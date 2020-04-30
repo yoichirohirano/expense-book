@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from '@/App.tsx';
 import * as serviceWorker from './serviceWorker';
+
+const test = (): boolean => {
+  return false;
+};
 
 ReactDOM.render(
   <React.StrictMode>

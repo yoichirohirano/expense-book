@@ -1,3 +1,4 @@
+/* eslint-disable */
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -147,3 +148,4 @@ export function unregister() {
       });
   }
 }
+/* eslint-disable */
