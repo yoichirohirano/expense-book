@@ -37,7 +37,6 @@
     }
   },
   "prettier": {
-    "singleQuote": true,
     "trailingComma": "es5",
     "arrowParens": "always"
   },
@@ -185,6 +184,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-links": "^5.3.18",
+    "@storybook/addon-viewport": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
