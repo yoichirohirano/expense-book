@@ -1,16 +1,7 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
-import Footer from "../../src/components/organisms/Footer";
-import MonthlyExpense from "../../src/components/organisms/MonthlyExpense";
+import Top from "../../src/components/templates/Top";
 
-const props = {
-  onClick: (): boolean => {
-    return true;
-  },
-  text: "BUTTON",
-};
-
-export const monthlyExpense = () => {
+export const top = () => {
   const props = {
     months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
     expenseAmount: 200000,
@@ -21,6 +12,18 @@ export const monthlyExpense = () => {
         amount: 12000,
         color: "#7CB342",
         budget: 30000,
+      },
+      {
+        label: "Cafe",
+        amount: 1800,
+        color: "#D81B60",
+        budget: 5000,
+      },
+      {
+        label: "雑費",
+        amount: 8000,
+        color: "#FDD835",
+        budget: 12000,
       },
       {
         label: "Cafe",
@@ -78,18 +81,9 @@ export const monthlyExpense = () => {
       },
     ],
   };
-  return <MonthlyExpense {...props}></MonthlyExpense>;
-};
-
-export const footer = () => {
-  return (
-    <>
-      <Box css={{ paddingTop: "60vh" }}></Box>
-      <Footer onClick={props.onClick}></Footer>
-    </>
-  );
+  return <Top {...props}></Top>;
 };
 
 export default {
-  title: "organisms",
+  title: "templates",
 };
