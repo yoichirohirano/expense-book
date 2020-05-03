@@ -6,6 +6,9 @@ import Navigation from "@/components/atoms/Navigation";
 import MonthTabs from "@/components/atoms/MonthTabs";
 import Chart from "@/components/atoms/Chart";
 import ChartLabel from "@/components/atoms/ChartLabel";
+import InputWithLabel from "@/components/atoms/InputWithLabel";
+import DateInput from "@/components/atoms/DateInput";
+import CategoryButton from "@/components/atoms/CategoryButton";
 
 const props = {
   onClick: (): boolean => {
@@ -106,6 +109,46 @@ export const chartLabel = () => {
     budgetAmount: 300000,
   };
   return <ChartLabel {...props}></ChartLabel>;
+};
+export const textInputWithLabel = () => {
+  const props = {
+    label: "Item Name",
+    onChange: () => {
+      console.log("change");
+    },
+  };
+  return <InputWithLabel {...props}></InputWithLabel>;
+};
+
+export const numberInputWithLabel = () => {
+  const props = {
+    label: "金額",
+    type: "number",
+    onChange: () => {
+      console.log("change");
+    },
+  };
+  return <InputWithLabel {...props}></InputWithLabel>;
+};
+
+export const dateInput = () => {
+  const props = {
+    onChange: (date) => {
+      console.log(date);
+    },
+  };
+  return <DateInput {...props}></DateInput>;
+};
+
+export const categoryButton = () => {
+  const props = {
+    color: "primary",
+    label: "Food",
+    onClick: (date) => {
+      console.log(date);
+    },
+  };
+  return <CategoryButton {...props}></CategoryButton>;
 };
 
 export default {
