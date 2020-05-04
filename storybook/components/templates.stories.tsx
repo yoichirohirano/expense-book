@@ -26,18 +26,6 @@ export const top = () => {
         budget: 12000,
       },
       {
-        label: "Cafe",
-        amount: 1800,
-        color: "#D81B60",
-        budget: 5000,
-      },
-      {
-        label: "雑費",
-        amount: 8000,
-        color: "#FDD835",
-        budget: 12000,
-      },
-      {
         label: "Drink",
         amount: 50000,
         color: "#5E35B1",

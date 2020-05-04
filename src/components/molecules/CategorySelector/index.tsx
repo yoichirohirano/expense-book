@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
-import CategoryButton from "@/components/atoms/CategoryButton";
+import CategoryButton, {
+  CategoryButtonProps,
+} from "@/components/atoms/CategoryButton";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { Category } from "@/components/atoms/Chart";
-import { PropTypes } from "@material-ui/core";
 
-interface Props {
+interface CategorySelectorProps {
   categories: Array<Category>;
 }
 
@@ -22,19 +23,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CategorySelector: React.FC<Props> = (props) => {
+const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
   const classes = useStyles();
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const categoryButtonProps = (
+    category: Category,
+    index: number
+  ): CategoryButtonProps => {
+    return {
+      selected: index === selectedIndex,
+      label: category.label,
+      onClick: (): void => {
+        setSelectedIndex(index);
+      },
+    };
+  };
+
   return (
     <Box className={classes.root}>
       {props.categories.map((category, index) => {
-        const props = {
-          color: "primary" as PropTypes.Color,
-          label: category.label,
-          onClick: () => {
-            return true;
-          },
-        };
-        return <CategoryButton key={index} {...props}></CategoryButton>;
+        return (
+          <CategoryButton
+            key={index}
+            {...categoryButtonProps(category, index)}
+          ></CategoryButton>
+        );
       })}
     </Box>
   );

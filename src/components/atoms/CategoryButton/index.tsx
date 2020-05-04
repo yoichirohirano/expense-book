@@ -1,16 +1,19 @@
 import React from "react";
 import Chip from "@material-ui/core/Chip";
-import { PropTypes } from "@material-ui/core";
 
-interface Props {
-  color: PropTypes.Color;
+export interface CategoryButtonProps {
+  selected: boolean;
   label: string;
   onClick: (props: any) => any;
 }
 
-const CategoryButton: React.FC<Props> = (props) => {
+const CategoryButton: React.FC<CategoryButtonProps> = (props) => {
   return (
-    <Chip color={props.color} label={props.label} onClick={props.onClick} />
+    <Chip
+      color={props.selected ? "secondary" : "primary"}
+      label={props.label}
+      onClick={props.onClick}
+    />
   );
 };
 

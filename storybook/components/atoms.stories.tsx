@@ -1,5 +1,7 @@
 import React from "react";
 import AddButton from "@/components/atoms/AddButton";
+import CloseButton from "@/components/atoms/CloseButton";
+import CompleteButton from "@/components/atoms/CompleteButton";
 import TextButton from "@/components/atoms/TextButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import Navigation from "@/components/atoms/Navigation";
@@ -22,6 +24,12 @@ export const navigation = () => {
 };
 export const addButton = () => {
   return <AddButton {...props}></AddButton>;
+};
+export const closeButton = () => {
+  return <CloseButton {...props}></CloseButton>;
+};
+export const completeButton = () => {
+  return <CompleteButton {...props}></CompleteButton>;
 };
 export const removeButton = () => {
   return <TextButton {...props} text="REMOVE"></TextButton>;
@@ -142,7 +150,18 @@ export const dateInput = () => {
 
 export const categoryButton = () => {
   const props = {
-    color: "primary",
+    selected: false,
+    label: "Food",
+    onClick: (date) => {
+      console.log(date);
+    },
+  };
+  return <CategoryButton {...props}></CategoryButton>;
+};
+
+export const categoryButtonSelected = () => {
+  const props = {
+    selected: true,
     label: "Food",
     onClick: (date) => {
       console.log(date);
