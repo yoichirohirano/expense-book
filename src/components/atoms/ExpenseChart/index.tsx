@@ -44,7 +44,7 @@ const getBorderColors = (categories: Array<Category>): Array<string> => {
   });
 };
 
-const Chart: React.FC<Props> = (props) => {
+const ExpenseChart: React.FC<Props> = (props) => {
   const data: ChartData<chartjs.ChartData> = {
     labels: props.categories.map((category) => {
       return category.label;
@@ -95,4 +95,4 @@ const Chart: React.FC<Props> = (props) => {
   return <HorizontalBar data={data} width={100} options={options} />;
 };
 
-export default Chart;
+export default ExpenseChart;

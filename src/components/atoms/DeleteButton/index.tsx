@@ -1,21 +1,16 @@
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
+import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-interface Props {
+interface DeleteButtonProps {
   onClick: (props: any) => any;
-  disabled?: boolean;
 }
 
-const DeleteButton: React.FC<Props> = (props) => {
+const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
   return (
-    <IconButton
-      aria-label="delete"
-      onClick={props.onClick}
-      disabled={props.disabled}
-    >
+    <Fab onClick={props.onClick}>
       <DeleteIcon />
-    </IconButton>
+    </Fab>
   );
 };
 

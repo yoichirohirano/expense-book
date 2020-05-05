@@ -1,16 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
-import MonthlyExpense from "@/components/organisms/MonthlyExpense";
+import List from "@/components/organisms/List";
 import AddItemDrawer from "@/components/molecules/AddItemDrawer";
 import Navigation from "@/components/atoms/Navigation";
-import { Category } from "@/components/atoms/Chart";
-
-interface Props {
-  months: Array<string>;
-  expenseAmount: number;
-  budgetAmount: number;
-  categories: Array<Category>;
-}
 
 const categories = [
   {
@@ -75,18 +67,39 @@ const categories = [
   },
 ];
 
-const Top: React.FC<Props> = (props) => {
+const ListView: React.FC = () => {
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  const toggleDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent
+  ): void => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
   return (
     <>
-      <Box padding="0 0 130px">
-        <MonthlyExpense {...props}></MonthlyExpense>
+      <Box zIndex="2">
+        <List onClickItem={toggleDrawer(true)}></List>
       </Box>
-      <AddItemDrawer categories={categories} title="ADD ITEM"></AddItemDrawer>
-      <Box position="fixed" bottom="0">
+      <AddItemDrawer
+        categories={categories}
+        title="EDIT ITEM"
+        isEdit={true}
+        isOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+      ></AddItemDrawer>
+      <Box position="fixed" bottom="0" zIndex="2">
         <Navigation></Navigation>
       </Box>
     </>
   );
 };
 
-export default Top;
+export default ListView;

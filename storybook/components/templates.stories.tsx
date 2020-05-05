@@ -1,7 +1,8 @@
 import React from "react";
-import Top from "../../src/components/templates/Top";
+import ChartView from "../../src/components/templates/ChartView";
+import ListView from "../../src/components/templates/ListView";
 
-export const top = () => {
+export const chartView = () => {
   const props = {
     months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
     expenseAmount: 200000,
@@ -69,7 +70,11 @@ export const top = () => {
       },
     ],
   };
-  return <Top {...props}></Top>;
+  return <ChartView {...props}></ChartView>;
+};
+
+export const listView = () => {
+  return <ListView></ListView>;
 };
 
 export default {

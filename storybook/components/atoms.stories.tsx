@@ -2,15 +2,16 @@ import React from "react";
 import AddButton from "@/components/atoms/AddButton";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
-import TextButton from "@/components/atoms/TextButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import Navigation from "@/components/atoms/Navigation";
 import MonthTabs from "@/components/atoms/MonthTabs";
-import Chart from "@/components/atoms/Chart";
+import ExpenseChart from "@/components/atoms/ExpenseChart";
 import ChartLabel from "@/components/atoms/ChartLabel";
 import InputWithLabel from "@/components/atoms/InputWithLabel";
 import DateInput from "@/components/atoms/DateInput";
 import CategoryButton from "@/components/atoms/CategoryButton";
+import ExpenseListItem from "@/components/atoms/ExpenseListItem";
+import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 
 const props = {
   onClick: (): boolean => {
@@ -31,14 +32,8 @@ export const closeButton = () => {
 export const completeButton = () => {
   return <CompleteButton {...props}></CompleteButton>;
 };
-export const removeButton = () => {
-  return <TextButton {...props} text="REMOVE"></TextButton>;
-};
 export const deleteButton = () => {
   return <DeleteButton {...props}></DeleteButton>;
-};
-export const deleteButtonDisabled = () => {
-  return <DeleteButton {...props} disabled={true}></DeleteButton>;
 };
 export const monthTabs = () => {
   const months = ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"];
@@ -109,7 +104,7 @@ export const chart = () => {
       },
     ],
   };
-  return <Chart {...props}></Chart>;
+  return <ExpenseChart {...props}></ExpenseChart>;
 };
 export const chartLabel = () => {
   const props = {
@@ -168,6 +163,22 @@ export const categoryButtonSelected = () => {
     },
   };
   return <CategoryButton {...props}></CategoryButton>;
+};
+
+export const expenseListItem = () => {
+  const props = {
+    categoryLabel: "Cafe",
+    title: "スタバ",
+    amount: 300,
+  };
+  return <ExpenseListItem {...props}></ExpenseListItem>;
+};
+
+export const expenseListSubHeader = () => {
+  const props = {
+    dateLabel: "2020/05/01",
+  };
+  return <ExpenseListSubHeader {...props}></ExpenseListSubHeader>;
 };
 
 export default {

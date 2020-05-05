@@ -1,6 +1,7 @@
 import React from "react";
 import CategorySelector from "../../src/components/molecules/CategorySelector";
 import AddItemDrawer from "../../src/components/molecules/AddItemDrawer";
+import ExpenseList from "../../src/components/molecules/ExpenseList";
 
 const categories = [
   {
@@ -76,8 +77,85 @@ export const addItemDrawer = () => {
   const props = {
     categories: categories,
     title: "ADD ITEM",
+    isEdit: false,
+    isOpen: true,
+    toggleDrawer: () => {},
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;
+};
+
+export const addItemDrawerEdit = () => {
+  const props = {
+    categories: categories,
+    title: "EDIT ITEM",
+    isEdit: true,
+    isOpen: true,
+    toggleDrawer: () => {},
+  };
+  return <AddItemDrawer {...props}></AddItemDrawer>;
+};
+
+export const expenseList = () => {
+  const props = {
+    monthlyExpense: {
+      "2020/05/01": [
+        {
+          categoryLabel: "Cafe",
+          title: "スタバ",
+          amount: 300,
+        },
+      ],
+      "2020/05/02": [
+        {
+          categoryLabel: "Food",
+          title: "赤札堂",
+          amount: 3000,
+        },
+        {
+          categoryLabel: "Gym",
+          title: "GOLD GYM",
+          amount: 11000,
+        },
+      ],
+      "2020/05/03": [
+        {
+          categoryLabel: "Food",
+          title: "赤札堂",
+          amount: 3000,
+        },
+        {
+          categoryLabel: "Gym",
+          title: "GOLD GYM",
+          amount: 11000,
+        },
+      ],
+      "2020/05/04": [
+        {
+          categoryLabel: "Cafe",
+          title: "スタバ",
+          amount: 300,
+        },
+      ],
+      "2020/05/05": [
+        {
+          categoryLabel: "Cafe",
+          title: "スタバ",
+          amount: 300,
+        },
+      ],
+      "2020/05/06": [
+        {
+          categoryLabel: "Cafe",
+          title: "スタバ",
+          amount: 300,
+        },
+      ],
+    },
+    onClickItem: () => {
+      console.log("click");
+    },
+  };
+  return <ExpenseList {...props}></ExpenseList>;
 };
 
 export default {

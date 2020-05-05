@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import MonthTabs from "@/components/atoms/MonthTabs";
-import Chart, { Category } from "@/components/atoms/Chart";
+import ExpenseChart, { Category } from "@/components/atoms/ExpenseChart";
 import ChartLabel from "@/components/atoms/ChartLabel";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   categories: Array<Category>;
 }
 
-const MonthlyExpense: React.FC<Props> = (props) => {
+const Chart: React.FC<Props> = (props) => {
   return (
     <>
       <Box position="fixed" top="0">
@@ -19,10 +19,10 @@ const MonthlyExpense: React.FC<Props> = (props) => {
       </Box>
       <Box margin="50px 0 0">
         <ChartLabel {...props}></ChartLabel>
-        <Chart {...props}></Chart>
+        <ExpenseChart {...props}></ExpenseChart>
       </Box>
     </>
   );
 };
 
-export default MonthlyExpense;
+export default Chart;

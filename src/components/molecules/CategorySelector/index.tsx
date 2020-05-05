@@ -4,7 +4,7 @@ import CategoryButton, {
   CategoryButtonProps,
 } from "@/components/atoms/CategoryButton";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import { Category } from "@/components/atoms/Chart";
+import { Category } from "components/atoms/ExpenseChart";
 
 interface CategorySelectorProps {
   categories: Array<Category>;

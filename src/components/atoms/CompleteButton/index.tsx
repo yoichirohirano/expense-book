@@ -7,7 +7,7 @@ interface CompleteButtonProps {
 
 const CompleteButton: React.FC<CompleteButtonProps> = (props) => {
   return (
-    <Fab onClick={props.onClick} color="primary">
+    <Fab onClick={props.onClick} color="secondary">
       <DoneIcon />
     </Fab>
   );

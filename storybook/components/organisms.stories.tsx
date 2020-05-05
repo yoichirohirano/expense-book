@@ -1,5 +1,6 @@
 import React from "react";
-import MonthlyExpense from "../../src/components/organisms/MonthlyExpense";
+import Chart from "../../src/components/organisms/Chart";
+import List from "../../src/components/organisms/List";
 
 const categories = [
   {
@@ -64,14 +65,23 @@ const categories = [
   },
 ];
 
-export const monthlyExpense = () => {
+export const chart = () => {
   const props = {
     months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
     expenseAmount: 200000,
     budgetAmount: 300000,
     categories: categories,
   };
-  return <MonthlyExpense {...props}></MonthlyExpense>;
+  return <Chart {...props}></Chart>;
+};
+
+export const list = () => {
+  const props = {
+    onClickItem: () => {
+      console.log("click");
+    },
+  };
+  return <List {...props}></List>;
 };
 
 export default {
