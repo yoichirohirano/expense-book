@@ -1,7 +1,7 @@
 import React from "react";
-import CategorySelector from "../../src/components/molecules/CategorySelector";
-import AddItemDrawer from "../../src/components/molecules/AddItemDrawer";
-import ExpenseList from "../../src/components/molecules/ExpenseList";
+import CategorySelector from "@/components/molecules/CategorySelector";
+import AddItemDrawer from "@/components/molecules/AddItemDrawer";
+import ExpenseList from "@/components/molecules/ExpenseList";
 
 const categories = [
   {
@@ -155,7 +155,7 @@ export const expenseList = () => {
         },
       ],
     },
-    onClickItem: () => {
+    handleClickItem: () => {
       console.log("click");
     },
   };

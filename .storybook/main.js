@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  stories: ["../storybook/**/*.stories.tsx"],
+  stories: ["../src/storybook/**/*.stories.tsx"],
   addons: [
     "storybook-addon-material-ui/register",
     "@storybook/preset-typescript",

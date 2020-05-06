@@ -3,15 +3,16 @@ import AddButton from "@/components/atoms/AddButton";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
+import CategoryButton from "@/components/atoms/CategoryButton";
 import Navigation from "@/components/atoms/Navigation";
 import MonthTabs from "@/components/atoms/MonthTabs";
 import ExpenseChart from "@/components/atoms/ExpenseChart";
 import ChartLabel from "@/components/atoms/ChartLabel";
 import InputWithLabel from "@/components/atoms/InputWithLabel";
 import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
-import CategoryButton from "@/components/atoms/CategoryButton";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
+import H6Title from "@/components/atoms/H6Title";
 
 const props = {
   handleClick: (): void => {
@@ -68,7 +69,7 @@ export const monthTabs = (): JSX.Element => {
       console.log(value);
     },
   };
-  return <MonthTabs {...props} disabled={true}></MonthTabs>;
+  return <MonthTabs {...props}></MonthTabs>;
 };
 export const chart = (): JSX.Element => {
   const props = {
@@ -192,6 +193,13 @@ export const expenseListSubHeader = (): JSX.Element => {
     dateLabel: "2020/05/01",
   };
   return <ExpenseListSubHeader {...props}></ExpenseListSubHeader>;
+};
+
+export const h6Title = (): JSX.Element => {
+  const props = {
+    text: "タイトル Title",
+  };
+  return <H6Title {...props}></H6Title>;
 };
 
 export default {

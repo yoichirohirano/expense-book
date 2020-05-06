@@ -1,6 +1,6 @@
 import React from "react";
-import Chart from "../../src/components/organisms/Chart";
-import List from "../../src/components/organisms/List";
+import Chart from "@/components/organisms/Chart";
+import List from "@/components/organisms/List";
 
 const categories = [
   {

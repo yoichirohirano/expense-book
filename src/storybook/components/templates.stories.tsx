@@ -1,6 +1,6 @@
 import React from "react";
-import ChartView from "../../src/components/templates/ChartView";
-import ListView from "../../src/components/templates/ListView";
+import ChartView from "@/components/templates/ChartView";
+import ListView from "@/components/templates/ListView";
 
 export const chartView = () => {
   const props = {
