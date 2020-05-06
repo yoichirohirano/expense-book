@@ -1,39 +1,18 @@
 import React from "react";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ExpenseListItem, {
   ExpenseListItemProps,
 } from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
-
-interface Props {
+import useStyles from "./style";
+export interface ExpenseListProps {
   monthlyExpense: {
     [key: string]: Array<ExpenseListItemProps>;
   };
-  onClickItem: () => {};
+  handleClickItem: (props: unknown) => unknown;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: "100%",
-      backgroundColor: theme.palette.background.paper,
-      position: "relative",
-      overflow: "auto",
-      maxHeight: "calc(100vh - 100px)",
-      paddingBottom: "0px",
-    },
-    listSection: {
-      backgroundColor: "inherit",
-    },
-    ul: {
-      backgroundColor: "inherit",
-      padding: 0,
-    },
-  })
-);
-
-const ExpenseList: React.FC<Props> = (props) => {
+const ExpenseList: React.FC<ExpenseListProps> = (props) => {
   const classes = useStyles();
 
   return (
@@ -46,7 +25,7 @@ const ExpenseList: React.FC<Props> = (props) => {
               <ExpenseListItem
                 key={`${key}-${index}`}
                 {...item}
-                onClickItem={props.handleClickItem}
+                handleClickItem={props.handleClickItem}
               ></ExpenseListItem>
             ))}
           </ul>

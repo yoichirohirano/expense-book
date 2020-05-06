@@ -1,7 +1,9 @@
 import React from "react";
 import CategorySelector from "@/components/molecules/CategorySelector";
 import AddItemDrawer from "@/components/molecules/AddItemDrawer";
-import ExpenseList from "@/components/molecules/ExpenseList";
+import ExpenseList, {
+  ExpenseListProps,
+} from "@/components/molecules/ExpenseList";
 
 const categories = [
   {
@@ -66,7 +68,7 @@ const categories = [
   },
 ];
 
-export const categorySelector = () => {
+export const categorySelector = (): JSX.Element => {
   const props = {
     categories: categories,
   };
@@ -86,7 +88,7 @@ export const addItemDrawer = () => {
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };
 
-export const addItemDrawerEdit = () => {
+export const addItemDrawerEdit = (): JSX.Element => {
   const props = {
     categories: categories,
     title: "EDIT ITEM",
@@ -99,8 +101,8 @@ export const addItemDrawerEdit = () => {
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };
 
-export const expenseList = () => {
-  const props = {
+export const expenseList = (): JSX.Element => {
+  const props: ExpenseListProps = {
     monthlyExpense: {
       "2020/05/01": [
         {

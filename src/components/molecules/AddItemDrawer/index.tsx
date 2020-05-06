@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import InputWithLabel from "@/components/atoms/InputWithLabel";
+import TextInput from "@/components/atoms/TextInput";
 import DateInput from "@/components/atoms/DateInput";
 import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
@@ -22,6 +22,20 @@ interface AddItemDrawerProps {
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const classes = useStyles();
+  const [itemNameError, setItemNameError] = useState<boolean>(false);
+  const [priceError, setPriceError] = useState<boolean>(false);
+
+  const handleChangeItemName = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleChangePrice = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleChangeDate = (e) => {
+    console.log(e.target.value);
+  };
 
   return (
     <SwipeableDrawer
@@ -41,24 +55,26 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           }}
         ></CloseButton>
       </Box>
-      <Container maxWidth="sm" className={classes.inputFlexContainer}>
+      <Container maxWidth="sm">
         <H6Title text={props.title}></H6Title>
-        <Box padding="8px 0">
+        <Box className={classes.categorySelectorWrapper}>
           <CategorySelector categories={props.categories}></CategorySelector>
         </Box>
-        <Box className={classes.inputFlexContainer}>
-          <InputWithLabel
+        <Box className={classes.inputArea}>
+          <TextInput
             label="アイテム名"
-            defaultValue="スタバ"
-            onChange={() => {}}
-          ></InputWithLabel>
-          <InputWithLabel
+            handleChange={handleChangeItemName}
+            error={itemNameError}
+            helperText={itemNameError ? "入力してください。" : ""}
+          ></TextInput>
+          <TextInput
             label="金額"
-            defaultValue="300"
             type="number"
-            onChange={() => {}}
-          ></InputWithLabel>
-          <DateInput handleChange={() => {}}></DateInput>
+            handleChange={handleChangePrice}
+            helperText={priceError ? "入力してください。" : ""}
+            error={priceError}
+          ></TextInput>
+          <DateInput handleChange={handleChangeDate}></DateInput>
         </Box>
       </Container>
       <Box className={classes.completeButtonWrapper}>

@@ -20,10 +20,14 @@ const useStyles = makeStyles((theme: Theme) =>
       right: "92px",
       bottom: "20px",
     },
-    inputFlexContainer: {
+    inputArea: {
       display: "flex",
       justifyContent: "space-between",
       flexWrap: "wrap",
+      paddingBottom: "20px",
+    },
+    categorySelectorWrapper: {
+      padding: "8px 0",
     },
   })
 );

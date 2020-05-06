@@ -3,12 +3,12 @@ import Box from "@material-ui/core/Box";
 import getPriceSeparatedByComma from "@/util/functions/getPriceSeparatedByComma";
 import useStyles from "./style";
 
-interface ChartLabelProps {
+export interface ChartHeaderProps {
   expenseAmount: number;
   budgetAmount: number;
 }
 
-const ChartLabel: React.FC<ChartLabelProps> = (props) => {
+const ChartHeader: React.FC<ChartHeaderProps> = (props) => {
   const classes = useStyles();
   return (
     <Box className={classes.root} fontFamily="h2.fontFamily">
@@ -19,4 +19,4 @@ const ChartLabel: React.FC<ChartLabelProps> = (props) => {
   );
 };
 
-export default ChartLabel;
+export default ChartHeader;

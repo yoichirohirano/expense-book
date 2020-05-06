@@ -7,8 +7,8 @@ import CategoryButton from "@/components/atoms/CategoryButton";
 import Navigation from "@/components/atoms/Navigation";
 import MonthTabs from "@/components/atoms/MonthTabs";
 import ExpenseChart from "@/components/atoms/ExpenseChart";
-import ChartLabel from "@/components/atoms/ChartLabel";
-import InputWithLabel from "@/components/atoms/InputWithLabel";
+import ChartHeader from "@/components/atoms/ChartHeader";
+import TextInput from "@/components/atoms/TextInput";
 import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
@@ -65,7 +65,8 @@ export const navigation = (): JSX.Element => {
 export const monthTabs = (): JSX.Element => {
   const props = {
     months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
-    handleChange: (value): void => {
+    currentIndex: 0,
+    handleChange: (value: number): void => {
       console.log(value);
     },
   };
@@ -76,95 +77,81 @@ export const chart = (): JSX.Element => {
     categories: [
       {
         label: "Food",
-        amount: 12000,
+        amount: 24000,
         color: "#7CB342",
         budget: 30000,
       },
       {
         label: "Cafe",
-        amount: 1800,
+        amount: 7000,
         color: "#D81B60",
         budget: 5000,
       },
       {
-        label: "雑費",
+        label: "test",
         amount: 8000,
         color: "#FDD835",
         budget: 12000,
-      },
-      {
-        label: "Drink",
-        amount: 50000,
-        color: "#5E35B1",
-        budget: 45000,
-      },
-      {
-        label: "Date",
-        amount: 4500,
-        color: "#FB8C00",
-        budget: 20000,
-      },
-      {
-        label: "Book",
-        amount: 3000,
-        color: "#1E88E5",
-        budget: 3000,
-      },
-      {
-        label: "Gym",
-        amount: 11660,
-        color: "#F4511E",
-        budget: 12000,
-      },
-      {
-        label: "Fixed",
-        amount: 30000,
-        color: "#00ACC1",
-        budget: 33000,
-      },
-      {
-        label: "Sudden",
-        amount: 30000,
-        color: "#8E24AA",
-        budget: 30000,
-      },
-      {
-        label: "Savings",
-        amount: 45000,
-        color: "#3949AB",
-        budget: 45000,
       },
     ],
   };
   return <ExpenseChart {...props}></ExpenseChart>;
 };
-export const chartLabel = (): JSX.Element => {
+export const chartHeader = (): JSX.Element => {
   const props = {
     expenseAmount: 200000,
     budgetAmount: 300000,
   };
-  return <ChartLabel {...props}></ChartLabel>;
+  return <ChartHeader {...props}></ChartHeader>;
 };
-export const textInputWithLabel = (): JSX.Element => {
+export const textInput = (): JSX.Element => {
   const props = {
     label: "Item Name",
     defaultValue: "Default Value",
+    error: false,
     handleChange: (): void => {
       console.log("change");
     },
   };
-  return <InputWithLabel {...props}></InputWithLabel>;
+  return <TextInput {...props}></TextInput>;
 };
 
-export const numberInputWithLabel = (): JSX.Element => {
+export const textInputWithNoInputError = (): JSX.Element => {
   const props = {
-    label: "金額",
-    type: "number",
-    onChange: (): void => {
+    label: "Item Name",
+    defaultValue: "Default Value",
+    error: true,
+    helperText: "入力してください。",
+    handleChange: (): void => {
       console.log("change");
     },
   };
-  return <InputWithLabel {...props}></InputWithLabel>;
+  return <TextInput {...props}></TextInput>;
+};
+
+export const numberInput = (): JSX.Element => {
+  const props = {
+    label: "Price",
+    error: false,
+    type: "number",
+    handleChange: (): void => {
+      console.log("change");
+    },
+  };
+  return <TextInput {...props}></TextInput>;
+};
+
+export const numberInputWithNoInputError = (): JSX.Element => {
+  const props = {
+    label: "Price",
+    error: true,
+    type: "number",
+    helperText: "入力してください。",
+    handleChange: (): void => {
+      console.log("change");
+    },
+  };
+  return <TextInput {...props}></TextInput>;
 };
 
 export const dateInput = (): JSX.Element => {

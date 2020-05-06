@@ -5,32 +5,23 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import useStyles from "./style";
 
-interface MonthTabsProps {
+export interface MonthTabsProps {
   months: Array<string>;
-  handleChange: (props: unknown) => unknown;
+  currentIndex: number;
+  handleChange: (props: number) => unknown;
 }
-
-const tabProps = (index: number): Record<string, any> => {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`,
-  };
-};
 
 const MonthTabs: React.FC<MonthTabsProps> = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
   const onChange = (event: React.ChangeEvent<{}>, newValue: number): void => {
     props.handleChange(newValue);
-    setValue(newValue);
   };
 
   return (
     <Box className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
-          value={value}
+          value={props.currentIndex}
           onChange={onChange}
           indicatorColor="primary"
           textColor="primary"
@@ -38,7 +29,13 @@ const MonthTabs: React.FC<MonthTabsProps> = (props) => {
           scrollButtons="auto"
         >
           {props.months.map((item, index) => {
-            return <Tab key={index} label={item} {...tabProps(index)} />;
+            return (
+              <Tab
+                key={index}
+                label={item}
+                id={`scrollable-auto-tab-${index}`}
+              />
+            );
           })}
         </Tabs>
       </AppBar>

@@ -86,7 +86,11 @@ const ListView: React.FC = () => {
   return (
     <>
       <Box zIndex="2">
-        <List onClickItem={toggleDrawer(true)}></List>
+        <List
+          onClickItem={() => {
+            toggleDrawer(true);
+          }}
+        ></List>
       </Box>
       <AddItemDrawer
         categories={categories}

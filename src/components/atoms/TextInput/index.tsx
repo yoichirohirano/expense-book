@@ -1,14 +1,16 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import useStyles from "./style";
-export interface InputWithLabelProps {
+export interface TextInputProps {
   label: string;
   type?: string;
+  error: boolean;
   defaultValue?: string;
+  helperText?: string;
   handleChange: (props: unknown) => unknown;
 }
 
-const InputWithLabel: React.FC<InputWithLabelProps> = (props) => {
+const TextInput: React.FC<TextInputProps> = (props) => {
   const classes = useStyles();
 
   return (
@@ -17,10 +19,12 @@ const InputWithLabel: React.FC<InputWithLabelProps> = (props) => {
       onChange={props.handleChange}
       label={props.label}
       defaultValue={props.defaultValue || ""}
+      error={props.error}
+      helperText={props.helperText}
       type={props.type || "text"}
       className={classes.root}
     />
   );
 };
 
-export default InputWithLabel;
+export default TextInput;

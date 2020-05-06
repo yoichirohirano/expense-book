@@ -1,7 +1,9 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import MonthTabs from "@/components/atoms/MonthTabs";
-import ExpenseList from "@/components/molecules/ExpenseList";
+import ExpenseList, {
+  ExpenseListProps,
+} from "@/components/molecules/ExpenseList";
 
 const months = ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"];
 
@@ -61,7 +63,13 @@ const monthlyExpense = {
 };
 
 interface Props {
-  onClickItem: () => {};
+  onClickItem: (props: unknown) => unknown;
+}
+
+const expenseListProps: ExpenseListProps = {
+            monthlyExpense:{monthlyExpense},
+          onClickItem:{props.handleClickItem},
+
 }
 
 const List: React.FC<Props> = (props) => {
@@ -71,9 +79,7 @@ const List: React.FC<Props> = (props) => {
         <MonthTabs months={months}></MonthTabs>
       </Box>
       <Box margin="50px 0 0">
-        <ExpenseList
-          monthlyExpense={monthlyExpense}
-          onClickItem={props.handleClickItem}
+        <ExpenseList {...expenseListProps}
         ></ExpenseList>
       </Box>
     </>

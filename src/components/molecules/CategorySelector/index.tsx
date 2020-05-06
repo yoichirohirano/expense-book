@@ -33,7 +33,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
     return {
       selected: index === selectedIndex,
       label: category.label,
-      onClick: (): void => {
+      handleClick: (): void => {
         setSelectedIndex(index);
       },
     };

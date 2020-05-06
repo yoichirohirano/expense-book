@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./style";
-interface DateInputProps {
+export interface DateInputProps {
   handleChange: (props: unknown) => unknown;
 }
 
@@ -15,6 +15,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
       <DatePicker
         disableToolbar
         inputVariant="outlined"
+        format="yyyy/MM/dd"
         value={selectedDate}
         onChange={(date): void => {
           setDateChange(date as Date);
