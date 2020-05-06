@@ -1,4 +1,4 @@
-import convertHexToRgba from "./convertHexToRgba";
+import convertHexToRgba from ".";
 
 describe("convertHexToRgb", () => {
   test("normal without alpha", () => {
