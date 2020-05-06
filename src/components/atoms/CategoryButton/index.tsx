@@ -4,7 +4,7 @@ import Chip from "@material-ui/core/Chip";
 export interface CategoryButtonProps {
   selected: boolean;
   label: string;
-  onClick: (props: any) => any;
+  handleClick: (props: unknown) => unknown;
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = (props) => {
@@ -12,7 +12,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = (props) => {
     <Chip
       color={props.selected ? "secondary" : "primary"}
       label={props.label}
-      onClick={props.onClick}
+      onClick={props.handleClick}
     />
   );
 };

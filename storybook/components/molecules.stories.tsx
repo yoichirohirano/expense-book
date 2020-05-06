@@ -77,9 +77,11 @@ export const addItemDrawer = () => {
   const props = {
     categories: categories,
     title: "ADD ITEM",
-    isEdit: false,
+    isEditItem: false,
     isOpen: true,
-    toggleDrawer: () => {},
+    toggleDrawer: (open) => {
+      console.log(open);
+    },
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };
@@ -88,9 +90,11 @@ export const addItemDrawerEdit = () => {
   const props = {
     categories: categories,
     title: "EDIT ITEM",
-    isEdit: true,
+    isEditItem: true,
     isOpen: true,
-    toggleDrawer: () => {},
+    toggleDrawer: (open) => {
+      console.log(open);
+    },
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };

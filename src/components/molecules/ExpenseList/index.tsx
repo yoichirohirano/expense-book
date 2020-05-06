@@ -46,7 +46,7 @@ const ExpenseList: React.FC<Props> = (props) => {
               <ExpenseListItem
                 key={`${key}-${index}`}
                 {...item}
-                onClickItem={props.onClickItem}
+                onClickItem={props.handleClickItem}
               ></ExpenseListItem>
             ))}
           </ul>

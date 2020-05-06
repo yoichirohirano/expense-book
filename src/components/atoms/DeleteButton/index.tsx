@@ -3,12 +3,12 @@ import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 interface DeleteButtonProps {
-  onClick: (props: any) => any;
+  handleClick: (props: any) => any;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
   return (
-    <Fab onClick={props.onClick}>
+    <Fab onClick={props.handleClick}>
       <DeleteIcon />
     </Fab>
   );

@@ -2,12 +2,12 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 interface CloseButtonProps {
-  onClick: (props: any) => any;
+  handleClick: (props: unknown) => unknown;
 }
 
 const CloseButton: React.FC<CloseButtonProps> = (props) => {
   return (
-    <IconButton onClick={props.onClick} color="primary">
+    <IconButton onClick={props.handleClick} color="primary">
       <CloseIcon />
     </IconButton>
   );

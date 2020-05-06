@@ -1,13 +1,14 @@
 import React from "react";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-interface Props {
-  onClick: (props: any) => any;
+
+export interface AddButtonProps {
+  handleClick: (props: unknown) => unknown;
 }
 
-const AddButton: React.FC<Props> = (props) => {
+const AddButton: React.FC<AddButtonProps> = (props) => {
   return (
-    <Fab onClick={props.onClick} color="secondary">
+    <Fab onClick={props.handleClick} color="secondary">
       <AddIcon />
     </Fab>
   );

@@ -2,12 +2,12 @@ import React from "react";
 import Fab from "@material-ui/core/Fab";
 import DoneIcon from "@material-ui/icons/Done";
 interface CompleteButtonProps {
-  onClick: (props: any) => any;
+  handleClick: (props: unknown) => unknown;
 }
 
 const CompleteButton: React.FC<CompleteButtonProps> = (props) => {
   return (
-    <Fab onClick={props.onClick} color="secondary">
+    <Fab onClick={props.handleClick} color="secondary">
       <DoneIcon />
     </Fab>
   );

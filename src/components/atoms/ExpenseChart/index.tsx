@@ -1,23 +1,7 @@
 import React from "react";
+import * as chartjs from "chart.js";
 import { HorizontalBar, ChartData } from "react-chartjs-2";
 import convertHexToRgba from "@/util/functions/convertHexToRgba";
-import * as chartjs from "chart.js";
-
-// export interface Budget {
-//   [categoryId: string]: number;
-// }
-
-// 呼び出し元のorganismsでredux化する
-// const getFormattedCategories = (
-//   categories: Array<Category>,
-//   budget: Budget
-// ) => {
-//   const newCategories = categories.map((category: Category) => {
-//     const amount = budget[category.label];
-//     return Object.assign(category, { budget: amount });
-//   });
-//   return newCategories;
-// };
 
 export interface Category {
   label: string;
@@ -26,7 +10,7 @@ export interface Category {
   color: string;
 }
 
-interface Props {
+export interface ExpenseChartProps {
   categories: Array<Category>;
 }
 
@@ -44,7 +28,23 @@ const getBorderColors = (categories: Array<Category>): Array<string> => {
   });
 };
 
-const ExpenseChart: React.FC<Props> = (props) => {
+const options: chartjs.ChartOptions = {
+  responsive: true,
+  legend: {
+    display: false,
+  },
+  scales: {
+    xAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+};
+
+const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
   const data: ChartData<chartjs.ChartData> = {
     labels: props.categories.map((category) => {
       return category.label;
@@ -75,21 +75,6 @@ const ExpenseChart: React.FC<Props> = (props) => {
         barPercentage: 0.5,
       },
     ],
-  };
-  const options: chartjs.ChartOptions = {
-    responsive: true,
-    legend: {
-      display: false,
-    },
-    scales: {
-      xAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
   };
 
   return <HorizontalBar data={data} width={100} options={options} />;

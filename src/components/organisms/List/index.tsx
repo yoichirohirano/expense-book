@@ -73,7 +73,7 @@ const List: React.FC<Props> = (props) => {
       <Box margin="50px 0 0">
         <ExpenseList
           monthlyExpense={monthlyExpense}
-          onClickItem={props.onClickItem}
+          onClickItem={props.handleClickItem}
         ></ExpenseList>
       </Box>
     </>

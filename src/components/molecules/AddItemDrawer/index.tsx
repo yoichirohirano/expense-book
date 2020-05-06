@@ -10,93 +10,74 @@ import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import { Category } from "components/atoms/ExpenseChart";
 import CategorySelector from "@/components/molecules/CategorySelector";
-import { makeStyles } from "@material-ui/core/styles";
-// interface AddItemDrawerProps {
-//   onClick: (props: any) => any;
-// }
-
-const completeButtonWrapperStyle = {
-  position: "fixed",
-  right: "20px",
-  bottom: "20px",
-};
-
-const deleteButtonWrapperStyle = {
-  position: "fixed",
-  right: "92px",
-  bottom: "20px",
-};
-
-const closeButtonWrapperStyle = {
-  position: "absolute",
-  top: "8px",
-  left: "0px",
-};
+import useStyles from "./style";
 
 interface AddItemDrawerProps {
   categories: Array<Category>;
   title: string;
-  isEdit: boolean;
+  isEditItem: boolean;
   isOpen: boolean;
-  toggleDrawer: Function;
+  toggleDrawer: (props: boolean) => void;
 }
 
-const useStyles = makeStyles({
-  root: {
-    paddingBottom: "20px",
-  },
-});
-
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
-  const inputContainerClasses = useStyles();
+  const classes = useStyles();
 
   return (
-    <>
-      <SwipeableDrawer
-        anchor="bottom"
-        open={props.isOpen}
-        onClose={props.toggleDrawer(false)}
-        onOpen={props.toggleDrawer(true)}
-      >
-        <div role="presentation">
-          <Box css={closeButtonWrapperStyle}>
-            <CloseButton onClick={props.toggleDrawer(false)}></CloseButton>
-          </Box>
-          <Container maxWidth="sm" classes={inputContainerClasses}>
-            <H6Title text={props.title}></H6Title>
-            <Box padding="8px 0">
-              <CategorySelector
-                categories={props.categories}
-              ></CategorySelector>
-            </Box>
-            <Box display="flex" justifyContent="space-between" flexWrap="wrap">
-              <InputWithLabel
-                label="アイテム名"
-                defaultValue="スタバ"
-                onChange={() => {}}
-              ></InputWithLabel>
-              <InputWithLabel
-                label="金額"
-                defaultValue="300"
-                type="number"
-                onChange={() => {}}
-              ></InputWithLabel>
-              <DateInput onChange={() => {}}></DateInput>
-            </Box>
-          </Container>
-          <Box css={completeButtonWrapperStyle}>
-            <CompleteButton
-              onClick={props.toggleDrawer(false)}
-            ></CompleteButton>
-          </Box>
-          {props.isEdit && (
-            <Box css={deleteButtonWrapperStyle}>
-              <DeleteButton onClick={props.toggleDrawer(false)}></DeleteButton>
-            </Box>
-          )}
-        </div>
-      </SwipeableDrawer>
-    </>
+    <SwipeableDrawer
+      anchor="bottom"
+      open={props.isOpen}
+      onClose={() => {
+        props.toggleDrawer(false);
+      }}
+      onOpen={() => {
+        props.toggleDrawer(true);
+      }}
+    >
+      <Box className={classes.closeButtonWrapper}>
+        <CloseButton
+          handleClick={() => {
+            props.toggleDrawer(false);
+          }}
+        ></CloseButton>
+      </Box>
+      <Container maxWidth="sm" className={classes.inputFlexContainer}>
+        <H6Title text={props.title}></H6Title>
+        <Box padding="8px 0">
+          <CategorySelector categories={props.categories}></CategorySelector>
+        </Box>
+        <Box className={classes.inputFlexContainer}>
+          <InputWithLabel
+            label="アイテム名"
+            defaultValue="スタバ"
+            onChange={() => {}}
+          ></InputWithLabel>
+          <InputWithLabel
+            label="金額"
+            defaultValue="300"
+            type="number"
+            onChange={() => {}}
+          ></InputWithLabel>
+          <DateInput handleChange={() => {}}></DateInput>
+        </Box>
+      </Container>
+      <Box className={classes.completeButtonWrapper}>
+        <CompleteButton
+          handleClick={() => {
+            props.toggleDrawer(false);
+          }}
+        ></CompleteButton>
+      </Box>
+      {props.isEditItem && (
+        <Box className={classes.deleteButtonWrapper}>
+          <DeleteButton
+            handleClick={() => {
+              props.toggleDrawer(false);
+            }}
+          ></DeleteButton>
+        </Box>
+      )}
+    </SwipeableDrawer>
   );
 };
 

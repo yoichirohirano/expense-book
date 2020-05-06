@@ -8,38 +8,69 @@ import MonthTabs from "@/components/atoms/MonthTabs";
 import ExpenseChart from "@/components/atoms/ExpenseChart";
 import ChartLabel from "@/components/atoms/ChartLabel";
 import InputWithLabel from "@/components/atoms/InputWithLabel";
-import DateInput from "@/components/atoms/DateInput";
+import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
 import CategoryButton from "@/components/atoms/CategoryButton";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 
 const props = {
-  onClick: (): boolean => {
-    return true;
+  handleClick: (): void => {
+    console.log("click!");
   },
-  text: "BUTTON",
 };
 
-export const navigation = () => {
-  return <Navigation></Navigation>;
-};
-export const addButton = () => {
+export const addButton = (): JSX.Element => {
   return <AddButton {...props}></AddButton>;
 };
-export const closeButton = () => {
+
+export const closeButton = (): JSX.Element => {
   return <CloseButton {...props}></CloseButton>;
 };
-export const completeButton = () => {
+
+export const completeButton = (): JSX.Element => {
   return <CompleteButton {...props}></CompleteButton>;
 };
-export const deleteButton = () => {
+
+export const deleteButton = (): JSX.Element => {
   return <DeleteButton {...props}></DeleteButton>;
 };
-export const monthTabs = () => {
-  const months = ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"];
-  return <MonthTabs {...props} disabled={true} months={months}></MonthTabs>;
+
+export const categoryButton = (): JSX.Element => {
+  const props = {
+    selected: false,
+    label: "Food",
+    handleClick: (date): void => {
+      console.log(date);
+    },
+  };
+  return <CategoryButton {...props}></CategoryButton>;
 };
-export const chart = () => {
+
+export const categoryButtonSelected = (): JSX.Element => {
+  const props = {
+    selected: true,
+    label: "Food",
+    handleClick: (date): void => {
+      console.log(date);
+    },
+  };
+  return <CategoryButton {...props}></CategoryButton>;
+};
+
+export const navigation = (): JSX.Element => {
+  return <Navigation></Navigation>;
+};
+
+export const monthTabs = (): JSX.Element => {
+  const props = {
+    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
+    handleChange: (value): void => {
+      console.log(value);
+    },
+  };
+  return <MonthTabs {...props} disabled={true}></MonthTabs>;
+};
+export const chart = (): JSX.Element => {
   const props = {
     categories: [
       {
@@ -106,75 +137,57 @@ export const chart = () => {
   };
   return <ExpenseChart {...props}></ExpenseChart>;
 };
-export const chartLabel = () => {
+export const chartLabel = (): JSX.Element => {
   const props = {
     expenseAmount: 200000,
     budgetAmount: 300000,
   };
   return <ChartLabel {...props}></ChartLabel>;
 };
-export const textInputWithLabel = () => {
+export const textInputWithLabel = (): JSX.Element => {
   const props = {
     label: "Item Name",
-    onChange: () => {
+    defaultValue: "Default Value",
+    handleChange: (): void => {
       console.log("change");
     },
   };
   return <InputWithLabel {...props}></InputWithLabel>;
 };
 
-export const numberInputWithLabel = () => {
+export const numberInputWithLabel = (): JSX.Element => {
   const props = {
     label: "金額",
     type: "number",
-    onChange: () => {
+    onChange: (): void => {
       console.log("change");
     },
   };
   return <InputWithLabel {...props}></InputWithLabel>;
 };
 
-export const dateInput = () => {
-  const props = {
-    onChange: (date) => {
+export const dateInput = (): JSX.Element => {
+  const props: DateInputProps = {
+    handleChange: (date) => {
       console.log(date);
     },
   };
   return <DateInput {...props}></DateInput>;
 };
 
-export const categoryButton = () => {
-  const props = {
-    selected: false,
-    label: "Food",
-    onClick: (date) => {
-      console.log(date);
-    },
-  };
-  return <CategoryButton {...props}></CategoryButton>;
-};
-
-export const categoryButtonSelected = () => {
-  const props = {
-    selected: true,
-    label: "Food",
-    onClick: (date) => {
-      console.log(date);
-    },
-  };
-  return <CategoryButton {...props}></CategoryButton>;
-};
-
-export const expenseListItem = () => {
+export const expenseListItem = (): JSX.Element => {
   const props = {
     categoryLabel: "Cafe",
     title: "スタバ",
     amount: 300,
+    handleClickItem: (): void => {
+      console.log("click!");
+    },
   };
   return <ExpenseListItem {...props}></ExpenseListItem>;
 };
 
-export const expenseListSubHeader = () => {
+export const expenseListSubHeader = (): JSX.Element => {
   const props = {
     dateLabel: "2020/05/01",
   };
