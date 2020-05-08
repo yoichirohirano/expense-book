@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { quizReducer } from "./quiz/reducer";
+import categories from "./categories";
 
 const rootReducer = combineReducers({
-  quiz: quizReducer,
+  categories,
 });
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

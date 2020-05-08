@@ -2,13 +2,7 @@ import React from "react";
 import * as chartjs from "chart.js";
 import { HorizontalBar, ChartData } from "react-chartjs-2";
 import convertHexToRgba from "@/util/functions/convertHexToRgba";
-
-export interface Category {
-  label: string;
-  amount: number;
-  budget: number;
-  color: string;
-}
+import { Category } from "state/categories";
 
 export interface ExpenseChartProps {
   categories: Array<Category>;
@@ -47,14 +41,14 @@ const options: chartjs.ChartOptions = {
 const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
   const data: ChartData<chartjs.ChartData> = {
     labels: props.categories.map((category) => {
-      return category.label;
+      return category.name;
     }),
     datasets: [
       // 出費
       {
         label: "Expense",
         data: props.categories.map((category) => {
-          return category.amount;
+          return category.defaultBudget;
         }),
         backgroundColor: getBackgroundColors(props.categories),
         borderColor: getBorderColors(props.categories),
@@ -65,10 +59,10 @@ const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
       {
         label: "Budget",
         data: props.categories.map((category) => {
-          return category.budget;
+          return category.defaultBudget;
         }),
         backgroundColor: props.categories.map((category) => {
-          return category.amount <= category.budget
+          return category.defaultBudget <= category.defaultBudget
             ? "rgba(0, 0, 0, 0.1)"
             : "rgba(255, 0, 0, 0.5)";
         }),

@@ -13,8 +13,6 @@ type ReturnTypes<T> = {
  */
 type Unbox<T> = T extends { [K in keyof T]: infer U } ? U : never;
 
-type T = Unbox<{ a?: "typeA"; b: string }>; // type T = typeA | string
-
 /**
  * ActionCreatorsをGenericsとして渡すことで、Action型に相当する型をUnionTypesで取得する
  */
