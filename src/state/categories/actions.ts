@@ -4,16 +4,16 @@ import types from "./types";
 
 const actions = {
   createCategory: (category: Category) => {
-    return { type: types.CREATE_CATEGORY, payload: category };
+    return { type: types.CREATE_CATEGORY, payload: { category } };
   },
-  updateCategory: (category: Category) => {
-    return { type: types.UPDATE_CATEGORY, payload: category };
+  updateCategory: (category: Category, id: string) => {
+    return { type: types.UPDATE_CATEGORY, payload: { category, id } };
   },
-  deleteCategory: (category: Category) => {
-    return { type: types.DELETE_CATEGORY, payload: category };
+  deleteCategory: (id: string) => {
+    return { type: types.DELETE_CATEGORY, payload: { id } };
   },
 };
 
-export type CategoriesActions = CreatorsToActions<typeof actions>;
+export type CategoriesAction = CreatorsToActions<typeof actions>;
 
 export default actions;

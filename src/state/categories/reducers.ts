@@ -1,26 +1,32 @@
 import { Category } from ".";
-import { CategoriesActions } from "./actions";
+import { CategoriesAction } from "./actions";
 import actionTypes from "./types";
 
 export type State = {
-  categories: Array<Category>;
+  categories: {
+    [key: string]: Category;
+  };
 };
 
 const initialState: State = {
-  categories: [],
+  categories: {},
 };
 
 const reducer = (
   state: State = initialState,
-  action: CategoriesActions
+  action: CategoriesAction
 ): State => {
   switch (action.type) {
     case actionTypes.CREATE_CATEGORY:
-      return Object.assign({}, state, {});
+      state.categories[action.payload.category.name] = action.payload.category;
+      return state;
     case actionTypes.UPDATE_CATEGORY:
-      return Object.assign({}, state, {});
+      delete state.categories[action.payload.id];
+      state.categories[action.payload.category.name] = action.payload.category;
+      return state;
     case actionTypes.DELETE_CATEGORY:
-      return Object.assign({}, state, {});
+      delete state.categories[action.payload.id];
+      return state;
     default:
       return state;
   }
