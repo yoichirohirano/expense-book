@@ -4,6 +4,7 @@ import actionTypes from "./types";
 
 export type State = {
   categories: {
+    // categoryId(same as category.name) : category
     [key: string]: Category;
   };
 };

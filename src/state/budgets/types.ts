@@ -1,0 +1,7 @@
+const types = {
+  CREATE_BUDGET: "BUDGETS_CREATE_BUDGET",
+  UPDATE_BUDGET: "BUDGETS_UPDATE_BUDGET",
+  DELETE_BUDGET: "BUDGETS_DELETE_BUDGET",
+} as const;
+
+export default types;

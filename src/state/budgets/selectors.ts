@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Category } from ".";
+import { Budget } from ".";
 
 const selectors = {
-  getSelectedCategory: (categories: Array<Category>, selectedId: string) => {
-    return Object.entries(categories).find(([key]) => {
+  getSelectedBudget: (budgets: Array<Budget>, selectedId: string) => {
+    return Object.entries(budgets).find(([key]) => {
       return key === selectedId;
     });
   },
