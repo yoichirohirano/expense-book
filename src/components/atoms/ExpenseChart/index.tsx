@@ -2,22 +2,27 @@ import React from "react";
 import * as chartjs from "chart.js";
 import { HorizontalBar, ChartData } from "react-chartjs-2";
 import convertHexToRgba from "@/util/functions/convertHexToRgba";
-import { Category } from "state/categories";
 
+export type ChartItem = {
+  categoryName: string;
+  amount: number;
+  color: string;
+  budget: number;
+};
 export interface ExpenseChartProps {
-  categories: Array<Category>;
+  chartItems: Array<ChartItem>;
 }
 
-const getBackgroundColors = (categories: Array<Category>): Array<string> => {
-  return categories.map((category) => {
-    const rgba = convertHexToRgba(category.color, 0.2);
+const getBackgroundColors = (chartItems: Array<ChartItem>): Array<string> => {
+  return chartItems.map((chartItem) => {
+    const rgba = convertHexToRgba(chartItem.color, 0.2);
     return rgba || "";
   });
 };
 
-const getBorderColors = (categories: Array<Category>): Array<string> => {
-  return categories.map((category) => {
-    const rgba = convertHexToRgba(category.color, 1);
+const getBorderColors = (chartItems: Array<ChartItem>): Array<string> => {
+  return chartItems.map((chartItem) => {
+    const rgba = convertHexToRgba(chartItem.color, 1);
     return rgba || "";
   });
 };
@@ -40,31 +45,31 @@ const options: chartjs.ChartOptions = {
 
 const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
   const data: ChartData<chartjs.ChartData> = {
-    labels: props.categories.map((category) => {
-      return category.name;
+    labels: props.chartItems.map((item) => {
+      return item.categoryName;
     }),
     datasets: [
       // 出費
       {
         label: "Expense",
-        data: props.categories.map((category) => {
-          return category.defaultBudget;
+        data: props.chartItems.map((item) => {
+          return item.amount;
         }),
-        backgroundColor: getBackgroundColors(props.categories),
-        borderColor: getBorderColors(props.categories),
+        backgroundColor: getBackgroundColors(props.chartItems),
+        borderColor: getBorderColors(props.chartItems),
         barPercentage: 1,
         borderWidth: 1,
       },
       // 予算
       {
         label: "Budget",
-        data: props.categories.map((category) => {
-          return category.defaultBudget;
+        data: props.chartItems.map((item) => {
+          return item.budget;
         }),
-        backgroundColor: props.categories.map((category) => {
-          return category.defaultBudget <= category.defaultBudget
-            ? "rgba(0, 0, 0, 0.1)"
-            : "rgba(255, 0, 0, 0.5)";
+        backgroundColor: props.chartItems.map((item) => {
+          return item.budget < item.amount
+            ? "rgba(255, 0, 0, 0.7)"
+            : "rgba(0, 0, 0, 0.1)";
         }),
         barPercentage: 0.5,
       },

@@ -3,16 +3,11 @@ import Chart from "@/components/organisms/Chart";
 import List from "@/components/organisms/List";
 
 export const chart = () => {
-  return <Chart></Chart>;
+  return <Chart />;
 };
 
 export const list = () => {
-  const props = {
-    onClickItem: () => {
-      console.log("click");
-    },
-  };
-  return <List {...props}></List>;
+  return <List />;
 };
 
 export default {

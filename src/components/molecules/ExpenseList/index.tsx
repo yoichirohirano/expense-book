@@ -1,13 +1,14 @@
 import React from "react";
 import List from "@material-ui/core/List";
 import ExpenseListItem, {
-  ExpenseListItemProps,
+  ExpenseItemData,
 } from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import useStyles from "./style";
 export interface ExpenseListProps {
   monthlyExpense: {
-    [key: string]: Array<ExpenseListItemProps>;
+    // YYYY/MM/DD: expenseItemData
+    [key: string]: Array<ExpenseItemData>;
   };
   handleClickItem: (props: unknown) => unknown;
 }

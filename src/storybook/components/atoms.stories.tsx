@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import AddButton from "@/components/atoms/AddButton";
 import CloseButton from "@/components/atoms/CloseButton";
@@ -6,7 +7,9 @@ import DeleteButton from "@/components/atoms/DeleteButton";
 import CategoryButton from "@/components/atoms/CategoryButton";
 import Navigation from "@/components/atoms/Navigation";
 import MonthTabs from "@/components/atoms/MonthTabs";
-import ExpenseChart from "@/components/atoms/ExpenseChart";
+import ExpenseChart, {
+  ExpenseChartProps,
+} from "@/components/atoms/ExpenseChart";
 import ChartHeader from "@/components/atoms/ChartHeader";
 import TextInput from "@/components/atoms/TextInput";
 import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
@@ -40,8 +43,8 @@ export const categoryButton = (): JSX.Element => {
   const props = {
     selected: false,
     label: "Food",
-    handleClick: (date): void => {
-      console.log(date);
+    handleClick: (param: any): void => {
+      console.log(param);
     },
   };
   return <CategoryButton {...props}></CategoryButton>;
@@ -51,8 +54,8 @@ export const categoryButtonSelected = (): JSX.Element => {
   const props = {
     selected: true,
     label: "Food",
-    handleClick: (date): void => {
-      console.log(date);
+    handleClick: (param: any): void => {
+      console.log(param);
     },
   };
   return <CategoryButton {...props}></CategoryButton>;
@@ -72,24 +75,24 @@ export const monthTabs = (): JSX.Element => {
   };
   return <MonthTabs {...props}></MonthTabs>;
 };
-export const chart = (): JSX.Element => {
-  const props = {
-    categories: [
+export const expenseChart = (): JSX.Element => {
+  const props: ExpenseChartProps = {
+    chartItems: [
       {
-        label: "Food",
+        categoryName: "Food",
         amount: 24000,
         color: "#7CB342",
         budget: 30000,
       },
       {
-        label: "Cafe",
+        categoryName: "Cafe",
         amount: 7000,
         color: "#D81B60",
         budget: 5000,
       },
       {
-        label: "test",
-        amount: 8000,
+        categoryName: "test",
+        amount: 12000,
         color: "#FDD835",
         budget: 12000,
       },
@@ -165,7 +168,7 @@ export const dateInput = (): JSX.Element => {
 
 export const expenseListItem = (): JSX.Element => {
   const props = {
-    categoryLabel: "Cafe",
+    categoryName: "Cafe",
     title: "スタバ",
     amount: 300,
     handleClickItem: (): void => {
