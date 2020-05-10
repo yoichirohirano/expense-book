@@ -1,4 +1,5 @@
 import reducer, { State } from "./reducers";
+import selectors from "./selectors";
 import actions from "./actions";
 import { Expense } from ".";
 
@@ -108,6 +109,48 @@ describe("expenses reducer", () => {
           title: "飲み会",
         },
       });
+    });
+  });
+});
+
+describe("expenses selector", () => {
+  const date = new Date();
+  const initialState: State = {
+    expenses: {
+      "1589011584031": {
+        category: "Food",
+        amount: 3000,
+        date,
+        title: "スーパー",
+      },
+      "1589011597561": {
+        category: "Drink",
+        amount: 300,
+        date,
+        title: "飲み会",
+      },
+    },
+  };
+
+  describe("getSelectedExpense", () => {
+    test("shout get selected expense", () => {
+      const selectedExpense = selectors.getSelectedExpense(
+        initialState.expenses,
+        "1589011584031"
+      );
+      expect(selectedExpense).toMatchObject({
+        category: "Food",
+        amount: 3000,
+        date,
+        title: "スーパー",
+      });
+    });
+    test("shout get null", () => {
+      const selectedExpense = selectors.getSelectedExpense(
+        initialState.expenses,
+        "123456789"
+      );
+      expect(selectedExpense).toBe(null);
     });
   });
 });
