@@ -1,6 +1,6 @@
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       paddingBottom: "20px",
@@ -24,7 +24,6 @@ const useStyles = makeStyles(() =>
       display: "flex",
       justifyContent: "space-between",
       flexWrap: "wrap",
-      alignItems: "center",
       paddingBottom: "20px",
     },
     categorySelectorWrapper: {

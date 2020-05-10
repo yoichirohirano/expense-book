@@ -8,7 +8,7 @@ import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
-import { Category } from "components/atoms/ExpenseChart";
+import { Category } from "@/state/categories";
 import CategorySelector from "@/components/molecules/CategorySelector";
 import useStyles from "./style";
 

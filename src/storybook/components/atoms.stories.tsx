@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import TextButton from "@/components/atoms/TextButton";
 import AddButton from "@/components/atoms/AddButton";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
@@ -21,6 +22,16 @@ const props = {
   handleClick: (): void => {
     console.log("click!");
   },
+};
+
+export const textButton = (): JSX.Element => {
+  const props = {
+    handleClick: (): void => {
+      console.log("click!");
+    },
+    text: "ADD CATEGORY",
+  };
+  return <TextButton {...props}></TextButton>;
 };
 
 export const addButton = (): JSX.Element => {
@@ -75,6 +86,7 @@ export const monthTabs = (): JSX.Element => {
   };
   return <MonthTabs {...props}></MonthTabs>;
 };
+
 export const expenseChart = (): JSX.Element => {
   const props: ExpenseChartProps = {
     chartItems: [
@@ -100,6 +112,7 @@ export const expenseChart = (): JSX.Element => {
   };
   return <ExpenseChart {...props}></ExpenseChart>;
 };
+
 export const chartHeader = (): JSX.Element => {
   const props = {
     expenseAmount: 200000,
@@ -107,10 +120,22 @@ export const chartHeader = (): JSX.Element => {
   };
   return <ChartHeader {...props}></ChartHeader>;
 };
+
 export const textInput = (): JSX.Element => {
   const props = {
     label: "Item Name",
-    defaultValue: "Default Value",
+    error: false,
+    handleChange: (): void => {
+      console.log("change");
+    },
+  };
+  return <TextInput {...props}></TextInput>;
+};
+
+export const textInputWithDefaultValue = (): JSX.Element => {
+  const props = {
+    label: "CategoryName",
+    defaultValue: "Food",
     error: false,
     handleChange: (): void => {
       console.log("change");
@@ -121,8 +146,7 @@ export const textInput = (): JSX.Element => {
 
 export const textInputWithNoInputError = (): JSX.Element => {
   const props = {
-    label: "Item Name",
-    defaultValue: "Default Value",
+    label: "ItemName",
     error: true,
     helperText: "入力してください。",
     handleChange: (): void => {
@@ -135,6 +159,19 @@ export const textInputWithNoInputError = (): JSX.Element => {
 export const numberInput = (): JSX.Element => {
   const props = {
     label: "Price",
+    error: false,
+    type: "number",
+    handleChange: (): void => {
+      console.log("change");
+    },
+  };
+  return <TextInput {...props}></TextInput>;
+};
+
+export const numberInputWithDefaultValue = (): JSX.Element => {
+  const props = {
+    label: "Budget",
+    defaultValue: "25000",
     error: false,
     type: "number",
     handleChange: (): void => {

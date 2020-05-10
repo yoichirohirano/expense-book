@@ -4,7 +4,7 @@ import CategoryButton, {
   CategoryButtonProps,
 } from "@/components/atoms/CategoryButton";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import { Category } from "components/atoms/ExpenseChart";
+import { Category } from "@/state/categories";
 
 interface CategorySelectorProps {
   categories: Array<Category>;
@@ -32,7 +32,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
   ): CategoryButtonProps => {
     return {
       selected: index === selectedIndex,
-      label: category.label,
+      label: category.name,
       handleClick: (): void => {
         setSelectedIndex(index);
       },
