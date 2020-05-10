@@ -1,5 +1,5 @@
 import React from "react";
-import Fab from "@material-ui/core/Fab";
+import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 interface DeleteButtonProps {
@@ -8,9 +8,9 @@ interface DeleteButtonProps {
 
 const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
   return (
-    <Fab onClick={props.handleClick}>
+    <IconButton onClick={props.handleClick} color="primary">
       <DeleteIcon />
-    </Fab>
+    </IconButton>
   );
 };
 
