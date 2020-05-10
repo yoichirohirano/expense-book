@@ -1,4 +1,5 @@
 import reducer, { State } from "./reducers";
+import selectors from "./selectors";
 import actions from "./actions";
 import { Budget } from ".";
 
@@ -86,6 +87,41 @@ describe("budgets reducer", () => {
           Drink: 40000,
         },
       });
+    });
+  });
+});
+
+describe("budgets selector", () => {
+  const initialState: State = {
+    budgets: {
+      "202004": {
+        Food: 10000,
+        Drink: 20000,
+      },
+      "202005": {
+        Food: 30000,
+        Drink: 40000,
+      },
+    },
+  };
+
+  describe("getSelectedBudget", () => {
+    test("shout get selected budget", () => {
+      const selectedExpense = selectors.getSelectedBudget(
+        initialState.budgets,
+        "202004"
+      );
+      expect(selectedExpense).toMatchObject({
+        Food: 10000,
+        Drink: 20000,
+      });
+    });
+    test("shout get null", () => {
+      const selectedExpense = selectors.getSelectedBudget(
+        initialState.budgets,
+        "190012"
+      );
+      expect(selectedExpense).toBe(null);
     });
   });
 });

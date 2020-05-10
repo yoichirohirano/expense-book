@@ -2,10 +2,16 @@
 import { Budget } from ".";
 
 const selectors = {
-  getSelectedBudget: (budgets: Array<Budget>, selectedId: string) => {
-    return Object.entries(budgets).find(([key]) => {
+  getSelectedBudget: (
+    budgets: {
+      [key: string]: Budget;
+    },
+    selectedId: string
+  ): Budget | null => {
+    const res = Object.entries(budgets).find(([key]) => {
       return key === selectedId;
     });
+    return res ? res[1] : null;
   },
 };
 

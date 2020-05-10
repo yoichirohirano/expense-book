@@ -1,4 +1,5 @@
 import reducer, { State } from "./reducers";
+import selectors from "./selectors";
 import actions from "./actions";
 import { Category } from ".";
 
@@ -96,6 +97,44 @@ describe("categories reducer", () => {
           color: "#000000",
         },
       });
+    });
+  });
+});
+
+describe("categories selector", () => {
+  const initialState: State = {
+    categories: {
+      Food: {
+        name: "Food",
+        defaultBudget: 30000,
+        color: "#000000",
+      },
+      Drink: {
+        name: "Drink",
+        defaultBudget: 30000,
+        color: "#000000",
+      },
+    },
+  };
+
+  describe("getSelectedCategory", () => {
+    test("shout get selected category", () => {
+      const selectedExpense = selectors.getSelectedCategory(
+        initialState.categories,
+        "Food"
+      );
+      expect(selectedExpense).toMatchObject({
+        name: "Food",
+        defaultBudget: 30000,
+        color: "#000000",
+      });
+    });
+    test("shout get null", () => {
+      const selectedExpense = selectors.getSelectedCategory(
+        initialState.categories,
+        "NOTHING"
+      );
+      expect(selectedExpense).toBe(null);
     });
   });
 });
