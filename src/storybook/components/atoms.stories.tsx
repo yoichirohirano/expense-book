@@ -50,6 +50,10 @@ export const deleteButton = (): JSX.Element => {
   return <DeleteButton {...props}></DeleteButton>;
 };
 
+export const deleteButtonDisabled = (): JSX.Element => {
+  return <DeleteButton {...props} disabled={true}></DeleteButton>;
+};
+
 export const categoryButton = (): JSX.Element => {
   const props = {
     selected: false,

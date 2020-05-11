@@ -4,7 +4,7 @@ import useStyles from "./style";
 
 export interface TextButtonProps {
   text: string;
-  handleClick: (props: unknown) => unknown;
+  handleClick: (...props: any[]) => any;
 }
 
 const TextButton: React.FC<TextButtonProps> = (props) => {
@@ -15,6 +15,7 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
       color="primary"
       size="large"
       className={classes.root}
+      onClick={props.handleClick}
     >
       {props.text}
     </Button>

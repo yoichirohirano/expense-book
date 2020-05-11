@@ -4,12 +4,15 @@ import TextInput from "@/components/atoms/TextInput";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import useStyles from "./style";
 
-export interface BudgetEditItemProps {
+export type BudgetEditItemInfo = {
   categoryName: string;
   budget: number;
-  handleChangeCategoryName: (props: unknown) => unknown;
-  handleChangeBudget: (props: unknown) => unknown;
-  handleClickDeleteButton: (props: unknown) => unknown;
+};
+
+export interface BudgetEditItemProps extends BudgetEditItemInfo {
+  handleChangeCategoryName: (...props: any[]) => any;
+  handleChangeBudget: (...props: any[]) => any;
+  handleClickDeleteButton?: (...props: any[]) => any;
 }
 
 const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
@@ -30,7 +33,7 @@ const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
         <TextInput
           label="金額"
           type="number"
-          defaultValue={props.budget.toString()}
+          defaultValue={props.budget ? props.budget.toString() : ""}
           handleChange={props.handleChangeBudget}
           helperText={priceError ? "入力してください。" : ""}
           error={priceError}
@@ -38,7 +41,12 @@ const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
       </Box>
       <Box className={classes.deleteButtonWrapper}>
         <DeleteButton
-          handleClick={props.handleClickDeleteButton}
+          handleClick={
+            props.handleClickDeleteButton
+              ? props.handleClickDeleteButton
+              : undefined
+          }
+          disabled={props.handleClickDeleteButton ? false : true}
         ></DeleteButton>
       </Box>
     </Box>

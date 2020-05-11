@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* makeStylesでうまく反映されないCSS */
+.MuiExpansionPanel-root.Mui-expanded {
+  margin: auto;
+}
+.MuiExpansionPanel-root.Mui-expanded:first-child {
+  margin-top: 0;
+}

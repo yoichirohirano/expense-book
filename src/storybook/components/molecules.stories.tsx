@@ -11,6 +11,9 @@ import ExpenseList, {
 import CategoryEditList, {
   CategoryEditListProps,
 } from "@/components/molecules/CategoryEditList";
+import BudgetEditList, {
+  BudgetEditListProps,
+} from "@/components/molecules/BudgetEditList";
 
 const categories = [
   {
@@ -178,9 +181,112 @@ export const budgetEditItem = () => {
   return <BudgetEditItem {...props}></BudgetEditItem>;
 };
 
+export const budgetEditList = () => {
+  const budgets = {
+    "2020/04": {
+      Food: {
+        categoryName: "Food",
+        budget: 30000,
+      },
+    },
+    "2020/05": {
+      Food: {
+        categoryName: "Food",
+        budget: 30000,
+      },
+      Drink: {
+        categoryName: "Drink",
+        budget: 45000,
+      },
+      Book: {
+        categoryName: "Book",
+        budget: 3000,
+      },
+    },
+    "2020/06": {
+      Food: {
+        categoryName: "Food",
+        budget: 30000,
+      },
+      Drink: {
+        categoryName: "Drink",
+        budget: 45000,
+      },
+      Book: {
+        categoryName: "Book",
+        budget: 3000,
+      },
+    },
+  };
+  const props: BudgetEditListProps = {
+    budgets,
+    handleChangeCategoryName: (props: any): void => {
+      console.log(props);
+    },
+    handleChangeBudget: (props: any): void => {
+      console.log(props);
+    },
+    handleClickAddBudgetButton: (props: any): void => {
+      console.log(props);
+    },
+  };
+  return <BudgetEditList {...props}></BudgetEditList>;
+};
+
 export const categoryEditList = () => {
   const props: CategoryEditListProps = {
-    categories,
+    categories: {
+      Food: {
+        name: "Food",
+        color: "#7CB342",
+        defaultBudget: 30000,
+      },
+      Cafe: {
+        name: "Cafe",
+        color: "#D81B60",
+        defaultBudget: 5000,
+      },
+      雑費: {
+        name: "雑費",
+        color: "#FDD835",
+        defaultBudget: 12000,
+      },
+      Drink: {
+        name: "Drink",
+        color: "#5E35B1",
+        defaultBudget: 45000,
+      },
+      Date: {
+        name: "Date",
+        color: "#FB8C00",
+        defaultBudget: 20000,
+      },
+      Book: {
+        name: "Book",
+        color: "#1E88E5",
+        defaultBudget: 3000,
+      },
+      Gym: {
+        name: "Gym",
+        color: "#F4511E",
+        defaultBudget: 12000,
+      },
+      Fixed: {
+        name: "Fixed",
+        color: "#00ACC1",
+        defaultBudget: 33000,
+      },
+      Sudden: {
+        name: "Sudden",
+        color: "#8E24AA",
+        defaultBudget: 30000,
+      },
+      Savings: {
+        name: "Savings",
+        color: "#3949AB",
+        defaultBudget: 45000,
+      },
+    },
     handleChangeCategoryName: (props: any): void => {
       console.log(props);
     },

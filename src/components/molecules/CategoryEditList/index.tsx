@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import H6Title from "@/components/atoms/H6Title";
@@ -7,26 +7,33 @@ import BudgetEditItem, {
 } from "@/components/molecules/BudgetEditItem";
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
 import { Category } from "@/state/categories";
-import useStyles from "./style";
+import { Categories } from "@/state/categories/reducers";
 
 export interface CategoryEditListProps {
-  categories: Array<Category>;
-  handleChangeCategoryName: (props: unknown) => unknown;
-  handleChangeBudget: (props: unknown) => unknown;
-  handleClickAddCategoryButton: (props: unknown) => unknown;
-  handleClickDeleteButton: (props: unknown) => unknown;
+  categories: Categories;
+  handleChangeCategoryName: (...props: any[]) => any;
+  handleChangeBudget: (...props: any[]) => any;
+  handleClickAddCategoryButton: (...props: any[]) => any;
+  handleClickDeleteButton: (...props: any[]) => any;
 }
 
 const CategoryEditList: React.FC<CategoryEditListProps> = (props) => {
-  const classes = useStyles();
-
-  const budgetEditItemProps = (category: Category): BudgetEditItemProps => {
+  const budgetEditItemProps = (
+    categoryId: string,
+    category: Category
+  ): BudgetEditItemProps => {
     return {
       categoryName: category.name,
       budget: category.defaultBudget,
-      handleChangeCategoryName: props.handleChangeCategoryName,
-      handleChangeBudget: props.handleChangeBudget,
-      handleClickDeleteButton: props.handleClickDeleteButton,
+      handleChangeCategoryName: (newName: string): void => {
+        props.handleChangeCategoryName(categoryId, newName);
+      },
+      handleChangeBudget: (newBudget: number) => {
+        props.handleChangeBudget(categoryId, newBudget);
+      },
+      handleClickDeleteButton: () => {
+        props.handleClickDeleteButton(categoryId);
+      },
     };
   };
   const textButtonProps: TextButtonProps = {
@@ -37,11 +44,11 @@ const CategoryEditList: React.FC<CategoryEditListProps> = (props) => {
   return (
     <Container maxWidth="sm">
       <H6Title text="Default Category"></H6Title>
-      {props.categories.map((item, index) => {
+      {Object.entries(props.categories).map(([key, item]) => {
         return (
           <BudgetEditItem
-            key={index}
-            {...budgetEditItemProps(item)}
+            key={key}
+            {...budgetEditItemProps(key, item)}
           ></BudgetEditItem>
         );
       })}

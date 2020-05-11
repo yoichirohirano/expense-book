@@ -3,7 +3,7 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import ListIcon from "@material-ui/icons/List";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import SettingsIcon from "@material-ui/icons/Settings";
 import useStyles from "./style";
 
 const Navigation: React.FC = () => {
@@ -31,8 +31,13 @@ const Navigation: React.FC = () => {
         classes={bottomNavigationActionClasses}
       />
       <BottomNavigationAction
-        label="Account"
-        icon={<AccountCircleIcon />}
+        label="Budget"
+        icon={<SettingsIcon />}
+        classes={bottomNavigationActionClasses}
+      />
+      <BottomNavigationAction
+        label="Category"
+        icon={<SettingsIcon />}
         classes={bottomNavigationActionClasses}
       />
     </BottomNavigation>
