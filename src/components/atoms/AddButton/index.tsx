@@ -8,7 +8,7 @@ export interface AddButtonProps {
 
 const AddButton: React.FC<AddButtonProps> = (props) => {
   return (
-    <Fab onClick={props.handleClick} color="secondary">
+    <Fab onClick={props.handleClick} color="secondary" className="AddButton">
       <AddIcon />
     </Fab>
   );
