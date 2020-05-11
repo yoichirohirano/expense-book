@@ -13,6 +13,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = (props) => {
       color={props.selected ? "secondary" : "primary"}
       label={props.label}
       onClick={props.handleClick}
+      className="CategoryButton"
     />
   );
 };
