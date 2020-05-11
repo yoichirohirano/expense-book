@@ -1,29 +1,25 @@
-import reducer, { State } from "./reducers";
+import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Expense } from ".";
+import { Expense, Expenses } from ".";
 
 describe("expenses reducer", () => {
-  let initialState: State = {
-    expenses: {},
-  };
+  let initialState: Expenses = {};
   const date = new Date();
 
   beforeEach(() => {
     initialState = {
-      expenses: {
-        "1589011584031": {
-          category: "Food",
-          amount: 3000,
-          date,
-          title: "スーパー",
-        },
-        "1589011597561": {
-          category: "Drink",
-          amount: 300,
-          date,
-          title: "飲み会",
-        },
+      "1589011584031": {
+        category: "Food",
+        amount: 3000,
+        date,
+        title: "スーパー",
+      },
+      "1589011597561": {
+        category: "Drink",
+        amount: 300,
+        date,
+        title: "飲み会",
       },
     };
   });
@@ -38,11 +34,11 @@ describe("expenses reducer", () => {
 
     test("should add new expense", () => {
       const id = new Date().getTime().toString();
-      const newState: State = reducer(
+      const newState: Expenses = reducer(
         initialState,
         actions.createExpense(newExpense, id)
       );
-      expect(newState.expenses).toMatchObject({
+      expect(newState).toMatchObject({
         "1589011584031": {
           category: "Food",
           amount: 3000,
@@ -74,11 +70,11 @@ describe("expenses reducer", () => {
     };
 
     test("should update selected expense", () => {
-      const newState: State = reducer(
+      const newState: Expenses = reducer(
         initialState,
         actions.updateExpense(newExpense, "1589011584031")
       );
-      expect(newState.expenses).toMatchObject({
+      expect(newState).toMatchObject({
         "1589011584031": {
           category: "Cafe",
           amount: 400,
@@ -97,11 +93,11 @@ describe("expenses reducer", () => {
 
   describe("deleteExpense", () => {
     test("should delete selected expense", () => {
-      const newState: State = reducer(
+      const newState: Expenses = reducer(
         initialState,
         actions.deleteExpense("1589011584031")
       );
-      expect(newState.expenses).toMatchObject({
+      expect(newState).toMatchObject({
         "1589011597561": {
           category: "Drink",
           amount: 300,
@@ -115,27 +111,25 @@ describe("expenses reducer", () => {
 
 describe("expenses selector", () => {
   const date = new Date();
-  const initialState: State = {
-    expenses: {
-      "1589011584031": {
-        category: "Food",
-        amount: 3000,
-        date,
-        title: "スーパー",
-      },
-      "1589011597561": {
-        category: "Drink",
-        amount: 300,
-        date,
-        title: "飲み会",
-      },
+  const initialState: Expenses = {
+    "1589011584031": {
+      category: "Food",
+      amount: 3000,
+      date,
+      title: "スーパー",
+    },
+    "1589011597561": {
+      category: "Drink",
+      amount: 300,
+      date,
+      title: "飲み会",
     },
   };
 
   describe("getSelectedExpense", () => {
     test("shout get selected expense", () => {
       const selectedExpense = selectors.getSelectedExpense(
-        initialState.expenses,
+        initialState,
         "1589011584031"
       );
       expect(selectedExpense).toMatchObject({
@@ -147,7 +141,7 @@ describe("expenses selector", () => {
     });
     test("shout get null", () => {
       const selectedExpense = selectors.getSelectedExpense(
-        initialState.expenses,
+        initialState,
         "123456789"
       );
       expect(selectedExpense).toBe(null);

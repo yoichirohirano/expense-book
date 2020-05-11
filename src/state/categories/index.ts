@@ -6,8 +6,13 @@ export type Category = {
   color: string;
 };
 
+export type Categories = {
+  // categoryId(same as category.name) : category
+  [key: string]: Category;
+};
+
 export { default as selectors } from "./selectors";
 export { default as actions } from "./actions";
-export { default as categoriesTypes } from "./types";
+export { default as types } from "./types";
 
 export default reducer;

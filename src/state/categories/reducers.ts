@@ -1,11 +1,6 @@
-import { Category } from ".";
+import { Categories } from ".";
 import { CategoriesAction } from "./actions";
 import actionTypes from "./types";
-
-export type Categories = {
-  // categoryId(same as category.name) : category
-  [key: string]: Category;
-};
 
 const initialState: Categories = {
   // TODO: Storybook確認用

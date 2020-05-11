@@ -1,26 +1,22 @@
-import reducer, { State } from "./reducers";
+import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Category } from ".";
+import { Category, Categories } from ".";
 
 describe("categories reducer", () => {
-  let initialState: State = {
-    categories: {},
-  };
+  let initialState: Categories = {};
 
   beforeEach(() => {
     initialState = {
-      categories: {
-        Food: {
-          name: "Food",
-          defaultBudget: 30000,
-          color: "#000000",
-        },
-        Drink: {
-          name: "Drink",
-          defaultBudget: 30000,
-          color: "#000000",
-        },
+      Food: {
+        name: "Food",
+        defaultBudget: 30000,
+        color: "#000000",
+      },
+      Drink: {
+        name: "Drink",
+        defaultBudget: 30000,
+        color: "#000000",
       },
     };
   });
@@ -33,11 +29,11 @@ describe("categories reducer", () => {
     };
 
     test("should add new category", () => {
-      const newState: State = reducer(
+      const newState: Categories = reducer(
         initialState,
         actions.createCategory(newCategory)
       );
-      expect(newState.categories).toMatchObject({
+      expect(newState).toMatchObject({
         Food: {
           name: "Food",
           defaultBudget: 30000,
@@ -65,11 +61,11 @@ describe("categories reducer", () => {
     };
 
     test("should update selected category", () => {
-      const newState: State = reducer(
+      const newState: Categories = reducer(
         initialState,
         actions.updateCategory(newCategory, "Food")
       );
-      expect(newState.categories).toMatchObject({
+      expect(newState).toMatchObject({
         newCategory: {
           name: "newCategory",
           defaultBudget: 20000,
@@ -86,11 +82,11 @@ describe("categories reducer", () => {
 
   describe("deleteCategory", () => {
     test("should delete selected category", () => {
-      const newState: State = reducer(
+      const newState: Categories = reducer(
         initialState,
         actions.deleteCategory("Food")
       );
-      expect(newState.categories).toMatchObject({
+      expect(newState).toMatchObject({
         Drink: {
           name: "Drink",
           defaultBudget: 30000,
@@ -102,25 +98,23 @@ describe("categories reducer", () => {
 });
 
 describe("categories selector", () => {
-  const initialState: State = {
-    categories: {
-      Food: {
-        name: "Food",
-        defaultBudget: 30000,
-        color: "#000000",
-      },
-      Drink: {
-        name: "Drink",
-        defaultBudget: 30000,
-        color: "#000000",
-      },
+  const initialState: Categories = {
+    Food: {
+      name: "Food",
+      defaultBudget: 30000,
+      color: "#000000",
+    },
+    Drink: {
+      name: "Drink",
+      defaultBudget: 30000,
+      color: "#000000",
     },
   };
 
   describe("getSelectedCategory", () => {
     test("shout get selected category", () => {
       const selectedExpense = selectors.getSelectedCategory(
-        initialState.categories,
+        initialState,
         "Food"
       );
       expect(selectedExpense).toMatchObject({
@@ -131,7 +125,7 @@ describe("categories selector", () => {
     });
     test("shout get null", () => {
       const selectedExpense = selectors.getSelectedCategory(
-        initialState.categories,
+        initialState,
         "NOTHING"
       );
       expect(selectedExpense).toBe(null);

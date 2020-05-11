@@ -1,28 +1,24 @@
-import { Budget } from ".";
+import { Budgets } from ".";
 import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
-export type State = {
-  budgets: {
-    // YYYYMM: budget
-    [key: string]: Budget;
-  };
-};
-
-const initialState: State = {
+const initialState: Budgets = {
   budgets: {},
 };
 
-const reducer = (state: State = initialState, action: BudgetsAction): State => {
+const reducer = (
+  state: Budgets = initialState,
+  action: BudgetsAction
+): Budgets => {
   switch (action.type) {
     case actionTypes.CREATE_BUDGET:
-      state.budgets[action.payload.id] = action.payload.budget;
+      state[action.payload.id] = action.payload.budget;
       return state;
     case actionTypes.UPDATE_BUDGET:
-      state.budgets[action.payload.id] = action.payload.budget;
+      state[action.payload.id] = action.payload.budget;
       return state;
     case actionTypes.DELETE_BUDGET:
-      delete state.budgets[action.payload.id];
+      delete state[action.payload.id];
       return state;
     default:
       return state;

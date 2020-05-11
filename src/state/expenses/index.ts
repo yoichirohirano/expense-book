@@ -7,6 +7,11 @@ export type Expense = {
   title: string;
 };
 
+export type Expenses = {
+  // expenseId(date serial): expense
+  [key: string]: Expense;
+};
+
 export { default as expensesSelectors } from "./selectors";
 export { default as expensesTypes } from "./types";
 

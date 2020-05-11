@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Expense } from ".";
+import { Expense, Expenses } from ".";
 
 const selectors = {
   getSelectedExpense: (
-    expenses: {
-      [key: string]: Expense;
-    },
+    expenses: Expenses,
     selectedId: string
   ): Expense | null => {
     const res = Object.entries(expenses).find(([key]) => {

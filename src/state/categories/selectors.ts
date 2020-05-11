@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Category } from ".";
-import { State } from "./reducers";
+import { Category, Categories } from ".";
 
 const selectors = {
   getSelectedCategory: (
-    categories: State,
+    categories: Categories,
     selectedId: string
   ): Category | null => {
     const res = Object.entries(categories).find(([key]) => {

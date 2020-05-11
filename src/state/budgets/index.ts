@@ -5,7 +5,12 @@ export type Budget = {
   [key: string]: number;
 };
 
-export { default as budgetsSelectors } from "./selectors";
-export { default as budgetsTypes } from "./types";
+export type Budgets = {
+  // YYYYMM: budget
+  [key: string]: Budget;
+};
+
+export { default as selectors } from "./selectors";
+export { default as types } from "./types";
 
 export default reducer;

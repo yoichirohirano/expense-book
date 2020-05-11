@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Budget } from ".";
+import { Budget, Budgets } from ".";
 
 const selectors = {
-  getSelectedBudget: (
-    budgets: {
-      [key: string]: Budget;
-    },
-    selectedId: string
-  ): Budget | null => {
+  getSelectedBudget: (budgets: Budgets, selectedId: string): Budget | null => {
     const res = Object.entries(budgets).find(([key]) => {
       return key === selectedId;
     });
