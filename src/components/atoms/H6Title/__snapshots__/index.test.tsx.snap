@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<H6Title /> should match the snapshot 1`] = `"<h6 class=\\"MuiTypography-root H6Title makeStyles-root-1 MuiTypography-h6\\">title</h6>"`;

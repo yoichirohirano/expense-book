@@ -1,13 +1,17 @@
 import React from "react";
-import DateInput from "./";
+import MonthTabs from "./";
 import { shallow } from "enzyme";
 
-describe("<DateInput />", () => {
+describe("<MonthTabs />", () => {
   let container: any = null;
-  const onChangeFunction = jest.fn();
+  const props = {
+    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
+    currentIndex: 0,
+    handleChange: jest.fn(),
+  };
 
   beforeEach(() => {
-    container = shallow(<DateInput handleChange={onChangeFunction} />);
+    container = shallow(<MonthTabs {...props} />);
   });
 
   afterEach(() => {
@@ -21,8 +25,8 @@ describe("<DateInput />", () => {
 
   test("event handler should be triggered", () => {
     container
-      .find(".DateInput-datepicker")
+      .find(".MonthTabs-Tabs")
       .simulate("change", { target: { value: "" } });
-    expect(onChangeFunction).toBeCalled();
+    expect(props.handleChange).toBeCalled();
   });
 });

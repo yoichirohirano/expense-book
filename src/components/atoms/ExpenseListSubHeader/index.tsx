@@ -10,7 +10,9 @@ const ExpenseListSubHeader: React.FC<ExpenseListSubHeaderProps> = (props) => {
   const classes = useStyles();
 
   return (
-    <ListSubheader className={classes.root}>{props.dateLabel}</ListSubheader>
+    <ListSubheader className={`ExpenseListSubHeader ${classes.root}`}>
+      {props.dateLabel}
+    </ListSubheader>
   );
 };
 

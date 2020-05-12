@@ -1,20 +1,17 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import useStyles from "./style";
 
 interface H6TitleProps {
   text: string;
 }
 
 const H6Title: React.FC<H6TitleProps> = (props) => {
+  const classes = useStyles();
   return (
-    <Box
-      fontSize="h6.fontSize"
-      textAlign="center"
-      padding="20px 0 0"
-      fontFamily="Roboto"
-    >
+    <Typography variant="h6" className={`H6Title ${classes.root}`}>
       {props.text}
-    </Box>
+    </Typography>
   );
 };
 

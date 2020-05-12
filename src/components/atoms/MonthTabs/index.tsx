@@ -27,6 +27,7 @@ const MonthTabs: React.FC<MonthTabsProps> = (props) => {
           textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
+          className="MonthTabs-Tabs"
         >
           {props.months.map((item, index) => {
             return (

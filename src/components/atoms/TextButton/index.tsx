@@ -14,7 +14,7 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
       variant="outlined"
       color="primary"
       size="large"
-      className={classes.root}
+      className={`TextButton ${classes.root}`}
       onClick={props.handleClick}
     >
       {props.text}
