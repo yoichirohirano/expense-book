@@ -16,7 +16,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   return (
     <TextField
       variant="outlined"
-      onChange={(e) => {
+      onChange={(e): void => {
         props.handleChange(e.target.value);
       }}
       label={props.label}
@@ -24,7 +24,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       error={props.error}
       helperText={props.helperText}
       type={props.type || "text"}
-      className={classes.root}
+      className={`TextInput ${classes.root}`}
     />
   );
 };
