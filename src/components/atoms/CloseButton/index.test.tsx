@@ -1,13 +1,13 @@
 import React from "react";
-import AddButton from "./";
+import CloseButton from "./";
 import { shallow } from "enzyme";
 
-describe("<AddButton />", () => {
-  let container: any = null;
-  const onClickFunction = jest.fn();
+describe("<CloseButton />", () => {
+  let container = null;
+  const handleClickFunction = jest.fn();
 
   beforeEach(() => {
-    container = shallow(<AddButton handleClick={onClickFunction} />);
+    container = shallow(<CloseButton handleClick={handleClickFunction} />);
   });
 
   afterEach(() => {
@@ -20,13 +20,13 @@ describe("<AddButton />", () => {
   });
 
   test("should have proper props", () => {
-    expect(container.find(".AddButton").props()).toMatchObject({
-      onClick: onClickFunction,
+    expect(container.find(".CloseButton").props()).toMatchObject({
+      onClick: handleClickFunction,
     });
   });
 
   test("click event handler should be triggered", () => {
     container.simulate("click");
-    expect(onClickFunction).toBeCalled();
+    expect(handleClickFunction).toBeCalled();
   });
 });

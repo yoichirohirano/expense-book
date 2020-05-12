@@ -7,7 +7,11 @@ interface CloseButtonProps {
 
 const CloseButton: React.FC<CloseButtonProps> = (props) => {
   return (
-    <IconButton onClick={props.handleClick} color="primary">
+    <IconButton
+      onClick={props.handleClick}
+      color="primary"
+      className="CloseButton"
+    >
       <CloseIcon />
     </IconButton>
   );

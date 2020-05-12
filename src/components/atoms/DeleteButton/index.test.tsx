@@ -1,37 +1,47 @@
-import React from 'react';
-import DeleteButton from './index';
-import { shallow } from 'enzyme';
+import React from "react";
+import DeleteButton from "./";
+import { shallow } from "enzyme";
 
-describe('<DeleteButton />', () => {
-  const container = null;
-  const onClickFunction = jest.fn();
-  const text = 'TEST';
+describe("<DeleteButton />", () => {
+  let container: any = null;
+  const props = {
+    handleClick: jest.fn(),
+    disabled: true,
+  };
 
-  // beforeEach(() => {
-  //   container = shallow(<Button onClick={onClickFunction} text={text} />);
-  // });
+  afterEach(() => {
+    container.unmount();
+    container = null;
+  });
 
-  // afterEach(() => {
-  //   container.unmount();
-  //   container = null;
-  // });
+  test("should match the snapshot", () => {
+    container = shallow(<DeleteButton {...props} />);
+    expect(container.html()).toMatchSnapshot();
+  });
 
-  // test('should match the snapshot', () => {
-  //   expect(container.html()).toMatchSnapshot();
-  // });
+  test("should have proper props", () => {
+    container = shallow(<DeleteButton {...props} />);
+    expect(container.find(".DeleteButton").props()).toMatchObject({
+      onClick: props.handleClick,
+      disabled: true,
+    });
+  });
 
-  // test('should have proper props', () => {
-  //   expect(container.props()).toMatchObject({
-  //     onClick: onClickFunction,
-  //   });
-  // });
+  test("should have proper props(disable false)", () => {
+    const props = {
+      handleClick: jest.fn(),
+      disabled: false,
+    };
+    container = shallow(<DeleteButton {...props} />);
+    expect(container.find(".DeleteButton").props()).toMatchObject({
+      onClick: props.handleClick,
+      disabled: false,
+    });
+  });
 
-  // test('should have proper text', () => {
-  //   expect(container.text()).toBe(text);
-  // });
-
-  // test('click event handler should be triggered', () => {
-  //   container.simulate('click');
-  //   expect(onClickFunction).toBeCalled();
-  // });
+  test("click event handler should be triggered", () => {
+    container = shallow(<DeleteButton {...props} />);
+    container.simulate("click");
+    expect(props.handleClick).toBeCalled();
+  });
 });

@@ -1,17 +1,17 @@
 import React from "react";
-import AddButton from "./";
+import CompleteButton from "./";
 import { shallow } from "enzyme";
 
-describe("<AddButton />", () => {
+describe("<CompleteButton />", () => {
   let container: any = null;
-  const onClickFunction = jest.fn();
+  const handleClickFunction = jest.fn();
 
   beforeEach(() => {
-    container = shallow(<AddButton handleClick={onClickFunction} />);
+    container = shallow(<CompleteButton handleClick={handleClickFunction} />);
   });
 
   afterEach(() => {
-    container.unmount();
+    container && container.unmount();
     container = null;
   });
 
@@ -20,13 +20,13 @@ describe("<AddButton />", () => {
   });
 
   test("should have proper props", () => {
-    expect(container.find(".AddButton").props()).toMatchObject({
-      onClick: onClickFunction,
+    expect(container.find(".CompleteButton").props()).toMatchObject({
+      onClick: handleClickFunction,
     });
   });
 
   test("click event handler should be triggered", () => {
     container.simulate("click");
-    expect(onClickFunction).toBeCalled();
+    expect(handleClickFunction).toBeCalled();
   });
 });

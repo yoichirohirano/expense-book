@@ -3,7 +3,7 @@ import ChartHeader from "./";
 import { shallow } from "enzyme";
 
 describe("<ChartHeader />", () => {
-  let container = null;
+  let container: any = null;
   const props = {
     expenseAmount: 200000,
     budgetAmount: 300000,

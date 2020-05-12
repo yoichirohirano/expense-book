@@ -3,7 +3,7 @@ import CategoryButton from "./";
 import { shallow } from "enzyme";
 
 describe("<CategoryButton />", () => {
-  let container = null;
+  let container: any = null;
 
   const props = {
     selected: false,

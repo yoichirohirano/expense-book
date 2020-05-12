@@ -7,7 +7,11 @@ interface CompleteButtonProps {
 
 const CompleteButton: React.FC<CompleteButtonProps> = (props) => {
   return (
-    <Fab onClick={props.handleClick} color="secondary">
+    <Fab
+      onClick={props.handleClick}
+      color="secondary"
+      className="CompleteButton"
+    >
       <DoneIcon />
     </Fab>
   );

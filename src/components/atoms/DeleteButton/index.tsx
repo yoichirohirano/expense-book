@@ -13,6 +13,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
       onClick={props.handleClick}
       color="primary"
       disabled={props.disabled || false}
+      className="DeleteButton"
     >
       <DeleteIcon />
     </IconButton>
