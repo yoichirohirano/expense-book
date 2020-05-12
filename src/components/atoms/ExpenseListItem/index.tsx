@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
@@ -16,12 +16,20 @@ export interface ExpenseListItemProps extends ExpenseItemData {
 const ExpenseListItem: React.FC<ExpenseListItemProps> = (props) => {
   return (
     <>
-      <ListItem button onClick={props.handleClickItem}>
-        <ListItemText primary={props.categoryName} secondary={props.title} />
-        {/* TODO: スタイル記述をstyle.tsxに移管 */}
-        <Box fontSize="subtitle1" fontFamily="h2.fontFamily">
-          {`¥${props.amount}`}
-        </Box>
+      <ListItem
+        button
+        onClick={props.handleClickItem}
+        className="ExpenseListItem"
+      >
+        <ListItemText
+          primary={props.categoryName}
+          secondary={props.title}
+          className="ExpenseListItem-ListItemText"
+        />
+        <Typography
+          variant="subtitle1"
+          className="ExpenseListItem-amount"
+        >{`¥${props.amount}`}</Typography>
       </ListItem>
       <Divider />
     </>
