@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChartHeader /> should match the snapshot 1`] = `"<div class=\\"MuiBox-root MuiBox-root-3 makeStyles-root-1\\"><div class=\\"MuiBox-root MuiBox-root-4 ChartHeader-total\\">Total: ¥200,000</div><div class=\\"MuiBox-root MuiBox-root-5\\">/</div><div class=\\"MuiBox-root MuiBox-root-6 ChartHeader-budget\\">Budget: ¥300,000</div></div>"`;

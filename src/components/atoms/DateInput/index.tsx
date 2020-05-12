@@ -24,7 +24,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
         variant="inline"
         label="日付"
         autoOk={true}
-        className={classes.datePicker}
+        className={`DateInput-datepicker ${classes.datePicker}`}
       />
     </MuiPickersUtilsProvider>
   );

@@ -12,9 +12,13 @@ const ChartHeader: React.FC<ChartHeaderProps> = (props) => {
   const classes = useStyles();
   return (
     <Box className={classes.root} fontFamily="h2.fontFamily">
-      <Box>Total: ¥{getPriceSeparatedByComma(props.expenseAmount)}</Box>
+      <Box className="ChartHeader-total">
+        Total: ¥{getPriceSeparatedByComma(props.expenseAmount)}
+      </Box>
       <Box padding="0 10px">/</Box>
-      <Box>Budget: ¥{getPriceSeparatedByComma(props.budgetAmount)}</Box>
+      <Box className="ChartHeader-budget">
+        Budget: ¥{getPriceSeparatedByComma(props.budgetAmount)}
+      </Box>
     </Box>
   );
 };
