@@ -14,6 +14,7 @@ import CategoryEditList, {
 import BudgetEditList, {
   BudgetEditListProps,
 } from "@/components/molecules/BudgetEditList";
+import Chart from "@/components/molecules/Chart";
 
 const categories = [
   {
@@ -67,6 +68,10 @@ const categories = [
     defaultBudget: 45000,
   },
 ];
+
+export const chart = () => {
+  return <Chart />;
+};
 
 export const categorySelector = (): JSX.Element => {
   const props = {
