@@ -93,4 +93,10 @@ describe("<CategorySelector />", () => {
       "secondary"
     );
   });
+
+  test("event handler should be triggered", () => {
+    container = mount(<CategorySelector {...props} />);
+    container.find(".CategoryButton").at(1).simulate("click");
+    expect(props.handleChangeCategory).toBeCalled();
+  });
 });
