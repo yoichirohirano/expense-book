@@ -8,34 +8,26 @@ import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
-import { Category } from "@/state/categories";
+import { Categories } from "@/state/categories";
 import CategorySelector from "@/components/molecules/CategorySelector";
 import useStyles from "./style";
 
-interface AddItemDrawerProps {
-  categories: Array<Category>;
+export interface AddItemDrawerProps {
+  categories: Categories;
   title: string;
   isEditItem: boolean;
   isOpen: boolean;
   toggleDrawer: (props: boolean) => void;
+  handleChangeCategory: (...props: any[]) => any;
+  handleChangeItemName: (...props: any[]) => any;
+  handleChangePrice: (...props: any[]) => any;
+  handleChangeDate: (...props: any[]) => any;
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const classes = useStyles();
   const [itemNameError, setItemNameError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
-
-  const handleChangeItemName = (e) => {
-    console.log(e.target.value);
-  };
-
-  const handleChangePrice = (e) => {
-    console.log(e.target.value);
-  };
-
-  const handleChangeDate = (e) => {
-    console.log(e.target.value);
-  };
 
   return (
     <SwipeableDrawer
@@ -58,23 +50,28 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       <Container maxWidth="sm">
         <H6Title text={props.title}></H6Title>
         <Box className={classes.categorySelectorWrapper}>
-          <CategorySelector categories={props.categories}></CategorySelector>
+          <CategorySelector
+            categories={props.categories}
+            handleChangeCategory={props.handleChangeCategory}
+          ></CategorySelector>
         </Box>
         <Box className={classes.inputArea}>
           <TextInput
             label="アイテム名"
-            handleChange={handleChangeItemName}
+            handleChange={props.handleChangeItemName}
             error={itemNameError}
             helperText={itemNameError ? "入力してください。" : ""}
+            className="ItemNameInput"
           ></TextInput>
           <TextInput
             label="金額"
             type="number"
-            handleChange={handleChangePrice}
+            handleChange={props.handleChangePrice}
             helperText={priceError ? "入力してください。" : ""}
             error={priceError}
+            className="PriceInput"
           ></TextInput>
-          <DateInput handleChange={handleChangeDate}></DateInput>
+          <DateInput handleChange={props.handleChangeDate}></DateInput>
         </Box>
       </Container>
       <Box className={classes.completeButtonWrapper}>
