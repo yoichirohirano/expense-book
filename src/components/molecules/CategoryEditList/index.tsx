@@ -28,10 +28,10 @@ const CategoryEditList: React.FC<CategoryEditListProps> = (props) => {
       handleChangeCategoryName: (newName: string): void => {
         props.handleChangeCategoryName(categoryId, newName);
       },
-      handleChangeBudget: (newBudget: number) => {
+      handleChangeBudget: (newBudget: number): void => {
         props.handleChangeBudget(categoryId, newBudget);
       },
-      handleClickDeleteButton: () => {
+      handleClickDeleteButton: (): void => {
         props.handleClickDeleteButton(categoryId);
       },
     };

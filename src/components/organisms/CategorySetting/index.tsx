@@ -1,11 +1,9 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
 import CategoryEditList, {
   CategoryEditListProps,
 } from "@/components/molecules/CategoryEditList";
 import { RootState } from "@/state/store";
-import { actions, Category } from "@/state/categories";
-import { Categories } from "@/state/categories/reducers";
+import { actions, Category, Categories } from "@/state/categories";
 import { useSelector, useDispatch } from "react-redux";
 
 const CategorySetting: React.FC = () => {
