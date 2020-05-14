@@ -8,6 +8,7 @@ export interface TextInputProps {
   defaultValue?: string;
   helperText?: string;
   handleChange: (...props: any[]) => any;
+  className?: string;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -24,7 +25,9 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       error={props.error}
       helperText={props.helperText}
       type={props.type || "text"}
-      className={`TextInput ${classes.root}`}
+      className={`TextInput ${props.className && props.className} ${
+        classes.root
+      }`}
     />
   );
 };
