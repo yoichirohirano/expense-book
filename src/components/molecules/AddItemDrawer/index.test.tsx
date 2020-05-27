@@ -63,10 +63,8 @@ describe("<AddItemDrawer />", () => {
     isEditItem: false,
     isOpen: true,
     toggleDrawer: jest.fn(),
-    handleChangeCategory: jest.fn(),
-    handleChangeItemName: jest.fn(),
-    handleChangePrice: jest.fn(),
-    handleChangeDate: jest.fn(),
+    add: jest.fn(),
+    delete: jest.fn(),
   };
 
   afterEach(() => {
@@ -99,28 +97,6 @@ describe("<AddItemDrawer />", () => {
     container = shallow(<AddItemDrawer {...props} />);
     expect(container.find("CategorySelector").props()).toMatchObject({
       categories: props.categories,
-      handleChangeCategory: props.handleChangeCategory,
-    });
-  });
-
-  test("should have proper handler - ItemNameInput", () => {
-    container = shallow(<AddItemDrawer {...props} />);
-    expect(container.find(".ItemNameInput").props()).toMatchObject({
-      handleChange: props.handleChangeItemName,
-    });
-  });
-
-  test("should have proper handler - PriceInput", () => {
-    container = shallow(<AddItemDrawer {...props} />);
-    expect(container.find(".PriceInput").props()).toMatchObject({
-      handleChange: props.handleChangePrice,
-    });
-  });
-
-  test("should have proper handler - DateInput", () => {
-    container = shallow(<AddItemDrawer {...props} />);
-    expect(container.find("DateInput").props()).toMatchObject({
-      handleChange: props.handleChangeDate,
     });
   });
 });
