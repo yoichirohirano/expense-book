@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import budgets from "./budgets";
-import categories from "./categories";
-import { Categories } from "./categories/reducers";
-import expenses from "./expenses";
+import budgets, { Budgets } from "./budgets";
+import categories, { Categories } from "./categories";
+import expenses, { Expenses } from "./expenses";
 
 export type RootState = {
+  budgets: Budgets;
   categories: Categories;
+  expenses: Expenses;
 };
 const rootReducer = combineReducers({
   budgets,

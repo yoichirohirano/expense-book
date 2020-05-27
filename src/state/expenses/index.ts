@@ -13,6 +13,7 @@ export type Expenses = {
 };
 
 export { default as expensesSelectors } from "./selectors";
+export { default as actions } from "./actions";
 export { default as expensesTypes } from "./types";
 
 export default reducer;

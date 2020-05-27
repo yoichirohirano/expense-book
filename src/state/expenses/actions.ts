@@ -4,8 +4,8 @@ import { Expense } from ".";
 import types from "./types";
 
 const actions = {
-  createExpense: (expense: Expense, id: string) => {
-    return { type: types.CREATE_EXPENSE, payload: { expense, id } };
+  createExpense: (expense: Expense) => {
+    return { type: types.CREATE_EXPENSE, payload: { expense } };
   },
   updateExpense: (expense: Expense, id: string) => {
     return { type: types.UPDATE_EXPENSE, payload: { expense, id } };

@@ -9,17 +9,22 @@ const reducer = (
   action: ExpensesAction
 ): Expenses => {
   switch (action.type) {
-    case actionTypes.CREATE_EXPENSE:
+    case actionTypes.CREATE_EXPENSE: {
+      const id = new Date().getTime();
+      state[id] = action.payload.expense;
+      return state;
+    }
+    case actionTypes.UPDATE_EXPENSE: {
       state[action.payload.id] = action.payload.expense;
       return state;
-    case actionTypes.UPDATE_EXPENSE:
-      state[action.payload.id] = action.payload.expense;
-      return state;
-    case actionTypes.DELETE_EXPENSE:
+    }
+    case actionTypes.DELETE_EXPENSE: {
       delete state[action.payload.id];
       return state;
-    default:
+    }
+    default: {
       return state;
+    }
   }
 };
 

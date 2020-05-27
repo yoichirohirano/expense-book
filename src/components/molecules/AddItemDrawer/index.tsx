@@ -9,25 +9,55 @@ import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import { Categories } from "@/state/categories";
+import { Expense } from "@/state/expenses";
 import CategorySelector from "@/components/molecules/CategorySelector";
 import useStyles from "./style";
 
 export interface AddItemDrawerProps {
   categories: Categories;
   title: string;
-  isEditItem: boolean;
   isOpen: boolean;
+  isEditItem: boolean;
+  editingItem?: Expense;
   toggleDrawer: (props: boolean) => void;
-  handleChangeCategory: (...props: any[]) => any;
-  handleChangeItemName: (...props: any[]) => any;
-  handleChangePrice: (...props: any[]) => any;
-  handleChangeDate: (...props: any[]) => any;
+  add: (props: Expense) => void;
+  delete: () => void;
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const classes = useStyles();
+
   const [itemNameError, setItemNameError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
+  const [category, setCategory] = useState(
+    props.editingItem?.category || Object.keys(props.categories)[0]
+  );
+  const [title, setTitle] = useState(props.editingItem?.title || "");
+  const [amount, setAmount] = useState(props.editingItem?.amount || 0);
+  const [date, setDate] = useState(props.editingItem?.date || new Date());
+
+  const validate = (): void => {
+    setItemNameError(!title);
+    setPriceError(!amount || amount < 0);
+  };
+
+  const handleClickCompleteButton = (): void => {
+    validate();
+    if (title && amount) {
+      props.add({
+        category,
+        title,
+        amount,
+        date,
+      });
+      props.toggleDrawer(false);
+    }
+  };
+
+  const handleClickDeleteButton = (): void => {
+    props.delete();
+    props.toggleDrawer(false);
+  };
 
   return (
     <SwipeableDrawer
@@ -52,13 +82,13 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
         <Box className={classes.categorySelectorWrapper}>
           <CategorySelector
             categories={props.categories}
-            handleChangeCategory={props.handleChangeCategory}
+            handleChangeCategory={setCategory}
           ></CategorySelector>
         </Box>
         <Box className={classes.inputArea}>
           <TextInput
             label="アイテム名"
-            handleChange={props.handleChangeItemName}
+            handleChange={setTitle}
             error={itemNameError}
             helperText={itemNameError ? "入力してください。" : ""}
             className="ItemNameInput"
@@ -66,28 +96,22 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           <TextInput
             label="金額"
             type="number"
-            handleChange={props.handleChangePrice}
+            handleChange={setAmount}
             helperText={priceError ? "入力してください。" : ""}
             error={priceError}
             className="PriceInput"
           ></TextInput>
-          <DateInput handleChange={props.handleChangeDate}></DateInput>
+          <DateInput handleChange={setDate}></DateInput>
         </Box>
       </Container>
       <Box className={classes.completeButtonWrapper}>
         <CompleteButton
-          handleClick={() => {
-            props.toggleDrawer(false);
-          }}
+          handleClick={handleClickCompleteButton}
         ></CompleteButton>
       </Box>
       {props.isEditItem && (
         <Box className={classes.deleteButtonWrapper}>
-          <DeleteButton
-            handleClick={() => {
-              props.toggleDrawer(false);
-            }}
-          ></DeleteButton>
+          <DeleteButton handleClick={handleClickDeleteButton}></DeleteButton>
         </Box>
       )}
     </SwipeableDrawer>
