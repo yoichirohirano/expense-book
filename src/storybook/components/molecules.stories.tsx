@@ -92,6 +92,12 @@ export const addItemDrawer = () => {
     toggleDrawer: (open: any): void => {
       console.log(open);
     },
+    add: (open: any): void => {
+      console.log(open);
+    },
+    delete: (): void => {
+      console.log(open);
+    },
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };
@@ -103,6 +109,12 @@ export const addItemDrawerEdit = (): JSX.Element => {
     isEditItem: true,
     isOpen: true,
     toggleDrawer: (open: any): void => {
+      console.log(open);
+    },
+    add: (open: any): void => {
+      console.log(open);
+    },
+    delete: (): void => {
       console.log(open);
     },
   };
