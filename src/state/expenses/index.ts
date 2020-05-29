@@ -1,14 +1,14 @@
 import reducer from "./reducers";
 
 export type Expense = {
-  category: string;
   amount: number;
+  category: string;
   date: Date;
-  title: string;
+  name: string;
 };
 
 export type Expenses = {
-  // expenseId(date serial): expense
+  // expenseId(random): expense
   [key: string]: Expense;
 };
 

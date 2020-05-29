@@ -13,13 +13,13 @@ describe("expenses reducer", () => {
         category: "Food",
         amount: 3000,
         date,
-        title: "スーパー",
+        name: "スーパー",
       },
       "1589011597561": {
         category: "Drink",
         amount: 300,
         date,
-        title: "飲み会",
+        name: "飲み会",
       },
     };
   });
@@ -29,35 +29,18 @@ describe("expenses reducer", () => {
       category: "Cafe",
       amount: 400,
       date,
-      title: "スタバ",
+      name: "スタバ",
     };
 
     test("should add new expense", () => {
-      const id = new Date().getTime().toString();
       const newState: Expenses = reducer(
         initialState,
-        actions.createExpense(newExpense, id)
+        actions.createExpense(newExpense)
       );
-      expect(newState).toMatchObject({
-        "1589011584031": {
-          category: "Food",
-          amount: 3000,
-          date,
-          title: "スーパー",
-        },
-        "1589011597561": {
-          category: "Drink",
-          amount: 300,
-          date,
-          title: "飲み会",
-        },
-        [id]: {
-          category: "Cafe",
-          amount: 400,
-          date,
-          title: "スタバ",
-        },
+      const index = Object.entries(newState).findIndex(([key, value]) => {
+        return value === newExpense;
       });
+      expect(index).toBeGreaterThan(0);
     });
   });
 
@@ -66,7 +49,7 @@ describe("expenses reducer", () => {
       category: "Cafe",
       amount: 400,
       date,
-      title: "スタバ",
+      name: "スタバ",
     };
 
     test("should update selected expense", () => {
@@ -79,13 +62,13 @@ describe("expenses reducer", () => {
           category: "Cafe",
           amount: 400,
           date,
-          title: "スタバ",
+          name: "スタバ",
         },
         "1589011597561": {
           category: "Drink",
           amount: 300,
           date,
-          title: "飲み会",
+          name: "飲み会",
         },
       });
     });
@@ -102,7 +85,7 @@ describe("expenses reducer", () => {
           category: "Drink",
           amount: 300,
           date,
-          title: "飲み会",
+          name: "飲み会",
         },
       });
     });
@@ -116,13 +99,13 @@ describe("expenses selector", () => {
       category: "Food",
       amount: 3000,
       date,
-      title: "スーパー",
+      name: "スーパー",
     },
     "1589011597561": {
       category: "Drink",
       amount: 300,
       date,
-      title: "飲み会",
+      name: "飲み会",
     },
   };
 
@@ -136,7 +119,7 @@ describe("expenses selector", () => {
         category: "Food",
         amount: 3000,
         date,
-        title: "スーパー",
+        name: "スーパー",
       });
     });
     test("shout get null", () => {

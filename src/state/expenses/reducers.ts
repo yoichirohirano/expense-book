@@ -16,7 +16,7 @@ const reducer = (
     }
     case actionTypes.UPDATE_EXPENSE: {
       state[action.payload.id] = action.payload.expense;
-      return state;
+      return Object.assign({}, state);
     }
     case actionTypes.DELETE_EXPENSE: {
       delete state[action.payload.id];

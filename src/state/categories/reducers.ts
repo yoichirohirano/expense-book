@@ -64,16 +64,15 @@ const reducer = (
     case actionTypes.CREATE_CATEGORY: {
       const id = new Date().getTime();
       state[id] = action.payload.category;
-      return Object.assign({}, state);
+      return state;
     }
     case actionTypes.UPDATE_CATEGORY: {
-      delete state[action.payload.id];
       state[action.payload.id] = action.payload.category;
       return Object.assign({}, state);
     }
     case actionTypes.DELETE_CATEGORY: {
       delete state[action.payload.id];
-      return Object.assign({}, state);
+      return state;
     }
     default:
       return state;
