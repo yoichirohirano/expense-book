@@ -8,15 +8,15 @@ describe("categories reducer", () => {
 
   beforeEach(() => {
     initialState = {
-      Food: {
+      aaaaa: {
         name: "Food",
         defaultBudget: 30000,
-        color: "#000000",
+        sortIndex: 0,
       },
-      Drink: {
+      bbbbb: {
         name: "Drink",
         defaultBudget: 30000,
-        color: "#000000",
+        sortIndex: 1,
       },
     };
   });
@@ -25,7 +25,7 @@ describe("categories reducer", () => {
     const newCategory: Category = {
       name: "newCategory",
       defaultBudget: 20000,
-      color: "#000000",
+      sortIndex: 2,
     };
 
     test("should add new category", () => {
@@ -33,23 +33,10 @@ describe("categories reducer", () => {
         initialState,
         actions.createCategory(newCategory)
       );
-      expect(newState).toMatchObject({
-        Food: {
-          name: "Food",
-          defaultBudget: 30000,
-          color: "#000000",
-        },
-        Drink: {
-          name: "Drink",
-          defaultBudget: 30000,
-          color: "#000000",
-        },
-        newCategory: {
-          name: "newCategory",
-          defaultBudget: 20000,
-          color: "#000000",
-        },
+      const index = Object.entries(newState).findIndex(([key, value]) => {
+        return value === newCategory;
       });
+      expect(index).toBeGreaterThan(0);
     });
   });
 
@@ -57,24 +44,24 @@ describe("categories reducer", () => {
     const newCategory: Category = {
       name: "newCategory",
       defaultBudget: 20000,
-      color: "#000000",
+      sortIndex: 2,
     };
 
     test("should update selected category", () => {
       const newState: Categories = reducer(
         initialState,
-        actions.updateCategory(newCategory, "Food")
+        actions.updateCategory(newCategory, "aaaaa")
       );
       expect(newState).toMatchObject({
-        newCategory: {
+        aaaaa: {
           name: "newCategory",
           defaultBudget: 20000,
-          color: "#000000",
+          sortIndex: 2,
         },
-        Drink: {
+        bbbbb: {
           name: "Drink",
           defaultBudget: 30000,
-          color: "#000000",
+          sortIndex: 1,
         },
       });
     });
@@ -87,10 +74,10 @@ describe("categories reducer", () => {
         actions.deleteCategory("Food")
       );
       expect(newState).toMatchObject({
-        Drink: {
+        bbbbb: {
           name: "Drink",
           defaultBudget: 30000,
-          color: "#000000",
+          sortIndex: 1,
         },
       });
     });
@@ -102,12 +89,12 @@ describe("categories selector", () => {
     Food: {
       name: "Food",
       defaultBudget: 30000,
-      color: "#000000",
+      sortIndex: 0,
     },
     Drink: {
       name: "Drink",
       defaultBudget: 30000,
-      color: "#000000",
+      sortIndex: 1,
     },
   };
 
@@ -120,7 +107,7 @@ describe("categories selector", () => {
       expect(selectedExpense).toMatchObject({
         name: "Food",
         defaultBudget: 30000,
-        color: "#000000",
+        sortIndex: 0,
       });
     });
     test("shout get null", () => {

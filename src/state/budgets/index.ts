@@ -1,7 +1,7 @@
 import reducer from "./reducers";
 
 export type Budget = {
-  // categoryId: amount
+  // Food: 30000
   [key: string]: number;
 };
 

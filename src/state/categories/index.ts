@@ -1,13 +1,13 @@
 import reducer from "./reducers";
 
 export type Category = {
-  name: string;
   defaultBudget: number;
-  color: string;
+  name: string;
+  sortIndex: number;
 };
 
 export type Categories = {
-  // categoryId(same as category.name) : category
+  // categoryId(random) : category
   [key: string]: Category;
 };
 

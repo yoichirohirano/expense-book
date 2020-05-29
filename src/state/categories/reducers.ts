@@ -4,55 +4,55 @@ import actionTypes from "./types";
 
 const initialState: Categories = {
   // TODO: Storybook確認用
-  Food: {
+  aaaaa: {
+    defaultBudget: 30000,
     name: "Food",
-    color: "#7CB342",
-    defaultBudget: 30000,
+    sortIndex: 0,
   },
-  Cafe: {
-    name: "Cafe",
-    color: "#D81B60",
+  bbbbb: {
     defaultBudget: 5000,
+    name: "Cafe",
+    sortIndex: 1,
   },
-  雑費: {
+  ccccc: {
+    defaultBudget: 12000,
     name: "雑費",
-    color: "#FDD835",
-    defaultBudget: 12000,
+    sortIndex: 2,
   },
-  Drink: {
+  ddddd: {
+    defaultBudget: 45000,
     name: "Drink",
-    color: "#5E35B1",
-    defaultBudget: 45000,
+    sortIndex: 3,
   },
-  Date: {
-    name: "Date",
-    color: "#FB8C00",
+  eeeee: {
     defaultBudget: 20000,
+    name: "Date",
+    sortIndex: 4,
   },
-  Book: {
-    name: "Book",
-    color: "#1E88E5",
+  fffff: {
     defaultBudget: 3000,
+    name: "Book",
+    sortIndex: 5,
   },
-  Gym: {
-    name: "Gym",
-    color: "#F4511E",
+  ggggg: {
     defaultBudget: 12000,
+    name: "Gym",
+    sortIndex: 6,
   },
-  Fixed: {
-    name: "Fixed",
-    color: "#00ACC1",
+  hhhhh: {
     defaultBudget: 33000,
+    name: "Fixed",
+    sortIndex: 7,
   },
-  Sudden: {
-    name: "Sudden",
-    color: "#8E24AA",
+  iiiii: {
     defaultBudget: 30000,
+    name: "Sudden",
+    sortIndex: 8,
   },
-  Savings: {
-    name: "Savings",
-    color: "#3949AB",
+  jjjjj: {
     defaultBudget: 45000,
+    name: "Savings",
+    sortIndex: 9,
   },
 };
 
@@ -61,16 +61,20 @@ const reducer = (
   action: CategoriesAction
 ): Categories => {
   switch (action.type) {
-    case actionTypes.CREATE_CATEGORY:
-      state[action.payload.category.name] = action.payload.category;
+    case actionTypes.CREATE_CATEGORY: {
+      const id = new Date().getTime();
+      state[id] = action.payload.category;
       return Object.assign({}, state);
-    case actionTypes.UPDATE_CATEGORY:
+    }
+    case actionTypes.UPDATE_CATEGORY: {
       delete state[action.payload.id];
-      state[action.payload.category.name] = action.payload.category;
+      state[action.payload.id] = action.payload.category;
       return Object.assign({}, state);
-    case actionTypes.DELETE_CATEGORY:
+    }
+    case actionTypes.DELETE_CATEGORY: {
       delete state[action.payload.id];
       return Object.assign({}, state);
+    }
     default:
       return state;
   }
