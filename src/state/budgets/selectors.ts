@@ -8,6 +8,14 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
+  getBudgetAmount: (budgets: Budgets, selectedId: string) => {
+    return Object.entries(budgets[selectedId]).reduce(
+      (accumulator: number, [key, value]: [string, number]) => {
+        return accumulator + value;
+      },
+      0
+    );
+  },
 };
 
 export default selectors;

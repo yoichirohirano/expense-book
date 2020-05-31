@@ -11,7 +11,7 @@ export type Categories = {
   [key: string]: Category;
 };
 
-export { default as selectors } from "./selectors";
+export { default as categoriesSelectors } from "./selectors";
 export { default as actions } from "./actions";
 export { default as types } from "./types";
 

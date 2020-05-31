@@ -10,7 +10,7 @@ export type Budgets = {
   [key: string]: Budget;
 };
 
-export { default as selectors } from "./selectors";
+export { default as budgetsSelectors } from "./selectors";
 export { default as actions } from "./actions";
 export { default as types } from "./types";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/state/store";
-import { actions, Budget, Budgets } from "@/state/budgets";
+import { actions, budgetsSelectors, Budget, Budgets } from "@/state/budgets";
 import { Categories } from "@/state/categories";
 import Box from "@material-ui/core/Box";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -15,6 +15,7 @@ import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
+import getPriceSeparatedByComma from "@/util/functions/getPriceSeparatedByComma";
 import useStyles, {
   usePanelClasses,
   usePanelSummaryClasses,
@@ -42,13 +43,19 @@ const BudgetEditList: React.FC = () => {
   );
 
   const dispatch = useDispatch();
-  const [expanded, setExpanded] = useState<string | false>("");
+  const [currentMonth, setCurrentMonth] = useState<string | false>("");
+
+  const budgetAmount = (budgets: Budgets, month: string): string => {
+    return getPriceSeparatedByComma(
+      budgetsSelectors.getBudgetAmount(budgets, month)
+    );
+  };
 
   const toggle = (panel: string) => (
     event: React.ChangeEvent<{}>,
-    newExpanded: boolean
+    isExpanded: boolean
   ): void => {
-    setExpanded(newExpanded ? panel : false);
+    setCurrentMonth(isExpanded ? panel : false);
   };
 
   const add = (): void => {
@@ -80,6 +87,7 @@ const BudgetEditList: React.FC = () => {
       },
     };
   };
+
   const addButtonProps: TextButtonProps = {
     text: "ADD BUDGET",
     handleClick: add,
@@ -94,16 +102,22 @@ const BudgetEditList: React.FC = () => {
             className={panelClasses.root}
             key={month}
             square
-            expanded={expanded === month}
+            expanded={currentMonth === month}
             onChange={toggle(month)}
           >
             <ExpansionPanelSummary
-              className={panelSummaryClasses.root}
+              classes={{
+                root: panelSummaryClasses.root,
+                content: panelSummaryClasses.content,
+              }}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
               <Typography className={classes.heading}>{month}</Typography>
+              <Typography className={classes.secondaryHeading}>
+                ¥{budgetAmount(budgets, month)}
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={panelDetailsClasses.root}>
               {Object.entries(budget).map(([categoryName, categoryBudget]) => {

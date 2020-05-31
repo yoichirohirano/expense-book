@@ -11,6 +11,14 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
+  getTotalAmount: (categories: Categories) => {
+    return Object.entries(categories).reduce(
+      (accumulator: number, [key, value]: [string, Category]) => {
+        return accumulator + value.defaultAmount;
+      },
+      0
+    );
+  },
 };
 
 export default selectors;
