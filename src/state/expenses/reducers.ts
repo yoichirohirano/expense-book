@@ -12,7 +12,7 @@ const reducer = (
     case actionTypes.CREATE_EXPENSE: {
       const id = new Date().getTime();
       state[id] = action.payload.expense;
-      return state;
+      return Object.assign({}, state);
     }
     case actionTypes.UPDATE_EXPENSE: {
       state[action.payload.id] = action.payload.expense;
@@ -20,7 +20,7 @@ const reducer = (
     }
     case actionTypes.DELETE_EXPENSE: {
       delete state[action.payload.id];
-      return state;
+      return Object.assign({}, state);
     }
     default: {
       return state;

@@ -13,13 +13,13 @@ const reducer = (
   switch (action.type) {
     case actionTypes.CREATE_BUDGET:
       state[action.payload.id] = action.payload.budget;
-      return state;
+      return Object.assign({}, state);
     case actionTypes.UPDATE_BUDGET:
       state[action.payload.id] = action.payload.budget;
       return Object.assign({}, state);
     case actionTypes.DELETE_BUDGET:
       delete state[action.payload.id];
-      return state;
+      return Object.assign({}, state);
     default:
       return state;
   }

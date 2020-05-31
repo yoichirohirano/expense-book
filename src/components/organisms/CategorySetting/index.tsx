@@ -16,6 +16,43 @@ const CategorySetting: React.FC = () => {
   );
   const dispatch = useDispatch();
 
+  const add = (): void => {
+    const newCategory: Category = {
+      name: "",
+      defaultBudget: 0,
+      // 末尾に追加
+      sortIndex: Object.entries(categories).length,
+    };
+    dispatch(actions.createCategory(newCategory));
+    console.log(categories);
+  };
+
+  const remove = (id: string): void => {
+    dispatch(actions.deleteCategory(id));
+  };
+
+  const editName = (id: string, name: string): void => {
+    dispatch(
+      actions.updateCategory(
+        Object.assign({}, categories[id], {
+          name,
+        }),
+        id
+      )
+    );
+  };
+
+  const editBudget = (id: string, defaultBudget: number): void => {
+    dispatch(
+      actions.updateCategory(
+        Object.assign({}, categories[id], {
+          defaultBudget,
+        }),
+        id
+      )
+    );
+  };
+
   const budgetEditItemProps = (
     categoryId: string,
     category: Category
@@ -23,41 +60,21 @@ const CategorySetting: React.FC = () => {
     return {
       categoryName: category.name,
       budget: category.defaultBudget,
-      handleChangeCategoryName: (id: string, newCategoryName: string): void => {
-        dispatch(
-          actions.updateCategory(
-            Object.assign({}, categories[id], {
-              name: newCategoryName,
-            }),
-            id
-          )
-        );
-        console.log(categories);
+      handleChangeCategoryName: (value): void => {
+        editName(categoryId, value);
       },
-      handleChangeBudget: (id: string, newBudget: number) => {
-        const newCategory: Category = Object.assign({}, categories[id], {
-          defaultBudget: newBudget,
-        });
-        dispatch(actions.updateCategory(newCategory, id));
-        console.log(categories);
+      handleChangeBudget: (value): void => {
+        editBudget(categoryId, value);
       },
-      handleClickDeleteButton: (id: string) => {
-        console.log(id);
-        dispatch(actions.deleteCategory(id));
+      handleClickDeleteButton: (): void => {
+        remove(categoryId);
       },
     };
   };
-  const textButtonProps: TextButtonProps = {
+
+  const addButtonProps: TextButtonProps = {
     text: "ADD CATEGORY",
-    handleClick: () => {
-      const newCategory: Category = {
-        name: "",
-        defaultBudget: 0,
-        color: "#ffff00",
-      };
-      dispatch(actions.createCategory(newCategory));
-      console.log(categories);
-    },
+    handleClick: add,
   };
 
   return (
@@ -72,7 +89,7 @@ const CategorySetting: React.FC = () => {
         );
       })}
       <Box padding="20px 0">
-        <TextButton {...textButtonProps}></TextButton>
+        <TextButton {...addButtonProps}></TextButton>
       </Box>
     </Container>
   );
