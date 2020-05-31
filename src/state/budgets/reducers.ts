@@ -3,7 +3,19 @@ import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
 const initialState: Budgets = {
-  budgets: {},
+  "2020/04": {
+    Food: 30000,
+    Drink: 20000,
+  },
+  "2020/05": {
+    Food: 30000,
+    Book: 3000,
+  },
+  "2020/06": {
+    Food: 30000,
+    Drink: 20000,
+    Book: 3000,
+  },
 };
 
 const reducer = (

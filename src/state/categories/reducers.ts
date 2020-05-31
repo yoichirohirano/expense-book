@@ -5,52 +5,52 @@ import actionTypes from "./types";
 const initialState: Categories = {
   // TODO: Storybook確認用
   aaaaa: {
-    defaultBudget: 30000,
+    defaultAmount: 30000,
     name: "Food",
     sortIndex: 0,
   },
   bbbbb: {
-    defaultBudget: 5000,
+    defaultAmount: 5000,
     name: "Cafe",
     sortIndex: 1,
   },
   ccccc: {
-    defaultBudget: 12000,
+    defaultAmount: 12000,
     name: "雑費",
     sortIndex: 2,
   },
   ddddd: {
-    defaultBudget: 45000,
+    defaultAmount: 45000,
     name: "Drink",
     sortIndex: 3,
   },
   eeeee: {
-    defaultBudget: 20000,
+    defaultAmount: 20000,
     name: "Date",
     sortIndex: 4,
   },
   fffff: {
-    defaultBudget: 3000,
+    defaultAmount: 3000,
     name: "Book",
     sortIndex: 5,
   },
   ggggg: {
-    defaultBudget: 12000,
+    defaultAmount: 12000,
     name: "Gym",
     sortIndex: 6,
   },
   hhhhh: {
-    defaultBudget: 33000,
+    defaultAmount: 33000,
     name: "Fixed",
     sortIndex: 7,
   },
   iiiii: {
-    defaultBudget: 30000,
+    defaultAmount: 30000,
     name: "Sudden",
     sortIndex: 8,
   },
   jjjjj: {
-    defaultBudget: 45000,
+    defaultAmount: 45000,
     name: "Savings",
     sortIndex: 9,
   },

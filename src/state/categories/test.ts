@@ -10,12 +10,12 @@ describe("categories reducer", () => {
     initialState = {
       aaaaa: {
         name: "Food",
-        defaultBudget: 30000,
+        defaultAmount: 30000,
         sortIndex: 0,
       },
       bbbbb: {
         name: "Drink",
-        defaultBudget: 30000,
+        defaultAmount: 30000,
         sortIndex: 1,
       },
     };
@@ -24,7 +24,7 @@ describe("categories reducer", () => {
   describe("createCategory", () => {
     const newCategory: Category = {
       name: "newCategory",
-      defaultBudget: 20000,
+      defaultAmount: 20000,
       sortIndex: 2,
     };
 
@@ -43,7 +43,7 @@ describe("categories reducer", () => {
   describe("updateCategory", () => {
     const newCategory: Category = {
       name: "newCategory",
-      defaultBudget: 20000,
+      defaultAmount: 20000,
       sortIndex: 2,
     };
 
@@ -55,12 +55,12 @@ describe("categories reducer", () => {
       expect(newState).toMatchObject({
         aaaaa: {
           name: "newCategory",
-          defaultBudget: 20000,
+          defaultAmount: 20000,
           sortIndex: 2,
         },
         bbbbb: {
           name: "Drink",
-          defaultBudget: 30000,
+          defaultAmount: 30000,
           sortIndex: 1,
         },
       });
@@ -76,7 +76,7 @@ describe("categories reducer", () => {
       expect(newState).toMatchObject({
         bbbbb: {
           name: "Drink",
-          defaultBudget: 30000,
+          defaultAmount: 30000,
           sortIndex: 1,
         },
       });
@@ -88,12 +88,12 @@ describe("categories selector", () => {
   const initialState: Categories = {
     Food: {
       name: "Food",
-      defaultBudget: 30000,
+      defaultAmount: 30000,
       sortIndex: 0,
     },
     Drink: {
       name: "Drink",
-      defaultBudget: 30000,
+      defaultAmount: 30000,
       sortIndex: 1,
     },
   };
@@ -106,7 +106,7 @@ describe("categories selector", () => {
       );
       expect(selectedExpense).toMatchObject({
         name: "Food",
-        defaultBudget: 30000,
+        defaultAmount: 30000,
         sortIndex: 0,
       });
     });

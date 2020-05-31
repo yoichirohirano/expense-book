@@ -19,7 +19,7 @@ const CategorySetting: React.FC = () => {
   const add = (): void => {
     const newCategory: Category = {
       name: "",
-      defaultBudget: 0,
+      defaultAmount: 0,
       // 末尾に追加
       sortIndex: Object.entries(categories).length,
     };
@@ -42,15 +42,17 @@ const CategorySetting: React.FC = () => {
     );
   };
 
-  const editBudget = (id: string, defaultBudget: number): void => {
+  const editBudget = (id: string, defaultAmount: number): void => {
+    console.log(defaultAmount);
     dispatch(
       actions.updateCategory(
         Object.assign({}, categories[id], {
-          defaultBudget,
+          defaultAmount,
         }),
         id
       )
     );
+    console.log(categories);
   };
 
   const budgetEditItemProps = (
@@ -59,12 +61,13 @@ const CategorySetting: React.FC = () => {
   ): BudgetEditItemProps => {
     return {
       categoryName: category.name,
-      budget: category.defaultBudget,
+      budget: category.defaultAmount,
       handleChangeCategoryName: (value): void => {
         editName(categoryId, value);
       },
-      handleChangeBudget: (value): void => {
-        editBudget(categoryId, value);
+      handleChangeBudget: (value: string): void => {
+        // inputをnumberに置換
+        editBudget(categoryId, parseInt(value, 10));
       },
       handleClickDeleteButton: (): void => {
         remove(categoryId);

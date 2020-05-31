@@ -9,10 +9,13 @@ export type BudgetEditItemInfo = {
   budget: number;
 };
 
+// TODO: 自分で↑と↓の区別がわからなくなってる、、
+
 export interface BudgetEditItemProps extends BudgetEditItemInfo {
   handleChangeCategoryName: (...props: any[]) => any;
   handleChangeBudget: (...props: any[]) => any;
   handleClickDeleteButton?: (...props: any[]) => any;
+  categoryEditDisabled?: boolean;
 }
 
 const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
@@ -29,6 +32,7 @@ const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
           handleChange={props.handleChangeCategoryName}
           error={itemNameError}
           helperText={itemNameError ? "入力してください。" : ""}
+          disabled={props.categoryEditDisabled}
         ></TextInput>
         <TextInput
           label="金額"

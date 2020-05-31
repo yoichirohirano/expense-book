@@ -1,7 +1,7 @@
 import reducer from "./reducers";
 
 export type Category = {
-  defaultBudget: number;
+  defaultAmount: number;
   name: string;
   sortIndex: number;
 };
