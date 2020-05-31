@@ -4,11 +4,17 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import H6Title from "@/components/atoms/H6Title";
 import { RootState } from "@/state/store";
-import { actions, Category, Categories } from "@/state/categories";
+import {
+  actions,
+  Category,
+  Categories,
+  categoriesSelectors,
+} from "@/state/categories";
 import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
+import ChartHeader from "@/components/atoms/ChartHeader";
 
 const CategorySetting: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
@@ -24,7 +30,6 @@ const CategorySetting: React.FC = () => {
       sortIndex: Object.entries(categories).length,
     };
     dispatch(actions.createCategory(newCategory));
-    console.log(categories);
   };
 
   const remove = (id: string): void => {
@@ -43,7 +48,6 @@ const CategorySetting: React.FC = () => {
   };
 
   const editBudget = (id: string, defaultAmount: number): void => {
-    console.log(defaultAmount);
     dispatch(
       actions.updateCategory(
         Object.assign({}, categories[id], {
@@ -52,7 +56,6 @@ const CategorySetting: React.FC = () => {
         id
       )
     );
-    console.log(categories);
   };
 
   const budgetEditItemProps = (
@@ -83,6 +86,9 @@ const CategorySetting: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <H6Title text="Default Category"></H6Title>
+      <ChartHeader
+        expenseAmount={categoriesSelectors.getTotalAmount(categories)}
+      ></ChartHeader>
       {Object.entries(categories).map(([key, item]) => {
         return (
           <BudgetEditItem

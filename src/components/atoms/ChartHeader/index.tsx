@@ -5,7 +5,7 @@ import useStyles from "./style";
 
 export interface ChartHeaderProps {
   expenseAmount: number;
-  budgetAmount: number;
+  budgetAmount?: number;
 }
 
 const ChartHeader: React.FC<ChartHeaderProps> = (props) => {
@@ -15,10 +15,14 @@ const ChartHeader: React.FC<ChartHeaderProps> = (props) => {
       <Box className="ChartHeader-total">
         Total: ¥{getPriceSeparatedByComma(props.expenseAmount)}
       </Box>
-      <Box padding="0 10px">/</Box>
-      <Box className="ChartHeader-budget">
-        Budget: ¥{getPriceSeparatedByComma(props.budgetAmount)}
-      </Box>
+      {props.budgetAmount && (
+        <>
+          <Box padding="0 10px">/</Box>
+          <Box className="ChartHeader-budget">
+            Budget: ¥{getPriceSeparatedByComma(props.budgetAmount)}
+          </Box>
+        </>
+      )}
     </Box>
   );
 };
