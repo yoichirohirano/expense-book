@@ -148,6 +148,18 @@ export const textInputWithDefaultValue = (): JSX.Element => {
   return <TextInput {...props}></TextInput>;
 };
 
+export const textInputDisabled = (): JSX.Element => {
+  const props = {
+    label: "Item Name",
+    error: false,
+    handleChange: (): void => {
+      console.log("change");
+    },
+    disabled: true,
+  };
+  return <TextInput {...props}></TextInput>;
+};
+
 export const textInputWithNoInputError = (): JSX.Element => {
   const props = {
     label: "ItemName",

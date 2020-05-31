@@ -9,6 +9,7 @@ export interface TextInputProps {
   helperText?: string;
   handleChange: (...props: any[]) => any;
   className?: string;
+  disabled?: boolean;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -28,6 +29,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       className={`TextInput ${props.className && props.className} ${
         classes.root
       }`}
+      disabled={props.disabled || false}
     />
   );
 };

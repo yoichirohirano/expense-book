@@ -41,6 +41,21 @@ describe("<TextInput />", () => {
     );
   });
 
+  test("should be disabled", () => {
+    const props = {
+      label: "Budget",
+      defaultValue: "25000",
+      error: false,
+      type: "number",
+      handleChange: jest.fn(),
+      disabled: true,
+    };
+    container = mount(<TextInput {...props} />);
+    expect(
+      container.find("input.MuiInputBase-input").get(0).props.disabled
+    ).toBe(true);
+  });
+
   test("should be error", () => {
     const props = {
       label: "Budget",
