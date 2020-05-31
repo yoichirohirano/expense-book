@@ -7,7 +7,7 @@ export interface TextInputProps {
   error: boolean;
   defaultValue?: string;
   helperText?: string;
-  handleChange: (...props: any[]) => any;
+  handleChange?: (...props: any[]) => any;
   className?: string;
   disabled?: boolean;
 }
@@ -19,7 +19,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     <TextField
       variant="outlined"
       onChange={(e): void => {
-        props.handleChange(e.target.value);
+        props.handleChange && props.handleChange(e.target.value);
       }}
       label={props.label}
       defaultValue={props.defaultValue || ""}
