@@ -27,26 +27,26 @@ export interface AddItemDrawerProps {
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const classes = useStyles();
 
-  const [itemNameError, setItemNameError] = useState<boolean>(false);
-  const [priceError, setPriceError] = useState<boolean>(false);
+  const [name, setName] = useState(props.editingItem?.name || "");
+  const [amount, setAmount] = useState(props.editingItem?.amount || 0);
+  const [date, setDate] = useState(props.editingItem?.date || new Date());
   const [category, setCategory] = useState(
     props.editingItem?.category || Object.keys(props.categories)[0]
   );
-  const [title, setTitle] = useState(props.editingItem?.title || "");
-  const [amount, setAmount] = useState(props.editingItem?.amount || 0);
-  const [date, setDate] = useState(props.editingItem?.date || new Date());
+  const [itemNameError, setItemNameError] = useState<boolean>(false);
+  const [priceError, setPriceError] = useState<boolean>(false);
 
   const validate = (): void => {
-    setItemNameError(!title);
+    setItemNameError(!name);
     setPriceError(!amount || amount < 0);
   };
 
   const handleClickCompleteButton = (): void => {
     validate();
-    if (title && amount) {
+    if (name && amount) {
       props.add({
         category,
-        title,
+        name,
         amount,
         date,
       });
@@ -57,6 +57,23 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const handleClickDeleteButton = (): void => {
     props.delete();
     props.toggleDrawer(false);
+  };
+
+  const nameInputProps = {
+    label: "アイテム名",
+    handleChange: setName,
+    error: itemNameError,
+    helperText: itemNameError ? "入力してください。" : "",
+    className: "ItemNameInput",
+  };
+
+  const amountInputProps = {
+    label: "金額",
+    type: "number",
+    handleChange: setAmount,
+    helperText: priceError ? "入力してください。" : "",
+    error: priceError,
+    className: "PriceInput",
   };
 
   return (
@@ -86,21 +103,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           ></CategorySelector>
         </Box>
         <Box className={classes.inputArea}>
-          <TextInput
-            label="アイテム名"
-            handleChange={setTitle}
-            error={itemNameError}
-            helperText={itemNameError ? "入力してください。" : ""}
-            className="ItemNameInput"
-          ></TextInput>
-          <TextInput
-            label="金額"
-            type="number"
-            handleChange={setAmount}
-            helperText={priceError ? "入力してください。" : ""}
-            error={priceError}
-            className="PriceInput"
-          ></TextInput>
+          <TextInput {...nameInputProps}></TextInput>
+          <TextInput {...amountInputProps}></TextInput>
           <DateInput handleChange={setDate}></DateInput>
         </Box>
       </Container>

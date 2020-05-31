@@ -3,26 +3,13 @@ import Box from "@material-ui/core/Box";
 import CategoryButton, {
   CategoryButtonProps,
 } from "@/components/atoms/CategoryButton";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { Category, Categories } from "@/state/categories";
+import useStyles from "./style";
 
 interface CategorySelectorProps {
   categories: Categories;
   handleChangeCategory: (...props: any[]) => any;
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
-      "& > *": {
-        margin: theme.spacing(0.5),
-      },
-    },
-  })
-);
 
 const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
   const classes = useStyles();
