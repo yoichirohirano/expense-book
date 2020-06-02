@@ -21,7 +21,7 @@ export interface AddItemDrawerProps {
   editingItem?: Expense;
   toggleDrawer: (props: boolean) => void;
   add: (props: Expense) => void;
-  delete: () => void;
+  delete?: (...props: any[]) => any;
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
@@ -55,7 +55,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   };
 
   const handleClickDeleteButton = (): void => {
-    props.delete();
+    props.delete && props.delete();
     props.toggleDrawer(false);
   };
 
