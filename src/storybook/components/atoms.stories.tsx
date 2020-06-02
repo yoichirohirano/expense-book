@@ -82,7 +82,13 @@ export const navigation = (): JSX.Element => {
 
 export const monthTabs = (): JSX.Element => {
   const props = {
-    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
+    months: [
+      "202003",
+      "Wed Apr 01 2020",
+      "Fri May 01 2020",
+      "Mon Jun 01 2020",
+      "Wed Jul 01 2020",
+    ],
     currentIndex: 0,
     handleChange: (value: number): void => {
       console.log(value);
