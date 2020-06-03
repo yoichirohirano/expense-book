@@ -30,22 +30,17 @@ const getColor = (index: number, colorList: Array<string>): string => {
 };
 
 const ChartView: React.FC = () => {
+  const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
   const expenses = useSelector<RootState, Expenses>((state) => state.expenses);
-  const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // YYYYMMDDT000000
   const [currentMonth, setCurrentMonth] = useState<string>(
     `${moment(new Date()).format("YYYYMM")}01T000000`
   );
-  const [currentonthIndex, setCurrentonthIndex] = useState<string>(
-    `${moment(new Date()).format("YYYYMM")}01T000000`
-  );
-
-  const currentMonthIndex = () => {};
 
   // チャートに表示するデータをstoreの情報から生成する
   const getChartItems = (): Array<ChartItem> => {
