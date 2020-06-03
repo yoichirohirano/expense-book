@@ -12,11 +12,28 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
+  // 年月のリスト
   getMonths: (expenses: Expenses): Array<string> => {
     return Object.entries(expenses).map(([key]) => {
       return key;
     });
   },
+  // 指定月の出費リスト
+  getListOfMonth: (expenses: Expenses, id: string): Array<Expense> => {
+    const firstDayOfMonth = moment(id);
+    const firstDayOfNextMonth = moment(id).add(1, "M");
+    return Object.entries(expenses)
+      .filter(([id, expense]) => {
+        return (
+          moment(expense.date).isAfter(firstDayOfMonth) &&
+          moment(expense.date).isBefore(firstDayOfNextMonth)
+        );
+      })
+      .map(([id, expense]) => {
+        return expense;
+      });
+  },
+  // 指定月の出費合計金額
   getExpenseAmountOfMonth: (expenses: Expenses, id: string): number => {
     const firstDayOfMonth = moment(id);
     const firstDayOfNextMonth = moment(id).add(1, "M");

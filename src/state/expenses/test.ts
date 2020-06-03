@@ -142,10 +142,40 @@ describe("expenses selector", () => {
     });
   });
 
+  describe("getListOfMonth", () => {
+    test("shout get all expenses of selected month", () => {
+      const total = selectors.getListOfMonth(initialState, "202006");
+      expect(total).toEqual(
+        expect.arrayContaining([
+          {
+            category: "Drink",
+            amount: 300,
+            date: "20200602T123456",
+            name: "飲み会",
+          },
+          {
+            category: "Drink",
+            amount: 5000,
+            date: "20200625T123456",
+            name: "飲み会",
+          },
+        ])
+      );
+    });
+    test("shout get empty array", () => {
+      const total = selectors.getListOfMonth(initialState, "102006");
+      expect(total).toEqual(expect.arrayContaining([]));
+    });
+  });
+
   describe("getExpenseAmountOfMonth", () => {
     test("shout get total amount of selected month", () => {
       const total = selectors.getExpenseAmountOfMonth(initialState, "202006");
       expect(total).toBe(5300);
+    });
+    test("shout get 0 of month with no expenses", () => {
+      const total = selectors.getExpenseAmountOfMonth(initialState, "102006");
+      expect(total).toBe(0);
     });
   });
 });
