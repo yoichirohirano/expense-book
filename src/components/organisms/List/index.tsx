@@ -76,9 +76,9 @@ const List: React.FC = () => {
   const monthTabsProps: MonthTabsProps = {
     months: [
       "202003",
-      "Wed Apr 01 2020",
-      "Fri May 01 2020",
-      "Mon Jun 01 2020",
+      "20200401T000000",
+      "20200501T000000",
+      "20200601T000000",
       "Wed Jul 01 2020",
     ],
     currentIndex: monthTabIndex,

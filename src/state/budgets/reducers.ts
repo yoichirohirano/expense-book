@@ -3,15 +3,15 @@ import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
 const initialState: Budgets = {
-  "Wed Apr 01 2020": {
+  "20200401T000000": {
     Food: 30000,
     Drink: 20000,
   },
-  "Fri May 01 2020": {
+  "20200501T000000": {
     Food: 30000,
     Book: 3000,
   },
-  "Mon Jun 01 2020": {
+  "20200601T000000": {
     Food: 30000,
     Drink: 20000,
     Book: 3000,

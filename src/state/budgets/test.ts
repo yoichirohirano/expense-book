@@ -8,11 +8,11 @@ describe("budgets reducer", () => {
 
   beforeEach(() => {
     initialState = {
-      "Wed Apr 01 2020": {
+      "20200401T000000": {
         Food: 10000,
         Drink: 20000,
       },
-      "Fri May 01 2020": {
+      "20200501T000000": {
         Food: 30000,
         Drink: 40000,
       },
@@ -28,18 +28,18 @@ describe("budgets reducer", () => {
     test("should add new budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.createBudget(newBudget, "Mon Jun 01 2020")
+        actions.createBudget(newBudget, "20200601T000000")
       );
       expect(newState).toMatchObject({
-        "Wed Apr 01 2020": {
+        "20200401T000000": {
           Food: 10000,
           Drink: 20000,
         },
-        "Fri May 01 2020": {
+        "20200501T000000": {
           Food: 30000,
           Drink: 40000,
         },
-        "Mon Jun 01 2020": {
+        "20200601T000000": {
           Food: 50000,
           Drink: 60000,
         },
@@ -56,14 +56,14 @@ describe("budgets reducer", () => {
     test("should update selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.updateBudget(newBudget, "Wed Apr 01 2020")
+        actions.updateBudget(newBudget, "20200401T000000")
       );
       expect(newState).toMatchObject({
-        "Wed Apr 01 2020": {
+        "20200401T000000": {
           Food: 15000,
           Drink: 25000,
         },
-        "Fri May 01 2020": {
+        "20200501T000000": {
           Food: 30000,
           Drink: 40000,
         },
@@ -75,10 +75,10 @@ describe("budgets reducer", () => {
     test("should delete selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.deleteBudget("Wed Apr 01 2020")
+        actions.deleteBudget("20200401T000000")
       );
       expect(newState).toMatchObject({
-        "Fri May 01 2020": {
+        "20200501T000000": {
           Food: 30000,
           Drink: 40000,
         },
@@ -89,11 +89,11 @@ describe("budgets reducer", () => {
 
 describe("budgets selector", () => {
   const initialState: Budgets = {
-    "Wed Apr 01 2020": {
+    "20200401T000000": {
       Food: 10000,
       Drink: 20000,
     },
-    "Fri May 01 2020": {
+    "20200501T000000": {
       Food: 30000,
       Drink: 40000,
     },
@@ -103,7 +103,7 @@ describe("budgets selector", () => {
     test("shout get selected budget", () => {
       const selectedExpense = selectors.getSelectedBudget(
         initialState,
-        "Wed Apr 01 2020"
+        "20200401T000000"
       );
       expect(selectedExpense).toMatchObject({
         Food: 10000,

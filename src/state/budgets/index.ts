@@ -6,7 +6,7 @@ export type Budget = {
 };
 
 export type Budgets = {
-  // Date.prototype.toDateString(): budget
+  // YYYYMMDDT000000: budget
   [key: string]: Budget;
 };
 

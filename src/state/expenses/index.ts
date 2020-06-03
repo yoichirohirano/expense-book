@@ -3,7 +3,8 @@ import reducer from "./reducers";
 export type Expense = {
   amount: number;
   category: string;
-  date: Date;
+  // YYYYMMDDTHHMMSS
+  date: string;
   name: string;
 };
 
@@ -13,7 +14,7 @@ export type Expenses = {
 };
 
 export { default as expensesSelectors } from "./selectors";
-export { default as actions } from "./actions";
+export { default as expenseActions } from "./actions";
 export { default as expensesTypes } from "./types";
 
 export default reducer;
