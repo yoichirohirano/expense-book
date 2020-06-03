@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Category, Categories } from ".";
+import { Budget } from "@/state/budgets";
 
 const selectors = {
   getSelectedCategory: (
@@ -18,6 +19,13 @@ const selectors = {
       },
       0
     );
+  },
+  getDefaultBudget: (categories: Categories): Budget => {
+    const defaultBudget: Budget = {};
+    Object.entries(categories).forEach(([key, value]) => {
+      defaultBudget[value.name] = value.defaultAmount;
+    });
+    return defaultBudget;
   },
 };
 

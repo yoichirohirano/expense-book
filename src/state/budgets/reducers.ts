@@ -3,6 +3,7 @@ import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
 const initialState: Budgets = {
+  // TODO: Storybook確認用
   "20200401T000000": {
     Food: 30000,
     Drink: 20000,

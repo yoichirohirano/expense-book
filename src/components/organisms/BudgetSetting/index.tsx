@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/state/store";
 import { actions, budgetsSelectors, Budget, Budgets } from "@/state/budgets";
-import { Categories } from "@/state/categories";
+import { categoriesSelectors, Categories } from "@/state/categories";
 import Box from "@material-ui/core/Box";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -21,15 +21,6 @@ import useStyles, {
   usePanelSummaryClasses,
   usePanelDetailsClasses,
 } from "./style";
-
-// デフォルトカテゴリ情報からデフォルト予算を取得する
-const getDefaultBudget = (categories: Categories): Budget => {
-  const defaultBudget: Budget = {};
-  Object.entries(categories).forEach(([key, value]) => {
-    defaultBudget[value.name] = value.defaultAmount;
-  });
-  return defaultBudget;
-};
 
 const BudgetEditList: React.FC = () => {
   const classes = useStyles();
@@ -64,8 +55,8 @@ const BudgetEditList: React.FC = () => {
     const YYYY = nextMonth.getFullYear();
     // 来月を指定
     const MM = `0${nextMonth.getMonth() + 1}`.slice(-2);
-    const currentYYYYMM = `${YYYY}/${MM}`;
-    const newBudget: Budget = getDefaultBudget(categories);
+    const currentYYYYMM = `${YYYY}${MM}`;
+    const newBudget: Budget = categoriesSelectors.getDefaultBudget(categories);
     dispatch(actions.createBudget(newBudget, currentYYYYMM));
   };
 

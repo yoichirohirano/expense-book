@@ -5,9 +5,10 @@ import convertHexToRgba from "@/util/functions/convertHexToRgba";
 
 export type ChartItem = {
   categoryName: string;
-  amount: number;
-  color: string;
   budget: number;
+  amount: number;
+  sortIndex: number;
+  color: string;
 };
 export interface ExpenseChartProps {
   chartItems: Array<ChartItem>;

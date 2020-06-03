@@ -1,95 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import MonthTabs, { MonthTabsProps } from "@/components/atoms/MonthTabs";
 import ChartHeader, { ChartHeaderProps } from "@/components/atoms/ChartHeader";
 import ExpenseChart, {
   ExpenseChartProps,
+  ChartItem,
 } from "@/components/atoms/ExpenseChart";
 
-const months = ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"];
+export interface ChartProps {
+  months: Array<string>;
+  expenseAmount: number;
+  budgetAmount: number;
+  chartItems: Array<ChartItem>;
+  changeMonth: (index: number) => void;
+  initialMonthIndex: number;
+}
 
-const Chart: React.FC = () => {
-  const [monthTabIndex, setMonthTabIndex] = useState<number>(0);
-
+const Chart: React.FC<ChartProps> = (props) => {
   const monthTabsProps: MonthTabsProps = {
-    months: months,
-    currentIndex: monthTabIndex,
-    handleChange: (value: number): void => {
-      setMonthTabIndex(value);
+    months: props.months,
+    handleChange: (index: number): void => {
+      props.changeMonth(index);
     },
+    initialMonthIndex: props.initialMonthIndex,
   };
 
   const expenseChartProps: ExpenseChartProps = {
-    // TODO: Reduxから整形して落とし込み
-    chartItems: [
-      {
-        categoryName: "Food",
-        amount: 12000,
-        color: "#7CB342",
-        budget: 30000,
-      },
-      {
-        categoryName: "Cafe",
-        amount: 1800,
-        color: "#D81B60",
-        budget: 5000,
-      },
-      {
-        categoryName: "雑費",
-        amount: 8000,
-        color: "#FDD835",
-        budget: 12000,
-      },
-      {
-        categoryName: "Drink",
-        amount: 50000,
-        color: "#5E35B1",
-        budget: 45000,
-      },
-      {
-        categoryName: "Date",
-        amount: 4500,
-        color: "#FB8C00",
-        budget: 20000,
-      },
-      {
-        categoryName: "Book",
-        amount: 3000,
-        color: "#1E88E5",
-        budget: 3000,
-      },
-      {
-        categoryName: "Gym",
-        amount: 11660,
-        color: "#F4511E",
-        budget: 12000,
-      },
-      {
-        categoryName: "Fixed",
-        amount: 30000,
-        color: "#00ACC1",
-        budget: 33000,
-      },
-      {
-        categoryName: "Sudden",
-        amount: 30000,
-        color: "#8E24AA",
-        budget: 30000,
-      },
-      {
-        categoryName: "Savings",
-        amount: 45000,
-        color: "#3949AB",
-        budget: 45000,
-      },
-    ],
+    chartItems: props.chartItems,
   };
 
   const chartHeaderProps: ChartHeaderProps = {
-    // TODO: DBのexpenseから指定月の出費合計を計算
-    expenseAmount: 200000,
-    // TODO: DBのbudgetから指定月の予算合計を計算
-    budgetAmount: 300000,
+    expenseAmount: props.expenseAmount,
+    budgetAmount: props.budgetAmount,
   };
 
   return (

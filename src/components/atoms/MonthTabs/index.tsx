@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import Tabs from "@material-ui/core/Tabs";
@@ -7,13 +7,23 @@ import useStyles from "./style";
 
 export interface MonthTabsProps {
   months: Array<string>;
-  currentIndex: number;
   handleChange: (props: number) => unknown;
+  initialMonthIndex?: number;
 }
 
 const MonthTabs: React.FC<MonthTabsProps> = (props) => {
   const classes = useStyles();
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  // 初回のみカレントをpropsから設定
+  useEffect(() => {
+    if (props.initialMonthIndex) {
+      setCurrentIndex(props.initialMonthIndex);
+    }
+  }, []);
+
   const onChange = (event: React.ChangeEvent<{}>, newValue: number): void => {
+    setCurrentIndex(newValue);
     props.handleChange(newValue);
   };
 
@@ -21,7 +31,7 @@ const MonthTabs: React.FC<MonthTabsProps> = (props) => {
     <Box className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
-          value={props.currentIndex}
+          value={currentIndex}
           onChange={onChange}
           indicatorColor="primary"
           textColor="primary"

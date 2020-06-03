@@ -12,12 +12,6 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
-  // 年月のリスト
-  getMonths: (expenses: Expenses): Array<string> => {
-    return Object.entries(expenses).map(([key]) => {
-      return key;
-    });
-  },
   // 指定月の出費リスト
   getListOfMonth: (expenses: Expenses, id: string): Array<Expense> => {
     const firstDayOfMonth = moment(id);

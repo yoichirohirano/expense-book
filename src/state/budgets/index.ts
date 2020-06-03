@@ -6,7 +6,7 @@ export type Budget = {
 };
 
 export type Budgets = {
-  // YYYYMMDDT000000: budget
+  // YYYYMM01T000000: budget
   [key: string]: Budget;
 };
 
