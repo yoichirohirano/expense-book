@@ -82,13 +82,7 @@ export const navigation = (): JSX.Element => {
 
 export const monthTabs = (): JSX.Element => {
   const props = {
-    months: [
-      "202003",
-      "20200401T000000",
-      "20200501T000000",
-      "20200601T000000",
-      "Wed Jul 01 2020",
-    ],
+    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
     currentIndex: 0,
     handleChange: (value: number): void => {
       console.log(value);
@@ -103,20 +97,23 @@ export const expenseChart = (): JSX.Element => {
       {
         categoryName: "Food",
         amount: 24000,
-        color: "#7CB342",
         budget: 30000,
+        sortIndex: 0,
+        color: "#489ec8",
       },
       {
         categoryName: "Cafe",
         amount: 7000,
-        color: "#D81B60",
         budget: 5000,
+        sortIndex: 1,
+        color: "#489ec8",
       },
       {
         categoryName: "test",
         amount: 12000,
-        color: "#FDD835",
         budget: 12000,
+        sortIndex: 2,
+        color: "#489ec8",
       },
     ],
   };
