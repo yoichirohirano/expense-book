@@ -5,9 +5,10 @@ import { shallow } from "enzyme";
 describe("<ExpenseListItem />", () => {
   let container: any = null;
   const props = {
-    categoryName: "Cafe",
-    title: "スタバ",
+    category: "Cafe",
+    name: "スタバ",
     amount: 300,
+    date: "20200505T123456",
     handleClickItem: jest.fn(),
   };
 
@@ -34,8 +35,8 @@ describe("<ExpenseListItem />", () => {
     expect(
       container.find(".ExpenseListItem-ListItemText").props()
     ).toMatchObject({
-      primary: props.categoryName,
-      secondary: props.title,
+      primary: props.category,
+      secondary: props.name,
     });
   });
 
