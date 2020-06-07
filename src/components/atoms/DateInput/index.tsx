@@ -14,7 +14,6 @@ const DateInput: React.FC<DateInputProps> = (props) => {
   // 初回のみデフォルト日付をpropsから設定
   useEffect(() => {
     if (props.defaultTimestamp) {
-      console.log(props.defaultTimestamp);
       setDateChange(new Date(props.defaultTimestamp));
     }
   }, []);
