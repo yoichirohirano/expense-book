@@ -2,6 +2,24 @@
 import moment from "moment";
 import { Expense, Expenses } from ".";
 
+// 指定月の支出を絞込んで取得する
+const getListOfMonth = (expenses: Expenses, id: string): Expenses => {
+  const result: Record<string, Expense> = {};
+  const firstDayOfMonth = moment(id);
+  const firstDayOfNextMonth = moment(id).add(1, "M");
+  Object.entries(expenses)
+    .filter(([id, expense]) => {
+      return (
+        moment(expense.date).isAfter(firstDayOfMonth) &&
+        moment(expense.date).isBefore(firstDayOfNextMonth)
+      );
+    })
+    .forEach(([id, expense]) => {
+      result[id] = expense;
+    });
+  return result;
+};
+
 const selectors = {
   getSelectedExpense: (
     expenses: Expenses,
@@ -12,20 +30,26 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
-  // 指定月の出費リスト
+  // 指定月の出費リスト(Array)
   getListOfMonth: (expenses: Expenses, id: string): Array<Expense> => {
-    const firstDayOfMonth = moment(id);
-    const firstDayOfNextMonth = moment(id).add(1, "M");
-    return Object.entries(expenses)
-      .filter(([id, expense]) => {
-        return (
-          moment(expense.date).isAfter(firstDayOfMonth) &&
-          moment(expense.date).isBefore(firstDayOfNextMonth)
-        );
-      })
-      .map(([id, expense]) => {
+    return Object.entries(getListOfMonth(expenses, id)).map(
+      ([key, expense]) => {
         return expense;
-      });
+      }
+    );
+  },
+  // 指定月の日付別出費リスト {YYYY/MM/DD :Expenses}
+  getDailyExpenseListOfMonth: (
+    expenses: Expenses,
+    id: string
+  ): Record<string, Expenses> => {
+    const result: Record<string, Expenses> = {};
+    Object.entries(getListOfMonth(expenses, id)).forEach(([id, item]) => {
+      const yyyymmdd = moment(item.date).format("YYYY/MM/DD");
+      if (!result[yyyymmdd]) result[yyyymmdd] = {};
+      result[yyyymmdd][id] = item;
+    });
+    return result;
   },
   // 指定月の出費合計金額
   getExpenseAmountOfMonth: (expenses: Expenses, id: string): number => {

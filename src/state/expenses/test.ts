@@ -168,6 +168,33 @@ describe("expenses selector", () => {
     });
   });
 
+  describe("getDailyExpenseListOfMonth", () => {
+    test("shout get all expenses of selected month", () => {
+      const total = selectors.getDailyExpenseListOfMonth(
+        initialState,
+        "202006"
+      );
+      expect(total).toEqual({
+        "2020/06/02": {
+          "1589011597561": {
+            category: "Drink",
+            amount: 300,
+            date: "20200602T123456",
+            name: "飲み会",
+          },
+        },
+        "2020/06/25": {
+          "1589011597562": {
+            category: "Drink",
+            amount: 5000,
+            date: "20200625T123456",
+            name: "飲み会",
+          },
+        },
+      });
+    });
+  });
+
   describe("getExpenseAmountOfMonth", () => {
     test("shout get total amount of selected month", () => {
       const total = selectors.getExpenseAmountOfMonth(initialState, "202006");
