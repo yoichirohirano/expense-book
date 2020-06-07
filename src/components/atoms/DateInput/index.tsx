@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./style";
 export interface DateInputProps {
   handleChange: (...props: any[]) => any;
+  defaultTimestamp?: number;
 }
 
 const DateInput: React.FC<DateInputProps> = (props) => {
   const classes = useStyles();
   const [selectedDate, setDateChange] = useState(new Date());
+
+  // 初回のみデフォルト日付をpropsから設定
+  useEffect(() => {
+    if (props.defaultTimestamp) {
+      console.log(props.defaultTimestamp);
+      setDateChange(new Date(props.defaultTimestamp));
+    }
+  }, []);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

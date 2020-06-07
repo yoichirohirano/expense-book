@@ -1,6 +1,6 @@
 import React from "react";
 import DateInput from "./";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 describe("<DateInput />", () => {
   let container: any = null;
@@ -19,6 +19,19 @@ describe("<DateInput />", () => {
   // test("should match the snapshot", () => {
   //   expect(container.html()).toMatchSnapshot();
   // });
+
+  test("should have proper defaultTimestamp", () => {
+    container = mount(
+      <DateInput
+        handleChange={onChangeFunction}
+        // 2020/06/25
+        defaultTimestamp={1593056096000}
+      />
+    );
+    expect(container.find(".MuiOutlinedInput-input").props()).toMatchObject({
+      value: "2020/06/25",
+    });
+  });
 
   test("event handler should be triggered", () => {
     container
