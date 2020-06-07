@@ -120,7 +120,6 @@ const ChartView: React.FC = () => {
     categories: categories,
     title: "ADD ITEM",
     isOpen: drawerOpen,
-    isEditItem: false,
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {
       dispatch(expenseActions.createExpense(expense));
