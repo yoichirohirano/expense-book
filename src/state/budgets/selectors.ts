@@ -3,12 +3,14 @@ import moment from "moment";
 import { Budget, Budgets } from ".";
 
 const selectors = {
+  // 指定月の予算
   getSelectedBudget: (budgets: Budgets, id: string): Budget | null => {
     const res = Object.entries(budgets).find(([key]) => {
       return key === id;
     });
     return res ? res[1] : null;
   },
+  // 指定月の予算のインデックス
   getSelectedBudgetIndex: (budgets: Budgets, id: string): number => {
     const index = Object.entries(budgets).findIndex(([key]) => {
       return key === id;
@@ -21,6 +23,7 @@ const selectors = {
       return moment(key).format("YYYY/MM");
     });
   },
+  // 指定月の全カテゴリ予算合計額
   getBudgetAmount: (budgets: Budgets, id: string): number => {
     console.log(id);
     const budget = budgets[id];

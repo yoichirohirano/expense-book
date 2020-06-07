@@ -28,6 +28,12 @@ const initialState: Expenses = {
     date: "20200601T123456",
     name: "その他",
   },
+  "158902158465": {
+    category: "Book",
+    amount: 2392,
+    date: "20200530T123456",
+    name: "その他",
+  },
 };
 
 const reducer = (

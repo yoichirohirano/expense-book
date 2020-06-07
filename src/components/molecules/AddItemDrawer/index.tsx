@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -17,7 +18,7 @@ export interface AddItemDrawerProps {
   categories: Categories;
   title: string;
   isOpen: boolean;
-  isEditItem: boolean;
+  editItemId?: string;
   editingItem?: Expense;
   toggleDrawer: (props: boolean) => void;
   add: (props: Expense) => void;
@@ -29,12 +30,25 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
 
   const [name, setName] = useState(props.editingItem?.name || "");
   const [amount, setAmount] = useState(props.editingItem?.amount || 0);
-  const [date, setDate] = useState(props.editingItem?.date || new Date());
+  const [date, setDate] = useState(
+    props.editingItem?.date || moment(new Date()).format("YYYYMMDDTHHmmSS")
+  );
   const [category, setCategory] = useState(
     props.editingItem?.category || Object.keys(props.categories)[0]
   );
   const [itemNameError, setItemNameError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
+
+  // 編集時、デフォルトをpropsから設定
+  useEffect(() => {
+    if (props.editingItem) {
+      console.log(props.editingItem.category);
+      setName(props.editingItem.name);
+      setAmount(props.editingItem.amount);
+      setDate(props.editingItem.date);
+      setCategory(props.editingItem.category);
+    }
+  }, [props.editingItem]);
 
   const validate = (): void => {
     setItemNameError(!name);
@@ -65,6 +79,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     error: itemNameError,
     helperText: itemNameError ? "入力してください。" : "",
     className: "ItemNameInput",
+    defaultValue: name,
   };
 
   const amountInputProps = {
@@ -74,6 +89,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     helperText: priceError ? "入力してください。" : "",
     error: priceError,
     className: "PriceInput",
+    defaultValue: amount.toString(),
   };
 
   return (
@@ -105,7 +121,12 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
         <Box className={classes.inputArea}>
           <TextInput {...nameInputProps}></TextInput>
           <TextInput {...amountInputProps}></TextInput>
-          <DateInput handleChange={setDate}></DateInput>
+          <DateInput
+            handleChange={(date: Date): void => {
+              setDate(moment(date).format("YYYYMMDDTHHmmSS"));
+            }}
+            defaultTimestamp={moment(date).valueOf()}
+          ></DateInput>
         </Box>
       </Container>
       <Box className={classes.completeButtonWrapper}>
@@ -113,7 +134,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           handleClick={handleClickCompleteButton}
         ></CompleteButton>
       </Box>
-      {props.isEditItem && (
+      {props.editItemId && (
         <Box className={classes.deleteButtonWrapper}>
           <DeleteButton handleClick={handleClickDeleteButton}></DeleteButton>
         </Box>

@@ -3,7 +3,7 @@ import reducer from "./reducers";
 export type Expense = {
   amount: number;
   category: string;
-  // YYYYMMDDTHHMMSS
+  // YYYYMMDDTHHmmSS
   date: string;
   name: string;
 };

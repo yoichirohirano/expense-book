@@ -17,6 +17,11 @@ const initialState: Budgets = {
     Drink: 20000,
     Book: 3000,
   },
+  "20200701T000000": {
+    Food: 30000,
+    Drink: 20000,
+    Book: 3000,
+  },
 };
 
 const reducer = (

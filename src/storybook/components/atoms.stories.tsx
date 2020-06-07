@@ -224,9 +224,10 @@ export const dateInput = (): JSX.Element => {
 
 export const expenseListItem = (): JSX.Element => {
   const props = {
-    categoryName: "Cafe",
-    title: "スタバ",
+    category: "Cafe",
+    name: "スタバ",
     amount: 300,
+    date: "20200525T123456",
     handleClickItem: (): void => {
       console.log("click!");
     },

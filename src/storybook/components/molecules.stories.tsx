@@ -67,7 +67,6 @@ export const addItemDrawer = () => {
   const props = {
     categories: categories,
     title: "ADD ITEM",
-    isEditItem: false,
     isOpen: true,
     toggleDrawer: (open: any): void => {
       console.log(open);
@@ -86,7 +85,13 @@ export const addItemDrawerEdit = (): JSX.Element => {
   const props = {
     categories: categories,
     title: "EDIT ITEM",
-    isEditItem: true,
+    editItemId: "aaaaa",
+    editingItem: {
+      category: "Food",
+      amount: 2300,
+      date: "20200625T123456",
+      name: "スーパー",
+    },
     isOpen: true,
     toggleDrawer: (open: any): void => {
       console.log(open);
@@ -185,61 +190,61 @@ export const chart = () => {
 
 export const expenseList = (): JSX.Element => {
   const props: ExpenseListProps = {
-    monthlyExpense: {
-      "2020/05/01": [
-        {
-          categoryName: "Cafe",
-          title: "スタバ",
+    dailyExpenseList: {
+      "2020/05/01": {
+        "20200501T123456": {
+          category: "Cafe",
+          name: "スタバ",
           amount: 300,
+          date: "20200501T123456",
         },
-      ],
-      "2020/05/02": [
-        {
-          categoryName: "Food",
-          title: "赤札堂",
-          amount: 3000,
-        },
-        {
-          categoryName: "Gym",
-          title: "GOLD GYM",
+        "20200501T123556": {
+          category: "Gym",
+          name: "GOLD GYM",
           amount: 11000,
+          date: "20200501T123556",
         },
-      ],
-      "2020/05/03": [
-        {
-          categoryName: "Food",
-          title: "赤札堂",
+      },
+      "2020/05/02": {
+        "20200502T123456": {
+          category: "Food",
+          name: "赤札堂",
           amount: 3000,
+          date: "20200501T123456",
         },
-        {
-          categoryName: "Gym",
-          title: "GOLD GYM",
+      },
+      "2020/05/03": {
+        "20200503T123456": {
+          category: "Food",
+          name: "赤札堂",
+          amount: 3000,
+          date: "20200501T123456",
+        },
+        "20200503T123556": {
+          category: "Gym",
+          name: "GOLD GYM",
           amount: 11000,
+          date: "20200503T123556",
         },
-      ],
-      "2020/05/04": [
-        {
-          categoryName: "Cafe",
-          title: "スタバ",
+      },
+      "2020/05/04": {
+        "20200501T123456": {
+          category: "Cafe",
+          name: "スタバ",
           amount: 300,
+          date: "20200501T123456",
         },
-      ],
-      "2020/05/05": [
-        {
-          categoryName: "Cafe",
-          title: "スタバ",
+      },
+      "2020/05/05": {
+        "20200501T123456": {
+          category: "Cafe",
+          name: "スタバ",
           amount: 300,
+          date: "20200501T123456",
         },
-      ],
-      "2020/05/06": [
-        {
-          categoryName: "Cafe",
-          title: "スタバ",
-          amount: 300,
-        },
-      ],
+      },
     },
-    handleClickItem: (): void => {
+    edit: (): void => {
       console.log("click!");
     },
   };
