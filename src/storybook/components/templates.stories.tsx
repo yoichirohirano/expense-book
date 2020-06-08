@@ -1,8 +1,13 @@
 import React from "react";
-import ListView from "@/components/templates/ListView";
+import ChartPage from "@/components/templates/ChartPage";
+import ListPage from "@/components/templates/ListPage";
 
-export const listView = () => {
-  return <ListView></ListView>;
+export const chartPage = () => {
+  return <ChartPage />;
+};
+
+export const listPage = () => {
+  return <ListPage />;
 };
 
 export default {

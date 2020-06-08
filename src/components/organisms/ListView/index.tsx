@@ -19,7 +19,7 @@ import {
 } from "@/state/expenses";
 import { useSelector, useDispatch } from "react-redux";
 
-const List: React.FC = () => {
+const ListView: React.FC = () => {
   const dispatch = useDispatch();
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
@@ -87,4 +87,4 @@ const List: React.FC = () => {
   );
 };
 
-export default List;
+export default ListView;
