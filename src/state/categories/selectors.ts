@@ -12,6 +12,13 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
+  // カテゴリ名からカテゴリIDを取得する
+  getNameFromId: (categories: Categories, name: string): string => {
+    const res = Object.entries(categories).find(([id, category]) => {
+      return category.name === name;
+    });
+    return res ? res[0] : "";
+  },
   getTotalAmount: (categories: Categories) => {
     return Object.entries(categories).reduce(
       (accumulator: number, [key, value]: [string, Category]) => {

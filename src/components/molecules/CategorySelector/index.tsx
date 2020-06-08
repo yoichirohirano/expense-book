@@ -6,18 +6,18 @@ import CategoryButton, {
 import { Category, Categories } from "@/state/categories";
 import useStyles from "./style";
 
-interface CategorySelectorProps {
+export interface CategorySelectorProps {
   categories: Categories;
   handleChangeCategory: (...props: any[]) => any;
+  selectedCategoryId: string;
 }
 
 const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
   const classes = useStyles();
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
 
   useEffect(() => {
     // 初期表示時、先頭のカテゴリを指定
-    setSelectedCategoryId(Object.keys(props.categories)[0]);
+    // setSelectedCategoryId(Object.keys(props.categories)[0]);
   }, []);
 
   const categoryButtonProps = (
@@ -25,10 +25,9 @@ const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
     categoryId: string
   ): CategoryButtonProps => {
     return {
-      selected: categoryId === selectedCategoryId,
+      selected: categoryId === props.selectedCategoryId,
       label: category.name,
       handleClick: (): void => {
-        setSelectedCategoryId(categoryId);
         props.handleChangeCategory(categoryId);
       },
     };

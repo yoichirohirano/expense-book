@@ -5,61 +5,62 @@ import { shallow, mount } from "enzyme";
 describe("<CategorySelector />", () => {
   let container: any = null;
   const categories = {
-    Food: {
+    aaaaa: {
+      defaultAmount: 30000,
       name: "Food",
-      color: "#7CB342",
-      defaultAmount: 30000,
+      sortIndex: 0,
     },
-    Cafe: {
-      name: "Cafe",
-      color: "#D81B60",
+    bbbbb: {
       defaultAmount: 5000,
+      name: "Cafe",
+      sortIndex: 1,
     },
-    雑費: {
+    ccccc: {
+      defaultAmount: 12000,
       name: "雑費",
-      color: "#FDD835",
-      defaultAmount: 12000,
+      sortIndex: 2,
     },
-    Drink: {
+    ddddd: {
+      defaultAmount: 45000,
       name: "Drink",
-      color: "#5E35B1",
-      defaultAmount: 45000,
+      sortIndex: 3,
     },
-    Date: {
-      name: "Date",
-      color: "#FB8C00",
+    eeeee: {
       defaultAmount: 20000,
+      name: "Date",
+      sortIndex: 4,
     },
-    Book: {
-      name: "Book",
-      color: "#1E88E5",
+    fffff: {
       defaultAmount: 3000,
+      name: "Book",
+      sortIndex: 5,
     },
-    Gym: {
-      name: "Gym",
-      color: "#F4511E",
+    ggggg: {
       defaultAmount: 12000,
+      name: "Gym",
+      sortIndex: 6,
     },
-    Fixed: {
-      name: "Fixed",
-      color: "#00ACC1",
+    hhhhh: {
       defaultAmount: 33000,
+      name: "Fixed",
+      sortIndex: 7,
     },
-    Sudden: {
-      name: "Sudden",
-      color: "#8E24AA",
+    iiiii: {
       defaultAmount: 30000,
+      name: "Sudden",
+      sortIndex: 8,
     },
-    Savings: {
-      name: "Savings",
-      color: "#3949AB",
+    jjjjj: {
       defaultAmount: 45000,
+      name: "Savings",
+      sortIndex: 9,
     },
   };
 
   const props = {
     categories: categories,
     handleChangeCategory: jest.fn(),
+    selectedCategoryId: "",
   };
 
   afterEach(() => {

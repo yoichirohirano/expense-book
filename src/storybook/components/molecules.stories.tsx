@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from "react";
-import CategorySelector from "@/components/molecules/CategorySelector";
+import CategorySelector, {
+  CategorySelectorProps,
+} from "@/components/molecules/CategorySelector";
 import AddItemDrawer from "@/components/molecules/AddItemDrawer";
 import BudgetEditItem, {
   BudgetEditItemProps,
@@ -143,11 +145,12 @@ export const budgetEditItemDisabled = () => {
 };
 
 export const categorySelector = (): JSX.Element => {
-  const props = {
+  const props: CategorySelectorProps = {
     categories: categories,
     handleChangeCategory: (value: any) => {
       console.log(value);
     },
+    selectedCategoryId: "bbbbb",
   };
   return <CategorySelector {...props}></CategorySelector>;
 };
