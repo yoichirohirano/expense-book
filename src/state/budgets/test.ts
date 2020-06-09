@@ -1,71 +1,55 @@
 import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Budget, Budgets } from ".";
+import { Budget, Budgets, sampleState } from ".";
 
 describe("budgets reducer", () => {
   let initialState: Budgets = {};
 
+  const newBudget: Budget = {
+    aaaaa: {
+      amount: 33000,
+      category: {
+        name: "Food",
+        ref: "E3cnHvL8SwPTbn4ChMWq",
+      },
+    },
+    bbbbb: {
+      amount: 12000,
+      category: {
+        name: "雑費",
+        ref: "4fgOOb41j82zZxyCBQcS",
+      },
+    },
+  };
+
   beforeEach(() => {
-    initialState = {
-      "20200401T000000": {
-        Food: 10000,
-        Drink: 20000,
-      },
-      "20200501T000000": {
-        Food: 30000,
-        Drink: 40000,
-      },
-    };
+    initialState = sampleState;
   });
 
   describe("createBudget", () => {
-    const newBudget: Budget = {
-      Food: 50000,
-      Drink: 60000,
-    };
-
     test("should add new budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.createBudget(newBudget, "20200601T000000")
+        actions.createBudget(newBudget, "20300601T000000")
       );
       expect(newState).toMatchObject({
-        "20200401T000000": {
-          Food: 10000,
-          Drink: 20000,
-        },
-        "20200501T000000": {
-          Food: 30000,
-          Drink: 40000,
-        },
-        "20200601T000000": {
-          Food: 50000,
-          Drink: 60000,
+        "20300601T000000": {
+          budget: newBudget,
         },
       });
     });
   });
 
   describe("updateBudget", () => {
-    const newBudget: Budget = {
-      Food: 15000,
-      Drink: 25000,
-    };
-
     test("should update selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.updateBudget(newBudget, "20200401T000000")
+        actions.updateBudget(newBudget, "20200501T000000")
       );
       expect(newState).toMatchObject({
-        "20200401T000000": {
-          Food: 15000,
-          Drink: 25000,
-        },
         "20200501T000000": {
-          Food: 30000,
-          Drink: 40000,
+          budget: newBudget,
         },
       });
     });
@@ -75,45 +59,28 @@ describe("budgets reducer", () => {
     test("should delete selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.deleteBudget("20200401T000000")
+        actions.deleteBudget("20200501T000000")
       );
-      expect(newState).toMatchObject({
-        "20200501T000000": {
-          Food: 30000,
-          Drink: 40000,
-        },
-      });
+      expect(newState).not.toHaveProperty("20200501T000000");
     });
   });
 });
 
 describe("budgets selector", () => {
-  const initialState: Budgets = {
-    "20200401T000000": {
-      Food: 10000,
-      Drink: 20000,
-    },
-    "20200501T000000": {
-      Food: 30000,
-      Drink: 40000,
-    },
-  };
-
   describe("getSelectedBudget", () => {
     test("shout get selected budget", () => {
       const selectedExpense = selectors.getSelectedBudget(
-        initialState,
-        "20200401T000000"
+        sampleState,
+        "20200601T000000"
       );
-      expect(selectedExpense).toMatchObject({
-        Food: 10000,
-        Drink: 20000,
-      });
+      expect(selectedExpense).toMatchObject(
+        sampleState["20200601T000000"].budget
+      );
     });
     test("shout get null", () => {
       const selectedExpense = selectors.getSelectedBudget(
-        initialState,
-        "190012"
+        sampleState,
+        "30200501T000000"
       );
       expect(selectedExpense).toBe(null);
     });

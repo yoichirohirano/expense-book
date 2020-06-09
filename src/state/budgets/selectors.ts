@@ -8,10 +8,11 @@ const selectors = {
     const res = Object.entries(budgets).find(([key]) => {
       return key === id;
     });
-    return res ? res[1] : null;
+    return res ? res[1].budget : null;
   },
   // 指定月の予算のインデックス
   getSelectedBudgetIndex: (budgets: Budgets, id: string): number => {
+    // TODO: 日付順にソートする必要？
     const index = Object.entries(budgets).findIndex(([key]) => {
       return key === id;
     });
@@ -25,12 +26,11 @@ const selectors = {
   },
   // 指定月の全カテゴリ予算合計額
   getBudgetAmount: (budgets: Budgets, id: string): number => {
-    console.log(id);
-    const budget = budgets[id];
+    const budget = budgets[id].budget;
     if (!budget) return 0;
-    return Object.entries(budgets[id]).reduce(
-      (accumulator: number, [key, value]: [string, number]) => {
-        return accumulator + value;
+    return Object.entries(budget).reduce(
+      (accumulator: number, [key, value]) => {
+        return accumulator + value.amount;
       },
       0
     );
