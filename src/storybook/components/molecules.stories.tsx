@@ -11,59 +11,9 @@ import ExpenseList, {
   ExpenseListProps,
 } from "@/components/molecules/ExpenseList";
 import Chart, { ChartProps } from "@/components/molecules/Chart";
+import { sampleState } from "@/state/categories";
 
-const categories = {
-  aaaaa: {
-    defaultAmount: 30000,
-    name: "Food",
-    sortIndex: 0,
-  },
-  bbbbb: {
-    defaultAmount: 5000,
-    name: "Cafe",
-    sortIndex: 1,
-  },
-  ccccc: {
-    defaultAmount: 12000,
-    name: "雑費",
-    sortIndex: 2,
-  },
-  ddddd: {
-    defaultAmount: 45000,
-    name: "Drink",
-    sortIndex: 3,
-  },
-  eeeee: {
-    defaultAmount: 20000,
-    name: "Date",
-    sortIndex: 4,
-  },
-  fffff: {
-    defaultAmount: 3000,
-    name: "Book",
-    sortIndex: 5,
-  },
-  ggggg: {
-    defaultAmount: 12000,
-    name: "Gym",
-    sortIndex: 6,
-  },
-  hhhhh: {
-    defaultAmount: 33000,
-    name: "Fixed",
-    sortIndex: 7,
-  },
-  iiiii: {
-    defaultAmount: 30000,
-    name: "Sudden",
-    sortIndex: 8,
-  },
-  jjjjj: {
-    defaultAmount: 45000,
-    name: "Savings",
-    sortIndex: 9,
-  },
-};
+const categories = sampleState;
 
 export const addItemDrawer = () => {
   const props = {

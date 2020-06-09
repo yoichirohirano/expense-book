@@ -2,59 +2,61 @@ import { Categories } from ".";
 import { CategoriesAction } from "./actions";
 import actionTypes from "./types";
 
-const initialState: Categories = {
-  // TODO: Storybook確認用
-  aaaaa: {
+export const sampleState: Categories = {
+  E3cnHvL8SwPTbn4ChMWq: {
     defaultAmount: 30000,
     name: "Food",
     sortIndex: 0,
   },
-  bbbbb: {
+  AjOQWgDdVSVsLQNCEpNP: {
     defaultAmount: 5000,
     name: "Cafe",
     sortIndex: 1,
   },
-  ccccc: {
+  "4fgOOb41j82zZxyCBQcS": {
     defaultAmount: 12000,
     name: "雑費",
     sortIndex: 2,
   },
-  ddddd: {
-    defaultAmount: 45000,
-    name: "Drink",
+  pXhYzqbyOrjGnSmZJMFN: {
+    defaultAmount: 20000,
+    name: "Dating",
     sortIndex: 3,
   },
-  eeeee: {
+  fGUwZnNss1Nnmvtdteoi: {
     defaultAmount: 20000,
-    name: "Date",
+    name: "Free",
     sortIndex: 4,
   },
-  fffff: {
+  w2IJ86mtXfcNyRm23aw4: {
     defaultAmount: 3000,
     name: "Book",
     sortIndex: 5,
   },
-  ggggg: {
+  "0tMKc5h30IaaRIZnmcAv": {
     defaultAmount: 12000,
     name: "Gym",
     sortIndex: 6,
   },
-  hhhhh: {
-    defaultAmount: 33000,
+  XKZ5LP61ZgRGWeRFTboV: {
+    defaultAmount: 41000,
     name: "Fixed",
     sortIndex: 7,
   },
-  iiiii: {
-    defaultAmount: 30000,
+  "3KEecx7xaz3wffH9iwXe": {
+    defaultAmount: 25000,
     name: "Sudden",
     sortIndex: 8,
   },
-  jjjjj: {
+  WO0O1eUgpwzGj49EmzZW: {
     defaultAmount: 45000,
-    name: "Savings",
+    name: "Saving",
     sortIndex: 9,
   },
 };
+
+const initialState: Categories =
+  process.env.REACT_APP_ENV === "storybook" ? sampleState : {};
 
 const reducer = (
   state: Categories = initialState,
