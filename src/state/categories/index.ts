@@ -7,8 +7,7 @@ export type Category = {
 };
 
 export type Categories = {
-  // categoryId(random) : category
-  [key: string]: Category;
+  [id: string]: Category;
 };
 
 export { default as categoriesSelectors } from "./selectors";
