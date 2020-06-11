@@ -49,10 +49,10 @@ const ChartView: React.FC = () => {
       categoriesSelectors.getDefaultBudget(categories);
     // 予算からカテゴリ名/予算の情報配列を作成
     const chartItems: Array<ChartItem> = Object.entries(budget).map(
-      ([id, amount], index) => {
+      ([id, budget], index) => {
         return {
-          categoryName: id,
-          budget: amount,
+          categoryName: budget.category.name,
+          budget: budget.amount,
           amount: 0,
           sortIndex: 0,
           color: getColor(index, colorList),
@@ -74,7 +74,7 @@ const ChartView: React.FC = () => {
     );
     expenseList.forEach((expense) => {
       chartItems.forEach((item) => {
-        if (item.categoryName === expense.category) {
+        if (item.categoryName === expense.category.name) {
           item.amount += expense.amount;
           return;
         }

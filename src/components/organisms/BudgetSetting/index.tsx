@@ -72,8 +72,9 @@ const BudgetEditList: React.FC = () => {
       // 予算設定画面ではカテゴリ名は修正できないため、空関数を渡す
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
-        const newBudget = budgets[month];
-        newBudget[categoryName] = parseInt(value, 10);
+        const newBudget: Budget = budgets[month].budget;
+        const id = categoriesSelectors.getIdFromName(categories, categoryName);
+        newBudget[id].amount = parseInt(value, 10);
         dispatch(actions.updateBudget(Object.assign({}, newBudget), month));
       },
     };
@@ -87,14 +88,14 @@ const BudgetEditList: React.FC = () => {
   return (
     <>
       <H6Title text="Budget"></H6Title>
-      {Object.entries(budgets).map(([month, budget]) => {
+      {Object.entries(budgets).map(([yyyymm, value]) => {
         return (
           <ExpansionPanel
             className={panelClasses.root}
-            key={month}
+            key={yyyymm}
             square
-            expanded={currentMonth === month}
-            onChange={toggle(month)}
+            expanded={currentMonth === yyyymm}
+            onChange={toggle(yyyymm)}
           >
             <ExpansionPanelSummary
               classes={{
@@ -105,20 +106,20 @@ const BudgetEditList: React.FC = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>{month}</Typography>
+              <Typography className={classes.heading}>{yyyymm}</Typography>
               <Typography className={classes.secondaryHeading}>
-                ¥{budgetAmount(budgets, month)}
+                ¥{budgetAmount(budgets, yyyymm)}
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={panelDetailsClasses.root}>
-              {Object.entries(budget).map(([categoryName, categoryBudget]) => {
+              {Object.entries(value.budget).map(([id, item]) => {
                 return (
                   <BudgetEditItem
-                    key={categoryName}
+                    key={id}
                     {...budgetEditItemProps(
-                      month,
-                      categoryName,
-                      categoryBudget
+                      yyyymm,
+                      item.category.name,
+                      item.amount
                     )}
                   ></BudgetEditItem>
                 );

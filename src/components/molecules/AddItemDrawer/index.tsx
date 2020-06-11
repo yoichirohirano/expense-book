@@ -9,9 +9,11 @@ import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
-import { Categories } from "@/state/categories";
+import { Categories, Category, categoriesSelectors } from "@/state/categories";
 import { Expense } from "@/state/expenses";
-import CategorySelector from "@/components/molecules/CategorySelector";
+import CategorySelector, {
+  CategorySelectorProps,
+} from "@/components/molecules/CategorySelector";
 import useStyles from "./style";
 
 export interface AddItemDrawerProps {
@@ -26,27 +28,44 @@ export interface AddItemDrawerProps {
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
+  const getInitialCategory = (
+    editingItem: Expense | undefined
+  ): Category | null => {
+    if (editingItem) {
+      return categoriesSelectors.getSelectedCategory(
+        props.categories,
+        editingItem.category.ref
+      );
+    } else {
+      return null;
+    }
+  };
   const classes = useStyles();
 
   const [name, setName] = useState(props.editingItem?.name || "");
   const [amount, setAmount] = useState(props.editingItem?.amount || 0);
-  const [date, setDate] = useState(
-    props.editingItem?.date || moment(new Date()).format("YYYYMMDDTHHmmSS")
+  const [dateStr, setDate] = useState(
+    props.editingItem?.dateStr || moment(new Date()).format("YYYYMMDDTHHmmSS")
   );
-  const [category, setCategory] = useState(
-    props.editingItem?.category || Object.keys(props.categories)[0]
+  const [category, setCategory] = useState<Category>(
+    getInitialCategory(props.editingItem) ||
+      Object.entries(props.categories)[0][1]
   );
+
   const [itemNameError, setItemNameError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
 
   // 編集時、デフォルトをpropsから設定
   useEffect(() => {
     if (props.editingItem) {
-      console.log(props.editingItem.category);
       setName(props.editingItem.name);
       setAmount(props.editingItem.amount);
-      setDate(props.editingItem.date);
-      setCategory(props.editingItem.category);
+      setDate(props.editingItem.dateStr);
+      const category = categoriesSelectors.getSelectedCategory(
+        props.categories,
+        props.editingItem.category.ref
+      );
+      if (category) setCategory(category);
     }
   }, [props.editingItem]);
 
@@ -58,12 +77,20 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const handleClickCompleteButton = (): void => {
     validate();
     if (name && amount) {
-      props.add({
-        category,
+      const newExpense: Expense = {
+        category: {
+          name: category.name,
+          ref: categoriesSelectors.getIdFromName(
+            props.categories,
+            category.name
+          ),
+        },
         name,
         amount,
-        date,
-      });
+        date: moment(dateStr).toDate(),
+        dateStr,
+      };
+      props.add(newExpense);
       props.toggleDrawer(false);
     }
   };
@@ -92,6 +119,21 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     defaultValue: amount.toString(),
   };
 
+  const categorySelectorProps: CategorySelectorProps = {
+    categories: props.categories,
+    handleChangeCategory: (categoryId: string): void => {
+      const category = categoriesSelectors.getSelectedCategory(
+        props.categories,
+        categoryId
+      );
+      if (category) setCategory(category);
+    },
+    selectedCategoryId: categoriesSelectors.getIdFromName(
+      props.categories,
+      category.name
+    ),
+  };
+
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -113,10 +155,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       <Container maxWidth="sm">
         <H6Title text={props.title}></H6Title>
         <Box className={classes.categorySelectorWrapper}>
-          <CategorySelector
-            categories={props.categories}
-            handleChangeCategory={setCategory}
-          ></CategorySelector>
+          <CategorySelector {...categorySelectorProps}></CategorySelector>
         </Box>
         <Box className={classes.inputArea}>
           <TextInput {...nameInputProps}></TextInput>
@@ -125,7 +164,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
             handleChange={(date: Date): void => {
               setDate(moment(date).format("YYYYMMDDTHHmmSS"));
             }}
-            defaultTimestamp={moment(date).valueOf()}
+            defaultTimestamp={moment(dateStr).valueOf()}
           ></DateInput>
         </Box>
       </Container>
