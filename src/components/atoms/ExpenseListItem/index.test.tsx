@@ -1,14 +1,18 @@
 import React from "react";
-import ExpenseListItem from "./";
+import ExpenseListItem, { ExpenseListItemProps } from "./";
 import { shallow } from "enzyme";
 
 describe("<ExpenseListItem />", () => {
   let container: any = null;
-  const props = {
-    category: "Cafe",
+  const props: ExpenseListItemProps = {
+    amount: 400,
     name: "スタバ",
-    amount: 300,
-    date: "20200505T123456",
+    date: new Date("2020-06-09T00:00:00"),
+    dateStr: "20200609T000000",
+    category: {
+      name: "Cafe",
+      ref: "AjOQWgDdVSVsLQNCEpNP",
+    },
     handleClickItem: jest.fn(),
   };
 
@@ -35,7 +39,7 @@ describe("<ExpenseListItem />", () => {
     expect(
       container.find(".ExpenseListItem-ListItemText").props()
     ).toMatchObject({
-      primary: props.category,
+      primary: props.category.name,
       secondary: props.name,
     });
   });

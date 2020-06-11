@@ -18,7 +18,7 @@ const ExpenseListItem: React.FC<ExpenseListItemProps> = (props) => {
         className="ExpenseListItem"
       >
         <ListItemText
-          primary={props.category}
+          primary={props.category.name}
           secondary={props.name}
           className="ExpenseListItem-ListItemText"
         />

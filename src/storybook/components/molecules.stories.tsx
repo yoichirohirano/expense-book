@@ -3,7 +3,9 @@ import React from "react";
 import CategorySelector, {
   CategorySelectorProps,
 } from "@/components/molecules/CategorySelector";
-import AddItemDrawer from "@/components/molecules/AddItemDrawer";
+import AddItemDrawer, {
+  AddItemDrawerProps,
+} from "@/components/molecules/AddItemDrawer";
 import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
@@ -16,7 +18,7 @@ import { sampleState } from "@/state/categories";
 const categories = sampleState;
 
 export const addItemDrawer = () => {
-  const props = {
+  const props: AddItemDrawerProps = {
     categories: categories,
     title: "ADD ITEM",
     isOpen: true,
@@ -34,15 +36,19 @@ export const addItemDrawer = () => {
 };
 
 export const addItemDrawerEdit = (): JSX.Element => {
-  const props = {
+  const props: AddItemDrawerProps = {
     categories: categories,
     title: "EDIT ITEM",
     editItemId: "aaaaa",
     editingItem: {
-      category: "Food",
-      amount: 2300,
-      date: "20200625T123456",
-      name: "スーパー",
+      amount: 400,
+      name: "スタバ",
+      date: new Date("2020-06-09T00:00:00"),
+      dateStr: "20200609T000000",
+      category: {
+        name: "Cafe",
+        ref: "AjOQWgDdVSVsLQNCEpNP",
+      },
     },
     isOpen: true,
     toggleDrawer: (open: any): void => {

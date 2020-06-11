@@ -14,7 +14,9 @@ import ExpenseChart, {
 import ChartHeader from "@/components/atoms/ChartHeader";
 import TextInput from "@/components/atoms/TextInput";
 import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
-import ExpenseListItem from "@/components/atoms/ExpenseListItem";
+import ExpenseListItem, {
+  ExpenseListItemProps,
+} from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import H6Title from "@/components/atoms/H6Title";
 
@@ -223,11 +225,15 @@ export const dateInput = (): JSX.Element => {
 };
 
 export const expenseListItem = (): JSX.Element => {
-  const props = {
-    category: "Cafe",
+  const props: ExpenseListItemProps = {
+    amount: 400,
     name: "スタバ",
-    amount: 300,
-    date: "20200525T123456",
+    date: new Date("2020-06-09T00:00:00"),
+    dateStr: "20200609T000000",
+    category: {
+      name: "Cafe",
+      ref: "AjOQWgDdVSVsLQNCEpNP",
+    },
     handleClickItem: (): void => {
       console.log("click!");
     },
