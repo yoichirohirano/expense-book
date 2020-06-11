@@ -1,68 +1,41 @@
 import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Category, Categories } from ".";
+import { Category, Categories, sampleState } from ".";
 
 describe("categories reducer", () => {
   let initialState: Categories = {};
+  const newCategory: Category = {
+    name: "newCategory",
+    defaultAmount: 20000,
+    sortIndex: 99,
+  };
 
   beforeEach(() => {
-    initialState = {
-      aaaaa: {
-        name: "Food",
-        defaultAmount: 30000,
-        sortIndex: 0,
-      },
-      bbbbb: {
-        name: "Drink",
-        defaultAmount: 30000,
-        sortIndex: 1,
-      },
-    };
+    initialState = sampleState;
   });
 
   describe("createCategory", () => {
-    const newCategory: Category = {
-      name: "newCategory",
-      defaultAmount: 20000,
-      sortIndex: 2,
-    };
-
     test("should add new category", () => {
       const newState: Categories = reducer(
         initialState,
         actions.createCategory(newCategory)
       );
-      const index = Object.entries(newState).findIndex(([key, value]) => {
+      const result = Object.entries(newState).find(([key, value]) => {
         return value === newCategory;
       });
-      expect(index).toBeGreaterThan(0);
+      expect(result).toBeTruthy();
     });
   });
 
   describe("updateCategory", () => {
-    const newCategory: Category = {
-      name: "newCategory",
-      defaultAmount: 20000,
-      sortIndex: 2,
-    };
-
     test("should update selected category", () => {
       const newState: Categories = reducer(
         initialState,
-        actions.updateCategory(newCategory, "aaaaa")
+        actions.updateCategory(newCategory, "E3cnHvL8SwPTbn4ChMWq")
       );
       expect(newState).toMatchObject({
-        aaaaa: {
-          name: "newCategory",
-          defaultAmount: 20000,
-          sortIndex: 2,
-        },
-        bbbbb: {
-          name: "Drink",
-          defaultAmount: 30000,
-          sortIndex: 1,
-        },
+        E3cnHvL8SwPTbn4ChMWq: newCategory,
       });
     });
   });
@@ -71,44 +44,28 @@ describe("categories reducer", () => {
     test("should delete selected category", () => {
       const newState: Categories = reducer(
         initialState,
-        actions.deleteCategory("Food")
+        actions.deleteCategory("E3cnHvL8SwPTbn4ChMWq")
       );
-      expect(newState).toMatchObject({
-        bbbbb: {
-          name: "Drink",
-          defaultAmount: 30000,
-          sortIndex: 1,
-        },
-      });
+      expect(newState).not.toHaveProperty("E3cnHvL8SwPTbn4ChMWq");
     });
   });
 });
 
 describe("categories selector", () => {
-  const initialState: Categories = {
-    Food: {
-      name: "Food",
-      defaultAmount: 30000,
-      sortIndex: 0,
-    },
-    Drink: {
-      name: "Drink",
-      defaultAmount: 30000,
-      sortIndex: 1,
-    },
-  };
+  let initialState: Categories = {};
+  beforeEach(() => {
+    initialState = sampleState;
+  });
 
   describe("getSelectedCategory", () => {
     test("shout get selected category", () => {
       const selectedExpense = selectors.getSelectedCategory(
         initialState,
-        "Food"
+        "E3cnHvL8SwPTbn4ChMWq"
       );
-      expect(selectedExpense).toMatchObject({
-        name: "Food",
-        defaultAmount: 30000,
-        sortIndex: 0,
-      });
+      expect(selectedExpense).toMatchObject(
+        sampleState["E3cnHvL8SwPTbn4ChMWq"]
+      );
     });
     test("shout get null", () => {
       const selectedExpense = selectors.getSelectedCategory(
@@ -118,4 +75,23 @@ describe("categories selector", () => {
       expect(selectedExpense).toBe(null);
     });
   });
+
+  describe("getTotalAmount", () => {
+    test("shout get proper total amount", () => {
+      const totals = selectors.getTotalAmount(initialState);
+      expect(totals).toBe(
+        30000 +
+          5000 +
+          12000 +
+          20000 +
+          20000 +
+          3000 +
+          12000 +
+          41000 +
+          25000 +
+          45000
+      );
+    });
+  });
+  // TODO: getDefaultBudget
 });

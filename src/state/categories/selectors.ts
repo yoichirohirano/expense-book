@@ -12,6 +12,7 @@ const selectors = {
     });
     return res ? res[1] : null;
   },
+  // TODO: 削除
   // カテゴリ名からカテゴリIDを取得する
   getIdFromName: (categories: Categories, name: string): string => {
     const res = Object.entries(categories).find(([id, category]) => {
@@ -19,7 +20,8 @@ const selectors = {
     });
     return res ? res[0] : "";
   },
-  getTotalAmount: (categories: Categories) => {
+  // 全カテゴリ合計額
+  getTotalAmount: (categories: Categories): number => {
     return Object.entries(categories).reduce(
       (accumulator: number, [key, value]: [string, Category]) => {
         return accumulator + value.defaultAmount;
@@ -27,10 +29,18 @@ const selectors = {
       0
     );
   },
+  // デフォルト予算
   getDefaultBudget: (categories: Categories): Budget => {
     const defaultBudget: Budget = {};
-    Object.entries(categories).forEach(([key, value]) => {
-      defaultBudget[value.name] = value.defaultAmount;
+    Object.entries(categories).forEach(([id, category]) => {
+      const budgetCategoryID = new Date().getTime();
+      defaultBudget[budgetCategoryID] = {
+        amount: category.defaultAmount,
+        category: {
+          name: category.name,
+          ref: id,
+        },
+      };
     });
     return defaultBudget;
   },
