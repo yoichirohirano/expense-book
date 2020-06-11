@@ -1,20 +1,28 @@
-import reducer from "./reducers";
+import reducer, { sampleState } from "./reducers";
 
 export type Expense = {
   amount: number;
-  category: string;
+  // categoryId
+  // TODO: Firestore連携後、リファレンス型にする
+  category: {
+    name: string;
+    ref: string;
+  };
+  // クエリ検索用
+  // TODO: Firestore連携後、タイムスタンプ型にする
+  date: Date;
   // YYYYMMDDTHHmmSS
-  date: string;
+  dateStr: string;
   name: string;
 };
 
 export type Expenses = {
-  // expenseId(random): expense
-  [key: string]: Expense;
+  [id: string]: Expense;
 };
 
 export { default as expensesSelectors } from "./selectors";
 export { default as expenseActions } from "./actions";
 export { default as expensesTypes } from "./types";
+export { sampleState };
 
 export default reducer;

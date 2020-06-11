@@ -1,75 +1,46 @@
 import reducer from "./";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Expense, Expenses } from ".";
+import { Expense, Expenses, sampleState } from ".";
 
 describe("expenses reducer", () => {
   let initialState: Expenses = {};
-  const date = new Date();
+  const newExpense: Expense = {
+    amount: 400,
+    name: "スタバ",
+    date: new Date("2020-06-09T00:00:00"),
+    dateStr: "20200609T000000",
+    category: {
+      name: "Cafe",
+      ref: "AjOQWgDdVSVsLQNCEpNP",
+    },
+  };
 
   beforeEach(() => {
-    initialState = {
-      "1589011584031": {
-        category: "Food",
-        amount: 3000,
-        date: "20200525T123456",
-        name: "スーパー",
-      },
-      "1589011597561": {
-        category: "Drink",
-        amount: 300,
-        date: "20200401T123456",
-        name: "飲み会",
-      },
-    };
+    initialState = sampleState;
   });
 
   describe("createExpense", () => {
-    const newExpense: Expense = {
-      category: "Cafe",
-      amount: 400,
-      date: "20200501T123456",
-      name: "スタバ",
-    };
-
     test("should add new expense", () => {
       const newState: Expenses = reducer(
         initialState,
         actions.createExpense(newExpense)
       );
-      const index = Object.entries(newState).findIndex(([key, value]) => {
+      const result = Object.entries(newState).find(([key, value]) => {
         return value === newExpense;
       });
-      expect(index).toBeGreaterThan(0);
+      expect(result).toBeTruthy();
     });
   });
 
   describe("updateExpense", () => {
-    const newExpense: Expense = {
-      category: "Cafe",
-      amount: 400,
-      date: "20200701T123456",
-      name: "スタバ",
-    };
-
     test("should update selected expense", () => {
       const newState: Expenses = reducer(
         initialState,
-        actions.updateExpense(newExpense, "1589011584031")
+        actions.updateExpense(newExpense, "TSTHeB4tTwrf7DjCOmJc")
       );
       expect(newState).toMatchObject({
-        "1589011584031": {
-          category: "Cafe",
-          amount: 400,
-          date: "20200701T123456",
-          name: "スタバ",
-        },
-        "1589011597561": {
-          category: "Drink",
-          amount: 300,
-          date: "20200401T123456",
-          name: "飲み会",
-        },
+        TSTHeB4tTwrf7DjCOmJc: newExpense,
       });
     });
   });
@@ -78,62 +49,30 @@ describe("expenses reducer", () => {
     test("should delete selected expense", () => {
       const newState: Expenses = reducer(
         initialState,
-        actions.deleteExpense("1589011584031")
+        actions.deleteExpense("K0Sivmdt67a26IMWOw20")
       );
-      expect(newState).toMatchObject({
-        "1589011597561": {
-          category: "Drink",
-          amount: 300,
-          date: "20200401T123456",
-          name: "飲み会",
-        },
-      });
+      expect(newState).not.toHaveProperty("K0Sivmdt67a26IMWOw20");
     });
   });
 });
 
 describe("expenses selector", () => {
-  const initialState: Expenses = {
-    "1589011584031": {
-      category: "Food",
-      amount: 3000,
-      date: "20200525T123456",
-      name: "スーパー",
-    },
-    "1589011597561": {
-      category: "Drink",
-      amount: 300,
-      date: "20200602T123456",
-      name: "飲み会",
-    },
-    "1589011597562": {
-      category: "Drink",
-      amount: 5000,
-      date: "20200625T123456",
-      name: "飲み会",
-    },
-    "1589011597563": {
-      category: "Drink",
-      amount: 300,
-      date: "20200725T123456",
-      name: "コーヒー",
-    },
-  };
+  let initialState: Expenses = {};
+  beforeEach(() => {
+    initialState = sampleState;
+  });
 
   describe("getSelectedExpense", () => {
-    test("shout get selected expense", () => {
+    test("should get selected expense", () => {
       const selectedExpense = selectors.getSelectedExpense(
         initialState,
-        "1589011584031"
+        "TSTHeB4tTwrf7DjCOmJc"
       );
-      expect(selectedExpense).toMatchObject({
-        category: "Food",
-        amount: 3000,
-        date: "20200525T123456",
-        name: "スーパー",
-      });
+      expect(selectedExpense).toMatchObject(
+        sampleState["TSTHeB4tTwrf7DjCOmJc"]
+      );
     });
-    test("shout get null", () => {
+    test("should get null", () => {
       const selectedExpense = selectors.getSelectedExpense(
         initialState,
         "123456789"
@@ -142,65 +81,45 @@ describe("expenses selector", () => {
     });
   });
 
-  describe("getListOfMonth", () => {
-    test("shout get all expenses of selected month", () => {
-      const total = selectors.getListOfMonth(initialState, "202006");
+  describe("getExpenseListOfMonth", () => {
+    test("should get all expenses of selected month", () => {
+      const total = selectors.getExpenseListOfMonth(initialState, "202006");
       expect(total).toEqual(
         expect.arrayContaining([
-          {
-            category: "Drink",
-            amount: 300,
-            date: "20200602T123456",
-            name: "飲み会",
-          },
-          {
-            category: "Drink",
-            amount: 5000,
-            date: "20200625T123456",
-            name: "飲み会",
-          },
+          sampleState["TSTHeB4tTwrf7DjCOmJc"],
+          sampleState["K0Sivmdt67a26IMWOw20"],
         ])
       );
     });
-    test("shout get empty array", () => {
-      const total = selectors.getListOfMonth(initialState, "102006");
+    test("should get empty array", () => {
+      const total = selectors.getExpenseListOfMonth(initialState, "102006");
       expect(total).toEqual(expect.arrayContaining([]));
     });
   });
 
   describe("getDailyExpenseListOfMonth", () => {
-    test("shout get all expenses of selected month", () => {
+    test("should get all expenses of selected month", () => {
       const total = selectors.getDailyExpenseListOfMonth(
         initialState,
         "202006"
       );
       expect(total).toEqual({
-        "2020/06/02": {
-          "1589011597561": {
-            category: "Drink",
-            amount: 300,
-            date: "20200602T123456",
-            name: "飲み会",
-          },
+        "2020/06/09": {
+          TSTHeB4tTwrf7DjCOmJc: sampleState["TSTHeB4tTwrf7DjCOmJc"],
         },
         "2020/06/25": {
-          "1589011597562": {
-            category: "Drink",
-            amount: 5000,
-            date: "20200625T123456",
-            name: "飲み会",
-          },
+          K0Sivmdt67a26IMWOw20: sampleState["K0Sivmdt67a26IMWOw20"],
         },
       });
     });
   });
 
   describe("getExpenseAmountOfMonth", () => {
-    test("shout get total amount of selected month", () => {
+    test("should get total amount of selected month", () => {
       const total = selectors.getExpenseAmountOfMonth(initialState, "202006");
-      expect(total).toBe(5300);
+      expect(total).toBe(1300);
     });
-    test("shout get 0 of month with no expenses", () => {
+    test("should get 0 of month with no expenses", () => {
       const total = selectors.getExpenseAmountOfMonth(initialState, "102006");
       expect(total).toBe(0);
     });

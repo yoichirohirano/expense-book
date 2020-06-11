@@ -2,57 +2,60 @@ import { Expenses } from ".";
 import { ExpensesAction } from "./actions";
 import actionTypes from "./types";
 
-const initialState: Expenses = {
-  // TODO: Storybook確認用
-  "1589011584031": {
-    category: "Food",
-    amount: 2300,
-    date: "20200625T123456",
-    name: "スーパー",
+export const sampleState: Expenses = {
+  TSTHeB4tTwrf7DjCOmJc: {
+    amount: 1000,
+    category: {
+      name: "Food",
+      ref: "E3cnHvL8SwPTbn4ChMWq",
+    },
+    date: new Date("2020-06-09T00:00:00"),
+    dateStr: "20200609T000000",
+    name: "赤札堂",
   },
-  "1589011597561": {
-    category: "Book",
+  K0Sivmdt67a26IMWOw20: {
     amount: 300,
-    date: "20200401T123456",
+    category: {
+      name: "Cafe",
+      ref: "AjOQWgDdVSVsLQNCEpNP",
+    },
+    date: new Date("2020-06-25T12:34:56"),
+    dateStr: "20200625T123456",
+    name: "赤札堂",
+  },
+  joGcRIZuw4lsPzwOG19q: {
+    amount: 8000,
+    category: {
+      name: "Free",
+      ref: "fGUwZnNss1Nnmvtdteoi",
+    },
+    date: new Date("2020-07-02T18:00:00"),
+    dateStr: "20200702T180000",
     name: "飲み会",
-  },
-  "1589011584035": {
-    category: "Drink",
-    amount: 30000,
-    date: "20200601T123456",
-    name: "飲み会",
-  },
-  "158901158465": {
-    category: "Book",
-    amount: 300,
-    date: "20200601T123456",
-    name: "その他",
-  },
-  "158902158465": {
-    category: "Book",
-    amount: 2392,
-    date: "20200530T123456",
-    name: "その他",
   },
 };
+
+const initialState: Expenses =
+  process.env.REACT_APP_ENV === "storybook" ? sampleState : {};
 
 const reducer = (
   state: Expenses = initialState,
   action: ExpensesAction
 ): Expenses => {
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case actionTypes.CREATE_EXPENSE: {
       const id = new Date().getTime();
-      state[id] = action.payload.expense;
-      return Object.assign({}, state);
+      newState[id] = action.payload.expense;
+      return newState;
     }
     case actionTypes.UPDATE_EXPENSE: {
-      state[action.payload.id] = action.payload.expense;
-      return Object.assign({}, state);
+      newState[action.payload.id] = action.payload.expense;
+      return newState;
     }
     case actionTypes.DELETE_EXPENSE: {
-      delete state[action.payload.id];
-      return Object.assign({}, state);
+      delete newState[action.payload.id];
+      return newState;
     }
     default: {
       return state;
