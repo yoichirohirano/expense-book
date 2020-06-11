@@ -36,7 +36,7 @@ export const sampleState: Expenses = {
 };
 
 const initialState: Expenses =
-  process.env.REACT_APP_ENV === "storybook" ? sampleState : {};
+  process.env.NODE_ENV === "test" ? sampleState : {};
 
 const reducer = (
   state: Expenses = initialState,

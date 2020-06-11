@@ -56,7 +56,7 @@ export const sampleState: Categories = {
 };
 
 const initialState: Categories =
-  process.env.REACT_APP_ENV === "storybook" ? sampleState : {};
+  process.env.NODE_ENV === "test" ? sampleState : {};
 
 const reducer = (
   state: Categories = initialState,
