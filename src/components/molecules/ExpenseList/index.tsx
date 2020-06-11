@@ -3,11 +3,14 @@ import List from "@material-ui/core/List";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import useStyles from "./style";
-import { Expenses } from "@/state/expenses";
+import { Expense } from "@/state/expenses";
 
 export interface ExpenseListProps {
   dailyExpenseList: {
-    [key: string]: Expenses;
+    // YYYY/MM/DD
+    [yyyymmddWithSlash: string]: {
+      [id: string]: Expense;
+    };
   };
   edit: (...props: any[]) => any;
 }

@@ -151,55 +151,37 @@ export const expenseList = (): JSX.Element => {
   const props: ExpenseListProps = {
     dailyExpenseList: {
       "2020/05/01": {
-        "20200501T123456": {
-          category: "Cafe",
+        aaaaaaaaaaaa: {
+          amount: 400,
           name: "スタバ",
-          amount: 300,
-          date: "20200501T123456",
+          date: new Date("2020-05-01T00:00:00"),
+          dateStr: "20200501T123455",
+          category: {
+            name: "Cafe",
+            ref: "AjOQWgDdVSVsLQNCEpNP",
+          },
         },
-        "20200501T123556": {
-          category: "Gym",
-          name: "GOLD GYM",
-          amount: 11000,
-          date: "20200501T123556",
+        K0Sivmdt67a26IMWOw20: {
+          amount: 300,
+          category: {
+            name: "Food",
+            ref: "E3cnHvL8SwPTbn4ChMWq",
+          },
+          date: new Date("2020-05-01T12:34:56"),
+          dateStr: "20200501T123456",
+          name: "赤札堂",
         },
       },
       "2020/05/02": {
-        "20200502T123456": {
-          category: "Food",
+        TSTHeB4tTwrf7DjCOmJc: {
+          amount: 1000,
+          category: {
+            name: "Food",
+            ref: "E3cnHvL8SwPTbn4ChMWq",
+          },
+          date: new Date("2020-05-02T00:00:00"),
+          dateStr: "20200502T000000",
           name: "赤札堂",
-          amount: 3000,
-          date: "20200501T123456",
-        },
-      },
-      "2020/05/03": {
-        "20200503T123456": {
-          category: "Food",
-          name: "赤札堂",
-          amount: 3000,
-          date: "20200501T123456",
-        },
-        "20200503T123556": {
-          category: "Gym",
-          name: "GOLD GYM",
-          amount: 11000,
-          date: "20200503T123556",
-        },
-      },
-      "2020/05/04": {
-        "20200501T123456": {
-          category: "Cafe",
-          name: "スタバ",
-          amount: 300,
-          date: "20200501T123456",
-        },
-      },
-      "2020/05/05": {
-        "20200501T123456": {
-          category: "Cafe",
-          name: "スタバ",
-          amount: 300,
-          date: "20200501T123456",
         },
       },
     },
