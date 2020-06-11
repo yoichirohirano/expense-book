@@ -15,7 +15,7 @@ const selectors = {
   // TODO: 削除
   // カテゴリ名からカテゴリIDを取得する
   getIdFromName: (categories: Categories, name: string): string => {
-    const res = Object.entries(categories).find(([id, category]) => {
+    const res = Object.entries(categories).find(([, category]) => {
       return category.name === name;
     });
     return res ? res[0] : "";
@@ -23,7 +23,7 @@ const selectors = {
   // 全カテゴリ合計額
   getTotalAmount: (categories: Categories): number => {
     return Object.entries(categories).reduce(
-      (accumulator: number, [key, value]: [string, Category]) => {
+      (accumulator: number, [, value]: [string, Category]) => {
         return accumulator + value.defaultAmount;
       },
       0

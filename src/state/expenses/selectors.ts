@@ -12,7 +12,7 @@ const getExpensesOfMonth = (expenses: Expenses, yyyymm: string): Expenses => {
   const firstDayOfMonth = moment(yyyymm);
   const firstDayOfNextMonth = moment(yyyymm).add(1, "M");
   Object.entries(expenses)
-    .filter(([id, expense]) => {
+    .filter(([, expense]) => {
       return (
         moment(expense.date).isAfter(firstDayOfMonth) &&
         moment(expense.date).isBefore(firstDayOfNextMonth)
@@ -40,7 +40,7 @@ const selectors = {
     yyyymm: string
   ): Array<Expense> => {
     return Object.entries(getExpensesOfMonth(expenses, yyyymm)).map(
-      ([key, expense]) => {
+      ([, expense]) => {
         return expense;
       }
     );
@@ -64,7 +64,7 @@ const selectors = {
   getExpenseAmountOfMonth: (expenses: Expenses, yyyymm: string): number => {
     const expensesOfMonth: Array<number> = Object.entries(
       getExpensesOfMonth(expenses, yyyymm)
-    ).map(([expenseId, expense]) => {
+    ).map(([, expense]) => {
       return expense.amount;
     });
     return expensesOfMonth.reduce(

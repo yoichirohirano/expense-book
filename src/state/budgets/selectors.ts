@@ -28,12 +28,9 @@ const selectors = {
   getBudgetAmount: (budgets: Budgets, yyyymm: string): number => {
     const budget = budgets[yyyymm].budget;
     if (!budget) return 0;
-    return Object.entries(budget).reduce(
-      (accumulator: number, [key, value]) => {
-        return accumulator + value.amount;
-      },
-      0
-    );
+    return Object.entries(budget).reduce((accumulator: number, [, value]) => {
+      return accumulator + value.amount;
+    }, 0);
   },
 };
 
