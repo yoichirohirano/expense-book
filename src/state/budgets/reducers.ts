@@ -3,7 +3,7 @@ import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
 export const sampleState: Budgets = {
-  "20200501T000000": {
+  "202005": {
     budget: {
       "9DDlIptkGsz87lqQsxBU": {
         amount: 33000,
@@ -21,7 +21,7 @@ export const sampleState: Budgets = {
       },
     },
   },
-  "20200601T000000": {
+  "202006": {
     budget: {
       ag2NKkGp7PM1gWgGYR8P: {
         amount: 30000,
@@ -46,7 +46,7 @@ export const sampleState: Budgets = {
       },
     },
   },
-  "20200701T000000": {
+  "202007": {
     budget: {
       OOvrNjAExohP3sMft8qw: {
         amount: 28000,
@@ -73,19 +73,20 @@ const reducer = (
   state: Budgets = initialState,
   action: BudgetsAction
 ): Budgets => {
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case actionTypes.CREATE_BUDGET:
-      state[action.payload.id] = {
+      newState[action.payload.id] = {
         budget: {},
       };
-      state[action.payload.id].budget = action.payload.budget;
-      return Object.assign({}, state);
+      newState[action.payload.id].budget = action.payload.budget;
+      return newState;
     case actionTypes.UPDATE_BUDGET:
-      state[action.payload.id].budget = action.payload.budget;
-      return Object.assign({}, state);
+      newState[action.payload.id].budget = action.payload.budget;
+      return newState;
     case actionTypes.DELETE_BUDGET:
-      delete state[action.payload.id];
-      return Object.assign({}, state);
+      delete newState[action.payload.id];
+      return newState;
     default:
       return state;
   }

@@ -1,8 +1,7 @@
 import reducer, { sampleState } from "./reducers";
 
 export type Budget = {
-  // budgetId(random)
-  [key: string]: {
+  [id: string]: {
     amount: number;
     category: {
       // categoryId
@@ -14,8 +13,7 @@ export type Budget = {
 };
 
 export type Budgets = {
-  // YYYYMM01T000000: Budget
-  [key: string]: {
+  [yyyymm: string]: {
     budget: Budget;
   };
 };

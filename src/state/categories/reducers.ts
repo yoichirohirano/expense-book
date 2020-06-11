@@ -62,19 +62,20 @@ const reducer = (
   state: Categories = initialState,
   action: CategoriesAction
 ): Categories => {
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case actionTypes.CREATE_CATEGORY: {
       const id = new Date().getTime();
-      state[id] = action.payload.category;
-      return Object.assign({}, state);
+      newState[id] = action.payload.category;
+      return newState;
     }
     case actionTypes.UPDATE_CATEGORY: {
-      state[action.payload.id] = action.payload.category;
-      return Object.assign({}, state);
+      newState[action.payload.id] = action.payload.category;
+      return newState;
     }
     case actionTypes.DELETE_CATEGORY: {
-      delete state[action.payload.id];
-      return Object.assign({}, state);
+      delete newState[action.payload.id];
+      return newState;
     }
     default:
       return state;

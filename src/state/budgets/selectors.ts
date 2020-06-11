@@ -4,17 +4,17 @@ import { Budget, Budgets } from ".";
 
 const selectors = {
   // 指定月の予算
-  getSelectedBudget: (budgets: Budgets, id: string): Budget | null => {
+  getSelectedBudget: (budgets: Budgets, yyyymm: string): Budget | null => {
     const res = Object.entries(budgets).find(([key]) => {
-      return key === id;
+      return key === yyyymm;
     });
     return res ? res[1].budget : null;
   },
   // 指定月の予算のインデックス
-  getSelectedBudgetIndex: (budgets: Budgets, id: string): number => {
+  getSelectedBudgetIndex: (budgets: Budgets, yyyymm: string): number => {
     // TODO: 日付順にソートする必要？
     const index = Object.entries(budgets).findIndex(([key]) => {
-      return key === id;
+      return key === yyyymm;
     });
     return index || 0;
   },
@@ -25,8 +25,8 @@ const selectors = {
     });
   },
   // 指定月の全カテゴリ予算合計額
-  getBudgetAmount: (budgets: Budgets, id: string): number => {
-    const budget = budgets[id].budget;
+  getBudgetAmount: (budgets: Budgets, yyyymm: string): number => {
+    const budget = budgets[yyyymm].budget;
     if (!budget) return 0;
     return Object.entries(budget).reduce(
       (accumulator: number, [key, value]) => {

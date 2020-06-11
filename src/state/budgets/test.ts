@@ -31,10 +31,10 @@ describe("budgets reducer", () => {
     test("should add new budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.createBudget(newBudget, "20300601T000000")
+        actions.createBudget(newBudget, "203006")
       );
       expect(newState).toMatchObject({
-        "20300601T000000": {
+        "203006": {
           budget: newBudget,
         },
       });
@@ -45,10 +45,10 @@ describe("budgets reducer", () => {
     test("should update selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.updateBudget(newBudget, "20200501T000000")
+        actions.updateBudget(newBudget, "202005")
       );
       expect(newState).toMatchObject({
-        "20200501T000000": {
+        "202005": {
           budget: newBudget,
         },
       });
@@ -59,9 +59,9 @@ describe("budgets reducer", () => {
     test("should delete selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.deleteBudget("20200501T000000")
+        actions.deleteBudget("202005")
       );
-      expect(newState).not.toHaveProperty("20200501T000000");
+      expect(newState).not.toHaveProperty("202005");
     });
   });
 });
@@ -71,16 +71,14 @@ describe("budgets selector", () => {
     test("shout get selected budget", () => {
       const selectedExpense = selectors.getSelectedBudget(
         sampleState,
-        "20200601T000000"
+        "202006"
       );
-      expect(selectedExpense).toMatchObject(
-        sampleState["20200601T000000"].budget
-      );
+      expect(selectedExpense).toMatchObject(sampleState["202006"].budget);
     });
     test("shout get null", () => {
       const selectedExpense = selectors.getSelectedBudget(
         sampleState,
-        "30200501T000000"
+        "302005"
       );
       expect(selectedExpense).toBe(null);
     });
