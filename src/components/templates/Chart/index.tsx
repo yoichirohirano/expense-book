@@ -1,8 +1,8 @@
 import React from "react";
 import ChartView from "@/components/organisms/ChartView";
 
-const ChartPage: React.FC = () => {
+const Chart: React.FC = () => {
   return <ChartView />;
 };
 
-export default ChartPage;
+export default Chart;

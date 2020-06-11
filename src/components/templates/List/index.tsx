@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import ListView from "@/components/organisms/ListView";
 import Navigation from "@/components/atoms/Navigation";
 
-const ListPage: React.FC = () => {
+const List: React.FC = () => {
   return (
     <>
       <Box zIndex="2">
@@ -16,4 +16,4 @@ const ListPage: React.FC = () => {
   );
 };
 
-export default ListPage;
+export default List;

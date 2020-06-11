@@ -1,13 +1,13 @@
 import React from "react";
-import ChartPage from "@/components/templates/ChartPage";
-import ListPage from "@/components/templates/ListPage";
+import Chart from "@/components/templates/Chart";
+import List from "@/components/templates/List";
 
 export const chartPage = () => {
-  return <ChartPage />;
+  return <Chart />;
 };
 
 export const listPage = () => {
-  return <ListPage />;
+  return <List />;
 };
 
 export default {
