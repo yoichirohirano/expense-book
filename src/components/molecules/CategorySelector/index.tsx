@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import CategoryButton, {
   CategoryButtonProps,
@@ -14,11 +14,6 @@ export interface CategorySelectorProps {
 
 const CategorySelector: React.FC<CategorySelectorProps> = (props) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    // 初期表示時、先頭のカテゴリを指定
-    // setSelectedCategoryId(Object.keys(props.categories)[0]);
-  }, []);
 
   const categoryButtonProps = (
     category: Category,

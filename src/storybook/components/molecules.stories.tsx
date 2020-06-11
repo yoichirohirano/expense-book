@@ -100,7 +100,7 @@ export const categorySelector = (): JSX.Element => {
     handleChangeCategory: (value: any) => {
       console.log(value);
     },
-    selectedCategoryId: "bbbbb",
+    selectedCategoryId: "E3cnHvL8SwPTbn4ChMWq",
   };
   return <CategorySelector {...props}></CategorySelector>;
 };
