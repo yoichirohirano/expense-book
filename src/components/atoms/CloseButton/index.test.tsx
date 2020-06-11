@@ -3,7 +3,7 @@ import CloseButton from "./";
 import { shallow } from "enzyme";
 
 describe("<CloseButton />", () => {
-  let container = null;
+  let container: any = null;
   const handleClickFunction = jest.fn();
 
   beforeEach(() => {
