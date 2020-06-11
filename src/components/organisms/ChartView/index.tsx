@@ -37,15 +37,15 @@ const ChartView: React.FC = () => {
   const expenses = useSelector<RootState, Expenses>((state) => state.expenses);
   const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  // YYYYMMDDT000000
-  const [currentMonth, setCurrentMonth] = useState<string>(
-    `${moment(new Date()).format("YYYYMM")}01T000000`
+  // YYYYMM
+  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(
+    `${moment(new Date()).format("YYYYMM")}`
   );
 
   // チャートに表示するデータをstoreの情報から生成する
   const getChartItems = (): Array<ChartItem> => {
     const budget =
-      budgetsSelectors.getSelectedBudget(budgets, currentMonth) ||
+      budgetsSelectors.getSelectedBudget(budgets, currentYYYYMM) ||
       categoriesSelectors.getDefaultBudget(categories);
     // 予算からカテゴリ名/予算の情報配列を作成
     const chartItems: Array<ChartItem> = Object.entries(budget).map(
@@ -68,9 +68,9 @@ const ChartView: React.FC = () => {
     //   color: getColor(chartItems.length, colorList),
     // });
     // 出費をカテゴリ別に計上
-    const expenseList = expensesSelectors.getListOfMonth(
+    const expenseList = expensesSelectors.getExpenseListOfMonth(
       expenses,
-      currentMonth
+      currentYYYYMM
     );
     expenseList.forEach((expense) => {
       chartItems.forEach((item) => {
@@ -98,7 +98,7 @@ const ChartView: React.FC = () => {
   const changeMonth = (index: number): void => {
     // indexからbudgetIdを取得して設定
     const [id] = Object.entries(budgets)[index];
-    setCurrentMonth(id);
+    setCurrentYYYYMM(id);
   };
 
   const chartProps: ChartProps = {
@@ -106,13 +106,13 @@ const ChartView: React.FC = () => {
     changeMonth: changeMonth,
     expenseAmount: expensesSelectors.getExpenseAmountOfMonth(
       expenses,
-      currentMonth
+      currentYYYYMM
     ),
-    budgetAmount: budgetsSelectors.getBudgetAmount(budgets, currentMonth),
+    budgetAmount: budgetsSelectors.getBudgetAmount(budgets, currentYYYYMM),
     chartItems: getChartItems(),
     initialMonthIndex: budgetsSelectors.getSelectedBudgetIndex(
       budgets,
-      currentMonth
+      currentYYYYMM
     ),
   };
 

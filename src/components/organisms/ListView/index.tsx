@@ -32,7 +32,7 @@ const ListView: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // YYYYMMDDT000000
   const [currentMonth, setCurrentMonth] = useState<string>(
-    `${moment(new Date()).format("YYYYMM")}01T000000`
+    `${moment(new Date()).format("YYYYMM")}`
   );
   const monthList = budgetsSelectors.getMonths(budgets);
 
