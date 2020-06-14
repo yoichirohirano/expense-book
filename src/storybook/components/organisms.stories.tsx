@@ -1,15 +1,15 @@
 import React from "react";
 import ListView from "@/components/organisms/ListView";
-import CategorySetting from "@/components/organisms/CategorySetting";
-import BudgetSetting from "@/components/organisms/BudgetSetting";
+import CategoryView from "@/components/organisms/CategoryView";
+import BudgetView from "@/components/organisms/BudgetView";
 import ChartView from "@/components/organisms/ChartView";
 
-export const categorySetting = () => {
-  return <CategorySetting />;
+export const categoryView = () => {
+  return <CategoryView />;
 };
 
-export const budgetSetting = () => {
-  return <BudgetSetting />;
+export const budgetView = () => {
+  return <BudgetView />;
 };
 
 export const chartView = () => {

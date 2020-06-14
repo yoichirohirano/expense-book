@@ -16,7 +16,7 @@ import BudgetEditItem, {
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
 import ChartHeader from "@/components/atoms/ChartHeader";
 
-const CategorySetting: React.FC = () => {
+const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
@@ -104,4 +104,4 @@ const CategorySetting: React.FC = () => {
   );
 };
 
-export default CategorySetting;
+export default CategoryView;

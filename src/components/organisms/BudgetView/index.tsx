@@ -22,7 +22,7 @@ import useStyles, {
   usePanelDetailsClasses,
 } from "./style";
 
-const BudgetEditList: React.FC = () => {
+const BudgetView: React.FC = () => {
   const classes = useStyles();
   const panelClasses = usePanelClasses();
   const panelDetailsClasses = usePanelDetailsClasses();
@@ -70,6 +70,7 @@ const BudgetEditList: React.FC = () => {
       budget: categoryBudget,
       categoryEditDisabled: true,
       // 予算設定画面ではカテゴリ名は修正できないため、空関数を渡す
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
         const newBudget: Budget = budgets[month].budget;
@@ -137,4 +138,4 @@ const BudgetEditList: React.FC = () => {
   );
 };
 
-export default BudgetEditList;
+export default BudgetView;
