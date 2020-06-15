@@ -42,8 +42,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   };
   const classes = useStyles();
 
-  const [name, setName] = useState(props.editingItem?.name || "");
-  const [amount, setAmount] = useState(props.editingItem?.amount || 0);
+  const [name, setName] = useState<string>(props.editingItem?.name || "");
+  const [amount, setAmount] = useState<number>(props.editingItem?.amount || 0);
   const [dateStr, setDate] = useState(
     props.editingItem?.dateStr || moment(new Date()).format("YYYYMMDDTHHmmSS")
   );
@@ -112,7 +112,9 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const amountInputProps = {
     label: "金額",
     type: "number",
-    handleChange: setAmount,
+    handleChange: (value: string): void => {
+      setAmount(parseInt(value, 10));
+    },
     helperText: priceError ? "入力してください。" : "",
     error: priceError,
     className: "PriceInput",
