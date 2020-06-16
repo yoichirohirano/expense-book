@@ -93,5 +93,30 @@ describe("categories selector", () => {
       );
     });
   });
-  // TODO: getDefaultBudget
+
+  describe("getDefaultBudget", () => {
+    test("shout get default budget", () => {
+      const budget = selectors.getDefaultBudget(initialState);
+      const first = Object.values(budget).find((value) => {
+        return value.category.name == sampleState["E3cnHvL8SwPTbn4ChMWq"].name;
+      });
+      const second = Object.values(budget).find((value) => {
+        return value.category.name == sampleState["AjOQWgDdVSVsLQNCEpNP"].name;
+      });
+      expect(first).toEqual({
+        amount: sampleState["E3cnHvL8SwPTbn4ChMWq"].defaultAmount,
+        category: {
+          name: sampleState["E3cnHvL8SwPTbn4ChMWq"].name,
+          ref: "E3cnHvL8SwPTbn4ChMWq",
+        },
+      });
+      expect(second).toEqual({
+        amount: sampleState["AjOQWgDdVSVsLQNCEpNP"].defaultAmount,
+        category: {
+          name: sampleState["AjOQWgDdVSVsLQNCEpNP"].name,
+          ref: "AjOQWgDdVSVsLQNCEpNP",
+        },
+      });
+    });
+  });
 });

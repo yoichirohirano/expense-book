@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Category, Categories } from ".";
 import { Budget } from "@/state/budgets";
+import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
 
 const selectors = {
   getSelectedCategory: (
@@ -33,7 +34,7 @@ const selectors = {
   getDefaultBudget: (categories: Categories): Budget => {
     const defaultBudget: Budget = {};
     Object.entries(categories).forEach(([id, category]) => {
-      const budgetCategoryID = new Date().getTime();
+      const budgetCategoryID = getRandomIntegerInRange(1000000000, 9999999999);
       defaultBudget[budgetCategoryID] = {
         amount: category.defaultAmount,
         category: {
