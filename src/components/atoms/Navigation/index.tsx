@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
 // ナビゲーションのみ例外的にatomからreduxへの接続を許容する
-import { connect, useDispatch } from "react-redux";
-import { push } from "connected-react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { push, RouterState } from "connected-react-router";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import ListIcon from "@material-ui/icons/List";
 import SettingsIcon from "@material-ui/icons/Settings";
+import { RootState } from "@/state/store";
 import useStyles from "./style";
 
 export interface NavigationProps {
   pathname: string;
-  routes: Array<{
-    path: string;
-    index: number;
-  }>;
+  route: (index: number) => void;
 }
 
-const routes = [
+export const routes = [
   {
     path: "/",
     index: 0,
@@ -36,38 +34,25 @@ const routes = [
   },
 ];
 
-const mapStateToProps = (state: any): NavigationProps => ({
-  pathname: state.router.location.pathname,
-  routes,
-});
-
-const Navigation: React.FC<NavigationProps> = (props) => {
+export const Navigation: React.FC<NavigationProps> = (props) => {
   const bottomNavigationClasses = useStyles("BottomNavigation");
   const bottomNavigationActionClasses = useStyles("BottomNavigationAction");
-  const [index, setIndex] = React.useState(0);
-  const dispatch = useDispatch();
-
+  // デフォルトでは何もアクティブにしないよう-1を設定
+  const [index, setIndex] = React.useState(-1);
   // 初回レンダリング時、パスからカレントのインデックスを設定する
   useEffect(() => {
-    const current = props.routes.find((item) => {
+    const current = routes.find((item) => {
       return item.path === props.pathname;
     });
     setIndex(current ? current.index : 0);
   }, []);
-
-  const route = (index: number): void => {
-    const to = props.routes.find((item) => {
-      return item.index === index;
-    });
-    if (to) dispatch(push(to.path));
-  };
 
   return (
     <BottomNavigation
       value={index}
       onChange={(event, index): void => {
         setIndex(index);
-        route(index);
+        props.route(index);
       }}
       classes={bottomNavigationClasses}
       showLabels
@@ -96,4 +81,19 @@ const Navigation: React.FC<NavigationProps> = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(Navigation);
+export const ConnectedNavigation: React.FC = () => {
+  const router = useSelector<RootState, RouterState>((state) => state.router);
+  const dispatch = useDispatch();
+  const _props: NavigationProps = {
+    pathname: router.location.pathname,
+    route: (index: number): void => {
+      const to = routes.find((item) => {
+        return item.index === index;
+      });
+      if (to) dispatch(push(to.path));
+    },
+  };
+  return <Navigation {..._props} />;
+};
+
+export default ConnectedNavigation;
