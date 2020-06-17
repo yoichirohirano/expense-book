@@ -69,14 +69,14 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     }
   }, [props.editingItem]);
 
-  const validate = (): void => {
+  const validate = (): boolean => {
     setItemNameError(!name);
     setPriceError(!amount || amount < 0);
+    return Boolean(name && amount && dateStr);
   };
 
   const handleClickCompleteButton = (): void => {
-    validate();
-    if (name && amount) {
+    if (validate()) {
       const newExpense: Expense = {
         category: {
           name: category.name,
@@ -87,7 +87,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
         },
         name,
         amount,
-        date: moment(dateStr).toDate(),
+        date: moment(dateStr, moment.defaultFormat).toDate(),
         dateStr,
       };
       props.add(newExpense);
