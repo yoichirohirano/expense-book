@@ -36,6 +36,17 @@ export const textButton = (): JSX.Element => {
   return <TextButton {...props}></TextButton>;
 };
 
+export const textButtonNegative = (): JSX.Element => {
+  const props = {
+    handleClick: (): void => {
+      console.log("click!");
+    },
+    text: "DELETE CATEGORY",
+    isNegative: true,
+  };
+  return <TextButton {...props}></TextButton>;
+};
+
 export const addButton = (): JSX.Element => {
   return <AddButton {...props}></AddButton>;
 };

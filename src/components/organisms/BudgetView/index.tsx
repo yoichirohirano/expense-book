@@ -68,7 +68,6 @@ const BudgetView: React.FC = () => {
     return {
       categoryName: categoryName,
       budget: categoryBudget,
-      categoryEditDisabled: true,
       // 予算設定画面ではカテゴリ名は修正できないため、空関数を渡す
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
@@ -78,6 +77,8 @@ const BudgetView: React.FC = () => {
         newBudget[id].amount = parseInt(value, 10);
         dispatch(actions.updateBudget(Object.assign({}, newBudget), month));
       },
+      categoryEditDisabled: true,
+      deleteDisabled: true,
     };
   };
 

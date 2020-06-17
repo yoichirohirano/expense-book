@@ -24,6 +24,18 @@ describe("<TextButton />", () => {
 
   test("should have proper props", () => {
     expect(container.find(".TextButton").props()).toMatchObject({
+      variant: "outlined",
+      color: "primary",
+      onClick: props.handleClick,
+    });
+  });
+
+  test("should have proper props - negative", () => {
+    const negativeProps = { ...props, isNegative: true };
+    container = shallow(<TextButton {...negativeProps} />);
+    expect(container.find(".TextButton").props()).toMatchObject({
+      variant: "contained",
+      color: "default",
       onClick: props.handleClick,
     });
   });

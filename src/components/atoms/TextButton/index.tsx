@@ -5,14 +5,15 @@ import useStyles from "./style";
 export interface TextButtonProps {
   text: string;
   handleClick: (...props: any[]) => any;
+  isNegative?: boolean;
 }
 
 const TextButton: React.FC<TextButtonProps> = (props) => {
   const classes = useStyles();
   return (
     <Button
-      variant="outlined"
-      color="primary"
+      variant={props.isNegative ? "contained" : "outlined"}
+      color={props.isNegative ? "default" : "primary"}
       size="large"
       className={`TextButton ${classes.root}`}
       onClick={props.handleClick}
