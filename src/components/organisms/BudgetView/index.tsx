@@ -49,7 +49,7 @@ const BudgetView: React.FC = () => {
     setCurrentMonth(isExpanded ? panel : false);
   };
 
-  const add = (): void => {
+  const addBudget = (): void => {
     const nextMonth = new Date();
     nextMonth.setMonth(nextMonth.getMonth() + 1);
     const YYYY = nextMonth.getFullYear();
@@ -58,6 +58,14 @@ const BudgetView: React.FC = () => {
     const currentYYYYMM = `${YYYY}${MM}`;
     const newBudget: Budget = categoriesSelectors.getDefaultBudget(categories);
     dispatch(actions.createBudget(newBudget, currentYYYYMM));
+  };
+
+  const deleteBudget = (): void => {
+    if (currentMonth) {
+      dispatch(actions.deleteBudget(currentMonth));
+      // 開いているパネルを閉じる
+      setCurrentMonth(false);
+    }
   };
 
   const budgetEditItemProps = (
@@ -84,7 +92,13 @@ const BudgetView: React.FC = () => {
 
   const addButtonProps: TextButtonProps = {
     text: "ADD BUDGET",
-    handleClick: add,
+    handleClick: addBudget,
+  };
+
+  const deleteButtonProps: TextButtonProps = {
+    text: "DELETE BUDGET",
+    handleClick: deleteBudget,
+    isNegative: true,
   };
 
   return (
@@ -126,6 +140,9 @@ const BudgetView: React.FC = () => {
                   ></BudgetEditItem>
                 );
               })}
+              <Box padding="20px 0">
+                <TextButton {...deleteButtonProps}></TextButton>
+              </Box>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
