@@ -113,7 +113,6 @@ export const categorySelector = (): JSX.Element => {
 
 export const chart = () => {
   const props: ChartProps = {
-    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
     expenseAmount: 20000,
     budgetAmount: 300000,
     chartItems: [
@@ -139,10 +138,6 @@ export const chart = () => {
         color: "#489ec8",
       },
     ],
-    changeMonth: (value: any) => {
-      console.log(value);
-    },
-    initialMonthIndex: 0,
   };
   return <Chart {...props} />;
 };

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@material-ui/core/Box";
 import Chart, { ChartProps } from "@/components/molecules/Chart";
+import MonthTabs, { MonthTabsProps } from "@/components/atoms/MonthTabs";
 import AddItemDrawer from "@/components/molecules/AddItemDrawer";
 import Navigation from "@/components/atoms/Navigation";
 import AddButton from "@/components/atoms/AddButton";
@@ -102,14 +103,19 @@ const ChartView: React.FC = () => {
   };
 
   const chartProps: ChartProps = {
-    months: budgetsSelectors.getMonths(budgets),
-    changeMonth: changeMonth,
     expenseAmount: expensesSelectors.getExpenseAmountOfMonth(
       expenses,
       currentYYYYMM
     ),
     budgetAmount: budgetsSelectors.getBudgetAmount(budgets, currentYYYYMM),
     chartItems: getChartItems(),
+  };
+
+  const monthTabsProps: MonthTabsProps = {
+    months: budgetsSelectors.getMonths(budgets),
+    handleChange: (index: number): void => {
+      changeMonth(index);
+    },
     initialMonthIndex: budgetsSelectors.getSelectedBudgetIndex(
       budgets,
       currentYYYYMM
@@ -129,6 +135,9 @@ const ChartView: React.FC = () => {
   return (
     <>
       <Box padding="0 0 130px">
+        <Box position="fixed" top="0">
+          <MonthTabs {...monthTabsProps}></MonthTabs>
+        </Box>
         <Chart {...chartProps}></Chart>
       </Box>
       <Box css={addButtonWrapperStyle}>
