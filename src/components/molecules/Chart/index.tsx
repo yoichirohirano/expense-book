@@ -26,7 +26,9 @@ const Chart: React.FC<ChartProps> = (props) => {
     <>
       <Box margin="50px 0 0">
         <ChartHeader {...chartHeaderProps}></ChartHeader>
-        <ExpenseChart {...expenseChartProps}></ExpenseChart>
+        <Box paddingTop="10px">
+          <ExpenseChart {...expenseChartProps}></ExpenseChart>
+        </Box>
       </Box>
     </>
   );
