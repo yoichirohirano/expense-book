@@ -30,23 +30,29 @@ const ListView: React.FC = () => {
   const [selectedExpenseId, setSelectedExpenseId] = useState("");
   const [editingItem, setEditingItem] = useState<Expense | null>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  // YYYYMMDDT000000
-  const [currentMonth, setCurrentMonth] = useState<string>(
+  // YYYYMM
+  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(
     `${moment(new Date()).format("YYYYMM")}`
   );
   const monthList = budgetsSelectors.getMonths(budgets);
 
   const monthTabsProps: MonthTabsProps = {
     months: monthList,
-    handleChange: (newIndex) => {
-      setCurrentMonth(monthList[newIndex]);
+    handleChange: (index) => {
+      // indexからbudgetIdを取得して設定
+      const [id] = Object.entries(budgets)[index];
+      setCurrentYYYYMM(id);
     },
+    initialMonthIndex: budgetsSelectors.getSelectedBudgetIndex(
+      budgets,
+      currentYYYYMM
+    ),
   };
 
   const expenseListProps: ExpenseListProps = {
     dailyExpenseList: expensesSelectors.getDailyExpenseListOfMonth(
       expenses,
-      currentMonth
+      currentYYYYMM
     ),
     edit: (itemId: string) => {
       // EDIT ITEMを開く
