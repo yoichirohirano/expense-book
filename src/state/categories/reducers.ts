@@ -55,8 +55,7 @@ export const sampleState: Categories = {
   },
 };
 
-const initialState: Categories =
-  process.env.NODE_ENV === "test" ? sampleState : {};
+const initialState: Categories = sampleState;
 
 const reducer = (
   state: Categories = initialState,

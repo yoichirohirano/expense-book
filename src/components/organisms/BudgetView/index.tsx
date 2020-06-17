@@ -51,7 +51,7 @@ const BudgetView: React.FC = () => {
 
   const add = (): void => {
     const nextMonth = new Date();
-    nextMonth.setMonth(nextMonth.getMonth() + 2);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
     const YYYY = nextMonth.getFullYear();
     // 来月を指定
     const MM = `0${nextMonth.getMonth() + 1}`.slice(-2);
