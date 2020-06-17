@@ -1,32 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "@material-ui/core/List";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import useStyles from "./style";
-import { Expense } from "@/state/expenses";
+import { Expenses } from "@/state/expenses";
 
 export interface ExpenseListProps {
-  dailyExpenseList: {
-    // YYYY/MM/DD
-    [yyyymmddWithSlash: string]: {
-      [id: string]: Expense;
-    };
-  };
+  dailyExpenseList: Array<{
+    yyyymmddWithSlash: string;
+    expenses: Expenses;
+  }>;
   edit: (...props: any[]) => any;
 }
 
 const ExpenseList: React.FC<ExpenseListProps> = (props) => {
   const classes = useStyles();
 
+  useEffect(() => {
+    console.log(props.dailyExpenseList);
+  }, []);
+
   return (
     <List className={classes.root} subheader={<li />}>
-      {Object.entries(props.dailyExpenseList).map(([id, expense]) => (
-        <li key={`section-${id}`} className={classes.listSection}>
+      {props.dailyExpenseList.map((item, index) => (
+        <li key={`section-${index}`} className={classes.listSection}>
           <ul className={classes.ul}>
-            <ExpenseListSubHeader dateLabel={id} />
-            {Object.entries(expense).map(([expenseId, item]) => (
+            <ExpenseListSubHeader dateLabel={item.yyyymmddWithSlash} />
+            {Object.entries(item.expenses).map(([expenseId, item]) => (
               <ExpenseListItem
-                key={`${id}-${expenseId}`}
+                key={`${index}-${expenseId}`}
                 {...item}
                 handleClickItem={() => {
                   props.edit(expenseId);

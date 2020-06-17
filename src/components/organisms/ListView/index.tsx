@@ -9,7 +9,7 @@ import AddItemDrawer, {
   AddItemDrawerProps,
 } from "@/components/molecules/AddItemDrawer";
 import { RootState } from "@/state/store";
-import { categoriesSelectors, Categories } from "@/state/categories";
+import { Categories } from "@/state/categories";
 import { budgetsSelectors, Budgets } from "@/state/budgets";
 import {
   expenseActions,

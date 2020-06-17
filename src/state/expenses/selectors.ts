@@ -45,19 +45,44 @@ const selectors = {
       }
     );
   },
-  // 指定月の日付別出費リスト {YYYY/MM/DD :Expenses}
+  // 指定月の日付別出費リスト配列 {YYYY/MM/DD :Expenses}
   getDailyExpenseListOfMonth: (
     expenses: Expenses,
     yyyymm: string
-  ): Record<string, Expenses> => {
-    const result: Record<string, Expenses> = {};
+  ): Array<{
+    yyyymmddWithSlash: string;
+    expenses: Expenses;
+  }> => {
+    const result: Array<{
+      yyyymmddWithSlash: string;
+      expenses: Expenses;
+    }> = [];
     Object.entries(getExpensesOfMonth(expenses, yyyymm)).forEach(
       ([expenseId, expense]) => {
-        const yyyymmdd = moment(expense.dateStr).format("YYYY/MM/DD");
-        if (!result[yyyymmdd]) result[yyyymmdd] = {};
-        result[yyyymmdd][expenseId] = expense;
+        const yyyymmddWithSlash = moment(expense.dateStr).format("YYYY/MM/DD");
+
+        // すでに同日付のアイテムがあるかを検索する
+        const resultItem = result.find((item) => {
+          return item.yyyymmddWithSlash === yyyymmddWithSlash;
+        });
+        // すでに同日付のアイテムがある場合、既存のアイテム内のexpensesに追加する
+        if (resultItem) {
+          resultItem.expenses[expenseId] = expense;
+          // 同日付のアイテムがない場合、新しくアイテムを作成する
+        } else {
+          const expenses: Expenses = {};
+          expenses[expenseId] = expense;
+          result.push({
+            yyyymmddWithSlash,
+            expenses,
+          });
+        }
       }
     );
+    // 日付の降順にソート
+    result.sort((a, b) => {
+      return a.yyyymmddWithSlash < b.yyyymmddWithSlash ? 1 : -1;
+    });
     return result;
   },
   // 指定月の出費合計金額

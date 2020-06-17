@@ -144,44 +144,50 @@ export const chart = () => {
 
 export const expenseList = (): JSX.Element => {
   const props: ExpenseListProps = {
-    dailyExpenseList: {
-      "2020/05/01": {
-        aaaaaaaaaaaa: {
-          amount: 400,
-          name: "スタバ",
-          date: new Date("2020-05-01T00:00:00"),
-          dateStr: "20200501T123455",
-          category: {
-            name: "Cafe",
-            ref: "AjOQWgDdVSVsLQNCEpNP",
+    dailyExpenseList: [
+      {
+        yyyymmddWithSlash: "2020/05/01",
+        expenses: {
+          aaaaaaaaaaaa: {
+            amount: 400,
+            name: "スタバ",
+            date: new Date("2020-05-01T00:00:00"),
+            dateStr: "20200501T123455",
+            category: {
+              name: "Cafe",
+              ref: "AjOQWgDdVSVsLQNCEpNP",
+            },
           },
-        },
-        K0Sivmdt67a26IMWOw20: {
-          amount: 300,
-          category: {
-            name: "Food",
-            ref: "E3cnHvL8SwPTbn4ChMWq",
+          K0Sivmdt67a26IMWOw20: {
+            amount: 300,
+            category: {
+              name: "Food",
+              ref: "E3cnHvL8SwPTbn4ChMWq",
+            },
+            date: new Date("2020-05-01T12:34:56"),
+            dateStr: "20200501T123456",
+            name: "赤札堂",
           },
-          date: new Date("2020-05-01T12:34:56"),
-          dateStr: "20200501T123456",
-          name: "赤札堂",
         },
       },
-      "2020/05/02": {
-        TSTHeB4tTwrf7DjCOmJc: {
-          amount: 1000,
-          category: {
-            name: "Food",
-            ref: "E3cnHvL8SwPTbn4ChMWq",
+      {
+        yyyymmddWithSlash: "2020/05/02",
+        expenses: {
+          TSTHeB4tTwrf7DjCOmJc: {
+            amount: 1000,
+            category: {
+              name: "Food",
+              ref: "E3cnHvL8SwPTbn4ChMWq",
+            },
+            date: new Date("2020-05-02T00:00:00"),
+            dateStr: "20200502T000000",
+            name: "赤札堂",
           },
-          date: new Date("2020-05-02T00:00:00"),
-          dateStr: "20200502T000000",
-          name: "赤札堂",
         },
       },
-    },
-    edit: (): void => {
-      console.log("click!");
+    ],
+    edit: () => {
+      console.log("edit");
     },
   };
   return <ExpenseList {...props}></ExpenseList>;
