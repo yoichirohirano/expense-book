@@ -16,10 +16,6 @@ export interface ExpenseListProps {
 const ExpenseList: React.FC<ExpenseListProps> = (props) => {
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log(props.dailyExpenseList);
-  }, []);
-
   return (
     <List className={classes.root} subheader={<li />}>
       {props.dailyExpenseList.map((item, index) => (
