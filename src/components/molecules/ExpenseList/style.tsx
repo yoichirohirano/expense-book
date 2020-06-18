@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "inherit",
       padding: 0,
     },
+    whitespace: {
+      height: "80px",
+    },
   })
 );
 

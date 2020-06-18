@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import List from "@material-ui/core/List";
 import ExpenseListItem from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
@@ -34,6 +34,7 @@ const ExpenseList: React.FC<ExpenseListProps> = (props) => {
           </ul>
         </li>
       ))}
+      <li key="whitespace" className={classes.whitespace}></li>
     </List>
   );
 };

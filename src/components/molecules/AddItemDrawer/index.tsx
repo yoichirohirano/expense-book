@@ -66,6 +66,11 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
         props.editingItem.category.ref
       );
       if (category) setCategory(category);
+    } else {
+      setName("");
+      setAmount(0);
+      setDate(moment(new Date()).format("YYYYMMDDTHHmmSS"));
+      setCategory(Object.entries(props.categories)[0][1]);
     }
   }, [props.editingItem]);
 

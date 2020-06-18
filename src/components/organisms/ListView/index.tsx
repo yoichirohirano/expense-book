@@ -8,6 +8,7 @@ import ExpenseList, {
 import AddItemDrawer, {
   AddItemDrawerProps,
 } from "@/components/molecules/AddItemDrawer";
+import AddButton, { AddButtonProps } from "@/components/atoms/AddButton";
 import { RootState } from "@/state/store";
 import { Categories } from "@/state/categories";
 import { budgetsSelectors, Budgets } from "@/state/budgets";
@@ -18,6 +19,7 @@ import {
   expensesSelectors,
 } from "@/state/expenses";
 import { useSelector, useDispatch } from "react-redux";
+import { addButtonWrapperStyle } from "./style";
 
 const ListView: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,9 +29,10 @@ const ListView: React.FC = () => {
   const expenses = useSelector<RootState, Expenses>((state) => state.expenses);
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
 
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  // TODO: itemとIDどちらか一方のみでいけないか？
   const [selectedExpenseId, setSelectedExpenseId] = useState("");
   const [editingItem, setEditingItem] = useState<Expense | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // YYYYMM
   const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(
     `${moment(new Date()).format("YYYYMM")}`
@@ -61,11 +64,12 @@ const ListView: React.FC = () => {
       setDrawerOpen(true);
     },
   };
+
   const addItemDrawerProps = (): AddItemDrawerProps => {
     const props: AddItemDrawerProps = {
       categories,
-      title: "EDIT ITEM",
-      editItemId: selectedExpenseId,
+      title: selectedExpenseId ? "EDIT ITEM" : "ADD ITEM",
+      editItemId: selectedExpenseId || undefined,
       isOpen: drawerOpen,
       toggleDrawer: setDrawerOpen,
       add: (expense: Expense): void => {
@@ -73,13 +77,24 @@ const ListView: React.FC = () => {
           ? dispatch(expenseActions.updateExpense(expense, selectedExpenseId))
           : dispatch(expenseActions.createExpense(expense));
       },
-      delete: () => {
-        dispatch(expenseActions.deleteExpense(selectedExpenseId));
-      },
+      delete: selectedExpenseId
+        ? (): void => {
+            dispatch(expenseActions.deleteExpense(selectedExpenseId));
+          }
+        : undefined,
     };
     if (editingItem) props.editingItem = editingItem;
     return props;
   };
+
+  const addButtonProps: AddButtonProps = {
+    handleClick: (): void => {
+      setDrawerOpen(true);
+      setEditingItem(null);
+      setSelectedExpenseId("");
+    },
+  };
+
   return (
     <>
       <Box position="fixed" top="0" zIndex="2">
@@ -87,6 +102,9 @@ const ListView: React.FC = () => {
       </Box>
       <Box margin="50px 0 0">
         <ExpenseList {...expenseListProps}></ExpenseList>
+      </Box>
+      <Box css={addButtonWrapperStyle}>
+        <AddButton {...addButtonProps}></AddButton>
       </Box>
       <AddItemDrawer {...addItemDrawerProps()}></AddItemDrawer>
     </>
