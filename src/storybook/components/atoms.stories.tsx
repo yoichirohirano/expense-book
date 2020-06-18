@@ -95,7 +95,15 @@ export const navigation = (): JSX.Element => {
 
 export const monthTabs = (): JSX.Element => {
   const props = {
-    months: ["2020/03", "2020/04", "2020/05", "2020/06", "2020/07"],
+    months: [
+      "2020/03",
+      "2020/04",
+      "2020/05",
+      "2020/06",
+      "2020/07",
+      "2020/08",
+      "2020/09",
+    ],
     currentIndex: 0,
     handleChange: (value: number): void => {
       console.log(value);

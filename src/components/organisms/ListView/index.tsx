@@ -19,7 +19,7 @@ import {
   expensesSelectors,
 } from "@/state/expenses";
 import { useSelector, useDispatch } from "react-redux";
-import { addButtonWrapperStyle } from "./style";
+import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
 const ListView: React.FC = () => {
   const dispatch = useDispatch();
@@ -97,7 +97,7 @@ const ListView: React.FC = () => {
 
   return (
     <>
-      <Box position="fixed" top="0" zIndex="2">
+      <Box css={monthTabsWrapperStyle}>
         <MonthTabs {...monthTabsProps}></MonthTabs>
       </Box>
       <Box margin="50px 0 0">

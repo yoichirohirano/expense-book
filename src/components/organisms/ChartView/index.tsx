@@ -17,7 +17,7 @@ import {
 } from "@/state/expenses";
 import { budgetsSelectors, Budgets } from "@/state/budgets";
 import { RootState } from "@/state/store";
-import { addButtonWrapperStyle } from "./style";
+import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
 const colorList = ["#489ec8", "#5f3aaf", "#26a69a"];
 
@@ -123,7 +123,7 @@ const ChartView: React.FC = () => {
   };
 
   const addItemDrawerProps = {
-    categories: categories,
+    categories,
     title: "ADD ITEM",
     isOpen: drawerOpen,
     toggleDrawer: setDrawerOpen,
@@ -135,7 +135,7 @@ const ChartView: React.FC = () => {
   return (
     <>
       <Box padding="0 0 80px">
-        <Box position="fixed" top="0">
+        <Box css={monthTabsWrapperStyle}>
           <MonthTabs {...monthTabsProps}></MonthTabs>
         </Box>
         <Chart {...chartProps}></Chart>
