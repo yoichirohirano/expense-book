@@ -10,7 +10,7 @@ import Navigation from "@/components/atoms/Navigation";
 const Top: React.FC = () => {
   return (
     <>
-      <Box zIndex="2" marginBottom="60px">
+      <Box zIndex="2" marginBottom="56px">
         <Switch>
           <Route exact path="/" component={ChartView} />
           <Route path="/list" component={ListView} />

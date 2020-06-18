@@ -100,7 +100,7 @@ const ListView: React.FC = () => {
       <Box css={monthTabsWrapperStyle}>
         <MonthTabs {...monthTabsProps}></MonthTabs>
       </Box>
-      <Box margin="50px 0 0">
+      <Box margin="48px 0 0">
         <ExpenseList {...expenseListProps}></ExpenseList>
       </Box>
       <Box css={addButtonWrapperStyle}>

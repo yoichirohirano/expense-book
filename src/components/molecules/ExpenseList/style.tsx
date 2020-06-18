@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: "relative",
       overflow: "auto",
-      maxHeight: "calc(100vh - 100px)",
+      maxHeight: "calc(100vh - 104px)",
       paddingBottom: "0px",
     },
     listSection: {
