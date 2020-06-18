@@ -103,14 +103,20 @@ describe("expenses selector", () => {
         initialState,
         "202006"
       );
-      expect(total).toEqual({
-        "2020/06/09": {
-          TSTHeB4tTwrf7DjCOmJc: sampleState["TSTHeB4tTwrf7DjCOmJc"],
+      expect(total).toEqual([
+        {
+          yyyymmddWithSlash: "2020/06/25",
+          expenses: {
+            K0Sivmdt67a26IMWOw20: sampleState["K0Sivmdt67a26IMWOw20"],
+          },
         },
-        "2020/06/25": {
-          K0Sivmdt67a26IMWOw20: sampleState["K0Sivmdt67a26IMWOw20"],
+        {
+          yyyymmddWithSlash: "2020/06/09",
+          expenses: {
+            TSTHeB4tTwrf7DjCOmJc: sampleState["TSTHeB4tTwrf7DjCOmJc"],
+          },
         },
-      });
+      ]);
     });
   });
 
