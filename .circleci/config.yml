@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      # # functions配下のnpm設定
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "functions/yarn.lock" }}
+      # - run:
+      #     name: Install functions/
+      #     command: yarn
+      #     working_directory: functions
+      # - save_cache:
+      #     key: dependency-cache-{{ checksum "functions/yarn.lock" }}
+      #     paths:
+      #       - functions/node_modules
+      # トップレベルのnpm設定
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install
+          command: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Test
+          command: yarn test
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Deploy
+          command: yarn deploy
+
+workflows:
+  version: 2
+  deploy_master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
