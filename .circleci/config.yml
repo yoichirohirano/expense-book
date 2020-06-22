@@ -27,6 +27,9 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: Set Firebase Config
+          command: npm run set-config
+      - run:
           name: Test
           command: npm run test
       - run:

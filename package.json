@@ -7,6 +7,7 @@
     "build": "node scripts/build.js",
     "deploy": "firebase deploy",
     "test": "node scripts/test.js",
+    "set-config": "ts-node scripts/setConfig.ts",
     "storybook": "NODE_ENV=test start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -217,6 +218,7 @@
     "firebase-tools": "^8.4.3",
     "prettier": "^2.0.5",
     "react-test-renderer": "^16.13.1",
-    "ts-loader": "^7.0.2"
+    "ts-loader": "^7.0.2",
+    "ts-node": "^8.10.2"
   }
 }
