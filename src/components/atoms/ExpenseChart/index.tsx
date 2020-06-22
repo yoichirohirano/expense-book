@@ -57,7 +57,7 @@ const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
         }),
         backgroundColor: props.chartItems.map((item) => {
           return item.budget < item.amount
-            ? "rgba(255, 0, 0, 0.2)"
+            ? "rgba(255, 0, 0, 0.7)"
             : convertHexToRgba(item.color, 0.2) || "";
         }),
         borderColor: props.chartItems.map((item) => {
