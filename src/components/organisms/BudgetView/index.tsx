@@ -82,9 +82,17 @@ const BudgetView: React.FC = () => {
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
         const newBudget: Budget = budgets[month].budget;
-        const id = categoriesSelectors.getIdFromName(categories, categoryName);
-        newBudget[id].amount = parseInt(value, 10);
-        dispatch(actions.updateBudget(Object.assign({}, newBudget), month));
+        // 更新用の予算から指定カテゴリの予算を取得し、金額を更新する
+        const budgetOfCategory = Object.values(newBudget).find((value) => {
+          return (
+            value.category.ref ===
+            categoriesSelectors.getIdFromName(categories, categoryName)
+          );
+        });
+        if (budgetOfCategory) {
+          budgetOfCategory.amount = parseInt(value, 10);
+          dispatch(actions.updateBudget(Object.assign({}, newBudget), month));
+        }
       },
       categoryEditDisabled: true,
       deleteDisabled: true,
