@@ -26,7 +26,7 @@ const ExpenseList: React.FC<ExpenseListProps> = (props) => {
               <ExpenseListItem
                 key={`${index}-${expenseId}`}
                 {...item}
-                handleClickItem={() => {
+                handleClickItem={(): void => {
                   props.edit(expenseId);
                 }}
               ></ExpenseListItem>
