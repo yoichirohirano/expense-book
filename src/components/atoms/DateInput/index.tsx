@@ -3,7 +3,7 @@ import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./style";
 export interface DateInputProps {
-  handleChange: (...props: any[]) => any;
+  handleChange: (date: Date) => void;
   defaultTimestamp?: number;
 }
 
@@ -27,7 +27,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
         value={selectedDate}
         onChange={(date): void => {
           setDateChange(date as Date);
-          props.handleChange(date);
+          props.handleChange(date as Date);
         }}
         variant="inline"
         label="日付"

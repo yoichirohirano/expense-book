@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 interface DeleteButtonProps {
-  handleClick?: (...props: any[]) => any;
+  handleClick?: () => void;
   disabled?: boolean;
 }
 

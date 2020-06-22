@@ -10,7 +10,7 @@ export interface ExpenseListProps {
     yyyymmddWithSlash: string;
     expenses: Expenses;
   }>;
-  edit: (...props: any[]) => any;
+  edit: (expenseId: string) => void;
 }
 
 const ExpenseList: React.FC<ExpenseListProps> = (props) => {

@@ -1,6 +1,6 @@
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = (module: string): Record<string, any> => {
+const useStyles = (module: string): Record<string, string> => {
   switch (module) {
     case "BottomNavigation":
       return makeStyles((theme: Theme) =>

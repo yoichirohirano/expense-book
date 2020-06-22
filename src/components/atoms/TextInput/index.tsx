@@ -7,7 +7,7 @@ export interface TextInputProps {
   error: boolean;
   defaultValue?: string;
   helperText?: string;
-  handleChange?: (...props: any[]) => any;
+  handleChange?: (value: string) => void;
   className?: string;
   disabled?: boolean;
 }

@@ -7,9 +7,9 @@ import useStyles from "./style";
 export interface BudgetEditItemProps {
   categoryName: string;
   budget: number;
-  handleChangeCategoryName: (...props: any[]) => any;
-  handleChangeBudget: (...props: any[]) => any;
-  handleClickDeleteButton?: (...props: any[]) => any;
+  handleChangeCategoryName: (value: string) => void;
+  handleChangeBudget: (value: string) => void;
+  handleClickDeleteButton?: () => void;
   categoryEditDisabled?: boolean;
   deleteDisabled?: boolean;
 }

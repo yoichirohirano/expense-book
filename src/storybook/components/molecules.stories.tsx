@@ -74,7 +74,7 @@ export const budgetEditItem = () => {
     handleChangeBudget: (props: any): void => {
       console.log(props);
     },
-    handleClickDeleteButton: (props: any): void => {
+    handleClickDeleteButton: (): void => {
       console.log(props);
     },
   };
@@ -91,7 +91,7 @@ export const budgetEditItemDisabled = () => {
     handleChangeBudget: (props: any): void => {
       console.log(props);
     },
-    handleClickDeleteButton: (props: any): void => {
+    handleClickDeleteButton: (): void => {
       console.log(props);
     },
     categoryEditDisabled: true,

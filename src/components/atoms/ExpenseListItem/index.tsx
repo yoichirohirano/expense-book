@@ -6,7 +6,9 @@ import Divider from "@material-ui/core/Divider";
 import { Expense } from "@/state/expenses";
 
 export interface ExpenseListItemProps extends Expense {
-  handleClickItem: (...props: any[]) => any;
+  handleClickItem: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
 }
 
 const ExpenseListItem: React.FC<ExpenseListItemProps> = (props) => {

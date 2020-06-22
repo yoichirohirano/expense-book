@@ -8,7 +8,7 @@ import useStyles from "./style";
 
 export interface CategorySelectorProps {
   categories: Categories;
-  handleChangeCategory: (...props: any[]) => any;
+  handleChangeCategory: (categoryId: string) => void;
   selectedCategoryId: string;
 }
 

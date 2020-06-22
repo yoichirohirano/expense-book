@@ -22,9 +22,9 @@ export interface AddItemDrawerProps {
   isOpen: boolean;
   editItemId?: string;
   editingItem?: Expense;
-  toggleDrawer: (props: boolean) => void;
+  toggleDrawer: (open: boolean) => void;
   add: (props: Expense) => void;
-  delete?: (...props: any[]) => any;
+  delete?: () => void;
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
@@ -145,16 +145,16 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     <SwipeableDrawer
       anchor="bottom"
       open={props.isOpen}
-      onClose={() => {
+      onClose={(): void => {
         props.toggleDrawer(false);
       }}
-      onOpen={() => {
+      onOpen={(): void => {
         props.toggleDrawer(true);
       }}
     >
       <Box className={classes.closeButtonWrapper}>
         <CloseButton
-          handleClick={() => {
+          handleClick={(): void => {
             props.toggleDrawer(false);
           }}
         ></CloseButton>

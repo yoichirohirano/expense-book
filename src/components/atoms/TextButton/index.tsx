@@ -4,7 +4,7 @@ import useStyles from "./style";
 
 export interface TextButtonProps {
   text: string;
-  handleClick: (...props: any[]) => any;
+  handleClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isNegative?: boolean;
 }
 
