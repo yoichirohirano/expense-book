@@ -15,11 +15,14 @@ import BudgetEditItem, {
 } from "@/components/molecules/BudgetEditItem";
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
 import ChartHeader from "@/components/atoms/ChartHeader";
+import { Typography } from "@material-ui/core";
 
 const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
+  // TODO: ログイン機能実装後、ログイン状態をReduxに移管する
+  const loggedIn = false;
   const dispatch = useDispatch();
 
   const add = (): void => {
@@ -83,25 +86,43 @@ const CategoryView: React.FC = () => {
     handleClick: add,
   };
 
-  return (
-    <Container maxWidth="sm">
-      <H6Title text="Default Category"></H6Title>
-      <ChartHeader
-        expenseAmount={categoriesSelectors.getTotalAmount(categories)}
-      ></ChartHeader>
-      {Object.entries(categories).map(([key, item]) => {
-        return (
-          <BudgetEditItem
-            key={key}
-            {...budgetEditItemProps(key, item)}
-          ></BudgetEditItem>
-        );
-      })}
-      <Box padding="20px 0">
-        <TextButton {...addButtonProps}></TextButton>
-      </Box>
-    </Container>
-  );
+  const loginButtonProps: TextButtonProps = {
+    text: "ログインする",
+    handleClick: () => {
+      return false;
+    },
+  };
+
+  if (loggedIn) {
+    return (
+      <Container maxWidth="sm">
+        <H6Title text="Default Category"></H6Title>
+        <ChartHeader
+          expenseAmount={categoriesSelectors.getTotalAmount(categories)}
+        ></ChartHeader>
+        {Object.entries(categories).map(([key, item]) => {
+          return (
+            <BudgetEditItem
+              key={key}
+              {...budgetEditItemProps(key, item)}
+            ></BudgetEditItem>
+          );
+        })}
+        <Box padding="20px 0">
+          <TextButton {...addButtonProps}></TextButton>
+        </Box>
+      </Container>
+    );
+  } else {
+    return (
+      <Container maxWidth="sm">
+        <Typography variant="body1">
+          ログインすることでカテゴリを自由に設定することができます。
+        </Typography>
+        <TextButton {...loginButtonProps}></TextButton>
+      </Container>
+    );
+  }
 };
 
 export default CategoryView;
