@@ -101,19 +101,13 @@ describe("expenses selector", () => {
     test("should get all expenses of selected month", () => {
       const total = selectors.getDailyExpenseListOfMonth(
         initialState,
-        "202006"
+        "202005"
       );
       expect(total).toEqual([
         {
-          yyyymmddWithSlash: "2020/06/25",
+          yyyymmddWithSlash: "2020/05/05",
           expenses: {
-            K0Sivmdt67a26IMWOw20: sampleState["K0Sivmdt67a26IMWOw20"],
-          },
-        },
-        {
-          yyyymmddWithSlash: "2020/06/09",
-          expenses: {
-            TSTHeB4tTwrf7DjCOmJc: sampleState["TSTHeB4tTwrf7DjCOmJc"],
+            xWSP5lnRysssssRh5ms: sampleState["xWSP5lnRysssssRh5ms"],
           },
         },
       ]);
@@ -122,8 +116,8 @@ describe("expenses selector", () => {
 
   describe("getExpenseAmountOfMonth", () => {
     test("should get total amount of selected month", () => {
-      const total = selectors.getExpenseAmountOfMonth(initialState, "202006");
-      expect(total).toBe(1300);
+      const total = selectors.getExpenseAmountOfMonth(initialState, "202005");
+      expect(total).toBe(50000);
     });
     test("should get 0 of month with no expenses", () => {
       const total = selectors.getExpenseAmountOfMonth(initialState, "102006");

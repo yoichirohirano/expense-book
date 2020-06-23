@@ -3,91 +3,195 @@ import { BudgetsAction } from "./actions";
 import actionTypes from "./types";
 
 export const sampleState: Budgets = {
-  "202005": {
+  "202001": {
     budget: {
-      "1483808733": {
-        amount: 45000,
-        category: { name: "Saving", ref: "WO0O1eUgpwzGj49EmzZW" },
-      },
       "3186020163": {
         amount: 30000,
-        category: { name: "Food", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
       },
-      "3967372454": {
-        amount: 5000,
-        category: { name: "Cafe", ref: "AjOQWgDdVSVsLQNCEpNP" },
+      "7081388040": {
+        amount: 20000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+      },
+      "9309824704": {
+        amount: 3000,
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
       },
       "4932031535": {
         amount: 12000,
         category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
       },
-      "7730759461": {
-        amount: 20000,
-        category: { name: "Dating", ref: "pXhYzqbyOrjGnSmZJMFN" },
+      "6911870738": {
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+      },
+      "8536650673": {
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+      },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+      },
+    },
+  },
+  "202002": {
+    budget: {
+      "3186020163": {
+        amount: 30000,
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
       },
       "7081388040": {
-        amount: 20000,
-        category: { name: "Free", ref: "fGUwZnNss1Nnmvtdteoi" },
+        amount: 70000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "Book", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+      },
+      "4932031535": {
+        amount: 12000,
+        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
       },
       "6911870738": {
-        amount: 12000,
-        category: { name: "Gym", ref: "0tMKc5h30IaaRIZnmcAv" },
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
       },
       "8536650673": {
-        amount: 41000,
-        category: { name: "Fixed", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
       },
-      "7460784683": {
-        amount: 25000,
-        category: { name: "Sudden", ref: "3KEecx7xaz3wffH9iwXe" },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+      },
+    },
+  },
+  "202003": {
+    budget: {
+      "3186020163": {
+        amount: 30000,
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+      },
+      "7081388040": {
+        amount: 10000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+      },
+      "9309824704": {
+        amount: 3000,
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+      },
+      "4932031535": {
+        amount: 12000,
+        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+      },
+      "6911870738": {
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+      },
+      "8536650673": {
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+      },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+      },
+    },
+  },
+  "202004": {
+    budget: {
+      "3186020163": {
+        amount: 30000,
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+      },
+      "7081388040": {
+        amount: 50000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+      },
+      "9309824704": {
+        amount: 3000,
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+      },
+      "4932031535": {
+        amount: 12000,
+        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+      },
+      "6911870738": {
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+      },
+      "8536650673": {
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+      },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+      },
+    },
+  },
+  "202005": {
+    budget: {
+      "3186020163": {
+        amount: 30000,
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+      },
+      "7081388040": {
+        amount: 50000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+      },
+      "9309824704": {
+        amount: 3000,
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+      },
+      "4932031535": {
+        amount: 12000,
+        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+      },
+      "6911870738": {
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+      },
+      "8536650673": {
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+      },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
       },
     },
   },
   "202006": {
     budget: {
-      "1483808733": {
-        amount: 45000,
-        category: { name: "Saving", ref: "WO0O1eUgpwzGj49EmzZW" },
-      },
       "3186020163": {
         amount: 30000,
-        category: { name: "Food", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
       },
-      "3967372454": {
-        amount: 5000,
-        category: { name: "Cafe", ref: "AjOQWgDdVSVsLQNCEpNP" },
+      "7081388040": {
+        amount: 50000,
+        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+      },
+      "9309824704": {
+        amount: 3000,
+        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
       },
       "4932031535": {
         amount: 12000,
         category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
       },
-      "7730759461": {
-        amount: 20000,
-        category: { name: "Dating", ref: "pXhYzqbyOrjGnSmZJMFN" },
-      },
-      "7081388040": {
-        amount: 20000,
-        category: { name: "Free", ref: "fGUwZnNss1Nnmvtdteoi" },
-      },
-      "9309824704": {
-        amount: 3000,
-        category: { name: "Book", ref: "w2IJ86mtXfcNyRm23aw4" },
-      },
       "6911870738": {
-        amount: 12000,
-        category: { name: "Gym", ref: "0tMKc5h30IaaRIZnmcAv" },
+        amount: 5000,
+        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
       },
       "8536650673": {
-        amount: 41000,
-        category: { name: "Fixed", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        amount: 30000,
+        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
       },
-      "7460784683": {
-        amount: 25000,
-        category: { name: "Sudden", ref: "3KEecx7xaz3wffH9iwXe" },
+      "1483808733": {
+        amount: 45000,
+        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
       },
     },
   },

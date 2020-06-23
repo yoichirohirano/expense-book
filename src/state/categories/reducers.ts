@@ -5,53 +5,38 @@ import actionTypes from "./types";
 export const sampleState: Categories = {
   E3cnHvL8SwPTbn4ChMWq: {
     defaultAmount: 30000,
-    name: "Food",
+    name: "食費",
     sortIndex: 0,
   },
-  AjOQWgDdVSVsLQNCEpNP: {
-    defaultAmount: 5000,
-    name: "Cafe",
+  fGUwZnNss1Nnmvtdteoi: {
+    defaultAmount: 50000,
+    name: "娯楽",
     sortIndex: 1,
+  },
+  w2IJ86mtXfcNyRm23aw4: {
+    defaultAmount: 3000,
+    name: "書籍",
+    sortIndex: 2,
   },
   "4fgOOb41j82zZxyCBQcS": {
     defaultAmount: 12000,
     name: "雑費",
-    sortIndex: 2,
-  },
-  pXhYzqbyOrjGnSmZJMFN: {
-    defaultAmount: 20000,
-    name: "Dating",
     sortIndex: 3,
   },
-  fGUwZnNss1Nnmvtdteoi: {
-    defaultAmount: 20000,
-    name: "Free",
+  pXhYzqbyOrjGnSmZJMFN: {
+    defaultAmount: 5000,
+    name: "交通費",
     sortIndex: 4,
   },
-  w2IJ86mtXfcNyRm23aw4: {
-    defaultAmount: 3000,
-    name: "Book",
+  XKZ5LP61ZgRGWeRFTboV: {
+    defaultAmount: 30000,
+    name: "固定費",
     sortIndex: 5,
   },
-  "0tMKc5h30IaaRIZnmcAv": {
-    defaultAmount: 12000,
-    name: "Gym",
-    sortIndex: 6,
-  },
-  XKZ5LP61ZgRGWeRFTboV: {
-    defaultAmount: 41000,
-    name: "Fixed",
-    sortIndex: 7,
-  },
-  "3KEecx7xaz3wffH9iwXe": {
-    defaultAmount: 25000,
-    name: "Sudden",
-    sortIndex: 8,
-  },
   WO0O1eUgpwzGj49EmzZW: {
-    defaultAmount: 45000,
-    name: "Saving",
-    sortIndex: 9,
+    defaultAmount: 40000,
+    name: "貯金",
+    sortIndex: 6,
   },
 };
 

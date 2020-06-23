@@ -58,7 +58,7 @@ describe("categories selector", () => {
   });
 
   describe("getSelectedCategory", () => {
-    test("shout get selected category", () => {
+    test("should get selected category", () => {
       const selectedExpense = selectors.getSelectedCategory(
         initialState,
         "E3cnHvL8SwPTbn4ChMWq"
@@ -67,7 +67,7 @@ describe("categories selector", () => {
         sampleState["E3cnHvL8SwPTbn4ChMWq"]
       );
     });
-    test("shout get null", () => {
+    test("should get null", () => {
       const selectedExpense = selectors.getSelectedCategory(
         initialState,
         "NOTHING"
@@ -77,31 +77,28 @@ describe("categories selector", () => {
   });
 
   describe("getTotalAmount", () => {
-    test("shout get proper total amount", () => {
+    test("should get proper total amount", () => {
       const totals = selectors.getTotalAmount(initialState);
       expect(totals).toBe(
-        30000 +
-          5000 +
-          12000 +
-          20000 +
-          20000 +
-          3000 +
-          12000 +
-          41000 +
-          25000 +
-          45000
+        sampleState["E3cnHvL8SwPTbn4ChMWq"].defaultAmount +
+          sampleState["fGUwZnNss1Nnmvtdteoi"].defaultAmount +
+          sampleState["w2IJ86mtXfcNyRm23aw4"].defaultAmount +
+          sampleState["4fgOOb41j82zZxyCBQcS"].defaultAmount +
+          sampleState["pXhYzqbyOrjGnSmZJMFN"].defaultAmount +
+          sampleState["XKZ5LP61ZgRGWeRFTboV"].defaultAmount +
+          sampleState["WO0O1eUgpwzGj49EmzZW"].defaultAmount
       );
     });
   });
 
   describe("getDefaultBudget", () => {
-    test("shout get default budget", () => {
+    test("should get default budget", () => {
       const budget = selectors.getDefaultBudget(initialState);
       const first = Object.values(budget).find((value) => {
         return value.category.name == sampleState["E3cnHvL8SwPTbn4ChMWq"].name;
       });
       const second = Object.values(budget).find((value) => {
-        return value.category.name == sampleState["AjOQWgDdVSVsLQNCEpNP"].name;
+        return value.category.name == sampleState["fGUwZnNss1Nnmvtdteoi"].name;
       });
       expect(first).toEqual({
         amount: sampleState["E3cnHvL8SwPTbn4ChMWq"].defaultAmount,
@@ -111,10 +108,10 @@ describe("categories selector", () => {
         },
       });
       expect(second).toEqual({
-        amount: sampleState["AjOQWgDdVSVsLQNCEpNP"].defaultAmount,
+        amount: sampleState["fGUwZnNss1Nnmvtdteoi"].defaultAmount,
         category: {
-          name: sampleState["AjOQWgDdVSVsLQNCEpNP"].name,
-          ref: "AjOQWgDdVSVsLQNCEpNP",
+          name: sampleState["fGUwZnNss1Nnmvtdteoi"].name,
+          ref: "fGUwZnNss1Nnmvtdteoi",
         },
       });
     });
