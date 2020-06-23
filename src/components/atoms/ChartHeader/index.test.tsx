@@ -23,12 +23,10 @@ describe("<ChartHeader />", () => {
   });
 
   test("should render total amount", () => {
-    expect(container.find(".ChartHeader-total").text()).toBe("Total: ¥200,000");
+    expect(container.find(".ChartHeader-total").text()).toBe("支出: ¥200,000");
   });
 
   test("should render budget amount", () => {
-    expect(container.find(".ChartHeader-budget").text()).toBe(
-      "Budget: ¥300,000"
-    );
+    expect(container.find(".ChartHeader-budget").text()).toBe("予算: ¥300,000");
   });
 });

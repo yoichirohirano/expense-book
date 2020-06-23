@@ -58,22 +58,22 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
       showLabels
     >
       <BottomNavigationAction
-        label="Chart"
+        label="グラフ"
         icon={<BarChartIcon />}
         classes={bottomNavigationActionClasses}
       />
       <BottomNavigationAction
-        label="List"
+        label="一覧"
         icon={<ListIcon />}
         classes={bottomNavigationActionClasses}
       />
       <BottomNavigationAction
-        label="Budget"
+        label="予算"
         icon={<SettingsIcon />}
         classes={bottomNavigationActionClasses}
       />
       <BottomNavigationAction
-        label="Category"
+        label="カテゴリ"
         icon={<SettingsIcon />}
         classes={bottomNavigationActionClasses}
       />

@@ -37,7 +37,7 @@ const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
       // 予算
       {
         type: "bubble",
-        label: "Budget",
+        label: "予算",
         data: props.chartItems.map((item, index) => {
           return {
             x: item.budget,
@@ -51,7 +51,7 @@ const ExpenseChart: React.FC<ExpenseChartProps> = (props) => {
       // 出費
       {
         type: "horizontalBar",
-        label: "Expense",
+        label: "支出",
         data: props.chartItems.map((item) => {
           return item.amount;
         }),

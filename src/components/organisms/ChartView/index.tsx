@@ -124,7 +124,7 @@ const ChartView: React.FC = () => {
 
   const addItemDrawerProps = {
     categories,
-    title: "ADD ITEM",
+    title: "出費を追加する",
     isOpen: drawerOpen,
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {

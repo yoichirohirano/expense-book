@@ -68,7 +68,7 @@ const ListView: React.FC = () => {
   const addItemDrawerProps = (): AddItemDrawerProps => {
     const props: AddItemDrawerProps = {
       categories,
-      title: selectedExpenseId ? "EDIT ITEM" : "ADD ITEM",
+      title: selectedExpenseId ? "出費を編集する" : "出費を追加する",
       editItemId: selectedExpenseId || undefined,
       isOpen: drawerOpen,
       toggleDrawer: setDrawerOpen,

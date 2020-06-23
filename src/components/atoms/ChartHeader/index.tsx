@@ -13,13 +13,13 @@ const ChartHeader: React.FC<ChartHeaderProps> = (props) => {
   return (
     <Box className={classes.root} fontFamily="h2.fontFamily">
       <Box className="ChartHeader-total">
-        Total: ¥{getPriceSeparatedByComma(props.expenseAmount)}
+        支出: ¥{getPriceSeparatedByComma(props.expenseAmount)}
       </Box>
       {props.budgetAmount && (
         <>
           <Box padding="0 10px">/</Box>
           <Box className="ChartHeader-budget">
-            Budget: ¥{getPriceSeparatedByComma(props.budgetAmount)}
+            予算: ¥{getPriceSeparatedByComma(props.budgetAmount)}
           </Box>
         </>
       )}

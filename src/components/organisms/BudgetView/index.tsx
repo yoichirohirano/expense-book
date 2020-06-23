@@ -105,7 +105,7 @@ const BudgetView: React.FC = () => {
   };
 
   const addButtonProps: TextButtonProps = {
-    text: "ADD BUDGET",
+    text: "予算を追加する",
     handleClick: addBudget,
   };
 
@@ -117,7 +117,7 @@ const BudgetView: React.FC = () => {
 
   return (
     <>
-      <H6Title text="Budget"></H6Title>
+      <H6Title text="予算設定"></H6Title>
       {Object.entries(budgets).map(([yyyymm, value]) => {
         return (
           <ExpansionPanel
