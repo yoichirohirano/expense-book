@@ -22,6 +22,11 @@ import useStyles, {
   usePanelDetailsClasses,
 } from "./style";
 
+const yyyymmWithSlash = (yyyymm: string): string => {
+  const matchList = yyyymm.match(/(\d{4})(\d{2})/);
+  return matchList ? `${matchList[1]}/${matchList[2]}` : yyyymm;
+};
+
 const BudgetView: React.FC = () => {
   const classes = useStyles();
   const panelClasses = usePanelClasses();
@@ -131,7 +136,9 @@ const BudgetView: React.FC = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>{yyyymm}</Typography>
+              <Typography className={classes.heading}>
+                {yyyymmWithSlash(yyyymm)}
+              </Typography>
               <Typography className={classes.secondaryHeading}>
                 ¥{budgetAmount(budgets, yyyymm)}
               </Typography>
