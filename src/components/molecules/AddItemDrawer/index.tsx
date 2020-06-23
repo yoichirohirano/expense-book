@@ -28,19 +28,20 @@ export interface AddItemDrawerProps {
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
-  const getInitialCategory = (
-    editingItem: Expense | undefined
-  ): Category | null => {
+  const classes = useStyles();
+
+  const getInitialCategory = (editingItem: Expense | undefined): Category => {
     if (editingItem) {
-      return categoriesSelectors.getSelectedCategory(
+      const editingItemCategory = categoriesSelectors.getSelectedCategory(
         props.categories,
         editingItem.category.ref
       );
-    } else {
-      return null;
+      if (editingItemCategory) return editingItemCategory;
     }
+    // 編集アイテムがない場合はデフォルトカテゴリの先頭要素を返す
+    const defaultCategory = Object.entries(props.categories)[0][1];
+    return defaultCategory;
   };
-  const classes = useStyles();
 
   const [name, setName] = useState<string>(props.editingItem?.name || "");
   const [amount, setAmount] = useState<number>(props.editingItem?.amount || 0);
@@ -48,12 +49,22 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     props.editingItem?.dateStr || moment(new Date()).format("YYYYMMDDTHHmmSS")
   );
   const [category, setCategory] = useState<Category>(
-    getInitialCategory(props.editingItem) ||
-      Object.entries(props.categories)[0][1]
+    getInitialCategory(props.editingItem)
   );
-
   const [itemNameError, setItemNameError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
+
+  /**
+   * 入力欄の状態を初期化する
+   */
+  const reset = (): void => {
+    setName("");
+    setAmount(0);
+    setDate(moment(new Date()).format("YYYYMMDDTHHmmSS"));
+    setCategory(Object.entries(props.categories)[0][1]);
+    setItemNameError(false);
+    setPriceError(false);
+  };
 
   // 編集時、デフォルトをpropsから設定
   useEffect(() => {
@@ -67,10 +78,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       );
       if (category) setCategory(category);
     } else {
-      setName("");
-      setAmount(0);
-      setDate(moment(new Date()).format("YYYYMMDDTHHmmSS"));
-      setCategory(Object.entries(props.categories)[0][1]);
+      reset();
     }
   }, [props.editingItem]);
 
@@ -97,12 +105,14 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       };
       props.add(newExpense);
       props.toggleDrawer(false);
+      reset();
     }
   };
 
   const handleClickDeleteButton = (): void => {
     props.delete && props.delete();
     props.toggleDrawer(false);
+    reset();
   };
 
   const nameInputProps = {
