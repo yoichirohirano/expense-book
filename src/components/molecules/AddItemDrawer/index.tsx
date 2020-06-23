@@ -169,7 +169,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           }}
         ></CloseButton>
       </Box>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" className={classes.root}>
         <H6Title text={props.title}></H6Title>
         <Box className={classes.categorySelectorWrapper}>
           <CategorySelector {...categorySelectorProps}></CategorySelector>
