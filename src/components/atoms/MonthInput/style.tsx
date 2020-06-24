@@ -1,13 +1,9 @@
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     datePicker: {
-      width: "calc(50% - 8px)",
-      marginTop: "20px",
-      "& > *": {
-        margin: `${theme.spacing(1)} 0`,
-      },
+      display: "none",
     },
   })
 );

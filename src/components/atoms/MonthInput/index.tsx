@@ -5,6 +5,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import useStyles from "./style";
 
 export interface MonthInputProps {
+  isOpen: boolean;
   handleChange: (date: Date) => void;
   defaultTimestamp?: number;
 }
@@ -23,6 +24,7 @@ const MonthInput: React.FC<MonthInputProps> = (props) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
       <DatePicker
+        open={props.isOpen}
         inputVariant="outlined"
         format="yyyy/MM"
         value={selectedDate}

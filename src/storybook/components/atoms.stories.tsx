@@ -246,6 +246,7 @@ export const dateInput = (): JSX.Element => {
 
 export const monthInput = (): JSX.Element => {
   const props: MonthInputProps = {
+    isOpen: true,
     handleChange: (date) => {
       console.log(date);
     },

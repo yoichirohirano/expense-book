@@ -1,13 +1,16 @@
 import React from "react";
-import MonthInput from ".";
+import MonthInput, { MonthInputProps } from ".";
 import { shallow, mount } from "enzyme";
 
 describe("<MonthInput />", () => {
   let container: any = null;
-  const onChangeFunction = jest.fn();
+  const props: MonthInputProps = {
+    isOpen: true,
+    handleChange: jest.fn(),
+  };
 
   beforeEach(() => {
-    container = shallow(<MonthInput handleChange={onChangeFunction} />);
+    container = shallow(<MonthInput {...props} />);
   });
 
   afterEach(() => {
@@ -18,7 +21,7 @@ describe("<MonthInput />", () => {
   test("should have proper defaultTimestamp", () => {
     container = mount(
       <MonthInput
-        handleChange={onChangeFunction}
+        {...props}
         // 2020/06/25
         defaultTimestamp={1593056096000}
       />
@@ -28,10 +31,24 @@ describe("<MonthInput />", () => {
     });
   });
 
+  test("should visible if isOpen is true", () => {
+    container = mount(<MonthInput {...props} />);
+    expect(container.find("[role='presentation']").length).toBe(1);
+  });
+
+  test("should invisible if isOpen is false", () => {
+    const props: MonthInputProps = {
+      isOpen: false,
+      handleChange: jest.fn(),
+    };
+    container = mount(<MonthInput {...props} />);
+    expect(container.find("[role='presentation']").length).toBe(0);
+  });
+
   test("event handler should be triggered", () => {
     container
       .find(".MonthInput-datepicker")
       .simulate("change", { target: { value: "" } });
-    expect(onChangeFunction).toBeCalled();
+    expect(props.handleChange).toBeCalled();
   });
 });
