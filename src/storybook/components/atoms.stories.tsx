@@ -14,6 +14,7 @@ import ExpenseChart, {
 import ChartHeader from "@/components/atoms/ChartHeader";
 import TextInput from "@/components/atoms/TextInput";
 import DateInput, { DateInputProps } from "@/components/atoms/DateInput";
+import MonthInput, { MonthInputProps } from "@/components/atoms/MonthInput";
 import ExpenseListItem, {
   ExpenseListItemProps,
 } from "@/components/atoms/ExpenseListItem";
@@ -241,6 +242,15 @@ export const dateInput = (): JSX.Element => {
     },
   };
   return <DateInput {...props}></DateInput>;
+};
+
+export const monthInput = (): JSX.Element => {
+  const props: MonthInputProps = {
+    handleChange: (date) => {
+      console.log(date);
+    },
+  };
+  return <MonthInput {...props}></MonthInput>;
 };
 
 export const expenseListItem = (): JSX.Element => {
