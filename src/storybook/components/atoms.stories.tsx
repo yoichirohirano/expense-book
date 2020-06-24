@@ -250,6 +250,9 @@ export const monthInput = (): JSX.Element => {
     handleChange: (date) => {
       console.log(date);
     },
+    handleClose: () => {
+      console.log("close");
+    },
   };
   return <MonthInput {...props}></MonthInput>;
 };

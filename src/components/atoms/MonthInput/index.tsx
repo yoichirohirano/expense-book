@@ -7,12 +7,13 @@ import useStyles from "./style";
 export interface MonthInputProps {
   isOpen: boolean;
   handleChange: (date: Date) => void;
+  handleClose?: () => void;
   defaultTimestamp?: number;
 }
 
 const MonthInput: React.FC<MonthInputProps> = (props) => {
   const classes = useStyles();
-  const [selectedDate, setDateChange] = useState(new Date());
+  const [selectedDate, setDateChange] = useState<Date>(new Date());
 
   // 初回のみデフォルト日付をpropsから設定
   useEffect(() => {
@@ -25,7 +26,6 @@ const MonthInput: React.FC<MonthInputProps> = (props) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
       <DatePicker
         open={props.isOpen}
-        inputVariant="outlined"
         format="yyyy/MM"
         value={selectedDate}
         views={["year", "month"]}
@@ -34,10 +34,10 @@ const MonthInput: React.FC<MonthInputProps> = (props) => {
           setDateChange(date as Date);
           props.handleChange(date as Date);
         }}
-        variant="inline"
         label="年月"
         autoOk={true}
-        className={`MonthInput-datepicker ${classes.datePicker}`}
+        className={`MonthInput-DatePicker ${classes.datePicker}`}
+        onClose={props.handleClose}
       />
     </MuiPickersUtilsProvider>
   );

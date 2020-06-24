@@ -7,33 +7,17 @@ describe("<MonthInput />", () => {
   const props: MonthInputProps = {
     isOpen: true,
     handleChange: jest.fn(),
+    handleClose: jest.fn(),
   };
-
-  beforeEach(() => {
-    container = shallow(<MonthInput {...props} />);
-  });
 
   afterEach(() => {
     container.unmount();
     container = null;
   });
 
-  test("should have proper defaultTimestamp", () => {
-    container = mount(
-      <MonthInput
-        {...props}
-        // 2020/06/25
-        defaultTimestamp={1593056096000}
-      />
-    );
-    expect(container.find(".MuiOutlinedInput-input").props()).toMatchObject({
-      value: "2020/06",
-    });
-  });
-
   test("should visible if isOpen is true", () => {
     container = mount(<MonthInput {...props} />);
-    expect(container.find("[role='presentation']").length).toBe(1);
+    expect(container.find(".MuiPickersModal-dialogRoot").length).toBeTruthy();
   });
 
   test("should invisible if isOpen is false", () => {
@@ -42,12 +26,13 @@ describe("<MonthInput />", () => {
       handleChange: jest.fn(),
     };
     container = mount(<MonthInput {...props} />);
-    expect(container.find("[role='presentation']").length).toBe(0);
+    expect(container.find(".MuiPickersModal-dialogRoot").length).toBe(0);
   });
 
-  test("event handler should be triggered", () => {
+  test("event handler should be triggered:change", () => {
+    container = shallow(<MonthInput {...props} />);
     container
-      .find(".MonthInput-datepicker")
+      .find(".MonthInput-DatePicker")
       .simulate("change", { target: { value: "" } });
     expect(props.handleChange).toBeCalled();
   });
