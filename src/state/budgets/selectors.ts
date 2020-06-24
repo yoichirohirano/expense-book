@@ -26,6 +26,8 @@ const selectors = {
   },
   // 指定月の全カテゴリ予算合計額
   getBudgetAmount: (budgets: Budgets, yyyymm: string): number => {
+    const selected = budgets[yyyymm];
+    if (!selected) return 0;
     const budget = budgets[yyyymm].budget;
     if (!budget) return 0;
     return Object.entries(budget).reduce((accumulator: number, [, value]) => {
