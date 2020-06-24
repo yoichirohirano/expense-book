@@ -15,6 +15,9 @@ import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
 import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
+import AddBudgetButton, {
+  AddBudgetButtonProps,
+} from "@/components/molecules/AddBudgetButton";
 import getPriceSeparatedByComma from "@/util/functions/getPriceSeparatedByComma";
 import useStyles, {
   usePanelClasses,
@@ -33,12 +36,12 @@ const BudgetView: React.FC = () => {
   const panelDetailsClasses = usePanelDetailsClasses();
   const panelSummaryClasses = usePanelSummaryClasses();
 
+  const dispatch = useDispatch();
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
 
-  const dispatch = useDispatch();
   const [currentMonth, setCurrentMonth] = useState<string | false>("");
 
   const budgetAmount = (budgets: Budgets, month: string): string => {
@@ -52,26 +55,6 @@ const BudgetView: React.FC = () => {
     isExpanded: boolean
   ): void => {
     setCurrentMonth(isExpanded ? panel : false);
-  };
-
-  const addBudget = (): void => {
-    const nextMonth = new Date();
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    const YYYY = nextMonth.getFullYear();
-    // TODO:来月以外も指定できるように
-    // 来月を指定
-    const MM = `0${nextMonth.getMonth() + 1}`.slice(-2);
-    const currentYYYYMM = `${YYYY}${MM}`;
-    const newBudget: Budget = categoriesSelectors.getDefaultBudget(categories);
-    dispatch(actions.createBudget(newBudget, currentYYYYMM));
-  };
-
-  const deleteBudget = (): void => {
-    if (currentMonth) {
-      dispatch(actions.deleteBudget(currentMonth));
-      // 開いているパネルを閉じる
-      setCurrentMonth(false);
-    }
   };
 
   const budgetEditItemProps = (
@@ -104,14 +87,29 @@ const BudgetView: React.FC = () => {
     };
   };
 
-  const addButtonProps: TextButtonProps = {
-    text: "予算を追加する",
-    handleClick: addBudget,
+  const addBudgetButtonProps: AddBudgetButtonProps = {
+    addBudget: (yyyymm: string): void => {
+      const currentYYYYMM = yyyymm;
+      const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+        categories
+      );
+      dispatch(actions.createBudget(newBudget, currentYYYYMM));
+      // Datepickerモーダルが消えるのを待ってからパネルを開く
+      setTimeout(() => {
+        setCurrentMonth(currentYYYYMM);
+      }, 200);
+    },
   };
 
   const deleteButtonProps: TextButtonProps = {
     text: "DELETE BUDGET",
-    handleClick: deleteBudget,
+    handleClick: (): void => {
+      if (currentMonth) {
+        dispatch(actions.deleteBudget(currentMonth));
+        // 開いているパネルを閉じる
+        setCurrentMonth(false);
+      }
+    },
     isNegative: true,
   };
 
@@ -164,9 +162,7 @@ const BudgetView: React.FC = () => {
         );
       })}
       <Container maxWidth="sm">
-        <Box padding="20px 0">
-          <TextButton {...addButtonProps}></TextButton>
-        </Box>
+        <AddBudgetButton {...addBudgetButtonProps}></AddBudgetButton>
       </Container>
     </>
   );

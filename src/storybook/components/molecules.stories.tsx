@@ -12,6 +12,9 @@ import BudgetEditItem, {
 import ExpenseList, {
   ExpenseListProps,
 } from "@/components/molecules/ExpenseList";
+import AddBudgetButton, {
+  AddBudgetButtonProps,
+} from "@/components/molecules/AddBudgetButton";
 import Chart, { ChartProps } from "@/components/molecules/Chart";
 import { sampleState } from "@/state/categories";
 
@@ -191,6 +194,15 @@ export const expenseList = (): JSX.Element => {
     },
   };
   return <ExpenseList {...props}></ExpenseList>;
+};
+
+export const addBudgetButton = (): JSX.Element => {
+  const props: AddBudgetButtonProps = {
+    addBudget: (yyyymm) => {
+      console.log(yyyymm);
+    },
+  };
+  return <AddBudgetButton {...props}></AddBudgetButton>;
 };
 
 export default {
