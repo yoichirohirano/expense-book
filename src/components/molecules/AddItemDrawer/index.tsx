@@ -3,7 +3,8 @@ import moment from "moment";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import TextInput from "@/components/atoms/TextInput";
+import TextInput, { TextInputProps } from "@/components/atoms/TextInput";
+import AmountInput, { AmountInputProps } from "@/components/atoms/AmountInput";
 import DateInput from "@/components/atoms/DateInput";
 import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
@@ -84,7 +85,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
 
   const validate = (): boolean => {
     setItemNameError(!name);
-    setPriceError(!amount || amount < 0);
+    setPriceError(!amount || amount <= 0);
     return Boolean(name && amount && dateStr);
   };
 
@@ -115,7 +116,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     reset();
   };
 
-  const nameInputProps = {
+  const nameInputProps: TextInputProps = {
     label: "アイテム名",
     handleChange: setName,
     error: itemNameError,
@@ -124,16 +125,15 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     defaultValue: name,
   };
 
-  const amountInputProps = {
+  const amountInputProps: AmountInputProps = {
     label: "金額",
-    type: "number",
     handleChange: (value: string): void => {
-      setAmount(parseInt(value, 10));
+      const newAmount = parseInt(value, 10) ? parseInt(value, 10) : 0;
+      setAmount(newAmount);
     },
     helperText: priceError ? "入力してください。" : "",
     error: priceError,
     className: "PriceInput",
-    defaultValue: amount.toString(),
   };
 
   const categorySelectorProps: CategorySelectorProps = {
@@ -176,7 +176,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
         </Box>
         <Box className={classes.inputArea}>
           <TextInput {...nameInputProps}></TextInput>
-          <TextInput {...amountInputProps}></TextInput>
+          <AmountInput {...amountInputProps}></AmountInput>
           <DateInput
             handleChange={(date: Date): void => {
               setDate(moment(date).format("YYYYMMDDTHHmmSS"));
