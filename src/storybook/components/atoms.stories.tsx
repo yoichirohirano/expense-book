@@ -20,6 +20,7 @@ import ExpenseListItem, {
 } from "@/components/atoms/ExpenseListItem";
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import H6Title from "@/components/atoms/H6Title";
+import AmountInput, { AmountInputProps } from "@/components/atoms/AmountInput";
 
 const props = {
   handleClick: (): void => {
@@ -233,6 +234,41 @@ export const numberInputWithNoInputError = (): JSX.Element => {
     },
   };
   return <TextInput {...props}></TextInput>;
+};
+
+export const amountInput = (): JSX.Element => {
+  const props: AmountInputProps = {
+    label: "Price",
+    error: false,
+    handleChange: (value: string): void => {
+      console.log(value);
+    },
+  };
+  return <AmountInput {...props}></AmountInput>;
+};
+
+export const amountInputWithDefaultValue = (): JSX.Element => {
+  const props: AmountInputProps = {
+    label: "Price",
+    error: false,
+    defaultValue: "1000000",
+    handleChange: (value: string): void => {
+      console.log(value);
+    },
+  };
+  return <AmountInput {...props}></AmountInput>;
+};
+
+export const amountInputWithNoInputError = (): JSX.Element => {
+  const props: AmountInputProps = {
+    label: "Price",
+    error: true,
+    helperText: "入力してください。",
+    handleChange: (value: string): void => {
+      console.log(value);
+    },
+  };
+  return <AmountInput {...props}></AmountInput>;
 };
 
 export const dateInput = (): JSX.Element => {
