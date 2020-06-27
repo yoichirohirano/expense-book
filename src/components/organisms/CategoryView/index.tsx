@@ -116,9 +116,14 @@ const CategoryView: React.FC = () => {
   } else {
     return (
       <Container maxWidth="sm">
-        <Typography variant="body1">
-          ログインすることでカテゴリを自由に設定することができます。
-        </Typography>
+        <Box padding="20px 0">
+          <Typography variant="body1" align="center">
+            ログインすることで
+          </Typography>
+          <Typography variant="body1" align="center">
+            カテゴリを自由に設定することができます。
+          </Typography>
+        </Box>
         <TextButton {...loginButtonProps}></TextButton>
       </Container>
     );
