@@ -96,7 +96,9 @@ const CategoryView: React.FC = () => {
   if (loggedIn) {
     return (
       <Container maxWidth="sm">
-        <H6Title text="Default Category"></H6Title>
+        <Box paddingTop="20px">
+          <H6Title text="デフォルトカテゴリ設定"></H6Title>
+        </Box>
         <ChartHeader
           expenseAmount={categoriesSelectors.getTotalAmount(categories)}
         ></ChartHeader>
