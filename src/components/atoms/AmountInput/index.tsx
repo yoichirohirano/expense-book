@@ -23,6 +23,7 @@ const AmountInput: React.FC<AmountInputProps> = (props) => {
   return (
     <NumberFormat
       prefix="¥"
+      type="tel"
       thousandSeparator={true}
       isNumericString={true}
       customInput={TextField}
