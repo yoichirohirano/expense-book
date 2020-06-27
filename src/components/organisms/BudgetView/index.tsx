@@ -87,6 +87,36 @@ const BudgetView: React.FC = () => {
     };
   };
 
+  const getBudgetEditItemList = (
+    yyyymm: string,
+    budget: Budget
+  ): Array<JSX.Element> => {
+    return Object.values(budget)
+      .sort((a, b) => {
+        const aIndex = categoriesSelectors.getSelectedCategory(
+          categories,
+          a.category.ref
+        )?.sortIndex;
+        const bIndex = categoriesSelectors.getSelectedCategory(
+          categories,
+          b.category.ref
+        )?.sortIndex;
+        if (aIndex !== undefined && bIndex !== undefined) {
+          return aIndex > bIndex ? 1 : -1;
+        } else {
+          return 1;
+        }
+      })
+      .map((item) => {
+        return (
+          <BudgetEditItem
+            key={item.category.ref}
+            {...budgetEditItemProps(yyyymm, item.category.name, item.amount)}
+          ></BudgetEditItem>
+        );
+      });
+  };
+
   const addBudgetButtonProps: AddBudgetButtonProps = {
     addBudget: (yyyymm: string): void => {
       const currentYYYYMM = yyyymm;
@@ -115,7 +145,9 @@ const BudgetView: React.FC = () => {
 
   return (
     <>
-      <H6Title text="予算設定"></H6Title>
+      <Box padding="20px 0">
+        <H6Title text="予算設定"></H6Title>
+      </Box>
       {Object.entries(budgets).map(([yyyymm, value]) => {
         return (
           <ExpansionPanel
@@ -142,18 +174,7 @@ const BudgetView: React.FC = () => {
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={panelDetailsClasses.root}>
-              {Object.entries(value.budget).map(([id, item]) => {
-                return (
-                  <BudgetEditItem
-                    key={id}
-                    {...budgetEditItemProps(
-                      yyyymm,
-                      item.category.name,
-                      item.amount
-                    )}
-                  ></BudgetEditItem>
-                );
-              })}
+              {getBudgetEditItemList(yyyymm, value.budget)}
               <Box padding="20px 0">
                 <TextButton {...deleteButtonProps}></TextButton>
               </Box>
