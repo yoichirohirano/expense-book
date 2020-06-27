@@ -134,7 +134,7 @@ export const sampleState: Expenses = {
     name: "ファッション雑貨",
   },
   lkjhrtrfsrIZuw4lsPzwO: {
-    amount: 45000,
+    amount: 40000,
     category: {
       name: "貯金",
       ref: "WO0O1eUgpwzGj49EmzZW",
@@ -142,6 +142,26 @@ export const sampleState: Expenses = {
     date: new Date("2020-06-30T00:11:34"),
     dateStr: "20200630T001134",
     name: "6月分の貯金",
+  },
+  ssjhrtrfsrIZuw4lsPzwO: {
+    amount: 3500,
+    category: {
+      name: "書籍",
+      ref: "w2IJ86mtXfcNyRm23aw4",
+    },
+    date: new Date("2020-06-29T00:11:34"),
+    dateStr: "20200629T001134",
+    name: "技術書",
+  },
+  ttjhrtrfsrIZuw4lsPzwO: {
+    amount: 8800,
+    category: {
+      name: "雑費",
+      ref: "雑費",
+    },
+    date: new Date("2020-06-28T00:11:34"),
+    dateStr: "20200628T001134",
+    name: "日用品",
   },
 };
 
