@@ -19,7 +19,15 @@ import { budgetsSelectors, Budgets } from "@/state/budgets";
 import { RootState } from "@/state/store";
 import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
-const colorList = ["#489ec8", "#5f3aaf", "#26a69a"];
+const colorList = [
+  "#9c27b0",
+  "#2196f3",
+  "#00bcd4",
+  "#4caf50",
+  "#cddc39",
+  "#ffc107",
+  "#ff5722",
+];
 
 // インデックスから色を取得する
 const getColor = (index: number, colorList: Array<string>): string => {
