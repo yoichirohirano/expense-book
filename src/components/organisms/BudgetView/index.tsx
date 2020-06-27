@@ -102,7 +102,7 @@ const BudgetView: React.FC = () => {
   };
 
   const deleteButtonProps: TextButtonProps = {
-    text: "DELETE BUDGET",
+    text: "削除",
     handleClick: (): void => {
       if (currentMonth) {
         dispatch(actions.deleteBudget(currentMonth));
