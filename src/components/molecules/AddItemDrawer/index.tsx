@@ -134,6 +134,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     helperText: priceError ? "入力してください。" : "",
     error: priceError,
     className: "PriceInput",
+    defaultValue: amount.toString(),
   };
 
   const categorySelectorProps: CategorySelectorProps = {
