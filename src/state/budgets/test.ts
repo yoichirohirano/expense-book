@@ -68,19 +68,29 @@ describe("budgets reducer", () => {
 
 describe("budgets selector", () => {
   describe("getSelectedBudget", () => {
-    test("shout get selected budget", () => {
+    test("should get selected budget", () => {
       const selectedExpense = selectors.getSelectedBudget(
         sampleState,
         "202006"
       );
       expect(selectedExpense).toMatchObject(sampleState["202006"].budget);
     });
-    test("shout get null", () => {
+    test("should get null", () => {
       const selectedExpense = selectors.getSelectedBudget(
         sampleState,
         "302005"
       );
       expect(selectedExpense).toBe(null);
+    });
+  });
+  describe("getSelectedBudgetIndex", () => {
+    test("should get selected budget index", () => {
+      const index = selectors.getSelectedBudgetIndex(sampleState, "202006");
+      expect(index).toBe(5);
+    });
+    test("should get 0 when not found", () => {
+      const index = selectors.getSelectedBudgetIndex(sampleState, "202007");
+      expect(index).toBe(0);
     });
   });
 });

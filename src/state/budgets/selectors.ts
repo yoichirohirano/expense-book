@@ -16,7 +16,7 @@ const selectors = {
     const index = Object.entries(budgets).findIndex(([key]) => {
       return key === yyyymm;
     });
-    return index || 0;
+    return index && index > 0 ? index : 0;
   },
   // 年月(YYYY/MM表示)のリスト
   getMonths: (budgets: Budgets): Array<string> => {
