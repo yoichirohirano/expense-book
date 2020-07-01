@@ -10,13 +10,12 @@ const selectors = {
     });
     return res ? res[1].budget : null;
   },
-  // 指定月の予算のインデックス
+  // 指定月の予算のインデックス 指定月がなければ0を返す
   getSelectedBudgetIndex: (budgets: Budgets, yyyymm: string): number => {
-    // TODO: 日付順にソートする必要？
     const index = Object.entries(budgets).findIndex(([key]) => {
       return key === yyyymm;
     });
-    return index && index > 0 ? index : 0;
+    return index >= 0 ? index : 0;
   },
   // 年月(YYYY/MM表示)のリスト
   getMonths: (budgets: Budgets): Array<string> => {
@@ -33,6 +32,23 @@ const selectors = {
     return Object.entries(budget).reduce((accumulator: number, [, value]) => {
       return accumulator + value.amount;
     }, 0);
+  },
+  /**
+   * 初期表示時の月をYYYYMM形式で取得する
+   * 今月の予算が設定されていれば今月、設定されていなければ予算登録月の最新月を返却する
+   * 予算登録がなければ空文字を返却する
+   * @param budgets
+   * @returns YYYYMM
+   */
+  getInitialMonth: (budgets: Budgets): string => {
+    const thisYYYYMM = `${moment(new Date()).format("YYYYMM")}`;
+    if (budgets[thisYYYYMM]) {
+      return thisYYYYMM;
+    } else {
+      return Object.keys(budgets).length
+        ? Object.keys(budgets)[Object.keys(budgets).length - 1]
+        : "";
+    }
   },
 };
 

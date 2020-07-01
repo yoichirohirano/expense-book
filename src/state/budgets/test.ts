@@ -93,4 +93,14 @@ describe("budgets selector", () => {
       expect(index).toBe(0);
     });
   });
+  describe("getInitialMonth", () => {
+    test("should get latest month in budgets", () => {
+      const index = selectors.getInitialMonth(sampleState);
+      expect(index).toBe("202006");
+    });
+    test("should get empty string", () => {
+      const index = selectors.getInitialMonth({});
+      expect(index).toBe("");
+    });
+  });
 });

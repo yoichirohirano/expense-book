@@ -34,9 +34,9 @@ const ListView: React.FC = () => {
   const [selectedExpenseId, setSelectedExpenseId] = useState("");
   const [editingItem, setEditingItem] = useState<Expense | null>(null);
   // YYYYMM
-  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(
-    `${moment(new Date()).format("YYYYMM")}`
-  );
+  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(() => {
+    return budgetsSelectors.getInitialMonth(budgets);
+  });
   const monthList = budgetsSelectors.getMonths(budgets);
 
   const monthTabsProps: MonthTabsProps = {

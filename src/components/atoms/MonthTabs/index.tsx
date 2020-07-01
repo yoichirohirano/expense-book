@@ -17,7 +17,7 @@ const MonthTabs: React.FC<MonthTabsProps> = (props) => {
 
   // 初回のみカレントをpropsから設定
   useEffect(() => {
-    if (props.initialMonthIndex) {
+    if (props.initialMonthIndex || props.initialMonthIndex === 0) {
       setCurrentIndex(props.initialMonthIndex);
     }
   }, []);

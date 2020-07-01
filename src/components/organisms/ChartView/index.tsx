@@ -47,9 +47,9 @@ const ChartView: React.FC = () => {
   const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // YYYYMM
-  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(
-    `${moment(new Date()).format("YYYYMM")}`
-  );
+  const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(() => {
+    return budgetsSelectors.getInitialMonth(budgets);
+  });
 
   // チャートに表示するデータをstoreの情報から生成する
   const getChartItems = (): Array<ChartItem> => {
