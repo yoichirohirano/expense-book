@@ -1,44 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Expense Book
 
-## Available Scripts
+日々の出費と予算をカテゴリ毎に記録し、月ごとの支出状況がひと目でわかる家計簿アプリです。
 
-In the project directory, you can run:
+[サンプル](https://yh-expense-book.web.app/) ※スマートフォン推奨
 
-### `yarn start`
+## 機能一覧
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 出費の登録、更新、削除
+  - 日付
+  - 金額
+  - カテゴリ
+  - タイトル
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- 月別/カテゴリ別予算の登録、更新、削除
 
-### `yarn test`
+- 月別/カテゴリ別の支出状況のグラフ表示
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 日付別の出費一覧表示
 
-### `yarn build`
+## 使用技術一覧
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Front-End
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Language
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- TypeScript 3.7.2
 
-### `yarn eject`
+#### Design
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Material-UI 4.9
+- Storybook 5.3.18
+- Chart.js 2.9.3
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Framework
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- React 16.13.1 w/ Redux 4.0.5
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Test
 
-## Learn More
+- Jest 24.9.0
+- Enzyme 3.11.0
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Linter,Formatter
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ESLint 6.6.0
+- Prettier 2.0.5
+
+### Back-End
+
+- Firebase
+  - Firebase Hosting
+
+### Infrastructure
+
+- CircleCI
+- Docker
+- docker-compose
+
+## 使用方法
