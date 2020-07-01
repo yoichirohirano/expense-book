@@ -4,7 +4,7 @@
 
 ![sample480](https://user-images.githubusercontent.com/25029901/86226285-66c00380-bbc6-11ea-830f-89dcfa53df77.gif)
 
-[サンプル](https://yh-expense-book.web.app/) 
+[公開サイト](https://yh-expense-book.web.app/) 
 
 ※スマートフォン推奨(以下QRコードからアクセスできます)
 
