@@ -10,6 +10,7 @@ export interface TextInputProps {
   handleChange?: (value: string) => void;
   className?: string;
   disabled?: boolean;
+  maxLength?: number;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -30,6 +31,9 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         classes.root
       }`}
       disabled={props.disabled || false}
+      inputProps={{
+        maxLength: props.maxLength || "",
+      }}
     />
   );
 };

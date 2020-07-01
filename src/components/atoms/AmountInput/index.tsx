@@ -11,6 +11,7 @@ export interface AmountInputProps {
   handleChange?: (value: string) => void;
   className?: string;
   disabled?: boolean;
+  maxLength?: number;
 }
 
 const AmountInput: React.FC<AmountInputProps> = (props) => {
@@ -37,6 +38,9 @@ const AmountInput: React.FC<AmountInputProps> = (props) => {
       className={`AmountInput ${props.className && props.className} ${
         classes.root
       }`}
+      inputProps={{
+        maxLength: props.maxLength || "",
+      }}
     />
   );
 };

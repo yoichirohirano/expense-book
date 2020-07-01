@@ -126,6 +126,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     helperText: itemNameError ? "入力してください。" : "",
     className: "ItemNameInput",
     defaultValue: name,
+    // UI考慮で最大20文字
+    maxLength: 20,
   };
 
   const amountInputProps: AmountInputProps = {
@@ -138,6 +140,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     error: priceError,
     className: "PriceInput",
     defaultValue: amount.toString(),
+    // UI考慮で最大 ¥999,999,999
+    maxLength: 12,
   };
 
   const categorySelectorProps: CategorySelectorProps = {
