@@ -2,6 +2,8 @@
 
 日々の出費と予算をカテゴリ毎に記録でき、月ごとの支出状況がひと目でわかる家計簿アプリ（PWA）です。
 
+![sample480](https://user-images.githubusercontent.com/25029901/86226285-66c00380-bbc6-11ea-830f-89dcfa53df77.gif)
+
 [サンプル](https://yh-expense-book.web.app/) ※スマートフォン推奨
 
 ![expense-book-qrcode](https://user-images.githubusercontent.com/25029901/86224478-e39dae00-bbc3-11ea-9162-78df74cdc229.png)
