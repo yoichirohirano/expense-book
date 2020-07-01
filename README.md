@@ -4,6 +4,8 @@
 
 [サンプル](https://yh-expense-book.web.app/) ※スマートフォン推奨
 
+![expense-book-qrcode](https://user-images.githubusercontent.com/25029901/86224478-e39dae00-bbc3-11ea-9162-78df74cdc229.png)
+
 ## 機能一覧
 
 - 出費の登録、更新、削除
