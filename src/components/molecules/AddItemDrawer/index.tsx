@@ -46,8 +46,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
 
   const [name, setName] = useState<string>(props.editingItem?.name || "");
   const [amount, setAmount] = useState<number>(props.editingItem?.amount || 0);
-  const [dateStr, setDate] = useState(
-    props.editingItem?.dateStr || moment(new Date()).format("YYYYMMDDTHHmmSS")
+  const [dateStr, setDateStr] = useState<string>(
+    props.editingItem?.dateStr || ""
   );
   const [category, setCategory] = useState<Category>(
     getInitialCategory(props.editingItem)
@@ -61,7 +61,10 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const reset = (): void => {
     setName("");
     setAmount(0);
-    setDate(moment(new Date()).format("YYYYMMDDTHHmmSS"));
+    const now = new Date();
+    // キャッシュしないでsetすると値がバグるので一度キャッシュする
+    const tmp = moment(now).format("YYYYMMDDTHHmmss");
+    setDateStr(tmp);
     setCategory(Object.entries(props.categories)[0][1]);
     setItemNameError(false);
     setPriceError(false);
@@ -72,7 +75,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     if (props.editingItem) {
       setName(props.editingItem.name);
       setAmount(props.editingItem.amount);
-      setDate(props.editingItem.dateStr);
+      setDateStr(props.editingItem.dateStr);
       const category = categoriesSelectors.getSelectedCategory(
         props.categories,
         props.editingItem.category.ref
@@ -182,7 +185,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
           <AmountInput {...amountInputProps}></AmountInput>
           <DateInput
             handleChange={(date: Date): void => {
-              setDate(moment(date).format("YYYYMMDDTHHmmSS"));
+              setDateStr(moment(date).format("YYYYMMDDTHHmmSS"));
             }}
             defaultTimestamp={moment(dateStr).valueOf()}
           ></DateInput>
