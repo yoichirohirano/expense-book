@@ -11,14 +11,11 @@
   - 金額
   - カテゴリ
   - タイトル
-
 - 月別/カテゴリ別予算の登録、更新、削除
-
 - 月別/カテゴリ別の支出状況のグラフ表示
+- 日付別の出費一覧表示
 
-- 日付別の出費一覧表示
-
-## 使用技術一覧
+## 使用技術
 
 ### Front-End
 
@@ -34,14 +31,15 @@
 
 #### Framework
 
-- React 16.13.1 w/ Redux 4.0.5
+- React 16.13.1
+w/ Redux 4.0.5
 
 #### Test
 
 - Jest 24.9.0
 - Enzyme 3.11.0
 
-#### Linter,Formatter
+#### Linter / Formatter
 
 - ESLint 6.6.0
 - Prettier 2.0.5
@@ -57,4 +55,7 @@
 - Docker
 - docker-compose
 
-## 使用方法
+## TODO
+
+[ ] ログイン機能
+[ ] カテゴリ追加、更新、削除機能
