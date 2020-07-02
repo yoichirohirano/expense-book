@@ -14,7 +14,12 @@ import {
   Expenses,
   expensesSelectors,
 } from "@/state/expenses";
-import { budgetsSelectors, Budgets } from "@/state/budgets";
+import {
+  budgetsSelectors,
+  budgetsActions,
+  Budget,
+  Budgets,
+} from "@/state/budgets";
 import { RootState } from "@/state/store";
 import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
@@ -103,12 +108,6 @@ const ChartView: React.FC = () => {
     return chartItems;
   };
 
-  const changeMonth = (index: number): void => {
-    // indexからbudgetIdを取得して設定
-    const [id] = Object.entries(budgets)[index];
-    setCurrentYYYYMM(id);
-  };
-
   const chartProps: ChartProps = {
     expenseAmount: expensesSelectors.getExpenseAmountOfMonth(
       expenses,
@@ -116,6 +115,12 @@ const ChartView: React.FC = () => {
     ),
     budgetAmount: budgetsSelectors.getBudgetAmount(budgets, currentYYYYMM),
     chartItems: getChartItems(),
+  };
+
+  const changeMonth = (index: number): void => {
+    // indexからbudgetIdを取得して設定
+    const [id] = Object.entries(budgets)[index];
+    setCurrentYYYYMM(id);
   };
 
   const monthTabsProps: MonthTabsProps = {
@@ -136,6 +141,15 @@ const ChartView: React.FC = () => {
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {
       dispatch(expenseActions.createExpense(expense));
+      // 登録した月の予算がなければ、予算も新規で登録する
+      const yyyymm = expense.dateStr.slice(0, 6);
+      if (!budgets[yyyymm]) {
+        const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+          categories
+        );
+        dispatch(budgetsActions.createBudget(newBudget, yyyymm));
+        setCurrentYYYYMM(yyyymm);
+      }
     },
   };
 

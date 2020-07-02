@@ -15,12 +15,12 @@ const MonthTabs: React.FC<MonthTabsProps> = (props) => {
   const classes = useStyles();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  // 初回のみカレントをpropsから設定
+  // カレントをpropsから設定
   useEffect(() => {
     if (props.initialMonthIndex || props.initialMonthIndex === 0) {
       setCurrentIndex(props.initialMonthIndex);
     }
-  }, []);
+  }, [props]);
 
   const onChange = (event: React.ChangeEvent<{}>, newValue: number): void => {
     setCurrentIndex(newValue);
