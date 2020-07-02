@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import H6Title from "@/components/atoms/H6Title";
 import { RootState } from "@/state/store";
 import {
-  actions,
+  categoriesActions,
   Category,
   Categories,
   categoriesSelectors,
@@ -32,16 +32,16 @@ const CategoryView: React.FC = () => {
       // 末尾に追加
       sortIndex: Object.entries(categories).length,
     };
-    dispatch(actions.createCategory(newCategory));
+    dispatch(categoriesActions.createCategory(newCategory));
   };
 
   const remove = (id: string): void => {
-    dispatch(actions.deleteCategory(id));
+    dispatch(categoriesActions.deleteCategory(id));
   };
 
   const editName = (id: string, name: string): void => {
     dispatch(
-      actions.updateCategory(
+      categoriesActions.updateCategory(
         Object.assign({}, categories[id], {
           name,
         }),
@@ -52,7 +52,7 @@ const CategoryView: React.FC = () => {
 
   const editBudget = (id: string, defaultAmount: number): void => {
     dispatch(
-      actions.updateCategory(
+      categoriesActions.updateCategory(
         Object.assign({}, categories[id], {
           defaultAmount,
         }),

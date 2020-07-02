@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/state/store";
-import { actions, budgetsSelectors, Budget, Budgets } from "@/state/budgets";
+import {
+  budgetsActions,
+  budgetsSelectors,
+  Budget,
+  Budgets,
+} from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
 import Box from "@material-ui/core/Box";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -79,7 +84,9 @@ const BudgetView: React.FC = () => {
         });
         if (budgetOfCategory) {
           budgetOfCategory.amount = parseInt(value, 10);
-          dispatch(actions.updateBudget(Object.assign({}, newBudget), month));
+          dispatch(
+            budgetsActions.updateBudget(Object.assign({}, newBudget), month)
+          );
         }
       },
       categoryEditDisabled: true,
@@ -123,7 +130,7 @@ const BudgetView: React.FC = () => {
       const newBudget: Budget = categoriesSelectors.getDefaultBudget(
         categories
       );
-      dispatch(actions.createBudget(newBudget, currentYYYYMM));
+      dispatch(budgetsActions.createBudget(newBudget, currentYYYYMM));
       // Datepickerモーダルが消えるのを待ってからパネルを開く
       setTimeout(() => {
         setCurrentMonth(currentYYYYMM);
@@ -135,7 +142,7 @@ const BudgetView: React.FC = () => {
     text: "削除",
     handleClick: (): void => {
       if (currentMonth) {
-        dispatch(actions.deleteBudget(currentMonth));
+        dispatch(budgetsActions.deleteBudget(currentMonth));
         // 開いているパネルを閉じる
         setCurrentMonth(false);
       }

@@ -11,8 +11,8 @@ export type Categories = {
 };
 
 export { default as categoriesSelectors } from "./selectors";
-export { default as actions } from "./actions";
-export { default as types } from "./types";
+export { default as categoriesActions } from "./actions";
+export { default as categoriesTypes } from "./types";
 export { sampleState };
 
 export default reducer;

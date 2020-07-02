@@ -9,8 +9,13 @@ import AddItemDrawer, {
 } from "@/components/molecules/AddItemDrawer";
 import AddButton, { AddButtonProps } from "@/components/atoms/AddButton";
 import { RootState } from "@/state/store";
-import { Categories } from "@/state/categories";
-import { budgetsSelectors, Budgets } from "@/state/budgets";
+import { categoriesSelectors, Categories } from "@/state/categories";
+import {
+  budgetsSelectors,
+  budgetsActions,
+  Budget,
+  Budgets,
+} from "@/state/budgets";
 import {
   expenseActions,
   Expense,
@@ -75,6 +80,15 @@ const ListView: React.FC = () => {
         selectedExpenseId
           ? dispatch(expenseActions.updateExpense(expense, selectedExpenseId))
           : dispatch(expenseActions.createExpense(expense));
+        // 登録した月の予算がなければ、予算も新規で登録する
+        const yyyymm = expense.dateStr.slice(0, 6);
+        if (!budgets[yyyymm]) {
+          const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+            categories
+          );
+          dispatch(budgetsActions.createBudget(newBudget, yyyymm));
+          setCurrentYYYYMM(yyyymm);
+        }
       },
       delete: selectedExpenseId
         ? (): void => {
