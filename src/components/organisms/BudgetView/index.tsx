@@ -35,10 +35,10 @@ const yyyymmWithSlash = (yyyymm: string): string => {
   return matchList ? `${matchList[1]}/${matchList[2]}` : yyyymm;
 };
 
-const AccordionButton = (props: {
+const MemorizedAccordionButton = React.memo(function AccordionButton(props: {
   yyyymm: string;
   budgets: Budgets;
-}): JSX.Element => {
+}) {
   const classes = useStyles();
   const panelSummaryClasses = usePanelSummaryClasses();
   const budgetAmount = (budgets: Budgets, month: string): string => {
@@ -65,14 +65,13 @@ const AccordionButton = (props: {
       </Typography>
     </ExpansionPanelSummary>
   );
-};
-const MemorizedAccordionButton = React.memo(AccordionButton);
+});
 
-const AccordionContent = (props: {
+const MemorizedAccordionContent = React.memo(function AccordionContent(props: {
   yyyymm: string;
   budget: Budget;
   close: (yyyymm: string) => void;
-}): JSX.Element => {
+}) {
   const panelDetailsClasses = usePanelDetailsClasses();
 
   const dispatch = useDispatch();
@@ -159,8 +158,7 @@ const AccordionContent = (props: {
       </Box>
     </ExpansionPanelDetails>
   );
-};
-const MemorizedAccordionContent = React.memo(AccordionContent);
+});
 
 const BudgetView: React.FC = () => {
   const panelClasses = usePanelClasses();
