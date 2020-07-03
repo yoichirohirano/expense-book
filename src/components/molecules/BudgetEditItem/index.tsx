@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import TextInput, { TextInputProps } from "@/components/atoms/TextInput";
+import AmountInput, { AmountInputProps } from "@/components/atoms/AmountInput";
 import DeleteButton from "@/components/atoms/DeleteButton";
 import useStyles from "./style";
 
@@ -28,9 +29,8 @@ const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
     disabled: props.categoryEditDisabled,
   };
 
-  const amountInputProps: TextInputProps = {
+  const amountInputProps: AmountInputProps = {
     label: "金額",
-    type: "number",
     defaultValue: props.budget ? props.budget.toString() : "",
     handleChange: (value: string) => {
       setPriceError(value ? false : true);
@@ -44,7 +44,7 @@ const BudgetEditItem: React.FC<BudgetEditItemProps> = (props) => {
     <Box className={classes.root}>
       <Box className={classes.inputArea}>
         <TextInput {...categoryInputProps}></TextInput>
-        <TextInput {...amountInputProps}></TextInput>
+        <AmountInput {...amountInputProps}></AmountInput>
       </Box>
       <Box className={classes.deleteButtonWrapper}>
         <DeleteButton

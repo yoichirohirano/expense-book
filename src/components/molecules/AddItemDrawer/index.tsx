@@ -132,6 +132,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
 
   const amountInputProps: AmountInputProps = {
     label: "金額",
+    defaultValue: amount.toString(),
     handleChange: (value: string): void => {
       const newAmount = parseInt(value, 10) ? parseInt(value, 10) : 0;
       setAmount(newAmount);
@@ -139,9 +140,6 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     helperText: priceError ? "入力してください。" : "",
     error: priceError,
     className: "PriceInput",
-    defaultValue: amount.toString(),
-    // UI考慮で最大 ¥999,999,999
-    maxLength: 12,
   };
 
   const categorySelectorProps: CategorySelectorProps = {
