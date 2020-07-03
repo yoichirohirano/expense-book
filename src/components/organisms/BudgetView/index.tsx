@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/state/store";
 import {
@@ -35,32 +35,51 @@ const yyyymmWithSlash = (yyyymm: string): string => {
   return matchList ? `${matchList[1]}/${matchList[2]}` : yyyymm;
 };
 
-const BudgetView: React.FC = () => {
+const AccordionButton = (props: {
+  yyyymm: string;
+  budgets: Budgets;
+}): JSX.Element => {
   const classes = useStyles();
-  const panelClasses = usePanelClasses();
-  const panelDetailsClasses = usePanelDetailsClasses();
   const panelSummaryClasses = usePanelSummaryClasses();
-
-  const dispatch = useDispatch();
-  const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
-  const categories = useSelector<RootState, Categories>(
-    (state) => state.categories
-  );
-
-  const [currentMonth, setCurrentMonth] = useState<string | false>("");
-
   const budgetAmount = (budgets: Budgets, month: string): string => {
     return getPriceSeparatedByComma(
       budgetsSelectors.getBudgetAmount(budgets, month)
     );
   };
 
-  const toggle = (panel: string) => (
-    event: React.ChangeEvent<{}>,
-    isExpanded: boolean
-  ): void => {
-    setCurrentMonth(isExpanded ? panel : false);
-  };
+  return (
+    <ExpansionPanelSummary
+      classes={{
+        root: panelSummaryClasses.root,
+        content: panelSummaryClasses.content,
+      }}
+      expandIcon={<ExpandMoreIcon />}
+      aria-controls="panel1a-content"
+      id="panel1a-header"
+    >
+      <Typography className={classes.heading}>
+        {yyyymmWithSlash(props.yyyymm)}
+      </Typography>
+      <Typography className={classes.secondaryHeading}>
+        ¥{budgetAmount(props.budgets, props.yyyymm)}
+      </Typography>
+    </ExpansionPanelSummary>
+  );
+};
+const MemorizedAccordionButton = React.memo(AccordionButton);
+
+const AccordionContent = (props: {
+  yyyymm: string;
+  budget: Budget;
+  close: (yyyymm: string) => void;
+}): JSX.Element => {
+  const panelDetailsClasses = usePanelDetailsClasses();
+
+  const dispatch = useDispatch();
+  const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
+  const categories = useSelector<RootState, Categories>(
+    (state) => state.categories
+  );
 
   const budgetEditItemProps = (
     month: string,
@@ -124,6 +143,43 @@ const BudgetView: React.FC = () => {
       });
   };
 
+  const deleteButtonProps: TextButtonProps = {
+    text: "削除",
+    handleClick: (): void => {
+      props.close(props.yyyymm);
+    },
+    isNegative: true,
+  };
+
+  return (
+    <ExpansionPanelDetails className={panelDetailsClasses.root}>
+      {getBudgetEditItemList(props.yyyymm, props.budget)}
+      <Box padding="20px 0">
+        <TextButton {...deleteButtonProps}></TextButton>
+      </Box>
+    </ExpansionPanelDetails>
+  );
+};
+const MemorizedAccordionContent = React.memo(AccordionContent);
+
+const BudgetView: React.FC = () => {
+  const panelClasses = usePanelClasses();
+
+  const dispatch = useDispatch();
+  const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
+  const categories = useSelector<RootState, Categories>(
+    (state) => state.categories
+  );
+
+  const [currentMonth, setCurrentMonth] = useState<string | false>("");
+
+  const toggle = (panel: string) => (
+    event: React.ChangeEvent<{}>,
+    isExpanded: boolean
+  ): void => {
+    setCurrentMonth(isExpanded ? panel : false);
+  };
+
   const addBudgetButtonProps: AddBudgetButtonProps = {
     addBudget: (yyyymm: string): void => {
       const currentYYYYMM = yyyymm;
@@ -138,17 +194,11 @@ const BudgetView: React.FC = () => {
     },
   };
 
-  const deleteButtonProps: TextButtonProps = {
-    text: "削除",
-    handleClick: (): void => {
-      if (currentMonth) {
-        dispatch(budgetsActions.deleteBudget(currentMonth));
-        // 開いているパネルを閉じる
-        setCurrentMonth(false);
-      }
-    },
-    isNegative: true,
-  };
+  const close = useCallback((yyyymm: string) => {
+    dispatch(budgetsActions.deleteBudget(yyyymm));
+    // 開いているパネルを閉じる
+    setCurrentMonth(false);
+  }, []);
 
   return (
     <>
@@ -164,28 +214,12 @@ const BudgetView: React.FC = () => {
             expanded={currentMonth === yyyymm}
             onChange={toggle(yyyymm)}
           >
-            <ExpansionPanelSummary
-              classes={{
-                root: panelSummaryClasses.root,
-                content: panelSummaryClasses.content,
-              }}
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className={classes.heading}>
-                {yyyymmWithSlash(yyyymm)}
-              </Typography>
-              <Typography className={classes.secondaryHeading}>
-                ¥{budgetAmount(budgets, yyyymm)}
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={panelDetailsClasses.root}>
-              {getBudgetEditItemList(yyyymm, value.budget)}
-              <Box padding="20px 0">
-                <TextButton {...deleteButtonProps}></TextButton>
-              </Box>
-            </ExpansionPanelDetails>
+            <MemorizedAccordionButton yyyymm={yyyymm} budgets={budgets} />
+            <MemorizedAccordionContent
+              yyyymm={yyyymm}
+              budget={value.budget}
+              close={close}
+            />
           </ExpansionPanel>
         );
       })}
