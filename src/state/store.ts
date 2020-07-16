@@ -8,6 +8,7 @@ import budgets, { Budgets } from "./budgets";
 import categories, { Categories } from "./categories";
 import expenses, { Expenses } from "./expenses";
 import history from "./history";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 export type RootState = {
   budgets: Budgets;
@@ -30,7 +31,8 @@ const persistConfig = {
 
 const store = createStore(
   persistReducer(persistConfig, rootReducer),
-  applyMiddleware(routerMiddleware(history), thunk)
+  composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
+  // applyMiddleware(routerMiddleware(history), thunk)
 );
 
 export const persistor = persistStore(store);
