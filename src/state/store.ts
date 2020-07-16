@@ -32,7 +32,6 @@ const persistConfig = {
 const store = createStore(
   persistReducer(persistConfig, rootReducer),
   composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
-  // applyMiddleware(routerMiddleware(history), thunk)
 );
 
 export const persistor = persistStore(store);
