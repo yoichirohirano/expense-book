@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Box from "@material-ui/core/Box";
-import Chart, { ChartProps } from "@/components/molecules/Chart";
-import MonthTabs, { MonthTabsProps } from "@/components/atoms/MonthTabs";
-import AddItemDrawer from "@/components/molecules/AddItemDrawer";
+import { Box } from "@material-ui/core";
 import Navigation from "@/components/atoms/Navigation";
 import AddButton from "@/components/atoms/AddButton";
 import { ChartItem } from "@/components/atoms/ExpenseChart";
+import MonthTabs, { MonthTabsProps } from "@/components/atoms/MonthTabs";
+import Chart, { ChartProps } from "@/components/molecules/Chart";
+import AddItemDrawer from "@/components/molecules/AddItemDrawer";
+import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
+
+import { RootState } from "@/state/store";
 import { categoriesSelectors, Categories } from "@/state/categories";
 import {
   expenseActions,
@@ -20,8 +23,6 @@ import {
   Budget,
   Budgets,
 } from "@/state/budgets";
-import { RootState } from "@/state/store";
-import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
 const colorList = [
   "#9c27b0",
@@ -43,12 +44,13 @@ const getColor = (index: number, colorList: Array<string>): string => {
 };
 
 const ChartView: React.FC = () => {
+  const dispatch = useDispatch();
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
   const expenses = useSelector<RootState, Expenses>((state) => state.expenses);
-  const dispatch = useDispatch();
+
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // YYYYMM
   const [currentYYYYMM, setCurrentYYYYMM] = useState<string>(() => {
