@@ -56,7 +56,7 @@ export const addItemDrawerEdit = (): JSX.Element => {
       dateStr: "20200609T000000",
       category: {
         name: "Cafe",
-        ref: "AjOQWgDdVSVsLQNCEpNP",
+        id: "AjOQWgDdVSVsLQNCEpNP",
       },
     },
     isOpen: true,
@@ -170,14 +170,14 @@ export const expenseList = (): JSX.Element => {
             dateStr: "20200501T123455",
             category: {
               name: "Cafe",
-              ref: "AjOQWgDdVSVsLQNCEpNP",
+              id: "AjOQWgDdVSVsLQNCEpNP",
             },
           },
           K0Sivmdt67a26IMWOw20: {
             amount: 300,
             category: {
               name: "Food",
-              ref: "E3cnHvL8SwPTbn4ChMWq",
+              id: "E3cnHvL8SwPTbn4ChMWq",
             },
             date: new Date("2020-05-01T12:34:56"),
             dateStr: "20200501T123456",
@@ -192,7 +192,7 @@ export const expenseList = (): JSX.Element => {
             amount: 1000,
             category: {
               name: "Food",
-              ref: "E3cnHvL8SwPTbn4ChMWq",
+              id: "E3cnHvL8SwPTbn4ChMWq",
             },
             date: new Date("2020-05-02T00:00:00"),
             dateStr: "20200502T000000",

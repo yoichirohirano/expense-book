@@ -7,8 +7,10 @@ import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
 import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
+import firebaseAuth from "@/plugins/firebase/auth";
 
 import { RootState } from "@/state/store";
+import { Login } from "state/login";
 import {
   categoriesActions,
   Category,
@@ -20,8 +22,7 @@ const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
-  // TODO: ログイン機能実装後、ログイン状態をReduxに移管する
-  const loggedIn = false;
+  const { loggedIn } = useSelector<RootState, Login>((state) => state.login);
   const dispatch = useDispatch();
 
   const add = (): void => {
@@ -88,7 +89,7 @@ const CategoryView: React.FC = () => {
   const loginButtonProps: TextButtonProps = {
     text: "ログインする",
     handleClick: () => {
-      return false;
+      firebaseAuth.login();
     },
   };
 

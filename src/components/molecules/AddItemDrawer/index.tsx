@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import moment from "moment";
 import { Box, Container, SwipeableDrawer } from "@material-ui/core";
 import TextInput, { TextInputProps } from "@/components/atoms/TextInput";
@@ -39,7 +39,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     if (editingItem) {
       const editingItemCategory = props.getSelectedCategory(
         props.categories,
-        editingItem.category.ref
+        editingItem.category.id
       );
       if (editingItemCategory) return editingItemCategory;
     }
@@ -62,7 +62,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   /**
    * 入力欄の状態を初期化する
    */
-  const reset = (): void => {
+  const reset = useCallback((): void => {
     setName("");
     setAmount(0);
     const now = new Date();
@@ -72,7 +72,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
     setCategory(Object.entries(props.categories)[0][1]);
     setItemNameError(false);
     setPriceError(false);
-  };
+  }, [props.categories]);
 
   // 編集時、デフォルトをpropsから設定
   useEffect(() => {
@@ -82,13 +82,13 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       setDateStr(props.editingItem.dateStr);
       const category = props.getSelectedCategory(
         props.categories,
-        props.editingItem.category.ref
+        props.editingItem.category.id
       );
       if (category) setCategory(category);
     } else {
       reset();
     }
-  }, [props.editingItem]);
+  }, [props, props.categories, props.editingItem, reset]);
 
   const validate = (): boolean => {
     setItemNameError(!name);
@@ -101,7 +101,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       const newExpense: Expense = {
         category: {
           name: category.name,
-          ref: props.getIdFromName(props.categories, category.name),
+          id: props.getIdFromName(props.categories, category.name),
         },
         name,
         amount,

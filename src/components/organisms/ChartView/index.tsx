@@ -12,7 +12,7 @@ import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 import { RootState } from "@/state/store";
 import { categoriesSelectors, Categories } from "@/state/categories";
 import {
-  expenseActions,
+  expensesActions,
   Expense,
   Expenses,
   expensesSelectors,
@@ -23,6 +23,7 @@ import {
   Budget,
   Budgets,
 } from "@/state/budgets";
+import { Login } from "@/state/login";
 
 const colorList = [
   "#9c27b0",
@@ -45,6 +46,7 @@ const getColor = (index: number, colorList: Array<string>): string => {
 
 const ChartView: React.FC = () => {
   const dispatch = useDispatch();
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
@@ -142,7 +144,7 @@ const ChartView: React.FC = () => {
     isOpen: drawerOpen,
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {
-      dispatch(expenseActions.createExpense(expense));
+      dispatch(expensesActions.createExpense(uid, expense));
       // 登録した月の予算がなければ、予算も新規で登録する
       const yyyymm = expense.dateStr.slice(0, 6);
       if (!budgets[yyyymm]) {

@@ -17,11 +17,12 @@ import {
   Budgets,
 } from "@/state/budgets";
 import {
-  expenseActions,
+  expensesActions,
   Expense,
   Expenses,
   expensesSelectors,
 } from "@/state/expenses";
+import { Login } from "@/state/login";
 import { useSelector, useDispatch } from "react-redux";
 import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 
@@ -32,6 +33,7 @@ const ListView: React.FC = () => {
   );
   const expenses = useSelector<RootState, Expenses>((state) => state.expenses);
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   // TODO: itemとIDどちらか一方のみでいけないか？
@@ -78,8 +80,8 @@ const ListView: React.FC = () => {
       toggleDrawer: setDrawerOpen,
       add: (expense: Expense): void => {
         selectedExpenseId
-          ? dispatch(expenseActions.updateExpense(expense, selectedExpenseId))
-          : dispatch(expenseActions.createExpense(expense));
+          ? dispatch(expensesActions.updateExpense(expense, selectedExpenseId))
+          : dispatch(expensesActions.createExpense(uid, expense));
         // 登録した月の予算がなければ、予算も新規で登録する
         const yyyymm = expense.dateStr.slice(0, 6);
         if (!budgets[yyyymm]) {
@@ -92,7 +94,7 @@ const ListView: React.FC = () => {
       },
       delete: selectedExpenseId
         ? (): void => {
-            dispatch(expenseActions.deleteExpense(selectedExpenseId));
+            dispatch(expensesActions.deleteExpense(selectedExpenseId));
           }
         : undefined,
       getSelectedCategory: categoriesSelectors.getSelectedCategory,

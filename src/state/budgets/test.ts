@@ -11,14 +11,14 @@ describe("budgets reducer", () => {
       amount: 33000,
       category: {
         name: "Food",
-        ref: "E3cnHvL8SwPTbn4ChMWq",
+        id: "E3cnHvL8SwPTbn4ChMWq",
       },
     },
     bbbbb: {
       amount: 12000,
       category: {
         name: "雑費",
-        ref: "4fgOOb41j82zZxyCBQcS",
+        id: "4fgOOb41j82zZxyCBQcS",
       },
     },
   };

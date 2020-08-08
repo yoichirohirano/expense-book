@@ -3,9 +3,7 @@ import reducer, { sampleState } from "./reducers";
 export type BudgetDocumentData = {
   amount: number;
   category: {
-    // categoryId
-    // TODO: Firestore連携後、リファレンス型にする
-    ref: string;
+    id: string;
     name: string;
   };
 };

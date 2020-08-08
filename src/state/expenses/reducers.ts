@@ -7,7 +7,7 @@ export const sampleState: Expenses = {
     amount: 15000,
     category: {
       name: "食費",
-      ref: "E3cnHvL8SwPTbn4ChMWq",
+      id: "E3cnHvL8SwPTbn4ChMWq",
     },
     date: new Date("2020-01-04T00:00:00"),
     dateStr: "20200104T000000",
@@ -17,7 +17,7 @@ export const sampleState: Expenses = {
     amount: 15000,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-02-14T00:00:00"),
     dateStr: "20200214T000000",
@@ -27,7 +27,7 @@ export const sampleState: Expenses = {
     amount: 25000,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-03-13T00:00:00"),
     dateStr: "20200313T000000",
@@ -37,7 +37,7 @@ export const sampleState: Expenses = {
     amount: 5000,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-04-01T00:00:00"),
     dateStr: "20200313T000000",
@@ -47,7 +47,7 @@ export const sampleState: Expenses = {
     amount: 50000,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-05-05T00:00:00"),
     dateStr: "20200505T000000",
@@ -57,7 +57,7 @@ export const sampleState: Expenses = {
     amount: 1000,
     category: {
       name: "食費",
-      ref: "E3cnHvL8SwPTbn4ChMWq",
+      id: "E3cnHvL8SwPTbn4ChMWq",
     },
     date: new Date("2020-06-09T00:00:00"),
     dateStr: "20200609T000000",
@@ -67,7 +67,7 @@ export const sampleState: Expenses = {
     amount: 300,
     category: {
       name: "食費",
-      ref: "E3cnHvL8SwPTbn4ChMWq",
+      id: "E3cnHvL8SwPTbn4ChMWq",
     },
     date: new Date("2020-06-25T12:34:56"),
     dateStr: "20200625T123456",
@@ -77,7 +77,7 @@ export const sampleState: Expenses = {
     amount: 4000,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-06-25T12:34:57"),
     dateStr: "20200625T123457",
@@ -87,7 +87,7 @@ export const sampleState: Expenses = {
     amount: 5000,
     category: {
       name: "交通費",
-      ref: "pXhYzqbyOrjGnSmZJMFN",
+      id: "pXhYzqbyOrjGnSmZJMFN",
     },
     date: new Date("2020-06-01T18:00:00"),
     dateStr: "20200601T180000",
@@ -97,7 +97,7 @@ export const sampleState: Expenses = {
     amount: 5000,
     category: {
       name: "貯金",
-      ref: "WO0O1eUgpwzGj49EmzZW",
+      id: "WO0O1eUgpwzGj49EmzZW",
     },
     date: new Date("2020-06-01T00:00:00"),
     dateStr: "20200601T000000",
@@ -107,7 +107,7 @@ export const sampleState: Expenses = {
     amount: 2980,
     category: {
       name: "固定費",
-      ref: "XKZ5LP61ZgRGWeRFTboV",
+      id: "XKZ5LP61ZgRGWeRFTboV",
     },
     date: new Date("2020-06-01T00:12:34"),
     dateStr: "20200601T001234",
@@ -117,7 +117,7 @@ export const sampleState: Expenses = {
     amount: 620,
     category: {
       name: "食費",
-      ref: "E3cnHvL8SwPTbn4ChMWq",
+      id: "E3cnHvL8SwPTbn4ChMWq",
     },
     date: new Date("2020-06-01T00:11:34"),
     dateStr: "20200601T001134",
@@ -127,7 +127,7 @@ export const sampleState: Expenses = {
     amount: 9800,
     category: {
       name: "娯楽",
-      ref: "fGUwZnNss1Nnmvtdteoi",
+      id: "fGUwZnNss1Nnmvtdteoi",
     },
     date: new Date("2020-06-14T00:11:34"),
     dateStr: "20200614T001134",
@@ -137,7 +137,7 @@ export const sampleState: Expenses = {
     amount: 40000,
     category: {
       name: "貯金",
-      ref: "WO0O1eUgpwzGj49EmzZW",
+      id: "WO0O1eUgpwzGj49EmzZW",
     },
     date: new Date("2020-06-30T00:11:34"),
     dateStr: "20200630T001134",
@@ -147,7 +147,7 @@ export const sampleState: Expenses = {
     amount: 3500,
     category: {
       name: "書籍",
-      ref: "w2IJ86mtXfcNyRm23aw4",
+      id: "w2IJ86mtXfcNyRm23aw4",
     },
     date: new Date("2020-06-29T00:11:34"),
     dateStr: "20200629T001134",
@@ -157,7 +157,7 @@ export const sampleState: Expenses = {
     amount: 8800,
     category: {
       name: "雑費",
-      ref: "雑費",
+      id: "雑費",
     },
     date: new Date("2020-06-28T00:11:34"),
     dateStr: "20200628T001134",
@@ -185,6 +185,9 @@ const reducer = (
     case actionTypes.DELETE_EXPENSE: {
       delete newState[action.payload.id];
       return newState;
+    }
+    case actionTypes.UPDATE_ALL_EXPENSES_FROM_FIRESTORE: {
+      return action.payload;
     }
     default: {
       return state;

@@ -12,7 +12,7 @@ describe("expenses reducer", () => {
     dateStr: "20200609T000000",
     category: {
       name: "Cafe",
-      ref: "AjOQWgDdVSVsLQNCEpNP",
+      id: "AjOQWgDdVSVsLQNCEpNP",
     },
   };
 
@@ -52,6 +52,20 @@ describe("expenses reducer", () => {
         actions.deleteExpense("K0Sivmdt67a26IMWOw20")
       );
       expect(newState).not.toHaveProperty("K0Sivmdt67a26IMWOw20");
+    });
+  });
+
+  describe("updateAllExpensesFromFirestore", () => {
+    test("should update all expenses", () => {
+      const newState: Expenses = reducer(
+        initialState,
+        actions.updateAllExpensesFromFirestore({
+          dummyId: newExpense,
+        })
+      );
+      expect(newState).toMatchObject({
+        dummyId: newExpense,
+      });
     });
   });
 });

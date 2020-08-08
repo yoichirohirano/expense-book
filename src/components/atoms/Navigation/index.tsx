@@ -45,7 +45,7 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
       return item.path === props.pathname;
     });
     setIndex(current ? current.index : 0);
-  }, []);
+  }, [props.pathname]);
 
   return (
     <BottomNavigation
@@ -72,11 +72,11 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
         icon={<SettingsIcon />}
         classes={bottomNavigationActionClasses}
       />
-      {/* <BottomNavigationAction
+      <BottomNavigationAction
         label="カテゴリ"
         icon={<SettingsIcon />}
         classes={bottomNavigationActionClasses}
-      /> */}
+      />
     </BottomNavigation>
   );
 };

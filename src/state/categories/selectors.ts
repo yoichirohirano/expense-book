@@ -6,7 +6,7 @@ import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
 const selectors = {
   getSelectedCategory: (
     categories: Categories,
-    selectedId: string
+    selectedId: string | firebase.firestore.DocumentReference
   ): Category | null => {
     const res = Object.entries(categories).find(([key]) => {
       return key === selectedId;
@@ -39,7 +39,7 @@ const selectors = {
         amount: category.defaultAmount,
         category: {
           name: category.name,
-          ref: id,
+          id: id,
         },
       };
     });

@@ -301,7 +301,7 @@ export const expenseListItem = (): JSX.Element => {
     dateStr: "20200609T000000",
     category: {
       name: "Cafe",
-      ref: "AjOQWgDdVSVsLQNCEpNP",
+      id: "AjOQWgDdVSVsLQNCEpNP",
     },
     handleClickItem: (): void => {
       console.log("click!");

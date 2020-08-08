@@ -45,11 +45,14 @@ const BudgetView: React.FC = () => {
     },
   };
 
-  const close = useCallback((yyyymm: string) => {
-    dispatch(budgetsActions.deleteBudget(yyyymm));
-    // 開いているパネルを閉じる
-    setCurrentMonth(false);
-  }, []);
+  const close = useCallback(
+    (yyyymm: string) => {
+      dispatch(budgetsActions.deleteBudget(yyyymm));
+      // 開いているパネルを閉じる
+      setCurrentMonth(false);
+    },
+    [dispatch]
+  );
 
   return (
     <>
