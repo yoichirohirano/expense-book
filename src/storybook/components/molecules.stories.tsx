@@ -34,6 +34,12 @@ export const addItemDrawer = () => {
     delete: (): void => {
       console.log(open);
     },
+    getSelectedCategory: (categories, selectedId) => {
+      return categories[selectedId];
+    },
+    getIdFromName: (categories, name) => {
+      return name;
+    },
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;
 };
@@ -62,6 +68,12 @@ export const addItemDrawerEdit = (): JSX.Element => {
     },
     delete: (): void => {
       console.log(open);
+    },
+    getSelectedCategory: (categories, selectedId) => {
+      return categories[selectedId];
+    },
+    getIdFromName: (categories, name) => {
+      return name;
     },
   };
   return <AddItemDrawer {...props}></AddItemDrawer>;

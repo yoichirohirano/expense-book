@@ -153,6 +153,8 @@ const ChartView: React.FC = () => {
         setCurrentYYYYMM(yyyymm);
       }
     },
+    getSelectedCategory: categoriesSelectors.getSelectedCategory,
+    getIdFromName: categoriesSelectors.getIdFromName,
   };
 
   return (

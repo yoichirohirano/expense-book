@@ -15,6 +15,8 @@ describe("<AddItemDrawer />", () => {
     toggleDrawer: jest.fn(),
     add: jest.fn(),
     delete: jest.fn(),
+    getSelectedCategory: jest.fn(),
+    getIdFromName: jest.fn(),
   };
 
   afterEach(() => {

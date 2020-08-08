@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import { Box, Container, SwipeableDrawer } from "@material-ui/core";
 import TextInput, { TextInputProps } from "@/components/atoms/TextInput";
 import AmountInput, { AmountInputProps } from "@/components/atoms/AmountInput";
 import DateInput from "@/components/atoms/DateInput";
@@ -10,12 +8,13 @@ import H6Title from "@/components/atoms/H6Title";
 import CloseButton from "@/components/atoms/CloseButton";
 import CompleteButton from "@/components/atoms/CompleteButton";
 import DeleteButton from "@/components/atoms/DeleteButton";
-import { Categories, Category, categoriesSelectors } from "@/state/categories";
-import { Expense } from "@/state/expenses";
 import CategorySelector, {
   CategorySelectorProps,
 } from "@/components/molecules/CategorySelector";
 import useStyles from "./style";
+
+import { Categories, Category } from "@/state/categories";
+import { Expense } from "@/state/expenses";
 
 export interface AddItemDrawerProps {
   categories: Categories;
@@ -26,6 +25,11 @@ export interface AddItemDrawerProps {
   toggleDrawer: (open: boolean) => void;
   add: (props: Expense) => void;
   delete?: () => void;
+  getSelectedCategory: (
+    categories: Categories,
+    selectedId: string
+  ) => Category | null;
+  getIdFromName: (categories: Categories, name: string) => string;
 }
 
 const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
@@ -33,7 +37,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
 
   const getInitialCategory = (editingItem: Expense | undefined): Category => {
     if (editingItem) {
-      const editingItemCategory = categoriesSelectors.getSelectedCategory(
+      const editingItemCategory = props.getSelectedCategory(
         props.categories,
         editingItem.category.ref
       );
@@ -76,7 +80,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       setName(props.editingItem.name);
       setAmount(props.editingItem.amount);
       setDateStr(props.editingItem.dateStr);
-      const category = categoriesSelectors.getSelectedCategory(
+      const category = props.getSelectedCategory(
         props.categories,
         props.editingItem.category.ref
       );
@@ -97,10 +101,7 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
       const newExpense: Expense = {
         category: {
           name: category.name,
-          ref: categoriesSelectors.getIdFromName(
-            props.categories,
-            category.name
-          ),
+          ref: props.getIdFromName(props.categories, category.name),
         },
         name,
         amount,
@@ -145,16 +146,10 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   const categorySelectorProps: CategorySelectorProps = {
     categories: props.categories,
     handleChangeCategory: (categoryId: string): void => {
-      const category = categoriesSelectors.getSelectedCategory(
-        props.categories,
-        categoryId
-      );
+      const category = props.getSelectedCategory(props.categories, categoryId);
       if (category) setCategory(category);
     },
-    selectedCategoryId: categoriesSelectors.getIdFromName(
-      props.categories,
-      category.name
-    ),
+    selectedCategoryId: props.getIdFromName(props.categories, category.name),
   };
 
   return (

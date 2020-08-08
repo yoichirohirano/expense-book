@@ -95,6 +95,8 @@ const ListView: React.FC = () => {
             dispatch(expenseActions.deleteExpense(selectedExpenseId));
           }
         : undefined,
+      getSelectedCategory: categoriesSelectors.getSelectedCategory,
+      getIdFromName: categoriesSelectors.getIdFromName,
     };
     if (editingItem) props.editingItem = editingItem;
     return props;
