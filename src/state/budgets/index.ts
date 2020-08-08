@@ -1,15 +1,17 @@
 import reducer, { sampleState } from "./reducers";
 
-export type Budget = {
-  [id: string]: {
-    amount: number;
-    category: {
-      // categoryId
-      // TODO: Firestore連携後、リファレンス型にする
-      ref: string;
-      name: string;
-    };
+export type BudgetDocumentData = {
+  amount: number;
+  category: {
+    // categoryId
+    // TODO: Firestore連携後、リファレンス型にする
+    ref: string;
+    name: string;
   };
+};
+
+export type Budget = {
+  [id: string]: BudgetDocumentData;
 };
 
 export type Budgets = {

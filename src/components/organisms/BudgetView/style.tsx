@@ -19,7 +19,7 @@ export const usePanelClasses = makeStyles(() => {
   };
 });
 
-export const usePanelSummaryClasses = makeStyles(() =>
+export const usePanelSummaryClasses = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: "rgba(0, 0, 0, .03)",
@@ -36,6 +36,16 @@ export const usePanelSummaryClasses = makeStyles(() =>
         margin: "12px 0",
       },
     },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+      flexBasis: "33.33%",
+      flexShrink: 0,
+    },
+    secondaryHeading: {
+      fontSize: theme.typography.pxToRem(15),
+      color: theme.palette.text.secondary,
+    },
     expanded: {},
   })
 );
@@ -47,23 +57,3 @@ export const usePanelDetailsClasses = makeStyles(() =>
     },
   })
 );
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: "100%",
-    },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
-      flexBasis: "33.33%",
-      flexShrink: 0,
-    },
-    secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
-    },
-  })
-);
-
-export default useStyles;
