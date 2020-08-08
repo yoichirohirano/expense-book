@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
+import { Box, Container, Typography } from "@material-ui/core";
 import H6Title from "@/components/atoms/H6Title";
+import ChartHeader from "@/components/atoms/ChartHeader";
+import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
+import BudgetEditItem, {
+  BudgetEditItemProps,
+} from "@/components/molecules/BudgetEditItem";
+
 import { RootState } from "@/state/store";
 import {
   categoriesActions,
@@ -10,12 +15,6 @@ import {
   Categories,
   categoriesSelectors,
 } from "@/state/categories";
-import BudgetEditItem, {
-  BudgetEditItemProps,
-} from "@/components/molecules/BudgetEditItem";
-import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
-import ChartHeader from "@/components/atoms/ChartHeader";
-import { Typography } from "@material-ui/core";
 
 const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
