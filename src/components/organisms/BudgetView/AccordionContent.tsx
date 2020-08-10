@@ -35,11 +35,11 @@ const AccordionContent = (props: {
   ): number => {
     const aIndex = categoriesSelectors.getSelectedCategory(
       categories,
-      a.category.ref
+      a.category.id
     )?.sortIndex;
     const bIndex = categoriesSelectors.getSelectedCategory(
       categories,
-      b.category.ref
+      b.category.id
     )?.sortIndex;
     if (aIndex !== undefined && bIndex !== undefined) {
       return aIndex > bIndex ? 1 : -1;
@@ -64,7 +64,7 @@ const AccordionContent = (props: {
         // 更新用の予算から指定カテゴリの予算を取得し、金額を更新する
         const budgetOfCategory = Object.values(newBudget).find((value) => {
           return (
-            value.category.ref ===
+            value.category.id ===
             categoriesSelectors.getIdFromName(categories, categoryName)
           );
         });
@@ -95,7 +95,7 @@ const AccordionContent = (props: {
         .map((item) => {
           return (
             <BudgetEditItem
-              key={item.category.ref}
+              key={item.category.id}
               {...budgetEditItemProps(
                 props.yyyymm,
                 item.category.name,
