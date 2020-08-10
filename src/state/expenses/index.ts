@@ -14,7 +14,7 @@ export type Expense = {
 };
 
 export type Expenses = {
-  [id: string]: Expense;
+  [expenseId: string]: Expense;
 };
 
 export { default as expensesSelectors } from "./selectors";

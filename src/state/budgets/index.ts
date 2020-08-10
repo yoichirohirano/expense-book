@@ -9,7 +9,7 @@ export type BudgetDocumentData = {
 };
 
 export type Budget = {
-  [id: string]: BudgetDocumentData;
+  [budgetId: string]: BudgetDocumentData;
 };
 
 export type Budgets = {

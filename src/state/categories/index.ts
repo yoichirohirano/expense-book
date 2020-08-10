@@ -7,7 +7,7 @@ export type Category = {
 };
 
 export type Categories = {
-  [id: string]: Category;
+  [categoryId: string]: Category;
 };
 
 export { default as categoriesSelectors } from "./selectors";
