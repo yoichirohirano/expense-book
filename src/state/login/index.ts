@@ -2,7 +2,7 @@ import reducer from "./reducers";
 
 export type Login = {
   loggedIn: boolean;
-  uid: string;
+  uid: string | null;
 };
 
 export { default as loginActions } from "./actions";

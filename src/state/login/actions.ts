@@ -7,7 +7,7 @@ const actions = {
     return { type: types.LOGIN, payload: { uid: uid } };
   },
   logout: () => {
-    return { type: types.LOGOUT, payload: { uid: "" } };
+    return { type: types.LOGOUT, payload: { uid: null } };
   },
 };
 

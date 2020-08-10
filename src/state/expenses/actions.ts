@@ -5,16 +5,9 @@ import { Expense, Expenses } from ".";
 import types from "./types";
 import expensesDB from "@/plugins/firebase/firestore/expenses";
 
-function createExpenseFunction(expense: Expense) {
-  return { type: types.CREATE_EXPENSE, payload: { expense } };
-}
-
 const actions = {
-  createExpense: (uid: string, expense: Expense) => {
-    return async (dispatch: Dispatch<any>) => {
-      await expensesDB.add(uid, expense);
-      dispatch(createExpenseFunction(expense));
-    };
+  createExpense: (expense: Expense) => {
+    return { type: types.CREATE_EXPENSE, payload: { expense } };
   },
   updateExpense: (expense: Expense, id: string) => {
     return { type: types.UPDATE_EXPENSE, payload: { expense, id } };
@@ -32,4 +25,13 @@ const actions = {
 
 export type ExpensesAction = CreatorsToActions<typeof actions>;
 
-export default actions;
+const thunkActions = {
+  create: (uid: string | null, expense: Expense) => {
+    return async (dispatch: Dispatch<ExpensesAction>) => {
+      uid && (await expensesDB.add(uid, expense));
+      return dispatch(actions.createExpense(expense));
+    };
+  },
+};
+
+export default Object.assign({}, actions, thunkActions);

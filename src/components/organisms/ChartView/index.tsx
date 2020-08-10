@@ -144,7 +144,7 @@ const ChartView: React.FC = () => {
     isOpen: drawerOpen,
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {
-      dispatch(expensesActions.createExpense(uid, expense));
+      dispatch(expensesActions.create(uid, expense));
       // 登録した月の予算がなければ、予算も新規で登録する
       const yyyymm = expense.dateStr.slice(0, 6);
       if (!budgets[yyyymm]) {
