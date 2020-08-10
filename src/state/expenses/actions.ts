@@ -32,6 +32,18 @@ const thunkActions = {
       return dispatch(actions.createExpense(expense));
     };
   },
+  update: (uid: string | null, expense: Expense, expenseId: string) => {
+    return async (dispatch: Dispatch<ExpensesAction>) => {
+      uid && (await expensesDB.update(uid, expense, expenseId));
+      return dispatch(actions.updateExpense(expense, expenseId));
+    };
+  },
+  delete: (uid: string | null, expenseId: string) => {
+    return async (dispatch: Dispatch<ExpensesAction>) => {
+      uid && (await expensesDB.delete(uid, expenseId));
+      return dispatch(actions.deleteExpense(expenseId));
+    };
+  },
 };
 
 export default Object.assign({}, actions, thunkActions);

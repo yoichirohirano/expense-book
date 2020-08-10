@@ -48,15 +48,9 @@ const expensesDB = {
       .doc(uid)
       .collection("expenses")
       .doc(expenseId)
-      .set({
-        expense,
-      });
+      .set(expense);
   },
-  delete: async (
-    uid: string,
-    expense: Expense,
-    expenseId: string
-  ): Promise<void> => {
+  delete: async (uid: string, expenseId: string): Promise<void> => {
     await db
       .collection("users")
       .doc(uid)

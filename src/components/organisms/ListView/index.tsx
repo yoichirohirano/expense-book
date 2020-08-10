@@ -80,7 +80,7 @@ const ListView: React.FC = () => {
       toggleDrawer: setDrawerOpen,
       add: (expense: Expense): void => {
         selectedExpenseId
-          ? dispatch(expensesActions.updateExpense(expense, selectedExpenseId))
+          ? dispatch(expensesActions.update(uid, expense, selectedExpenseId))
           : dispatch(expensesActions.create(uid, expense));
         // 登録した月の予算がなければ、予算も新規で登録する
         const yyyymm = expense.dateStr.slice(0, 6);
@@ -94,7 +94,7 @@ const ListView: React.FC = () => {
       },
       delete: selectedExpenseId
         ? (): void => {
-            dispatch(expensesActions.deleteExpense(selectedExpenseId));
+            dispatch(expensesActions.delete(uid, selectedExpenseId));
           }
         : undefined,
       getSelectedCategory: categoriesSelectors.getSelectedCategory,
