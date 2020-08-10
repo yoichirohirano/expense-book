@@ -1,6 +1,6 @@
 import reducer, { sampleState } from "./reducers";
 
-export type BudgetDocumentData = {
+export type Budget = {
   amount: number;
   category: {
     id: string;
@@ -8,14 +8,18 @@ export type BudgetDocumentData = {
   };
 };
 
-export type Budget = {
-  [budgetId: string]: BudgetDocumentData;
+export type BudgetCollection = {
+  [budgetId: string]: Budget;
 };
 
 export type Budgets = {
   [yyyymm: string]: {
-    budget: Budget;
+    budget: BudgetCollection;
   };
+};
+
+export type BudgetsCollection = {
+  [budgetId: string]: Budgets;
 };
 
 export { default as budgetsSelectors } from "./selectors";
