@@ -42,7 +42,9 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
   // 初回レンダリング時、パスからカレントのインデックスを設定する
   useEffect(() => {
     const current = routes.find((item) => {
-      return item.path === props.pathname;
+      // reduxを永続化しているため、カレントのパスをprops.pathnameから取得すると不整合が起こる場合がある。
+      // このため、カレントのパスはlocationから取得する。
+      return item.path === location.pathname;
     });
     setIndex(current ? current.index : 0);
   }, []);
