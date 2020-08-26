@@ -1,25 +1,25 @@
 import reducer, { sampleState } from "./reducers";
 
-export type Budget = {
+// カテゴリの予算
+export type CategoryBudget = {
   amount: number;
   category: {
     id: string;
     name: string;
   };
+  userId: string;
 };
 
-export type BudgetCollection = {
-  [budgetId: string]: Budget;
+// 月予算(FirestoreのcategoryBudgetsコレクション)
+export type CategoryBudgets = {
+  [budgetId: string]: CategoryBudget;
 };
 
+// 予算(Firestoreのbudgetsコレクション)
 export type Budgets = {
   [yyyymm: string]: {
-    budget: BudgetCollection;
+    categoryBudgets: CategoryBudget;
   };
-};
-
-export type BudgetsCollection = {
-  [budgetId: string]: Budgets;
 };
 
 export { default as budgetsSelectors } from "./selectors";

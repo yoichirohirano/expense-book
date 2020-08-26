@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import moment from "moment";
-import { Budget, Budgets } from ".";
+import { CategoryBudget, Budgets } from ".";
 
 const selectors = {
   // 指定月の予算
-  getSelectedBudget: (budgets: Budgets, yyyymm: string): Budget | null => {
+  getSelectedBudget: (
+    budgets: Budgets,
+    yyyymm: string
+  ): CategoryBudget | null => {
     const res = Object.entries(budgets).find(([key]) => {
       return key === yyyymm;
     });

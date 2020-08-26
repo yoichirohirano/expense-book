@@ -10,7 +10,7 @@ import AccordionButton from "./AccordionButton";
 import { usePanelClasses } from "./style";
 
 import { RootState } from "@/state/store";
-import { budgetsActions, Budget, Budgets } from "@/state/budgets";
+import { budgetsActions, CategoryBudget, Budgets } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
 
 const BudgetView: React.FC = () => {
@@ -34,7 +34,7 @@ const BudgetView: React.FC = () => {
   const addBudgetButtonProps: AddBudgetButtonProps = {
     addBudget: (yyyymm: string): void => {
       const currentYYYYMM = yyyymm;
-      const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+      const newBudget: CategoryBudget = categoriesSelectors.getDefaultBudget(
         categories
       );
       dispatch(budgetsActions.createBudget(newBudget, currentYYYYMM));

@@ -1,34 +1,29 @@
 import firebase from "@/plugins/firebase";
 import { db } from "@/plugins/firebase/firestore";
-import {
-  Budget,
-  Budgets,
-  BudgetCollection,
-  BudgetsCollection,
-} from "@/state/budgets";
+import { CategoryBudget, CategoryBudgets, Budgets } from "@/state/budgets";
 
-// export type FirestoreExpense = {
-//   amount: number;
-//   category: {
-//     id: string;
-//     name: string;
-//   };
-//   date: firebase.firestore.Timestamp;
-//   dateStr: string;
-//   name: string;
-// };
+/**
+ * カテゴリ予算のドキュメントから紐づくbudgetコレクションID(YYYYMM)を取得する
+ * @param document
+ */
+const getYYYYMMFromCategoryBudgetDocument = (
+  document: firebase.firestore.DocumentData
+): string => {
+  const matchList = document.ref.path.match(/budgets\/(\d+)\/categoryBudgets/);
+  return matchList ? matchList[1] : "";
+};
 
 const budgetsDB = {
   // 指定月に紐づく予算情報
-  get: async (uid: string, yyyymm: string): Promise<BudgetCollection> => {
-    const data: BudgetCollection = {};
+  get: async (uid: string, yyyymm: string): Promise<CategoryBudgets> => {
+    const data: CategoryBudgets = {};
     const snapshot = (await db
       .collection("users")
       .doc(uid)
       .collection("budgets")
       .doc(yyyymm)
-      .collection("budget")
-      .get()) as firebase.firestore.QuerySnapshot<Budget>;
+      .collection("categoryBudgets")
+      .get()) as firebase.firestore.QuerySnapshot<CategoryBudget>;
     snapshot.forEach(function (doc) {
       data[doc.id] = doc.data();
     });
@@ -36,71 +31,48 @@ const budgetsDB = {
   },
   // 全月の予算情報
   getAll: async (uid: string): Promise<Budgets> => {
-    const getRegisteredMonths = async (): Promise<Array<string>> => {
-      const list: Array<string> = [];
-      const snapshot = (await db
+    const snapshot = await db
+      .collectionGroup("categoryBudgets")
+      .where("userId", "==", uid)
+      .get();
+    const budgets: Budgets = {};
+    snapshot.forEach((doc) => {
+      const yyyymm = getYYYYMMFromCategoryBudgetDocument(doc);
+      if (!budgets[yyyymm]) {
+        budgets[yyyymm] = {
+          categoryBudgets: {},
+        };
+      }
+      if (!budgets[yyyymm].categoryBudgets[doc.id]) {
+        budgets[yyyymm].categoryBudgets[doc.id] = doc.data() as CategoryBudget;
+      }
+    });
+    return budgets;
+  },
+  // 月予算(全カテゴリ)の追加
+  addMonthlyBudget: async (
+    uid: string,
+    budgetList: Array<CategoryBudget>,
+    yyyymm: string
+  ): Promise<void> => {
+    const batch = db.batch();
+    budgetList.forEach((budget) => {
+      const ref = db
         .collection("users")
         .doc(uid)
         .collection("budgets")
-        .get()) as firebase.firestore.QuerySnapshot<Budgets>;
-      snapshot.forEach(function (doc) {
-        list.push(doc.id);
-      });
-      return list;
-    };
-    const yyyymmList = await getRegisteredMonths();
-    const budgetsData: Budgets = {};
-
-    // 月ごとのbudgetのコレクションのsnapshotを全て取得
-    ((await Promise.all(
-      yyyymmList.map(async (yyyymm) => {
-        return await db
-          .collection("users")
-          .doc(uid)
-          .collection("budgets")
-          .doc(yyyymm)
-          .collection("budget")
-          .get();
-      })
-    )) as Array<firebase.firestore.QuerySnapshot<Budget>>)
-      // 月ごとのbudgetの情報を配列にして取得
-      .map(
-        (snapshot): BudgetCollection => {
-          const data: BudgetCollection = {};
-          snapshot.forEach(function (doc) {
-            data[doc.id] = doc.data();
-          });
-          return data;
-        }
-      )
-      // Budgets型にまとめて返却
-      .forEach((data, index): void => {
-        budgetsData[yyyymmList[index]] = {
-          budget: data,
-        };
-      });
-    return budgetsData;
-  },
-  // 月予算(全カテゴリ)の追加
-  add: async (
-    uid: string,
-    budget: BudgetCollection,
-    yyyymm: string
-  ): Promise<void> => {
-    await db
-      .collection("users")
-      .doc(uid)
-      .collection("budgets")
-      .doc(yyyymm)
-      .collection("budget")
-      // TODO: だめだ、カテゴリ分ぶん回して、budget内のドキュメントを追加しないと。
-      .add(budget);
+        .doc(yyyymm)
+        .collection("categoryBudgets")
+        .doc();
+      batch.set(ref, budget);
+    });
+    await batch.commit();
   },
   // 月予算内の1カテゴリの変更
   update: async (
     uid: string,
     yyyymm: string,
-    budget: Budget,
+    budget: CategoryBudget,
     budgetId: string
   ): Promise<void> => {
     await db
@@ -108,7 +80,7 @@ const budgetsDB = {
       .doc(uid)
       .collection("budgets")
       .doc(yyyymm)
-      .collection("budget")
+      .collection("categoryBudgets")
       .doc(budgetId)
       .set(budget);
   },

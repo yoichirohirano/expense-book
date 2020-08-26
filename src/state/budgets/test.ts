@@ -1,12 +1,12 @@
 import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { Budget, Budgets, sampleState } from ".";
+import { CategoryBudget, Budgets, sampleState } from ".";
 
 describe("budgets reducer", () => {
   let initialState: Budgets = {};
 
-  const newBudget: Budget = {
+  const newBudget: CategoryBudget = {
     aaaaa: {
       amount: 33000,
       category: {

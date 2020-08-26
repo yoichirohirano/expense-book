@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Category, Categories } from ".";
-import { Budget } from "@/state/budgets";
+import { CategoryBudgets } from "@/state/budgets";
 import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
 
 const selectors = {
@@ -31,16 +31,17 @@ const selectors = {
     );
   },
   // デフォルト予算
-  getDefaultBudget: (categories: Categories): Budget => {
-    const defaultBudget: Budget = {};
+  getDefaultBudget: (userId: string, categories: Categories): CategoryBudgets => {
+    const defaultBudget: CategoryBudgets = {};
     Object.entries(categories).forEach(([id, category]) => {
-      const budgetCategoryID = getRandomIntegerInRange(1000000000, 9999999999);
+      const budgetCategoryID = getRandomIntegerInRange(1000000000, 9999999999).toString();
       defaultBudget[budgetCategoryID] = {
         amount: category.defaultAmount,
         category: {
           name: category.name,
-          id: id,
+          id,
         },
+        userId
       };
     });
     return defaultBudget;

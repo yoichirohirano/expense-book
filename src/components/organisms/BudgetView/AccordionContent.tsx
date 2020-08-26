@@ -11,14 +11,14 @@ import { RootState } from "@/state/store";
 import {
   budgetsActions,
   BudgetDocumentData,
-  Budget,
+  CategoryBudget,
   Budgets,
 } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
 
 const AccordionContent = (props: {
   yyyymm: string;
-  budget: Budget;
+  budget: CategoryBudget;
   close: (yyyymm: string) => void;
 }): JSX.Element => {
   const panelDetailsClasses = usePanelDetailsClasses();
@@ -60,7 +60,7 @@ const AccordionContent = (props: {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
-        const newBudget: Budget = budgets[month].budget;
+        const newBudget: CategoryBudget = budgets[month].budget;
         // 更新用の予算から指定カテゴリの予算を取得し、金額を更新する
         const budgetOfCategory = Object.values(newBudget).find((value) => {
           return (

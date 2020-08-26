@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Dispatch } from "redux";
 import { CreatorsToActions } from "@/state/CreatorsToActions";
-import { Budget } from ".";
+import { CategoryBudget } from ".";
 import types from "./types";
 import expensesDB from "@/plugins/firebase/firestore/expenses";
 
 const actions = {
-  createBudget: (budget: Budget, id: string) => {
+  createBudget: (budget: CategoryBudget, id: string) => {
     return { type: types.CREATE_BUDGET, payload: { budget, id } };
   },
-  updateBudget: (budget: Budget, id: string) => {
+  updateBudget: (budget: CategoryBudget, id: string) => {
     return { type: types.UPDATE_BUDGET, payload: { budget, id } };
   },
   deleteBudget: (id: string) => {
