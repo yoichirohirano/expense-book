@@ -10,15 +10,16 @@ import { usePanelDetailsClasses } from "./style";
 import { RootState } from "@/state/store";
 import {
   budgetsActions,
-  BudgetDocumentData,
+  budgetsSelectors,
   CategoryBudget,
   Budgets,
+  CategoryBudgets,
 } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
 
 const AccordionContent = (props: {
   yyyymm: string;
-  budget: CategoryBudget;
+  budget: CategoryBudgets;
   close: (yyyymm: string) => void;
 }): JSX.Element => {
   const panelDetailsClasses = usePanelDetailsClasses();
@@ -30,8 +31,8 @@ const AccordionContent = (props: {
   );
 
   const budgetComparerByCategoryDescending = (
-    a: BudgetDocumentData,
-    b: BudgetDocumentData
+    a: CategoryBudget,
+    b: CategoryBudget
   ): number => {
     const aIndex = categoriesSelectors.getSelectedCategory(
       categories,
@@ -49,7 +50,7 @@ const AccordionContent = (props: {
   };
 
   const budgetEditItemProps = (
-    month: string,
+    yyyymm: string,
     categoryName: string,
     categoryBudget: number
   ): BudgetEditItemProps => {
@@ -60,18 +61,30 @@ const AccordionContent = (props: {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
-        const newBudget: CategoryBudget = budgets[month].budget;
-        // 更新用の予算から指定カテゴリの予算を取得し、金額を更新する
-        const budgetOfCategory = Object.values(newBudget).find((value) => {
-          return (
-            value.category.id ===
-            categoriesSelectors.getIdFromName(categories, categoryName)
-          );
+        // 更新前の該当月該当カテゴリ予算
+        const present = budgetsSelectors.getCategoryBudgetOfSelectedMonth({
+          budgets,
+          yyyymm,
+          categoryId: categoriesSelectors.getIdFromName(
+            categories,
+            categoryName
+          ),
         });
-        if (budgetOfCategory) {
-          budgetOfCategory.amount = parseInt(value, 10);
+        if (present) {
+          const { budgetId, categoryBudget } = present;
+          // 更新のための該当月該当カテゴリ予算
+          const newCategoryBudget: CategoryBudget = Object.assign(
+            categoryBudget,
+            {
+              amount: parseInt(value, 10),
+            }
+          );
           dispatch(
-            budgetsActions.updateBudget(Object.assign({}, newBudget), month)
+            budgetsActions.updateBudget({
+              yyyymm,
+              budgetId: budgetId,
+              budget: newCategoryBudget,
+            })
           );
         }
       },

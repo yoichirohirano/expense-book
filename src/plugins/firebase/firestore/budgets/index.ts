@@ -50,31 +50,40 @@ const budgetsDB = {
     return budgets;
   },
   // 月予算(全カテゴリ)の追加
-  addMonthlyBudget: async (
-    uid: string,
-    budgetList: Array<CategoryBudget>,
-    yyyymm: string
-  ): Promise<void> => {
+  addMonthlyBudget: async ({
+    uid,
+    yyyymm,
+    categoryBudgets,
+  }: {
+    uid: string;
+    yyyymm: string;
+    categoryBudgets: CategoryBudgets;
+  }): Promise<void> => {
     const batch = db.batch();
-    budgetList.forEach((budget) => {
+    Object.entries(categoryBudgets).forEach(([id, budget]) => {
       const ref = db
         .collection("users")
         .doc(uid)
         .collection("budgets")
         .doc(yyyymm)
         .collection("categoryBudgets")
-        .doc();
+        .doc(id);
       batch.set(ref, budget);
     });
     await batch.commit();
   },
   // 月予算内の1カテゴリの変更
-  update: async (
-    uid: string,
-    yyyymm: string,
-    budget: CategoryBudget,
-    budgetId: string
-  ): Promise<void> => {
+  update: async ({
+    uid,
+    yyyymm,
+    budgetId,
+    budget,
+  }: {
+    uid: string;
+    yyyymm: string;
+    budgetId: string;
+    budget: CategoryBudget;
+  }): Promise<void> => {
     await db
       .collection("users")
       .doc(uid)

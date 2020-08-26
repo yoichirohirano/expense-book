@@ -1,41 +1,70 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Dispatch } from "redux";
 import { CreatorsToActions } from "@/state/CreatorsToActions";
-import { CategoryBudget } from ".";
+import { CategoryBudget, CategoryBudgets } from ".";
 import types from "./types";
-import expensesDB from "@/plugins/firebase/firestore/expenses";
+import budgetsDB from "@/plugins/firebase/firestore/budgets";
 
 const actions = {
-  createBudget: (budget: CategoryBudget, id: string) => {
-    return { type: types.CREATE_BUDGET, payload: { budget, id } };
+  createBudget: (categoryBudgets: CategoryBudgets, yyyymm: string) => {
+    return { type: types.CREATE_BUDGET, payload: { categoryBudgets, yyyymm } };
   },
-  updateBudget: (budget: CategoryBudget, id: string) => {
-    return { type: types.UPDATE_BUDGET, payload: { budget, id } };
+  updateBudget: ({
+    yyyymm,
+    budgetId,
+    budget,
+  }: {
+    yyyymm: string;
+    budgetId: string;
+    budget: CategoryBudget;
+  }) => {
+    return { type: types.UPDATE_BUDGET, payload: { yyyymm, budgetId, budget } };
   },
-  deleteBudget: (id: string) => {
-    return { type: types.DELETE_BUDGET, payload: { id } };
+  deleteBudget: (yyyymm: string) => {
+    return { type: types.DELETE_BUDGET, payload: { yyyymm } };
   },
 };
 
 export type BudgetsAction = CreatorsToActions<typeof actions>;
 
 const thunkActions = {
-  create: (uid: string | null, expense: Expense) => {
+  create: (
+    uid: string | null,
+    categoryBudgets: CategoryBudgets,
+    yyyymm: string
+  ) => {
     return async (dispatch: Dispatch<BudgetsAction>) => {
-      uid && (await expensesDB.add(uid, expense));
-      return dispatch(actions.createExpense(expense));
+      uid &&
+        (await budgetsDB.addMonthlyBudget({ uid, yyyymm, categoryBudgets }));
+      return dispatch(actions.createBudget(categoryBudgets, yyyymm));
     };
   },
-  update: (uid: string | null, expense: Expense, expenseId: string) => {
+  update: ({
+    uid,
+    yyyymm,
+    budgetId,
+    budget,
+  }: {
+    uid: string | null;
+    budgetId: string;
+    budget: CategoryBudget;
+    yyyymm: string;
+  }) => {
     return async (dispatch: Dispatch<BudgetsAction>) => {
-      uid && (await expensesDB.update(uid, expense, expenseId));
-      return dispatch(actions.updateExpense(expense, expenseId));
+      uid &&
+        (await budgetsDB.update({
+          uid,
+          yyyymm,
+          budgetId,
+          budget,
+        }));
+      return dispatch(actions.updateBudget({ yyyymm, budgetId, budget }));
     };
   },
-  delete: (uid: string | null, expenseId: string) => {
+  delete: (uid: string | null, yyyymm: string) => {
     return async (dispatch: Dispatch<BudgetsAction>) => {
-      uid && (await expensesDB.delete(uid, expenseId));
-      return dispatch(actions.deleteExpense(expenseId));
+      uid && (await budgetsDB.delete(uid, yyyymm));
+      return dispatch(actions.deleteBudget(yyyymm));
     };
   },
 };

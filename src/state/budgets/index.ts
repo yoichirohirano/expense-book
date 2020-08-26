@@ -18,7 +18,7 @@ export type CategoryBudgets = {
 // 予算(Firestoreのbudgetsコレクション)
 export type Budgets = {
   [yyyymm: string]: {
-    categoryBudgets: CategoryBudget;
+    categoryBudgets: CategoryBudgets;
   };
 };
 

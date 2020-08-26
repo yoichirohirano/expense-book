@@ -23,25 +23,31 @@ const selectors = {
   },
   // 全カテゴリ合計額
   getTotalAmount: (categories: Categories): number => {
-    return Object.entries(categories).reduce(
-      (accumulator: number, [, value]: [string, Category]) => {
+    return Object.values(categories).reduce(
+      (accumulator: number, value: Category): number => {
         return accumulator + value.defaultAmount;
       },
       0
     );
   },
   // デフォルト予算
-  getDefaultBudget: (userId: string, categories: Categories): CategoryBudgets => {
+  getDefaultBudget: (
+    userId: string,
+    categories: Categories
+  ): CategoryBudgets => {
     const defaultBudget: CategoryBudgets = {};
     Object.entries(categories).forEach(([id, category]) => {
-      const budgetCategoryID = getRandomIntegerInRange(1000000000, 9999999999).toString();
+      const budgetCategoryID = getRandomIntegerInRange(
+        1000000000,
+        9999999999
+      ).toString();
       defaultBudget[budgetCategoryID] = {
         amount: category.defaultAmount,
         category: {
           name: category.name,
           id,
         },
-        userId
+        userId,
       };
     });
     return defaultBudget;
