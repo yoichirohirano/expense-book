@@ -93,7 +93,7 @@ describe("categories selector", () => {
 
   describe("getDefaultBudget", () => {
     test("should get default budget", () => {
-      const budget = selectors.getDefaultBudget(initialState);
+      const budget = selectors.getDefaultBudget("testUser", initialState);
       const first = Object.values(budget).find((value) => {
         return value.category.name == sampleState["E3cnHvL8SwPTbn4ChMWq"].name;
       });
@@ -106,6 +106,7 @@ describe("categories selector", () => {
           name: sampleState["E3cnHvL8SwPTbn4ChMWq"].name,
           id: "E3cnHvL8SwPTbn4ChMWq",
         },
+        userId: "testUser",
       });
       expect(second).toEqual({
         amount: sampleState["fGUwZnNss1Nnmvtdteoi"].defaultAmount,
@@ -113,6 +114,7 @@ describe("categories selector", () => {
           name: sampleState["fGUwZnNss1Nnmvtdteoi"].name,
           id: "fGUwZnNss1Nnmvtdteoi",
         },
+        userId: "testUser",
       });
     });
   });

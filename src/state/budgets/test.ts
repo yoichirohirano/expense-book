@@ -1,13 +1,14 @@
 import reducer from "./reducers";
 import selectors from "./selectors";
 import actions from "./actions";
-import { CategoryBudget, Budgets, sampleState } from ".";
+import { CategoryBudgets, CategoryBudget, Budgets, sampleState } from ".";
 
 describe("budgets reducer", () => {
   let initialState: Budgets = {};
 
-  const newBudget: CategoryBudget = {
+  const newBudget: CategoryBudgets = {
     aaaaa: {
+      userId: "test",
       amount: 33000,
       category: {
         name: "Food",
@@ -15,11 +16,21 @@ describe("budgets reducer", () => {
       },
     },
     bbbbb: {
+      userId: "test",
       amount: 12000,
       category: {
         name: "雑費",
         id: "4fgOOb41j82zZxyCBQcS",
       },
+    },
+  };
+
+  const newCategoryBudget: CategoryBudget = {
+    userId: "test",
+    amount: 1200,
+    category: {
+      name: "雑費",
+      id: "4fgOOb41j82zZxyCBQcS",
     },
   };
 
@@ -35,7 +46,7 @@ describe("budgets reducer", () => {
       );
       expect(newState).toMatchObject({
         "203006": {
-          budget: newBudget,
+          categoryBudgets: newBudget,
         },
       });
     });
@@ -45,13 +56,15 @@ describe("budgets reducer", () => {
     test("should update selected budget", () => {
       const newState: Budgets = reducer(
         initialState,
-        actions.updateBudget(newBudget, "202005")
+        actions.updateBudget({
+          yyyymm: "202005",
+          budgetId: "4932031535",
+          budget: newCategoryBudget,
+        })
       );
-      expect(newState).toMatchObject({
-        "202005": {
-          budget: newBudget,
-        },
-      });
+      expect(newState["202005"].categoryBudgets["4932031535"]).toMatchObject(
+        newCategoryBudget
+      );
     });
   });
 
@@ -73,7 +86,9 @@ describe("budgets selector", () => {
         sampleState,
         "202006"
       );
-      expect(selectedExpense).toMatchObject(sampleState["202006"].budget);
+      expect(selectedExpense).toMatchObject(
+        sampleState["202006"].categoryBudgets
+      );
     });
     test("should get null", () => {
       const selectedExpense = selectors.getSelectedBudget(
