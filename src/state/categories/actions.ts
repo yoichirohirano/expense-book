@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Dispatch } from "redux";
 import { CreatorsToActions } from "@/state/CreatorsToActions";
 import { Category } from ".";
 import types from "./types";
-import budgetsDB from "@/plugins/firebase/firestore/budgets";
+import categoriesDB from "@/plugins/firebase/firestore/categories";
 
 const actions = {
   createCategory: (category: Category) => {
@@ -18,47 +19,33 @@ const actions = {
 
 export type CategoriesAction = CreatorsToActions<typeof actions>;
 
-// const thunkActions = {
-//   create: (
-//     uid: string | null,
-//     categoryBudgets: CategoryBudgets,
-//     yyyymm: string
-//   ) => {
-//     return async (dispatch: Dispatch<BudgetsAction>) => {
-//       uid &&
-//         (await budgetsDB.addMonthlyBudget({ uid, yyyymm, categoryBudgets }));
-//       return dispatch(actions.createBudget(categoryBudgets, yyyymm));
-//     };
-//   },
-//   update: ({
-//     uid,
-//     yyyymm,
-//     budgetId,
-//     budget,
-//   }: {
-//     uid: string | null;
-//     budgetId: string;
-//     budget: CategoryBudget;
-//     yyyymm: string;
-//   }) => {
-//     return async (dispatch: Dispatch<BudgetsAction>) => {
-//       uid &&
-//         (await budgetsDB.update({
-//           uid,
-//           yyyymm,
-//           budgetId,
-//           budget,
-//         }));
-//       return dispatch(actions.updateBudget({ yyyymm, budgetId, budget }));
-//     };
-//   },
-//   delete: (uid: string | null, yyyymm: string) => {
-//     return async (dispatch: Dispatch<BudgetsAction>) => {
-//       uid && (await budgetsDB.delete(uid, yyyymm));
-//       return dispatch(actions.deleteBudget(yyyymm));
-//     };
-//   },
-// };
+const thunkActions = {
+  create: (uid: string | null, category: Category) => {
+    return async (dispatch: Dispatch<CategoriesAction>) => {
+      uid && (await categoriesDB.add(uid, category));
+      return dispatch(actions.createCategory(category));
+    };
+  },
+  update: ({
+    uid,
+    categoryId,
+    category,
+  }: {
+    uid: string | null;
+    categoryId: string;
+    category: Category;
+  }) => {
+    return async (dispatch: Dispatch<CategoriesAction>) => {
+      uid && (await categoriesDB.update(uid, category, categoryId));
+      return dispatch(actions.updateCategory(category, categoryId));
+    };
+  },
+  delete: (uid: string | null, categoryId: string) => {
+    return async (dispatch: Dispatch<CategoriesAction>) => {
+      uid && (await categoriesDB.delete(uid, categoryId));
+      return dispatch(actions.deleteCategory(categoryId));
+    };
+  },
+};
 
-export default Object.assign({}, actions);
-// export default Object.assign({}, actions, thunkActions);
+export default Object.assign({}, actions, thunkActions);
