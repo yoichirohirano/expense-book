@@ -15,13 +15,18 @@ const categoriesDB = {
     });
     return data;
   },
-  add: async (uid: string, category: Category): Promise<string> => {
-    const res = await db
+  add: async (
+    uid: string,
+    category: Category,
+    categoryId: string
+  ): Promise<string> => {
+    await db
       .collection("users")
       .doc(uid)
       .collection("categories")
-      .add(category);
-    return res.id;
+      .doc(categoryId)
+      .set(category);
+    return categoryId;
   },
   update: async (
     uid: string,

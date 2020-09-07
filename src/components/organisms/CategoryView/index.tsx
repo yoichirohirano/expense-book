@@ -22,7 +22,9 @@ const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
-  const { loggedIn } = useSelector<RootState, Login>((state) => state.login);
+  const { uid, loggedIn } = useSelector<RootState, Login>(
+    (state) => state.login
+  );
   const dispatch = useDispatch();
 
   const add = (): void => {
@@ -32,32 +34,34 @@ const CategoryView: React.FC = () => {
       // 末尾に追加
       sortIndex: Object.entries(categories).length,
     };
-    dispatch(categoriesActions.createCategory(newCategory));
+    dispatch(categoriesActions.create(uid, newCategory));
   };
 
   const remove = (id: string): void => {
-    dispatch(categoriesActions.deleteCategory(id));
+    dispatch(categoriesActions.delete(uid, id));
   };
 
   const editName = (id: string, name: string): void => {
     dispatch(
-      categoriesActions.updateCategory(
-        Object.assign({}, categories[id], {
+      categoriesActions.update({
+        uid,
+        categoryId: id,
+        category: Object.assign({}, categories[id], {
           name,
         }),
-        id
-      )
+      })
     );
   };
 
   const editBudget = (id: string, defaultAmount: number): void => {
     dispatch(
-      categoriesActions.updateCategory(
-        Object.assign({}, categories[id], {
+      categoriesActions.update({
+        uid,
+        categoryId: id,
+        category: Object.assign({}, categories[id], {
           defaultAmount,
         }),
-        id
-      )
+      })
     );
   };
 

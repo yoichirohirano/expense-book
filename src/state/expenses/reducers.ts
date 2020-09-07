@@ -173,11 +173,7 @@ const reducer = (
 ): Expenses => {
   const newState = Object.assign({}, state);
   switch (action.type) {
-    case actionTypes.CREATE_EXPENSE: {
-      const id = new Date().getTime();
-      newState[id] = action.payload.expense;
-      return newState;
-    }
+    case actionTypes.CREATE_EXPENSE:
     case actionTypes.UPDATE_EXPENSE: {
       newState[action.payload.id] = action.payload.expense;
       return newState;

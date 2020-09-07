@@ -35,8 +35,17 @@ const expensesDB = {
     });
     return data;
   },
-  add: async (uid: string, expense: Expense): Promise<void> => {
-    await db.collection("users").doc(uid).collection("expenses").add(expense);
+  add: async (
+    uid: string,
+    expense: Expense,
+    expenseId: string
+  ): Promise<void> => {
+    await db
+      .collection("users")
+      .doc(uid)
+      .collection("expenses")
+      .doc(expenseId)
+      .set(expense);
   },
   update: async (
     uid: string,

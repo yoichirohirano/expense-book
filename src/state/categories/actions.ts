@@ -6,8 +6,8 @@ import types from "./types";
 import categoriesDB from "@/plugins/firebase/firestore/categories";
 
 const actions = {
-  createCategory: (category: Category) => {
-    return { type: types.CREATE_CATEGORY, payload: { category } };
+  createCategory: (category: Category, id: string) => {
+    return { type: types.CREATE_CATEGORY, payload: { category, id } };
   },
   updateCategory: (category: Category, id: string) => {
     return { type: types.UPDATE_CATEGORY, payload: { category, id } };
@@ -27,9 +27,10 @@ export type CategoriesAction = CreatorsToActions<typeof actions>;
 
 const thunkActions = {
   create: (uid: string | null, category: Category) => {
+    const categoryId = new Date().getTime().toString();
     return async (dispatch: Dispatch<CategoriesAction>) => {
-      uid && (await categoriesDB.add(uid, category));
-      return dispatch(actions.createCategory(category));
+      uid && (await categoriesDB.add(uid, category, categoryId));
+      return dispatch(actions.createCategory(category, categoryId));
     };
   },
   update: ({
