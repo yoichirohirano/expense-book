@@ -9,7 +9,8 @@
     "test": "node scripts/test.js",
     "set-config": "ts-node scripts/setConfig.ts",
     "storybook": "NODE_ENV=test start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "serve": "npm run build && firebase emulators:start"
   },
   "eslintConfig": {
     "extends": [
