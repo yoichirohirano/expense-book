@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Dispatch } from "redux";
 import { CreatorsToActions } from "@/state/CreatorsToActions";
-import { Category } from ".";
+import { Category, Categories } from ".";
 import types from "./types";
 import categoriesDB from "@/plugins/firebase/firestore/categories";
 
@@ -14,6 +14,12 @@ const actions = {
   },
   deleteCategory: (id: string) => {
     return { type: types.DELETE_CATEGORY, payload: { id } };
+  },
+  updateAllCategoriesFromFirestore: (categories: Categories) => {
+    return {
+      type: types.UPDATE_ALL_CATEGORIES_FROM_FIRESTORE,
+      payload: categories,
+    };
   },
 };
 

@@ -247,20 +247,26 @@ const reducer = (
 ): Budgets => {
   const newState = Object.assign({}, state);
   switch (action.type) {
-    case actionTypes.CREATE_BUDGET:
+    case actionTypes.CREATE_BUDGET: {
       newState[action.payload.yyyymm] = {
         categoryBudgets: {},
       };
       newState[action.payload.yyyymm].categoryBudgets =
         action.payload.categoryBudgets;
       return newState;
-    case actionTypes.UPDATE_BUDGET:
+    }
+    case actionTypes.UPDATE_BUDGET: {
       newState[action.payload.yyyymm].categoryBudgets[action.payload.budgetId] =
         action.payload.budget;
       return newState;
-    case actionTypes.DELETE_BUDGET:
+    }
+    case actionTypes.DELETE_BUDGET: {
       delete newState[action.payload.yyyymm];
       return newState;
+    }
+    case actionTypes.UPDATE_ALL_BUDGETS_FROM_FIRESTORE: {
+      return action.payload;
+    }
     default:
       return state;
   }

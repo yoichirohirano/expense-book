@@ -3,10 +3,14 @@ import "./App.css";
 import TopPage from "@/components/pages/TopPage";
 import usersDB from "@/plugins/firebase/firestore/users";
 import expensesDB from "@/plugins/firebase/firestore/expenses";
+import budgetsDB from "@/plugins/firebase/firestore/budgets";
+import categoriesDB from "@/plugins/firebase/firestore/categories";
 import firebaseAuth from "@/plugins/firebase/auth";
 import { useDispatch } from "react-redux";
 import { loginActions } from "state/login";
-import { expensesActions } from "state/expenses";
+import { expensesActions } from "@/state/expenses";
+import { budgetsActions } from "@/state/budgets";
+import { categoriesActions } from "@/state/categories";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -18,9 +22,13 @@ function App(): JSX.Element {
     if (!userInfo) {
       usersDB.add(user.uid);
     } else {
-      // 2回目以降はexpenses,budget,categoryを取得
+      // 2回目以降はFirestoreからexpenses,budget,categoryを取得
       const expenses = await expensesDB.get(user.uid);
       dispatch(expensesActions.updateAllExpensesFromFirestore(expenses));
+      const budgets = await budgetsDB.getAll(user.uid);
+      dispatch(budgetsActions.updateAllBudgetsFromFirestore(budgets));
+      const categories = await categoriesDB.get(user.uid);
+      dispatch(categoriesActions.updateAllCategoriesFromFirestore(categories));
     }
   };
   const onLogout = (): void => {

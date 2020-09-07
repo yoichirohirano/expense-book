@@ -61,6 +61,9 @@ const reducer = (
       delete newState[action.payload.id];
       return newState;
     }
+    case actionTypes.UPDATE_ALL_CATEGORIES_FROM_FIRESTORE: {
+      return action.payload;
+    }
     default:
       return state;
   }

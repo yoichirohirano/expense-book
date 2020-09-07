@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Dispatch } from "redux";
 import { CreatorsToActions } from "@/state/CreatorsToActions";
-import { CategoryBudget, CategoryBudgets } from ".";
+import { CategoryBudget, CategoryBudgets, Budgets } from ".";
 import types from "./types";
 import budgetsDB from "@/plugins/firebase/firestore/budgets";
 
@@ -22,6 +22,12 @@ const actions = {
   },
   deleteBudget: (yyyymm: string) => {
     return { type: types.DELETE_BUDGET, payload: { yyyymm } };
+  },
+  updateAllBudgetsFromFirestore: (budgets: Budgets) => {
+    return {
+      type: types.UPDATE_ALL_BUDGETS_FROM_FIRESTORE,
+      payload: budgets,
+    };
   },
 };
 
