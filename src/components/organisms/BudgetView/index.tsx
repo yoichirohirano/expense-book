@@ -40,7 +40,7 @@ const BudgetView: React.FC = () => {
         uid || "",
         categories
       );
-      dispatch(budgetsActions.createBudget(newBudget, currentYYYYMM));
+      dispatch(budgetsActions.create(uid, newBudget, currentYYYYMM));
       // Datepickerモーダルが消えるのを待ってからパネルを開く
       setTimeout(() => {
         setCurrentMonth(currentYYYYMM);
@@ -50,11 +50,11 @@ const BudgetView: React.FC = () => {
 
   const close = useCallback(
     (yyyymm: string) => {
-      dispatch(budgetsActions.deleteBudget(yyyymm));
+      dispatch(budgetsActions.delete(uid, yyyymm));
       // 開いているパネルを閉じる
       setCurrentMonth(false);
     },
-    [dispatch]
+    [dispatch, uid]
   );
 
   return (

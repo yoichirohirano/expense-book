@@ -16,6 +16,7 @@ import {
   CategoryBudgets,
 } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
+import { Login } from "@/state/login";
 
 const AccordionContent = (props: {
   yyyymm: string;
@@ -29,6 +30,7 @@ const AccordionContent = (props: {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
 
   const budgetComparerByCategoryDescending = (
     a: CategoryBudget,
@@ -80,7 +82,8 @@ const AccordionContent = (props: {
             }
           );
           dispatch(
-            budgetsActions.updateBudget({
+            budgetsActions.update({
+              uid,
               yyyymm,
               budgetId: budgetId,
               budget: newCategoryBudget,

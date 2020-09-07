@@ -95,12 +95,19 @@ const budgetsDB = {
   },
   // 月予算の削除
   delete: async (uid: string, yyyymm: string): Promise<void> => {
-    await db
-      .collection("users")
-      .doc(uid)
-      .collection("budgets")
-      .doc(yyyymm)
-      .delete();
+    const batch = db.batch();
+    const categoryBudgets = await budgetsDB.get(uid, yyyymm);
+    Object.entries(categoryBudgets).forEach(([id]) => {
+      const ref = db
+        .collection("users")
+        .doc(uid)
+        .collection("budgets")
+        .doc(yyyymm)
+        .collection("categoryBudgets")
+        .doc(id);
+      batch.delete(ref);
+    });
+    await batch.commit();
   },
 };
 

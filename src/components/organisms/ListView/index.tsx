@@ -89,7 +89,7 @@ const ListView: React.FC = () => {
             uid || "",
             categories
           );
-          dispatch(budgetsActions.createBudget(newBudget, yyyymm));
+          dispatch(budgetsActions.create(uid, newBudget, yyyymm));
           setCurrentYYYYMM(yyyymm);
         }
       },
