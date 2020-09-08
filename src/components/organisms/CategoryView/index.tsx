@@ -106,14 +106,18 @@ const CategoryView: React.FC = () => {
         <ChartHeader
           expenseAmount={categoriesSelectors.getTotalAmount(categories)}
         ></ChartHeader>
-        {Object.entries(categories).map(([key, item]) => {
-          return (
-            <BudgetEditItem
-              key={key}
-              {...budgetEditItemProps(key, item)}
-            ></BudgetEditItem>
-          );
-        })}
+        {Object.entries(categories)
+          .sort((a, b) => {
+            return a[1].sortIndex > b[1].sortIndex ? 1 : -1;
+          })
+          .map(([key, item]) => {
+            return (
+              <BudgetEditItem
+                key={key}
+                {...budgetEditItemProps(key, item)}
+              ></BudgetEditItem>
+            );
+          })}
         <Box padding="20px 0">
           <TextButton {...addButtonProps}></TextButton>
         </Box>
