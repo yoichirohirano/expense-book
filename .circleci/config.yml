@@ -13,7 +13,7 @@ jobs:
           command: yarn
           working_directory: functions
       - save_cache:
-          key: dependency-cache-{{ checksum "functions/package-lock.json" }}
+          key: dependency-cache-{{ checksum "functions/yarn.lock" }}
           paths:
             - functions/node_modules
       # トップレベルのnpm設定
