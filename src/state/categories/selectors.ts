@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { maxBy } from "lodash-es";
 import { Category, Categories } from ".";
 import { CategoryBudgets } from "@/state/budgets";
 import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
@@ -51,6 +52,11 @@ const selectors = {
       };
     });
     return defaultBudget;
+  },
+  // 新規カテゴリ追加時のインデックス
+  getIndexToAdd: (categories: Categories): number => {
+    const last = maxBy(Object.values(categories), "sortIndex");
+    return last ? last.sortIndex + 1 : 0;
   },
 };
 

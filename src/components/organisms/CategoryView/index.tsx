@@ -31,8 +31,7 @@ const CategoryView: React.FC = () => {
     const newCategory: Category = {
       name: "",
       defaultAmount: 0,
-      // 末尾に追加
-      sortIndex: Object.entries(categories).length,
+      sortIndex: categoriesSelectors.getIndexToAdd(categories),
     };
     dispatch(categoriesActions.create(uid, newCategory));
   };
