@@ -44,7 +44,7 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
     const current = routes.find((item) => {
       // reduxを永続化しているため、カレントのパスをprops.pathnameから取得すると不整合が起こる場合がある。
       // このため、カレントのパスはlocationから取得する。
-      return item.path === location.pathname;
+      return item.path === window.location.pathname;
     });
     setIndex(current ? current.index : 0);
   }, [props.pathname]);
