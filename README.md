@@ -60,7 +60,3 @@ w/ Redux 4.0.5
 - CircleCI
 - Docker
 - docker-compose
-
-## TODO
-- [ ] ログイン機能
-- [ ] カテゴリ追加、更新、削除機能
