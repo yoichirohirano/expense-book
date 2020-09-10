@@ -18,7 +18,10 @@ export const onFirestore = {
   updateCategoryInAllDocuments: functions.firestore
     .document("users/{userId}/categories/{categoryId}")
     .onUpdate(
-      async (change, context): Promise<void> => {
+      async (
+        change: functions.Change<FirebaseFirestore.QueryDocumentSnapshot>,
+        context: functions.EventContext
+      ): Promise<void> => {
         const { name } = change.after.data() as Category;
         const { userId, categoryId } = context.params as ContextParams;
         const batch = db.batch();
