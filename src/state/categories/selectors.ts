@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { maxBy } from "lodash-es";
+import maxBy from "lodash/maxBy";
 import { Category, Categories } from ".";
 import { CategoryBudgets } from "@/state/budgets";
 import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
