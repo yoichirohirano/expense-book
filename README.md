@@ -1,6 +1,6 @@
 # Expense Book
 
-日々の出費と予算をカテゴリ毎に記録でき、月ごとの支出状況がひと目でわかる家計簿アプリ（PWA）です。
+日々の出費と予算をカテゴリ毎に記録でき、月毎の支出状況がひと目でわかる家計簿アプリ（PWA）です。
 
 ![sample480](https://user-images.githubusercontent.com/25029901/86226285-66c00380-bbc6-11ea-830f-89dcfa53df77.gif)
 
