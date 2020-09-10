@@ -16,7 +16,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
     if (props.defaultTimestamp) {
       setDateChange(new Date(props.defaultTimestamp));
     }
-  }, []);
+  }, [props.defaultTimestamp]);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

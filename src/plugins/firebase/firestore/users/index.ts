@@ -1,11 +1,14 @@
 import firebase from "@/plugins/firebase";
 import { db } from "@/plugins/firebase/firestore";
+import { Expense } from "state/expenses";
+import { CategoryBudgets } from "state/budgets";
+import { Category } from "state/categories";
 
 export interface User extends firebase.firestore.DocumentData {
   createdAt: string;
-  expenses?: Record<string, any>;
-  budgets?: Record<string, any>;
-  categories?: Record<string, any>;
+  expenses?: Record<string, Expense>;
+  budgets?: Record<string, CategoryBudgets>;
+  categories?: Record<string, Category>;
 }
 
 export const userRef = (uid: string): firebase.firestore.DocumentReference => {

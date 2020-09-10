@@ -20,7 +20,7 @@ const MonthInput: React.FC<MonthInputProps> = (props) => {
     if (props.defaultTimestamp) {
       setDateChange(new Date(props.defaultTimestamp));
     }
-  }, []);
+  }, [props.defaultTimestamp]);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
