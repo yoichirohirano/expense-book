@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import moment from "moment";
-import { Budget, Budgets } from ".";
+import { CategoryBudgets, CategoryBudget, Budgets } from ".";
 
 const selectors = {
   // 指定月の予算
-  getSelectedBudget: (budgets: Budgets, yyyymm: string): Budget | null => {
+  getSelectedBudget: (
+    budgets: Budgets,
+    yyyymm: string
+  ): CategoryBudgets | null => {
     const res = Object.entries(budgets).find(([key]) => {
       return key === yyyymm;
     });
-    return res ? res[1].budget : null;
+    return res ? res[1].categoryBudgets : null;
   },
   // 指定月の予算のインデックス 指定月がなければ0を返す
   getSelectedBudgetIndex: (budgets: Budgets, yyyymm: string): number => {
@@ -27,7 +30,7 @@ const selectors = {
   getBudgetAmount: (budgets: Budgets, yyyymm: string): number => {
     const selected = budgets[yyyymm];
     if (!selected) return 0;
-    const budget = budgets[yyyymm].budget;
+    const budget = budgets[yyyymm].categoryBudgets;
     if (!budget) return 0;
     return Object.entries(budget).reduce((accumulator: number, [, value]) => {
       return accumulator + value.amount;
@@ -49,6 +52,34 @@ const selectors = {
         ? Object.keys(budgets)[Object.keys(budgets).length - 1]
         : "";
     }
+  },
+  /**
+   * 指定月の指定カテゴリ予算を取得する
+   * @param params.budgets
+   * @param params.yyyymm
+   * @param params.categoryId
+   * @returns 予算ID,カテゴリ予算
+   */
+  getCategoryBudgetOfSelectedMonth: ({
+    budgets,
+    yyyymm,
+    categoryId,
+  }: {
+    budgets: Budgets;
+    yyyymm: string;
+    categoryId: string;
+  }): { budgetId: string; categoryBudget: CategoryBudget } | null => {
+    const res = Object.entries(budgets[yyyymm].categoryBudgets).find(
+      ([budgetId, categoryBudget]) => {
+        return categoryBudget.category.id === categoryId;
+      }
+    );
+    return res
+      ? {
+          budgetId: res[0],
+          categoryBudget: res[1],
+        }
+      : null;
   },
 };
 

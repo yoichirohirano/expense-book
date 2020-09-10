@@ -4,194 +4,236 @@ import actionTypes from "./types";
 
 export const sampleState: Budgets = {
   "202001": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 20000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
   "202002": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 70000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
   "202003": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 10000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
   "202004": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 50000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
   "202005": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 50000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
   "202006": {
-    budget: {
+    categoryBudgets: {
       "3186020163": {
         amount: 30000,
-        category: { name: "食費", ref: "E3cnHvL8SwPTbn4ChMWq" },
+        category: { name: "食費", id: "E3cnHvL8SwPTbn4ChMWq" },
+        userId: "",
       },
       "7081388040": {
         amount: 50000,
-        category: { name: "娯楽", ref: "fGUwZnNss1Nnmvtdteoi" },
+        category: { name: "娯楽", id: "fGUwZnNss1Nnmvtdteoi" },
+        userId: "",
       },
       "9309824704": {
         amount: 3000,
-        category: { name: "書籍", ref: "w2IJ86mtXfcNyRm23aw4" },
+        category: { name: "書籍", id: "w2IJ86mtXfcNyRm23aw4" },
+        userId: "",
       },
       "4932031535": {
         amount: 12000,
-        category: { name: "雑費", ref: "4fgOOb41j82zZxyCBQcS" },
+        category: { name: "雑費", id: "4fgOOb41j82zZxyCBQcS" },
+        userId: "",
       },
       "6911870738": {
         amount: 5000,
-        category: { name: "交通費", ref: "pXhYzqbyOrjGnSmZJMFN" },
+        category: { name: "交通費", id: "pXhYzqbyOrjGnSmZJMFN" },
+        userId: "",
       },
       "8536650673": {
         amount: 30000,
-        category: { name: "固定費", ref: "XKZ5LP61ZgRGWeRFTboV" },
+        category: { name: "固定費", id: "XKZ5LP61ZgRGWeRFTboV" },
+        userId: "",
       },
       "1483808733": {
         amount: 45000,
-        category: { name: "貯金", ref: "WO0O1eUgpwzGj49EmzZW" },
+        category: { name: "貯金", id: "WO0O1eUgpwzGj49EmzZW" },
+        userId: "",
       },
     },
   },
@@ -205,18 +247,26 @@ const reducer = (
 ): Budgets => {
   const newState = Object.assign({}, state);
   switch (action.type) {
-    case actionTypes.CREATE_BUDGET:
-      newState[action.payload.id] = {
-        budget: {},
+    case actionTypes.CREATE_BUDGET: {
+      newState[action.payload.yyyymm] = {
+        categoryBudgets: {},
       };
-      newState[action.payload.id].budget = action.payload.budget;
+      newState[action.payload.yyyymm].categoryBudgets =
+        action.payload.categoryBudgets;
       return newState;
-    case actionTypes.UPDATE_BUDGET:
-      newState[action.payload.id].budget = action.payload.budget;
+    }
+    case actionTypes.UPDATE_BUDGET: {
+      newState[action.payload.yyyymm].categoryBudgets[action.payload.budgetId] =
+        action.payload.budget;
       return newState;
-    case actionTypes.DELETE_BUDGET:
-      delete newState[action.payload.id];
+    }
+    case actionTypes.DELETE_BUDGET: {
+      delete newState[action.payload.yyyymm];
       return newState;
+    }
+    case actionTypes.UPDATE_ALL_BUDGETS_FROM_FIRESTORE: {
+      return action.payload;
+    }
     default:
       return state;
   }

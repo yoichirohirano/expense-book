@@ -10,15 +10,17 @@ import { usePanelDetailsClasses } from "./style";
 import { RootState } from "@/state/store";
 import {
   budgetsActions,
-  BudgetDocumentData,
-  Budget,
+  budgetsSelectors,
+  CategoryBudget,
   Budgets,
+  CategoryBudgets,
 } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
+import { Login } from "@/state/login";
 
 const AccordionContent = (props: {
   yyyymm: string;
-  budget: Budget;
+  budget: CategoryBudgets;
   close: (yyyymm: string) => void;
 }): JSX.Element => {
   const panelDetailsClasses = usePanelDetailsClasses();
@@ -28,18 +30,19 @@ const AccordionContent = (props: {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
 
   const budgetComparerByCategoryDescending = (
-    a: BudgetDocumentData,
-    b: BudgetDocumentData
+    a: CategoryBudget,
+    b: CategoryBudget
   ): number => {
     const aIndex = categoriesSelectors.getSelectedCategory(
       categories,
-      a.category.ref
+      a.category.id
     )?.sortIndex;
     const bIndex = categoriesSelectors.getSelectedCategory(
       categories,
-      b.category.ref
+      b.category.id
     )?.sortIndex;
     if (aIndex !== undefined && bIndex !== undefined) {
       return aIndex > bIndex ? 1 : -1;
@@ -49,7 +52,7 @@ const AccordionContent = (props: {
   };
 
   const budgetEditItemProps = (
-    month: string,
+    yyyymm: string,
     categoryName: string,
     categoryBudget: number
   ): BudgetEditItemProps => {
@@ -60,18 +63,31 @@ const AccordionContent = (props: {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
-        const newBudget: Budget = budgets[month].budget;
-        // 更新用の予算から指定カテゴリの予算を取得し、金額を更新する
-        const budgetOfCategory = Object.values(newBudget).find((value) => {
-          return (
-            value.category.ref ===
-            categoriesSelectors.getIdFromName(categories, categoryName)
-          );
+        // 更新前の該当月該当カテゴリ予算
+        const present = budgetsSelectors.getCategoryBudgetOfSelectedMonth({
+          budgets,
+          yyyymm,
+          categoryId: categoriesSelectors.getIdFromName(
+            categories,
+            categoryName
+          ),
         });
-        if (budgetOfCategory) {
-          budgetOfCategory.amount = parseInt(value, 10);
+        if (present) {
+          const { budgetId, categoryBudget } = present;
+          // 更新のための該当月該当カテゴリ予算
+          const newCategoryBudget: CategoryBudget = Object.assign(
+            categoryBudget,
+            {
+              amount: parseInt(value, 10),
+            }
+          );
           dispatch(
-            budgetsActions.updateBudget(Object.assign({}, newBudget), month)
+            budgetsActions.update({
+              uid,
+              yyyymm,
+              budgetId: budgetId,
+              budget: newCategoryBudget,
+            })
           );
         }
       },
@@ -95,7 +111,7 @@ const AccordionContent = (props: {
         .map((item) => {
           return (
             <BudgetEditItem
-              key={item.category.ref}
+              key={item.category.id}
               {...budgetEditItemProps(
                 props.yyyymm,
                 item.category.name,

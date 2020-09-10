@@ -10,8 +10,9 @@ import AccordionButton from "./AccordionButton";
 import { usePanelClasses } from "./style";
 
 import { RootState } from "@/state/store";
-import { budgetsActions, Budget, Budgets } from "@/state/budgets";
+import { budgetsActions, CategoryBudgets, Budgets } from "@/state/budgets";
 import { categoriesSelectors, Categories } from "@/state/categories";
+import { Login } from "@/state/login";
 
 const BudgetView: React.FC = () => {
   const panelClasses = usePanelClasses();
@@ -21,6 +22,7 @@ const BudgetView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
 
   const [currentMonth, setCurrentMonth] = useState<string | false>("");
 
@@ -34,10 +36,11 @@ const BudgetView: React.FC = () => {
   const addBudgetButtonProps: AddBudgetButtonProps = {
     addBudget: (yyyymm: string): void => {
       const currentYYYYMM = yyyymm;
-      const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+      const newBudget: CategoryBudgets = categoriesSelectors.getDefaultBudget(
+        uid || "",
         categories
       );
-      dispatch(budgetsActions.createBudget(newBudget, currentYYYYMM));
+      dispatch(budgetsActions.create(uid, newBudget, currentYYYYMM));
       // Datepickerモーダルが消えるのを待ってからパネルを開く
       setTimeout(() => {
         setCurrentMonth(currentYYYYMM);
@@ -45,11 +48,14 @@ const BudgetView: React.FC = () => {
     },
   };
 
-  const close = useCallback((yyyymm: string) => {
-    dispatch(budgetsActions.deleteBudget(yyyymm));
-    // 開いているパネルを閉じる
-    setCurrentMonth(false);
-  }, []);
+  const close = useCallback(
+    (yyyymm: string) => {
+      dispatch(budgetsActions.delete(uid, yyyymm));
+      // 開いているパネルを閉じる
+      setCurrentMonth(false);
+    },
+    [dispatch, uid]
+  );
 
   return (
     <>
@@ -68,7 +74,7 @@ const BudgetView: React.FC = () => {
             <AccordionButton yyyymm={yyyymm} budgets={budgets} />
             <AccordionContent
               yyyymm={yyyymm}
-              budget={value.budget}
+              budget={value.categoryBudgets}
               close={close}
             />
           </ExpansionPanel>

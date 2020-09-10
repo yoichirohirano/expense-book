@@ -21,6 +21,7 @@ import ExpenseListItem, {
 import ExpenseListSubHeader from "@/components/atoms/ExpenseListSubHeader";
 import H6Title from "@/components/atoms/H6Title";
 import AmountInput, { AmountInputProps } from "@/components/atoms/AmountInput";
+import Progress from "@/components/atoms/Progress";
 
 const props = {
   handleClick: (): void => {
@@ -301,7 +302,7 @@ export const expenseListItem = (): JSX.Element => {
     dateStr: "20200609T000000",
     category: {
       name: "Cafe",
-      ref: "AjOQWgDdVSVsLQNCEpNP",
+      id: "AjOQWgDdVSVsLQNCEpNP",
     },
     handleClickItem: (): void => {
       console.log("click!");
@@ -322,6 +323,10 @@ export const h6Title = (): JSX.Element => {
     text: "タイトル Title",
   };
   return <H6Title {...props}></H6Title>;
+};
+
+export const progress = (): JSX.Element => {
+  return <Progress></Progress>;
 };
 
 export default {

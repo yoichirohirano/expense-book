@@ -7,8 +7,10 @@ import TextButton, { TextButtonProps } from "@/components/atoms/TextButton";
 import BudgetEditItem, {
   BudgetEditItemProps,
 } from "@/components/molecules/BudgetEditItem";
+import firebaseAuth from "@/plugins/firebase/auth";
 
 import { RootState } from "@/state/store";
+import { Login } from "state/login";
 import {
   categoriesActions,
   Category,
@@ -20,43 +22,45 @@ const CategoryView: React.FC = () => {
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
   );
-  // TODO: ログイン機能実装後、ログイン状態をReduxに移管する
-  const loggedIn = false;
+  const { uid, loggedIn } = useSelector<RootState, Login>(
+    (state) => state.login
+  );
   const dispatch = useDispatch();
 
   const add = (): void => {
     const newCategory: Category = {
       name: "",
       defaultAmount: 0,
-      // 末尾に追加
-      sortIndex: Object.entries(categories).length,
+      sortIndex: categoriesSelectors.getIndexToAdd(categories),
     };
-    dispatch(categoriesActions.createCategory(newCategory));
+    dispatch(categoriesActions.create(uid, newCategory));
   };
 
   const remove = (id: string): void => {
-    dispatch(categoriesActions.deleteCategory(id));
+    dispatch(categoriesActions.delete(uid, id));
   };
 
   const editName = (id: string, name: string): void => {
     dispatch(
-      categoriesActions.updateCategory(
-        Object.assign({}, categories[id], {
+      categoriesActions.update({
+        uid,
+        categoryId: id,
+        category: Object.assign({}, categories[id], {
           name,
         }),
-        id
-      )
+      })
     );
   };
 
   const editBudget = (id: string, defaultAmount: number): void => {
     dispatch(
-      categoriesActions.updateCategory(
-        Object.assign({}, categories[id], {
+      categoriesActions.update({
+        uid,
+        categoryId: id,
+        category: Object.assign({}, categories[id], {
           defaultAmount,
         }),
-        id
-      )
+      })
     );
   };
 
@@ -88,7 +92,7 @@ const CategoryView: React.FC = () => {
   const loginButtonProps: TextButtonProps = {
     text: "ログインする",
     handleClick: () => {
-      return false;
+      firebaseAuth.login();
     },
   };
 
@@ -101,14 +105,18 @@ const CategoryView: React.FC = () => {
         <ChartHeader
           expenseAmount={categoriesSelectors.getTotalAmount(categories)}
         ></ChartHeader>
-        {Object.entries(categories).map(([key, item]) => {
-          return (
-            <BudgetEditItem
-              key={key}
-              {...budgetEditItemProps(key, item)}
-            ></BudgetEditItem>
-          );
-        })}
+        {Object.entries(categories)
+          .sort((a, b) => {
+            return a[1].sortIndex > b[1].sortIndex ? 1 : -1;
+          })
+          .map(([key, item]) => {
+            return (
+              <BudgetEditItem
+                key={key}
+                {...budgetEditItemProps(key, item)}
+              ></BudgetEditItem>
+            );
+          })}
         <Box padding="20px 0">
           <TextButton {...addButtonProps}></TextButton>
         </Box>

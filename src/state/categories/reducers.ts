@@ -48,11 +48,7 @@ const reducer = (
 ): Categories => {
   const newState = Object.assign({}, state);
   switch (action.type) {
-    case actionTypes.CREATE_CATEGORY: {
-      const id = new Date().getTime();
-      newState[id] = action.payload.category;
-      return newState;
-    }
+    case actionTypes.CREATE_CATEGORY:
     case actionTypes.UPDATE_CATEGORY: {
       newState[action.payload.id] = action.payload.category;
       return newState;
@@ -60,6 +56,9 @@ const reducer = (
     case actionTypes.DELETE_CATEGORY: {
       delete newState[action.payload.id];
       return newState;
+    }
+    case actionTypes.UPDATE_ALL_CATEGORIES_FROM_FIRESTORE: {
+      return action.payload;
     }
     default:
       return state;

@@ -11,7 +11,7 @@ describe("<ExpenseListItem />", () => {
     dateStr: "20200609T000000",
     category: {
       name: "Cafe",
-      ref: "AjOQWgDdVSVsLQNCEpNP",
+      id: "AjOQWgDdVSVsLQNCEpNP",
     },
     handleClickItem: jest.fn(),
   };

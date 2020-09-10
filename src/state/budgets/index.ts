@@ -1,22 +1,24 @@
 import reducer, { sampleState } from "./reducers";
 
-export type BudgetDocumentData = {
+// カテゴリの予算
+export type CategoryBudget = {
   amount: number;
   category: {
-    // categoryId
-    // TODO: Firestore連携後、リファレンス型にする
-    ref: string;
+    id: string;
     name: string;
   };
+  userId: string;
 };
 
-export type Budget = {
-  [id: string]: BudgetDocumentData;
+// 月予算(FirestoreのcategoryBudgetsコレクション)
+export type CategoryBudgets = {
+  [budgetId: string]: CategoryBudget;
 };
 
+// 予算(Firestoreのbudgetsコレクション)
 export type Budgets = {
   [yyyymm: string]: {
-    budget: Budget;
+    categoryBudgets: CategoryBudgets;
   };
 };
 

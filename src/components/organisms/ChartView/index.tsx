@@ -12,7 +12,7 @@ import { addButtonWrapperStyle, monthTabsWrapperStyle } from "./style";
 import { RootState } from "@/state/store";
 import { categoriesSelectors, Categories } from "@/state/categories";
 import {
-  expenseActions,
+  expensesActions,
   Expense,
   Expenses,
   expensesSelectors,
@@ -20,9 +20,10 @@ import {
 import {
   budgetsSelectors,
   budgetsActions,
-  Budget,
+  CategoryBudgets,
   Budgets,
 } from "@/state/budgets";
+import { Login } from "@/state/login";
 
 const colorList = [
   "#9c27b0",
@@ -45,6 +46,7 @@ const getColor = (index: number, colorList: Array<string>): string => {
 
 const ChartView: React.FC = () => {
   const dispatch = useDispatch();
+  const { uid } = useSelector<RootState, Login>((state) => state.login);
   const budgets = useSelector<RootState, Budgets>((state) => state.budgets);
   const categories = useSelector<RootState, Categories>(
     (state) => state.categories
@@ -61,7 +63,7 @@ const ChartView: React.FC = () => {
   const getChartItems = (): Array<ChartItem> => {
     const budget =
       budgetsSelectors.getSelectedBudget(budgets, currentYYYYMM) ||
-      categoriesSelectors.getDefaultBudget(categories);
+      categoriesSelectors.getDefaultBudget(uid || "", categories);
     // 予算からカテゴリ名/予算の情報配列を作成
     const chartItems: Array<ChartItem> = Object.entries(budget).map(
       ([, budget], index) => {
@@ -142,14 +144,15 @@ const ChartView: React.FC = () => {
     isOpen: drawerOpen,
     toggleDrawer: setDrawerOpen,
     add: (expense: Expense): void => {
-      dispatch(expenseActions.createExpense(expense));
+      dispatch(expensesActions.create(uid, expense));
       // 登録した月の予算がなければ、予算も新規で登録する
       const yyyymm = expense.dateStr.slice(0, 6);
       if (!budgets[yyyymm]) {
-        const newBudget: Budget = categoriesSelectors.getDefaultBudget(
+        const newBudget: CategoryBudgets = categoriesSelectors.getDefaultBudget(
+          uid || "",
           categories
         );
-        dispatch(budgetsActions.createBudget(newBudget, yyyymm));
+        dispatch(budgetsActions.create(uid, newBudget, yyyymm));
         setCurrentYYYYMM(yyyymm);
       }
     },

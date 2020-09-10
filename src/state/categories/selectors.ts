@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import maxBy from "lodash/maxBy";
 import { Category, Categories } from ".";
-import { Budget } from "@/state/budgets";
+import { CategoryBudgets } from "@/state/budgets";
 import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";
 
 const selectors = {
   getSelectedCategory: (
     categories: Categories,
-    selectedId: string
+    selectedId: string | firebase.firestore.DocumentReference
   ): Category | null => {
     const res = Object.entries(categories).find(([key]) => {
       return key === selectedId;
@@ -23,27 +24,39 @@ const selectors = {
   },
   // 全カテゴリ合計額
   getTotalAmount: (categories: Categories): number => {
-    return Object.entries(categories).reduce(
-      (accumulator: number, [, value]: [string, Category]) => {
+    return Object.values(categories).reduce(
+      (accumulator: number, value: Category): number => {
         return accumulator + value.defaultAmount;
       },
       0
     );
   },
   // デフォルト予算
-  getDefaultBudget: (categories: Categories): Budget => {
-    const defaultBudget: Budget = {};
+  getDefaultBudget: (
+    userId: string,
+    categories: Categories
+  ): CategoryBudgets => {
+    const defaultBudget: CategoryBudgets = {};
     Object.entries(categories).forEach(([id, category]) => {
-      const budgetCategoryID = getRandomIntegerInRange(1000000000, 9999999999);
+      const budgetCategoryID = getRandomIntegerInRange(
+        1000000000,
+        9999999999
+      ).toString();
       defaultBudget[budgetCategoryID] = {
         amount: category.defaultAmount,
         category: {
           name: category.name,
-          ref: id,
+          id,
         },
+        userId,
       };
     });
     return defaultBudget;
+  },
+  // 新規カテゴリ追加時のインデックス
+  getIndexToAdd: (categories: Categories): number => {
+    const last = maxBy(Object.values(categories), "sortIndex");
+    return last ? last.sortIndex + 1 : 0;
   },
 };
 
