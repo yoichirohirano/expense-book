@@ -54,6 +54,8 @@ w/ Redux 4.0.5
 
 - Firebase
   - Firebase Hosting
+  - Firestore
+  - Cloud Functions for Firebase
 
 ### Infrastructure
 
