@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import TopPage from "@/components/pages/TopPage";
-import LoadingPage from "@/components/pages/LoadingPage";
+import TopPage from "@/components/Pages/TopPage";
+import LoadingPage from "@/components/Pages/LoadingPage";
 import usersDB from "@/plugins/firebase/firestore/users";
 import expensesDB from "@/plugins/firebase/firestore/expenses";
 import budgetsDB from "@/plugins/firebase/firestore/budgets";
