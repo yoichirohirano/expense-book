@@ -37,6 +37,7 @@ function App(): JSX.Element {
   const onLogout = (): void => {
     // ログイン導線を表示
     dispatch(loginActions.logout());
+    setFirebaseAccess(true);
   };
 
   firebaseAuth.onAuthStateChange(onLogin, onLogout);
