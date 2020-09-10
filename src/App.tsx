@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TopPage from "@/components/pages/TopPage";
+import LoadingPage from "@/components/pages/LoadingPage";
 import usersDB from "@/plugins/firebase/firestore/users";
 import expensesDB from "@/plugins/firebase/firestore/expenses";
 import budgetsDB from "@/plugins/firebase/firestore/budgets";
@@ -14,6 +15,7 @@ import { categoriesActions } from "@/state/categories";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
+  const [firebaseAccess, setFirebaseAccess] = useState<boolean>(false);
 
   const onLogin = async (user: firebase.User): Promise<void> => {
     dispatch(loginActions.login(user.uid));
@@ -30,6 +32,7 @@ function App(): JSX.Element {
       const categories = await categoriesDB.get(user.uid);
       dispatch(categoriesActions.updateAllCategoriesFromFirestore(categories));
     }
+    setFirebaseAccess(true);
   };
   const onLogout = (): void => {
     // ログイン導線を表示
@@ -39,9 +42,7 @@ function App(): JSX.Element {
   firebaseAuth.onAuthStateChange(onLogin, onLogout);
 
   return (
-    <div className="App">
-      <TopPage />
-    </div>
+    <div className="App">{firebaseAccess ? <TopPage /> : <LoadingPage />}</div>
   );
 }
 
