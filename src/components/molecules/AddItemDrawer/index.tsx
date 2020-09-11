@@ -91,9 +91,8 @@ const AddItemDrawer: React.FC<AddItemDrawerProps> = (props) => {
   }, [props, props.categories, props.editingItem, reset]);
 
   const validate = (): boolean => {
-    setItemNameError(!name);
     setPriceError(!amount || amount <= 0);
-    return Boolean(name && amount && dateStr);
+    return Boolean(amount && dateStr);
   };
 
   const handleClickCompleteButton = (): void => {
