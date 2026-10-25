@@ -60,6 +60,6 @@ w/ Redux 4.0.5
 
 ### Infrastructure
 
-- CircleCI
+- GitHub Actions
 - Docker
 - docker-compose

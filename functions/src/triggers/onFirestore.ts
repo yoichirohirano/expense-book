@@ -1,8 +1,9 @@
-import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore, QueryDocumentSnapshot } from "firebase-admin/firestore";
+import * as functions from "firebase-functions/v1";
 
-admin.initializeApp();
-export const db = admin.firestore();
+initializeApp();
+export const db = getFirestore();
 
 type ContextParams = {
   userId: string;
@@ -19,7 +20,7 @@ export const onFirestore = {
     .document("users/{userId}/categories/{categoryId}")
     .onUpdate(
       async (
-        change: functions.Change<FirebaseFirestore.QueryDocumentSnapshot>,
+        change: functions.Change<QueryDocumentSnapshot>,
         context: functions.EventContext
       ): Promise<void> => {
         const { name } = change.after.data() as Category;
