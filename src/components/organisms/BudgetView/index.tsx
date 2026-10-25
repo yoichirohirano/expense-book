@@ -26,12 +26,11 @@ const BudgetView: React.FC = () => {
 
   const [currentMonth, setCurrentMonth] = useState<string | false>("");
 
-  const toggle = (panel: string) => (
-    event: React.ChangeEvent<{}>,
-    isExpanded: boolean
-  ): void => {
-    setCurrentMonth(isExpanded ? panel : false);
-  };
+  const toggle =
+    (panel: string) =>
+    (event: React.ChangeEvent<{}>, isExpanded: boolean): void => {
+      setCurrentMonth(isExpanded ? panel : false);
+    };
 
   const addBudgetButtonProps: AddBudgetButtonProps = {
     addBudget: (yyyymm: string): void => {

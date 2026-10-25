@@ -13,7 +13,7 @@ describe("<ExpenseListItem />", () => {
       name: "Cafe",
       id: "AjOQWgDdVSVsLQNCEpNP",
     },
-    handleClickItem: jest.fn(),
+    handleClickItem: vi.fn(),
   };
 
   beforeEach(() => {

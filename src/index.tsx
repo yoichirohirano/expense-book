@@ -8,7 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import "typeface-roboto";
 import theme from "@/materialUI/theme";
-import App from "@/App.tsx";
+import App from "@/App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(

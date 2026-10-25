@@ -8,7 +8,7 @@ describe("<AmountInput />", () => {
     label: "Budget",
     defaultValue: "25000",
     error: false,
-    handleChange: jest.fn(),
+    handleChange: vi.fn(),
   };
 
   afterEach(() => {
@@ -36,7 +36,7 @@ describe("<AmountInput />", () => {
       label: "Budget",
       defaultValue: "25000",
       error: false,
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
       disabled: true,
     };
     container = mount(<AmountInput {...props} />);
@@ -51,7 +51,7 @@ describe("<AmountInput />", () => {
       defaultValue: "25000",
       error: true,
       helperText: "helperText",
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
     };
     container = mount(<AmountInput {...props} />);
     expect(container.exists(".MuiInputBase-root.Mui-error")).toBe(true);
@@ -63,7 +63,7 @@ describe("<AmountInput />", () => {
       defaultValue: "25000",
       error: true,
       helperText: "helperText",
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
     };
     container = mount(<AmountInput {...props} />);
     expect(container.find(".MuiFormHelperText-root").text()).toBe(

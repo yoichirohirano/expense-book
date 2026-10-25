@@ -1,4 +1,4 @@
-FROM node:8.17-alpine
+FROM node:26.12.1-alpine
 
 ENV NODE_ENV=development
 
@@ -10,4 +10,4 @@ RUN npm i
 
 COPY . .
 
-CMD ["npm", "start"]
+CMD ["npm", "start", "--", "--host"]

@@ -12,11 +12,11 @@ describe("<AddItemDrawer />", () => {
     title: "New Item",
     editItemId: "",
     isOpen: true,
-    toggleDrawer: jest.fn(),
-    add: jest.fn(),
-    delete: jest.fn(),
-    getSelectedCategory: jest.fn(),
-    getIdFromName: jest.fn(),
+    toggleDrawer: vi.fn(),
+    add: vi.fn(),
+    delete: vi.fn(),
+    getSelectedCategory: vi.fn(),
+    getIdFromName: vi.fn(),
   };
 
   afterEach(() => {

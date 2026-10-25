@@ -6,8 +6,8 @@ describe("<MonthInput />", () => {
   let container: any = null;
   const props: MonthInputProps = {
     isOpen: true,
-    handleChange: jest.fn(),
-    handleClose: jest.fn(),
+    handleChange: vi.fn(),
+    handleClose: vi.fn(),
   };
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe("<MonthInput />", () => {
   test("should invisible if isOpen is false", () => {
     const props: MonthInputProps = {
       isOpen: false,
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
     };
     container = mount(<MonthInput {...props} />);
     expect(container.find(".MuiPickersModal-dialogRoot").length).toBe(0);

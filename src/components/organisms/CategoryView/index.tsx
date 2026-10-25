@@ -10,7 +10,7 @@ import BudgetEditItem, {
 import firebaseAuth from "@/plugins/firebase/auth";
 
 import { RootState } from "@/state/store";
-import { Login } from "state/login";
+import { Login } from "@/state/login";
 import {
   categoriesActions,
   Category,

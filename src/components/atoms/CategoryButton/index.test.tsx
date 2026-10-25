@@ -8,7 +8,7 @@ describe("<CategoryButton />", () => {
   const props = {
     selected: false,
     label: "Food",
-    handleClick: jest.fn(),
+    handleClick: vi.fn(),
   };
 
   afterEach(() => {
@@ -41,7 +41,7 @@ describe("<CategoryButton />", () => {
     const props = {
       selected: true,
       label: "Food",
-      handleClick: jest.fn(),
+      handleClick: vi.fn(),
     };
     container = shallow(<CategoryButton {...props} />);
     expect(container.find(".CategoryButton").props()).toMatchObject({

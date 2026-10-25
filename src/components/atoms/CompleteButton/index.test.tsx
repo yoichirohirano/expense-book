@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 
 describe("<CompleteButton />", () => {
   let container: any = null;
-  const handleClickFunction = jest.fn();
+  const handleClickFunction = vi.fn();
 
   beforeEach(() => {
     container = shallow(<CompleteButton handleClick={handleClickFunction} />);

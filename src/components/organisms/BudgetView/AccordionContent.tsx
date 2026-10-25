@@ -60,7 +60,6 @@ const AccordionContent = (props: {
       categoryName: categoryName,
       budget: categoryBudget,
       // 予算設定画面ではカテゴリ名は修正できないため、空関数を渡す
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       handleChangeCategoryName: (): void => {},
       handleChangeBudget: (value: string): void => {
         // 更新前の該当月該当カテゴリ予算

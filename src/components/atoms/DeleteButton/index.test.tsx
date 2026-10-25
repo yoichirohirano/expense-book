@@ -5,7 +5,7 @@ import { shallow } from "enzyme";
 describe("<DeleteButton />", () => {
   let container: any = null;
   const props = {
-    handleClick: jest.fn(),
+    handleClick: vi.fn(),
     disabled: true,
   };
 
@@ -29,7 +29,7 @@ describe("<DeleteButton />", () => {
 
   test("should have proper props(disable false)", () => {
     const props = {
-      handleClick: jest.fn(),
+      handleClick: vi.fn(),
       disabled: false,
     };
     container = shallow(<DeleteButton {...props} />);
