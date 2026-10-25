@@ -9,7 +9,7 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "10"
+    "node": "22"
   },
   "eslintConfig": {
     "env": {
@@ -51,15 +51,15 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "firebase-admin": "^8.10.0",
-    "firebase-functions": "^3.6.1"
+    "firebase-admin": "^14.5.0",
+    "firebase-functions": "^7.4.0"
   },
   "devDependencies": {
+    "@types/node": "^22",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "eslint": "^7.8.1",
-    "firebase-functions-test": "^0.2.0",
-    "typescript": "^3.9.7"
+    "typescript": "^5.9.3"
   },
   "private": true
 }
