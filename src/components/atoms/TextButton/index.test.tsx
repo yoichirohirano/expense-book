@@ -6,7 +6,7 @@ describe("<TextButton />", () => {
   let container: any = null;
   const props = {
     text: "buttonText",
-    handleClick: jest.fn(),
+    handleClick: vi.fn(),
   };
 
   beforeEach(() => {

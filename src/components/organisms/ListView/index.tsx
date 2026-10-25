@@ -85,10 +85,8 @@ const ListView: React.FC = () => {
         // 登録した月の予算がなければ、予算も新規で登録する
         const yyyymm = expense.dateStr.slice(0, 6);
         if (!budgets[yyyymm]) {
-          const newBudget: CategoryBudgets = categoriesSelectors.getDefaultBudget(
-            uid || "",
-            categories
-          );
+          const newBudget: CategoryBudgets =
+            categoriesSelectors.getDefaultBudget(uid || "", categories);
           dispatch(budgetsActions.create(uid, newBudget, yyyymm));
           setCurrentYYYYMM(yyyymm);
         }

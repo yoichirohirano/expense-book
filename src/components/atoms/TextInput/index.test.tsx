@@ -9,7 +9,7 @@ describe("<TextInput />", () => {
     defaultValue: "25000",
     error: false,
     type: "number",
-    handleChange: jest.fn(),
+    handleChange: vi.fn(),
   };
 
   afterEach(() => {
@@ -47,7 +47,7 @@ describe("<TextInput />", () => {
       defaultValue: "25000",
       error: false,
       type: "number",
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
       disabled: true,
     };
     container = mount(<TextInput {...props} />);
@@ -62,7 +62,7 @@ describe("<TextInput />", () => {
       defaultValue: "25000",
       error: true,
       helperText: "helperText",
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
     };
     container = mount(<TextInput {...props} />);
     expect(container.exists(".MuiInputBase-root.Mui-error")).toBe(true);
@@ -74,7 +74,7 @@ describe("<TextInput />", () => {
       defaultValue: "25000",
       error: true,
       helperText: "helperText",
-      handleChange: jest.fn(),
+      handleChange: vi.fn(),
     };
     container = mount(<TextInput {...props} />);
     expect(container.find(".MuiFormHelperText-root").text()).toBe(

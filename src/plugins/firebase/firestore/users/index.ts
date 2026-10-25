@@ -1,8 +1,8 @@
 import firebase from "@/plugins/firebase";
 import { db } from "@/plugins/firebase/firestore";
-import { Expense } from "state/expenses";
-import { CategoryBudgets } from "state/budgets";
-import { Category } from "state/categories";
+import { Expense } from "@/state/expenses";
+import { CategoryBudgets } from "@/state/budgets";
+import { Category } from "@/state/categories";
 
 export interface User extends firebase.firestore.DocumentData {
   createdAt: string;

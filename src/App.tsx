@@ -1,3 +1,4 @@
+import type firebase from "firebase/compat/app";
 import React, { useState } from "react";
 import "./App.css";
 import TopPage from "@/components/pages/TopPage";
@@ -8,7 +9,7 @@ import budgetsDB from "@/plugins/firebase/firestore/budgets";
 import categoriesDB from "@/plugins/firebase/firestore/categories";
 import firebaseAuth from "@/plugins/firebase/auth";
 import { useDispatch } from "react-redux";
-import { loginActions } from "state/login";
+import { loginActions } from "@/state/login";
 import { expensesActions } from "@/state/expenses";
 import { budgetsActions } from "@/state/budgets";
 import { categoriesActions } from "@/state/categories";

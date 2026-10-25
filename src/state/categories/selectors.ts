@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-import maxBy from "lodash/maxBy";
+import type firebase from "firebase/compat/app";
+import maxBy from "lodash-es/maxBy";
 import { Category, Categories } from ".";
 import { CategoryBudgets } from "@/state/budgets";
 import getRandomIntegerInRange from "@/util/functions/getRandomIntegerInRange";

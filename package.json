@@ -3,227 +3,84 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "vite",
+    "build": "tsc -p tsconfig.build.json && vite build",
+    "preview": "vite preview",
     "deploy": "firebase deploy",
-    "test": "node scripts/test.js",
-    "set-config": "ts-node scripts/setConfig.ts",
-    "storybook": "NODE_ENV=test start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "test": "vitest",
+    "lint": "eslint .",
+    "set-config": "node scripts/setConfig.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "serve": "npm run build && firebase emulators:start"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:prettier/recommended",
-      "prettier/@typescript-eslint",
-      "prettier/react",
-      "react-app"
-    ],
-    "settings": {
-      "import/extensions": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx"
-      ],
-      "import/resolver": {
-        "webpack": {
-          "config": "config/webpack.config.js"
-        }
-      }
-    },
-    "rules": {
-      "react/prop-types": 0
-    }
   },
   "prettier": {
     "trailingComma": "es5",
     "arrowParens": "always"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.ts"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jest-environment-jsdom-fourteen",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "modulePaths": [
-      "/Users/yoichiro.hirano/Documents/MyPlayground/expense-book/src"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-      "^@/(.*)": "<rootDir>/src/$1"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
   "dependencies": {
-    "@babel/core": "7.9.0",
     "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
-    "@svgr/webpack": "4.3.3",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/chart.js": "^2.9.24",
-    "@types/enzyme": "^3.10.5",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.12.54",
-    "@types/react": "^16.9.47",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.8",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/redux-thunk": "^2.1.0",
-    "@types/styled-components": "^5.1.2",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "babel-eslint": "10.1.0",
-    "babel-jest": "^24.9.0",
-    "babel-loader": "8.1.0",
-    "babel-plugin-named-asset-import": "^0.3.6",
-    "babel-preset-react-app": "^9.1.2",
-    "camelcase": "^5.3.1",
-    "case-sensitive-paths-webpack-plugin": "2.3.0",
     "chart.js": "^2.9.3",
     "connected-react-router": "^6.8.0",
-    "css-loader": "3.4.2",
     "date-fns": "^2.15.0",
-    "dotenv": "8.2.0",
-    "dotenv-expand": "5.1.0",
-    "enzyme": "^3.11.0",
-    "eslint": "^6.6.0",
-    "eslint-config-react-app": "^5.2.1",
-    "eslint-loader": "3.0.3",
-    "eslint-plugin-flowtype": "4.6.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.19.0",
-    "eslint-plugin-react-hooks": "^1.6.1",
-    "file-loader": "4.3.0",
-    "firebase": "^7.19.0",
-    "fs-extra": "^8.1.0",
-    "html-webpack-plugin": "4.0.0-beta.11",
-    "identity-obj-proxy": "3.0.0",
-    "jest": "24.9.0",
-    "jest-environment-jsdom-fourteen": "1.0.1",
-    "jest-resolve": "24.9.0",
-    "jest-watch-typeahead": "0.4.2",
+    "firebase": "^13.1.0",
     "lodash-es": "^4.17.15",
-    "mini-css-extract-plugin": "0.9.0",
     "moment": "^2.26.0",
-    "optimize-css-assets-webpack-plugin": "5.0.3",
-    "pnp-webpack-plugin": "1.6.4",
-    "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
-    "postcss-normalize": "8.0.1",
-    "postcss-preset-env": "6.7.0",
-    "postcss-safe-parser": "4.0.1",
     "react": "^16.13.1",
-    "react-app-polyfill": "^1.0.6",
     "react-chartjs-2": "^2.10.0",
-    "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
     "react-number-format": "^4.4.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "resolve": "1.15.0",
-    "resolve-url-loader": "3.1.1",
-    "sass-loader": "8.0.2",
-    "semver": "6.3.0",
-    "storybook-addon-material-ui": "^0.9.0-alpha.21",
-    "style-loader": "0.23.1",
     "styled-components": "^5.1.0",
-    "terser-webpack-plugin": "2.3.5",
-    "ts-pnp": "1.1.6",
-    "typeface-roboto": "^0.0.75",
-    "typescript": "^4.0.2",
-    "url-loader": "2.3.0",
-    "webpack": "4.42.0",
-    "webpack-dev-server": "3.10.3",
-    "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "typeface-roboto": "^0.0.75"
   },
+  "overrides": {
+    "cheerio": "1.0.0-rc.12",
+    "@grpc/grpc-js": "^1.14.6",
+    "gaxios": {
+      "uuid": "^11.1.1"
+    }
+  },
+  "engines": {
+    "node": ">=22.23.4 <23 || >=24.22.1 <25 || >=26.12.1"
+  },
+  "type": "module",
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addon-viewport": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^5.3.18",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/lodash-es": "^4.17.3",
-    "@types/react-test-renderer": "^16.9.3",
-    "enzyme-adapter-react-16": "^1.15.3",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-import-resolver-webpack": "^0.12.1",
-    "eslint-plugin-prettier": "^3.1.3",
-    "firebase-tools": "^8.9.0",
-    "prettier": "^2.1.0",
-    "react-test-renderer": "^16.13.1",
-    "redux-devtools-extension": "^2.13.8",
-    "ts-loader": "^7.0.2",
-    "ts-node": "^8.10.2"
+    "@eslint/js": "^10.0.1",
+    "@storybook/addon-links": "^10.6.3",
+    "@storybook/react-vite": "^10.6.3",
+    "@types/chart.js": "^2.9.24",
+    "@types/enzyme": "^3.10.19",
+    "@types/enzyme-adapter-react-16": "^1.0.9",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^26.6.5",
+    "@types/react": "^16.9.47",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.2",
+    "@vitejs/plugin-react": "^6.1.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.8",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "firebase-tools": "^15.34.1",
+    "globals": "^17.13.0",
+    "jsdom": "^30.1.3",
+    "prettier": "^3.9.10",
+    "redux-devtools-extension": "^2.13.9",
+    "storybook": "^10.6.3",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   }
 }

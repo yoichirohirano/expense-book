@@ -7,7 +7,7 @@ describe("<MonthTabs />", () => {
   const props = {
     months: ["202003", "202004", "202005", "202006", "202007"],
     currentIndex: 0,
-    handleChange: jest.fn(),
+    handleChange: vi.fn(),
   };
 
   beforeEach(() => {

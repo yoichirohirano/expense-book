@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import moment from "moment";
 import { CategoryBudgets, CategoryBudget, Budgets } from ".";
 

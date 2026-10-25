@@ -6,7 +6,7 @@ describe("<AddBudgetButton />", () => {
   let container: any = null;
 
   const props = {
-    addBudget: jest.fn(),
+    addBudget: vi.fn(),
   };
 
   afterEach(() => {
@@ -15,8 +15,12 @@ describe("<AddBudgetButton />", () => {
   });
 
   test("should match the snapshot", () => {
+    // 初期値の年月が現在日時に依存するため固定する
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date(2020, 8, 15));
     container = shallow(<AddBudgetButton {...props} />);
     expect(container.html()).toMatchSnapshot();
+    vi.useRealTimers();
   });
 
   test("should have proper props:TextButton", () => {

@@ -6,7 +6,7 @@ describe("<Navigation />", () => {
   let container: any = null;
   const props: NavigationProps = {
     pathname: "",
-    route: jest.fn(),
+    route: vi.fn(),
   };
 
   beforeEach(() => {

@@ -4,7 +4,7 @@ import { shallow, mount } from "enzyme";
 
 describe("<DateInput />", () => {
   let container: any = null;
-  const onChangeFunction = jest.fn();
+  const onChangeFunction = vi.fn();
 
   beforeEach(() => {
     container = shallow(<DateInput handleChange={onChangeFunction} />);

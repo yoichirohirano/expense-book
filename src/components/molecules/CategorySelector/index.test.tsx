@@ -9,7 +9,7 @@ describe("<CategorySelector />", () => {
 
   const props = {
     categories: categories,
-    handleChangeCategory: jest.fn(),
+    handleChangeCategory: vi.fn(),
     selectedCategoryId: "E3cnHvL8SwPTbn4ChMWq",
   };
 
